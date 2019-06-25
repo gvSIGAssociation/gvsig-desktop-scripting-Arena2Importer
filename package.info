@@ -1,0 +1,21 @@
+#
+#Tue Jun 25 21:53:42 CEST 2019
+owner=gvSIG Association
+code=Arena2Importer
+java-version=j1_7
+operating-system=all
+description=Herramientas para crear y mantener una BBDD de accidentes a partir de los ficheros XML ARENA2 de la DGT
+official=true
+type=Script
+web-url=
+version=1.0.0-0
+buildNumber=0
+owner-url=
+dependencies=
+sources-url=
+name=Tools\: Importador XML ARENA2 a BBDD
+gvSIG-version=2.5.0
+state=testing
+categories=
+model-version=1.0.1
+architecture=all
