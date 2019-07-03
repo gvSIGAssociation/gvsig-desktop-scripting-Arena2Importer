@@ -5,7 +5,7 @@ Lang = python
 
 [Unit]
 type = Script
-name = conductores
+name = ARENA2_CONDUCTORES
 description = 
 createdBy = 
 version = 

@@ -5,7 +5,7 @@ Lang = python
 
 [Unit]
 type = Script
-name = informes
+name = ARENA2_PASAJEROS
 description = 
 createdBy = 
 version = 

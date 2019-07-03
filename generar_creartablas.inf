@@ -5,7 +5,7 @@ Lang = python
 
 [Unit]
 type = Script
-name = pasajeros
+name = generar_creartablas
 description = 
 createdBy = 
 version = 

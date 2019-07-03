@@ -34,6 +34,7 @@ class Arena2CrearTablasPanel(FormPanel):
     )
     self.btnAccept.setEnabled(False)
     self.setVisibleTaskStatus(False)
+    self.setPreferredSize(500,270)
 
   def setVisibleTaskStatus(self, visible):
     self.lblTaskTitle.setVisible(visible)
@@ -64,7 +65,8 @@ class Arena2CrearTablasPanel(FormPanel):
       self.chkCreateBaseTables.isSelected(),
       self.chkCreateDicTables.isSelected(),
       self.chkCreateLogTables.isSelected(),
-      self.chkLoadDic.isSelected()
+      self.chkLoadDic.isSelected(),
+      self.chkCreateWorkspace.isSelected()
     )
     th = Thread(process, "ARENA2_import")
     th.start()

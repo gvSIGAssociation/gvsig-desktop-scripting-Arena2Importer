@@ -5,7 +5,7 @@ Lang = python
 
 [Unit]
 type = Script
-name = generarfeaturetype
+name = ARENA2_CROQUIS
 description = 
 createdBy = 
 version = 
