@@ -25,6 +25,7 @@ class Arena2ImportadorPanel(FormPanel):
     self.connectionPicker = None
     self.taskStatusController = None
     self.currentFile = None
+    self.input_store = None
     self.initComponents()
 
   def initComponents(self):
@@ -32,18 +33,19 @@ class Arena2ImportadorPanel(FormPanel):
     dalSwingManager = DALSwingLocator.getSwingManager()
     toolsSwingManager = ToolsSwingLocator.getToolsSwingManager()
     taskManager = ToolsSwingLocator.getTaskStatusSwingManager()
-
+    """
     self.connectionPicker = dalSwingManager.createJDBCConnectionPickerController(
             self.cboConnection,
             self.btnConnection
     )
     self.connectionPicker.addChangeListener(self.doFileOrConnectionChanged)
-    
+    """
     self.arena2filePicker = toolsSwingManager.createFilePickerController(
       self.txtArena2File, 
       self.btnArena2File
     )
     self.arena2filePicker.addChangeListener(self.doFileOrConnectionChanged)
+    self.arena2filePicker.coerceAndSet("/home/jjdelcerro/datos/geodata/vector/ARENA2/TV_03_2019_01_Q1/victimas.xml")
     
     self.taskStatusController = taskManager.createTaskStatusController(
       self.lblTaskTitle,
@@ -57,6 +59,7 @@ class Arena2ImportadorPanel(FormPanel):
     self.setVisibleTaskStatus(False)
     self.tabImportar.setEnabledAt(1,False)
     self.setPreferredSize(700,500)
+    self.doFileOrConnectionChanged()
 
   def setVisibleTaskStatus(self, visible):
     self.lblTaskTitle.setVisible(visible)
@@ -64,27 +67,30 @@ class Arena2ImportadorPanel(FormPanel):
     #self.lblTaskMessage.setVisible(visible)
     
   def doFileOrConnectionChanged(self, *args):
-    conn = self.connectionPicker.get()
+    #conn = self.connectionPicker.get()
     arena2file = self.arena2filePicker.get()
 
     if arena2file!=None and self.currentFile!=arena2file :
       self.openArena2File(arena2file)
       
-    if conn == None or arena2file==None:
+    if arena2file==None :#or conn == None :
       self.btnCheckIntegrity.setEnabled(False)
+      self.btnImportar.setEnabled(False)
     else:
       self.btnCheckIntegrity.setEnabled(True)
+      self.btnImportar.setEnabled(True)
 
   def openArena2File(self, f):
     dataManager = DALLocator.getDataManager()
-    store = dataManager.openStore("ARENA2", "file", f)
-    panel = DALSwingLocator.getSwingManager().createFeatureStoreSearchPanel(store)
+    self.input_store = dataManager.openStore("ARENA2", "file", f)
+    panel = DALSwingLocator.getSwingManager().createFeatureStoreSearchPanel(self.input_store)
     self.tabImportar.setComponentAt(0, panel.asJComponent())
     self.currentFile = f
   
   def processCompleted(self):
     self.btnClose.setEnabled(True)
     self.setVisibleTaskStatus(False)
+    self.btnImportar.setEnabled(False)
     
   def btnImportar_click(self, *args):
     status = ToolsLocator.getTaskStatusManager().createDefaultSimpleTaskStatus("ARENA2 Importador")
@@ -92,6 +98,14 @@ class Arena2ImportadorPanel(FormPanel):
     self.setVisibleTaskStatus(True)
     self.btnClose.setEnabled(False)
         
+    process = ImportarProceso(
+      status,
+      self,
+      self.input_store,
+      None # A java Predicate
+    )
+    th = Thread(process, "ARENA2_import")
+    th.start()
 
 
 def main(*args):

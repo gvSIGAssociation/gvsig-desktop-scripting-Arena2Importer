@@ -75,14 +75,18 @@ class CrearTablasProceso(Runnable):
       # Añadir copia del tipo via 
       # Añadir MAPA geometria
       self.status.incrementCurrentValue()
-      for tableName in (
-        "ARENA2_CONDUCTORES", "ARENA2_CROQUIS", 
-        "ARENA2_INFORMES","ARENA2_PASAJEROS", 
-        "ARENA2_PEATONES", "ARENA2_VEHICULOS"):
+      for tableName, add_attributes in (
+        ("ARENA2_CONDUCTORES",add_attributes_ARENA2_CONDUCTORES), 
+        ("ARENA2_CROQUIS",add_attributes_ARENA2_CROQUIS), 
+        ("ARENA2_INFORMES",add_attributes_ARENA2_INFORMES),
+        ("ARENA2_PASAJEROS",add_attributes_ARENA2_PASAJEROS), 
+        ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES), 
+        ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS)
+        ):
         self.status.message("Creando "+tableName)
         params = server.getAddParameters(tableName)
         ft = params.getDefaultFeatureType()
-        add_attributes_ARENA2_ACCIDENTES(ft)
+        add_attributes(ft)
         server.add(tableName, params, False)
         self.status.incrementCurrentValue()
 

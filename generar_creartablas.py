@@ -26,19 +26,19 @@ def descriptor(builder, desc):
   builder.append("  attr.setIsIndexAscending(").append(toSource(desc.isIndexAscending())).append(")\n")
   builder.append("  attr.setIsIndexed(").append(toSource(desc.isIndexed())).append(")\n")
   builder.append("  attr.setIsPrimaryKey(").append(toSource(desc.isPrimaryKey())).append(")\n")
-  builder.append("  #attr.setPersistent(").append(toSource(desc.isPersistent())).append(")\n")
+  #builder.append("  #attr.setPersistent(").append(toSource(desc.isPersistent())).append(")\n")
   builder.append("  attr.setIsReadOnly(").append(toSource(desc.isReadOnly())).append(")\n")
   builder.append("  attr.setIsTime(").append(toSource(desc.isTime())).append(")\n")
   builder.append("  attr.setLabel(").append(toSource(desc.getLabel())).append(")\n")
-  builder.append("  #attr.setMandatory(").append(toSource(desc.isMandatory())).append(")\n")
+  #builder.append("  #attr.setMandatory(").append(toSource(desc.isMandatory())).append(")\n")
   builder.append("  attr.setOrder(").append(toSource(desc.getOder())).append(")\n")
   builder.append("  attr.setPrecision(").append(toSource(desc.getPrecision())).append(")\n")
-  builder.append("  #attr.setReadOnly(").append(toSource(desc.isReadOnly())).append(")\n")
+  builder.append("  attr.setReadOnly(").append(toSource(desc.isReadOnly())).append(")\n")
   builder.append("  attr.setRelationType(").append(toSource(desc.getRelationType())).append(")\n")
   if desc.getSRS()!=None:
       builder.append("  attr.setSRS(").append(toSource(desc.getSRS().toString())).append(")\n")
   
-  builder.append("  #attr.setSubtype(").append(toSource(desc.getSubtype())).append(")\n")
+  #builder.append("  #attr.setSubtype(").append(toSource(desc.getSubtype())).append(")\n")
   if desc.isForeingKey():
       fk = desc.getForeingKey()
       builder.append("  attr.getForeingKey().setCodeName(").append(toSource(fk.getCodeName())).append(")\n")

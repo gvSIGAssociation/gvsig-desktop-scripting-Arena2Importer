@@ -68,7 +68,7 @@ class Arena2CrearTablasPanel(FormPanel):
       self.chkLoadDic.isSelected(),
       self.chkCreateWorkspace.isSelected()
     )
-    th = Thread(process, "ARENA2_import")
+    th = Thread(process, "ARENA2_createtables")
     th.start()
 
     
