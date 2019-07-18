@@ -5,7 +5,7 @@ Lang = python
 
 [Unit]
 type = Script
-name = importar
+name = Arena2ImportLocator
 description = 
 createdBy = 
 version = 

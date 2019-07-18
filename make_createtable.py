@@ -44,21 +44,25 @@ def descriptor(builder, desc):
       builder.append("  attr.getForeingKey().setCodeName(").append(toSource(fk.getCodeName())).append(")\n")
       builder.append("  attr.getForeingKey().setForeingKey(").append(toSource(fk.isForeingKey())).append(")\n")
       builder.append("  attr.getForeingKey().setLabelFormula(").append(toSource(fk.getLabelFormula())).append(")\n")
-      builder.append("  attr.getForeingKey().setSelectable(").append(toSource(fk.isSelectable())).append(")\n")
+      builder.append("  attr.getForeingKey().setClosedList(").append(toSource(fk.isClosedList())).append(")\n")
       builder.append("  attr.getForeingKey().setTableName(").append(toSource(fk.getTableName())).append(")\n")
   
-  tags = desc.getTags()
-  for name in tags:
-      value = tags.get(name)
-      builder.append("  attr.getTags().set(").append(toSource(name)).append(", ").append(toSource(value)).append(")\n")
-              
   emu = desc.getFeatureAttributeEmulator()
   if emu!=None and isinstance(emu,FeatureAttributeEmulatorExpression):
       builder.append("  attr.setFeatureAttributeEmulator(").append(toSource(emu.getExpression().getPhrase())).append(")\n")
+
+  tags = desc.getTags()
+  if tags!=None and not tags.isEmpty():
+    builder.append("  tags = attr.getTags()\n")
+    for name in tags:
+        value = tags.get(name)
+        builder.append("  tags.set(").append(toSource(name)).append(", ").append(toSource(value)).append(")\n")
+              
   builder.append("\n")
   
 
 def generateTable(tableName, ft):
+  print "%s..." % tableName
   builder = StringBuilder()
   builder.append("""# encoding: utf-8
 
@@ -78,6 +82,18 @@ from org.gvsig.fmap.dal import DALLocator
     
   builder.append("""
 
+def configurar_featuretype_%s(ft):
+""" % tableName )
+  tags = ft.getTags()
+  if tags!=None and not tags.isEmpty():
+    builder.append("  tags = ft.getTags()\n")
+    for name in ft.getTags():
+        value = tags.get(name)
+        builder.append("  tags.set(").append(toSource(name)).append(", ").append(toSource(value)).append(")\n")
+              
+  builder.append("""
+  add_attributes_%s(ft)
+
 def crearTabla_%s(connection):
   tableName = "%s"
   dataManager = DALLocator.getDataManager()
@@ -87,14 +103,13 @@ def crearTabla_%s(connection):
   )
   params = server.getAddParameters(tableName)
   ft = params.getDefaultFeatureType()
-
-  add_attributes_%s(ft)
+  configurar_featuretype_%s(ft)
   
   server.add(tableName, params, False)
 
 def main(*args):
     pass
-""" % (tableName, tableName, tableName))
+""" % (tableName,tableName,tableName,tableName) )
   f = open(getResource(__file__,"tablas",tableName+".py"),"w")
   f.write(builder.toString())
   f.close()
@@ -102,6 +117,7 @@ def main(*args):
 def main(*args):
   f = File("/home/jjdelcerro/datos/geodata/vector/ARENA2/TV_03_2019_01_Q1/victimas.xml")
   dataManager = DALLocator.getDataManager()
+  print "Cargando ARENA2 file..."
   store = dataManager.openStore("ARENA2", "file", f)
 
   generateTable("ARENA2_ACCIDENTES", store.getDefaultFeatureType())

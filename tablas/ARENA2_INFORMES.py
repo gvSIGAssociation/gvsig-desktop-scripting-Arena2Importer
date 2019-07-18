@@ -19,11 +19,13 @@ def add_attribute_LID_INFORME(ft):
   attr.setIsPrimaryKey(True)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'LID_INFORME')
+  attr.setLabel(u'Id_informe')
   attr.setOrder(0)
   attr.setPrecision(0)
   attr.setReadOnly(False)
   attr.setRelationType(0)
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
 
 def add_attribute_COD_INFORME(ft):
   attr = ft.add("COD_INFORME",8)
@@ -40,11 +42,13 @@ def add_attribute_COD_INFORME(ft):
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'COD_INFORME')
+  attr.setLabel(u'_Codigo_informe')
   attr.setOrder(10)
   attr.setPrecision(0)
   attr.setReadOnly(False)
   attr.setRelationType(0)
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
 
 def add_attribute_FECHA_INI_EXPORT(ft):
   attr = ft.add("FECHA_INI_EXPORT",9)
@@ -61,11 +65,13 @@ def add_attribute_FECHA_INI_EXPORT(ft):
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'Fecha inicio')
+  attr.setLabel(u'_Fecha_inicio')
   attr.setOrder(20)
   attr.setPrecision(0)
   attr.setReadOnly(False)
   attr.setRelationType(0)
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
 
 def add_attribute_FECHA_FIN_EXPORT(ft):
   attr = ft.add("FECHA_FIN_EXPORT",9)
@@ -82,11 +88,13 @@ def add_attribute_FECHA_FIN_EXPORT(ft):
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'Fecha fin')
+  attr.setLabel(u'_Fecha_fin')
   attr.setOrder(30)
   attr.setPrecision(0)
   attr.setReadOnly(False)
   attr.setRelationType(0)
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
 
 def add_attribute_ACCIDENTES(ft):
   attr = ft.add("ACCIDENTES",34)
@@ -95,7 +103,7 @@ def add_attribute_ACCIDENTES(ft):
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACCIDENTES')
-  attr.setGroup(u'Accidentes')
+  attr.setGroup(u'_Accidentes')
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
@@ -108,10 +116,12 @@ def add_attribute_ACCIDENTES(ft):
   attr.setPrecision(0)
   attr.setReadOnly(True)
   attr.setRelationType(0)
-  attr.getTags().set(u'dal.relatedfeatures.unique.field', u'ID_ACCIDENTE')
-  attr.getTags().set(u'dynform.label.empty', u'True')
-  attr.getTags().set(u'dal.relatedfeatures.columns', u'ID_ACCIDENTE/FECHA_ACCIDENTE/COD_PROVINCIA/COD_MUNICIPIO/COD_POBLACION')
   attr.setFeatureAttributeEmulator(u"FEATURES('ARENA2_ACCIDENTES',FORMAT('COD_INFORME = ''%s''',COD_INFORME))")
+  tags = attr.getTags()
+  tags.set(u'dynform.label.empty', u'True')
+  tags.set(u'dal.relatedfeatures.table', u'ARENA2_ACCIDENTES')
+  tags.set(u'dal.relatedfeatures.columns', u'ID_ACCIDENTE/FECHA_ACCIDENTE/COD_PROVINCIA/COD_MUNICIPIO/COD_POBLACION')
+  tags.set(u'dal.relatedfeatures.unique.field.name', u'ID_ACCIDENTE')
 
 def add_attributes_ARENA2_INFORMES(ft):
   add_attribute_LID_INFORME(ft)
@@ -120,6 +130,12 @@ def add_attributes_ARENA2_INFORMES(ft):
   add_attribute_FECHA_FIN_EXPORT(ft)
   add_attribute_ACCIDENTES(ft)
 
+
+def configurar_featuretype_ARENA2_INFORMES(ft):
+  tags = ft.getTags()
+  tags.set(u'dynform.width', 500)
+
+  add_attributes_ARENA2_INFORMES(ft)
 
 def crearTabla_ARENA2_INFORMES(connection):
   tableName = "ARENA2_INFORMES"
@@ -130,8 +146,7 @@ def crearTabla_ARENA2_INFORMES(connection):
   )
   params = server.getAddParameters(tableName)
   ft = params.getDefaultFeatureType()
-
-  add_attributes_ARENA2_INFORMES(ft)
+  configurar_featuretype_ARENA2_INFORMES(ft)
   
   server.add(tableName, params, False)
 

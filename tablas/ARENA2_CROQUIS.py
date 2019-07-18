@@ -19,11 +19,13 @@ def add_attribute_LID_CROQUIS(ft):
   attr.setIsPrimaryKey(True)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'LID_CROQUIS')
+  attr.setLabel(u'_Id_croquis')
   attr.setOrder(0)
   attr.setPrecision(0)
   attr.setReadOnly(False)
   attr.setRelationType(0)
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
 
 def add_attribute_ID_ACCIDENTE(ft):
   attr = ft.add("ID_ACCIDENTE",8)
@@ -40,7 +42,7 @@ def add_attribute_ID_ACCIDENTE(ft):
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'Accidente')
+  attr.setLabel(u'_Accidente')
   attr.setOrder(10)
   attr.setPrecision(0)
   attr.setReadOnly(False)
@@ -48,8 +50,10 @@ def add_attribute_ID_ACCIDENTE(ft):
   attr.getForeingKey().setCodeName(u'ID_ACCIDENTE')
   attr.getForeingKey().setForeingKey(True)
   attr.getForeingKey().setLabelFormula(u"FORMAT('%s',ID_ACCIDENTE)")
-  attr.getForeingKey().setSelectable(False)
+  attr.getForeingKey().setClosedList(False)
   attr.getForeingKey().setTableName(u'ARENA2_ACCIDENTES')
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
 
 def add_attribute_ID_CROQUIS(ft):
   attr = ft.add("ID_CROQUIS",4)
@@ -66,11 +70,13 @@ def add_attribute_ID_CROQUIS(ft):
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'Cod.croquis')
+  attr.setLabel(u'_Codigo_croquis')
   attr.setOrder(20)
   attr.setPrecision(0)
   attr.setReadOnly(False)
   attr.setRelationType(0)
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
 
 def add_attribute_IMAGEN(ft):
   attr = ft.add("IMAGEN",16)
@@ -87,12 +93,14 @@ def add_attribute_IMAGEN(ft):
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'Imagen')
+  attr.setLabel(u'_Imagen')
   attr.setOrder(30)
   attr.setPrecision(0)
   attr.setReadOnly(False)
   attr.setRelationType(0)
-  attr.getTags().set(u'dynform.height', u'300')
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
+  tags.set(u'dynform.height', u'300')
 
 def add_attributes_ARENA2_CROQUIS(ft):
   add_attribute_LID_CROQUIS(ft)
@@ -100,6 +108,12 @@ def add_attributes_ARENA2_CROQUIS(ft):
   add_attribute_ID_CROQUIS(ft)
   add_attribute_IMAGEN(ft)
 
+
+def configurar_featuretype_ARENA2_CROQUIS(ft):
+  tags = ft.getTags()
+  tags.set(u'dynform.width', 500)
+
+  add_attributes_ARENA2_CROQUIS(ft)
 
 def crearTabla_ARENA2_CROQUIS(connection):
   tableName = "ARENA2_CROQUIS"
@@ -110,8 +124,7 @@ def crearTabla_ARENA2_CROQUIS(connection):
   )
   params = server.getAddParameters(tableName)
   ft = params.getDefaultFeatureType()
-
-  add_attributes_ARENA2_CROQUIS(ft)
+  configurar_featuretype_ARENA2_CROQUIS(ft)
   
   server.add(tableName, params, False)
 

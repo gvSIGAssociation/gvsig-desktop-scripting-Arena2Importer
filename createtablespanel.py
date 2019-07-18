@@ -8,12 +8,13 @@ from org.gvsig.tools import ToolsLocator
 from org.gvsig.fmap.dal.swing import DALSwingLocator 
 from org.gvsig.tools.swing.api import ToolsSwingLocator
 from java.lang import Thread
+from org.gvsig.tools.observer import Observer
 
-from addons.Arena2Importer.creartablas import CrearTablasProceso
 
-class Arena2CrearTablasPanel(FormPanel):
-  def __init__(self):
+class CreateTablesDialog(FormPanel, Observer):
+  def __init__(self, importManager):
     FormPanel.__init__(self,getResource(__file__,"creartablaspanel.xml"))
+    self.importManager = importmanager
     self.connectionPicker = None
     self.taskStatusController = None
     self.initComponents()
@@ -39,7 +40,6 @@ class Arena2CrearTablasPanel(FormPanel):
   def setVisibleTaskStatus(self, visible):
     self.lblTaskTitle.setVisible(visible)
     self.pgbTaskProgress.setVisible(visible)
-    #self.lblTaskMessage.setVisible(visible)
     
   def doConnectionChanged(self, *args):
     conn = self.connectionPicker.get()
@@ -48,25 +48,29 @@ class Arena2CrearTablasPanel(FormPanel):
     else:
       self.btnAccept.setEnabled(True)
       
-  def processCompleted(self):
-    self.btnClose.setEnabled(True)
-    self.setVisibleTaskStatus(False)
+  def update(self, observable, notification):
+    isRunning = getattr(observable,"isRunning",None)
+    if isRunning!=None and isRunning():
+      self.btnClose.setEnabled(False)
+      self.setVisibleTaskStatus(true)
+    else:
+      self.btnClose.setEnabled(True)
+      self.setVisibleTaskStatus(False)
     
   def btnAccept_click(self, *args):
-    status = ToolsLocator.getTaskStatusManager().createDefaultSimpleTaskStatus("ARENA2 Importador")
+    status = self.importManager.createStatus("ARENA2 tablas", self)
     self.taskStatusController.bind(status)
     self.setVisibleTaskStatus(True)
     self.btnClose.setEnabled(False)
         
-    process = CrearTablasProceso(
+    process = self.importManager.createTablesProcess(
       self.connectionPicker.get(),
       status,
-      self,
-      self.chkCreateBaseTables.isSelected(),
-      self.chkCreateDicTables.isSelected(),
-      self.chkCreateLogTables.isSelected(),
-      self.chkLoadDic.isSelected(),
-      self.chkCreateWorkspace.isSelected()
+      createBaseTables=self.chkCreateBaseTables.isSelected(),
+      createDicTables=self.chkCreateDicTables.isSelected(),
+      createLogTables=self.chkCreateLogTables.isSelected(),
+      loadDics=self.chkLoadDic.isSelected(),
+      createWorkspace=self.chkCreateWorkspace.isSelected()
     )
     th = Thread(process, "ARENA2_createtables")
     th.start()
