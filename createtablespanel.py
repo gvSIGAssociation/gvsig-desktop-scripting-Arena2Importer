@@ -13,8 +13,8 @@ from org.gvsig.tools.observer import Observer
 
 class CreateTablesDialog(FormPanel, Observer):
   def __init__(self, importManager):
-    FormPanel.__init__(self,getResource(__file__,"creartablaspanel.xml"))
-    self.importManager = importmanager
+    FormPanel.__init__(self,getResource(__file__,"createtablespanel.xml"))
+    self.importManager = importManager
     self.connectionPicker = None
     self.taskStatusController = None
     self.initComponents()
@@ -40,6 +40,7 @@ class CreateTablesDialog(FormPanel, Observer):
   def setVisibleTaskStatus(self, visible):
     self.lblTaskTitle.setVisible(visible)
     self.pgbTaskProgress.setVisible(visible)
+    self.lblTaskMessage.setVisible(visible)
     
   def doConnectionChanged(self, *args):
     conn = self.connectionPicker.get()
@@ -50,12 +51,12 @@ class CreateTablesDialog(FormPanel, Observer):
       
   def update(self, observable, notification):
     isRunning = getattr(observable,"isRunning",None)
-    if isRunning!=None and isRunning():
-      self.btnClose.setEnabled(False)
-      self.setVisibleTaskStatus(true)
-    else:
+    if isRunning==None:
+      return
+    if not isRunning():
       self.btnClose.setEnabled(True)
-      self.setVisibleTaskStatus(False)
+      if not observable.isAborted():
+        self.setVisibleTaskStatus(False)
     
   def btnAccept_click(self, *args):
     status = self.importManager.createStatus("ARENA2 tablas", self)
@@ -78,6 +79,5 @@ class CreateTablesDialog(FormPanel, Observer):
     
 
 def main(*args):
-  panel = Arena2CrearTablasPanel()
-  panel.showWindow("ARENA2 Crear tablas de accidentes")
+  pass
   

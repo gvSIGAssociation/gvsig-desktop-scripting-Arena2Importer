@@ -4,6 +4,8 @@ import gvsig
 
 from gvsig import getResource
 from gvsig.libs.formpanel import FormPanel
+from gvsig.commonsdialog import msgbox
+
 from java.awt import Component
 from org.gvsig.tools import ToolsLocator
 from org.gvsig.fmap.dal import DALLocator
@@ -176,21 +178,23 @@ class ImportPanel(FormPanel, Observer):
       if self.process.getName()=="import":
         if not isRunning():
           self.btnClose.setEnabled(True)
-          self.setVisibleTaskStatus(False)
           self.btnImportar.setEnabled(True)
           self.btnCheckIntegrity.setEnabled(True)
+          if not observable.isAborted():
+            self.setVisibleTaskStatus(False)
           
       elif self.process.getName()=="validator":
         if not isRunning():
           self.btnClose.setEnabled(True)
-          self.setVisibleTaskStatus(False)
           self.btnCheckIntegrity.setEnabled(True)
           self.btnImportar.setEnabled(True)
-          self.report = self.process.getReport()
-          self.tblincidents.setModel(self.report.getTableModel())
+          report = self.process.getReport()
+          self.tblincidents.setModel(report.getTableModel())
           self.tabImportar.setEnabledAt(1,True)
           self.tabImportar.setSelectedIndex(1)
-          self.lblCountIncidents.setText("%s Incidenias" % self.process.report.getRowCount())
+          self.lblCountIncidents.setText("%s Incidenias" % report.getRowCount())
+          if not observable.isAborted():
+            self.setVisibleTaskStatus(False)
 
     except:
       print "Ups!, se ha producido un error"
@@ -211,6 +215,11 @@ class ImportPanel(FormPanel, Observer):
     th.start()
     
   def btnImportar_click(self, *args):
+    workspace = DALLocator.getDataManager().getDatabaseWorkspace("ARENA2_DB")
+    if workspace==None:
+      msgbox("Debera contectarse al espacio de trabajo donde se encuentran las tablas de ARENA2")
+      return
+      
     status = self.importManager.createStatus("ARENA2 Importador", self)
     self.taskStatusController.bind(status)
     self.setVisibleTaskStatus(True)
@@ -218,8 +227,7 @@ class ImportPanel(FormPanel, Observer):
         
     self.process = self.importManager.createImportProcess(
       self.input_store,
-      status,
-      self.report
+      status
     )
     th = Thread(self.process, "ARENA2_import")
     th.start()

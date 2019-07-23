@@ -4,6 +4,9 @@ import gvsig
 
 from java.lang import Runnable
 from java.lang import Thread
+import java.lang.Exception 
+
+from org.apache.commons.io import IOUtils
 
 from org.gvsig.fmap.dal import DALLocator
 from org.gvsig.fmap.dal.DatabaseWorkspaceManager import TABLE_RESOURCES, TABLE_REPOSITORY, TABLE_CONFIGURATION
@@ -18,6 +21,7 @@ from addons.Arena2Importer.tablas.ARENA2_PEATONES import add_attributes_ARENA2_P
 from addons.Arena2Importer.tablas.ARENA2_VEHICULOS import add_attributes_ARENA2_VEHICULOS
 
 from addons.Arena2Reader import diccionarios
+from addons.Arena2Reader import recursos
 
 class CreateTablesProcess(Runnable):
   def __init__(self, 
@@ -54,7 +58,7 @@ class CreateTablesProcess(Runnable):
       if self.loadDics:
         count += len(diccionarios.getNames())
       if self.createWorkspace:
-        count += 1
+        count += 7+len(diccionarios.getNames())
       
       self.status.setRangeOfValues(0,count)
       self.status.setCurValue(0)
@@ -76,8 +80,6 @@ class CreateTablesProcess(Runnable):
         ft = params.getDefaultFeatureType()
         add_attributes_ARENA2_ACCIDENTES(ft)
         server.add("ARENA2_ACCIDENTES", params, False)
-        # Añadir copia del tipo via 
-        # Añadir MAPA geometria
         self.status.incrementCurrentValue()
         for tableName, add_attributes in (
           ("ARENA2_CONDUCTORES",add_attributes_ARENA2_CONDUCTORES), 
@@ -130,6 +132,7 @@ class CreateTablesProcess(Runnable):
           workspace.createTable(TABLE_REPOSITORY)
         workspace.set(CONFIG_NAME_STORESREPOSITORYID,"ARENA2_DB")
         workspace.set(CONFIG_NAME_STORESREPOSITORYLABEL,"ARENA2 (db)")
+        
         for tableName in ("ARENA2_ACCIDENTES",
           "ARENA2_CONDUCTORES", "ARENA2_CROQUIS", 
           "ARENA2_INFORMES","ARENA2_PASAJEROS", 
@@ -138,6 +141,21 @@ class CreateTablesProcess(Runnable):
           self.status.incrementCurrentValue()
           params = server.get(tableName)
           workspace.storesRepositoryWriteEntry(tableName, params)
+          
+          resourcesStorage_src = recursos.getResourcesStorage(tableName)
+          resourcesStorage_dst = server.getResourcesStorage(params)
+          print "recursos de ",repr(tableName), repr(recursos.getResourceNames(tableName))
+          for resourceName in recursos.getResourceNames(tableName):
+            self.status.message("Creando espacio de trabajo (%s/%s)" % (tableName,resourceName))
+            resource_src = resourcesStorage_src.getResource(resourceName)
+            resource_dst = resourcesStorage_dst.getResource(resourceName)
+            IOUtils.copy(
+              resource_src.asInputStream(), 
+              resource_dst.asOutputStream()
+            )
+            resource_src.close()
+            resource_dst.close()
+            
         for tableName in diccionarios.getNames():
           self.status.message("Creando espacio de trabajo ("+tableName+")")
           self.status.incrementCurrentValue()
@@ -147,12 +165,20 @@ class CreateTablesProcess(Runnable):
         self.status.incrementCurrentValue()
         
       self.status.message("Creacion completada")
-
-    except:
-      pass
-
-    finally:
       self.status.terminate()
+
+    except java.lang.Exception, ex:
+      print "Error creating tables", str(ex)
+      self.status.abort()
+      ex.printStackTrace()
+    except Exception, ex:
+      print "Error creating tables", str(ex)
+      self.status.abort()
+    except:
+      print "Error creating tables"
+      self.status.abort()
+    finally:
+      pass
 
 def main(*args):
     print "hola mundo"

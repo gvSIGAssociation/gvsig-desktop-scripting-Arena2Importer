@@ -41,7 +41,12 @@ class TestValidator(Validator):
 
   def getCause(self):
     return self.__cause
-    
+
+def testCreateTables():
+  manager = getArena2ImportManager()
+  dialog = manager.createTablestDialog()
+  dialog.showWindow("ARENA2 Crear tablas de accidentes")
+
 def main(*args):
   
   selfRegister()
@@ -49,3 +54,5 @@ def main(*args):
   manager.addValidator(TestValidator())
   manager.setValidOwnershipsOfRoads(TITULARIDADES)
   testImport()
+  #testCreateTables()
+

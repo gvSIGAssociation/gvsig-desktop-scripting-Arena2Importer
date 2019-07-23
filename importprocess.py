@@ -2,6 +2,8 @@
 
 import gvsig
 
+import java.lang.Exception
+
 from java.lang import Thread, Runnable
 from java.lang import Throwable, String, Boolean, Integer
 
@@ -26,7 +28,8 @@ class ImportProcess(Runnable):
     return "import"
     
   def run(self):
-    repo = DALLocator.getDataManager().getStoresRepository()
+    workspace = DALLocator.getDataManager().getDatabaseWorkspace("ARENA2_DB")
+    repo = workspace.getStoresRepository()
     try:
       children = self.input_store.getChildren()
 
@@ -53,19 +56,30 @@ class ImportProcess(Runnable):
           self.copyTable(sourceStore, targetStore)
   
       self.status.message("Creacion completada")
-    
-    except Throwable as ex:
-      raise ex
-      
-    finally:
       self.status.terminate()
+    
+    except java.lang.Exception, ex:
+      print "Error import data", str(ex)
+      self.status.abort()
+      ex.printStackTrace()
+
+    except Exception, ex:
+      print "Error import data", str(ex)
+      self.status.abort()
+    
+    except:
+      print "Error import data"
+      self.status.abort()
+
+    finally:
+      pass      
 
   def copyTable(self, sourceStore, targetStore):
     try:
       report = self.report
       targetStore.edit(FeatureStore.MODE_APPEND)
       for f_src in sourceStore:
-        if report.haveToImport(f_src.get("ID_ACCIDENTE")):
+        if report==None or report.haveToImport(f_src.get("ID_ACCIDENTE")):
           f_dst = targetStore.createNewFeature(f_src)
           targetStore.insert(f_dst)
         self.status.incrementCurrentValue()
@@ -79,7 +93,7 @@ class ImportProcess(Runnable):
       report = self.report
       targetStore.edit(FeatureStore.MODE_APPEND)
       for f_src in sourceStore:
-        if report.haveToImport(f_src.get("ID_ACCIDENTE")):
+        if report==None or report.haveToImport(f_src.get("ID_ACCIDENTE")):
           f_dst = targetStore.createNewFeature(f_src)
           # Copiar los atributos extra
           targetStore.insert(f_dst)
