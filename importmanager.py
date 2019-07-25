@@ -41,7 +41,8 @@ class CompoundValidator(Validator):
 class ImportManager(object):
   def __init__(self):
     self.__validator = CompoundValidator()
-
+    self.__ownerships = None
+    
   def addValidator(self, validator): 
     self.__validator.add(validator)
 

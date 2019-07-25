@@ -53,6 +53,6 @@ def main(*args):
   manager = getArena2ImportManager()
   manager.addValidator(TestValidator())
   manager.setValidOwnershipsOfRoads(TITULARIDADES)
-  testImport()
-  #testCreateTables()
+  #testImport()
+  testCreateTables()
 

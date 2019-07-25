@@ -10,8 +10,7 @@ from org.gvsig.scripting.app.extension import ScriptingExtension
 from org.gvsig.tools import ToolsLocator
 from org.gvsig.tools.swing.api import ToolsSwingLocator
 
-from addons.Arena2Importer.importarpanel import Arena2ImportadorPanel
-from addons.Arena2Importer.creartablaspanel import Arena2CrearTablasPanel
+from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
 
 class Arena2ImporterExtension(ScriptingExtension):
   def __init__(self):
@@ -20,21 +19,32 @@ class Arena2ImporterExtension(ScriptingExtension):
   def canQueryByAction(self):
     return False
 
-  def isEnabled(self,action):
+  def isEnabled(self,action=None):
     return True
 
-  def isVisible(self,action):
+  def isVisible(self,action=None):
     return True
     
   def execute(self,actionCommand, *args):
     actionCommand = actionCommand.lower()
     if actionCommand == "arena2-importer-showimporter":
-      panel = Arena2ImportadorPanel()
-      panel.showWindow("ARENA2 Importador")
+      self.importData()
     elif actionCommand == "arena2-importer-showtablecreator":
-      panel = Arena2CrearTablasPanel()
-      panel.showWindow("ARENA2 Crear tablas")
+      self.createTables()
+        
+  def createTables(self):
+    manager = getArena2ImportManager()
+    dialog = manager.createTablestDialog()
+    dialog.showWindow("ARENA2 Crear tablas de accidentes")
 
+  def importData(self):
+    manager = getArena2ImportManager()
+    dialog = manager.createImportDialog()
+    dialog.arena2filePicker.coerceAndSet(
+      getResource(__file__,"..","Arena2Reader","datos", "test","TV_03_2019_01_Q1","victimas.xml")
+    )
+    dialog.showWindow("ARENA2 Importar accidentes")
+    
 def selfRegister():
   application = ApplicationLocator.getManager()
 
@@ -67,7 +77,7 @@ def selfRegister():
     "_Show_the_ARENA2_import_tool" # Tooltip
   )
   action = actionManager.registerAction(action)
-  application.addMenu(action, "Tools/ARENA2/Importador")
+  application.addMenu(action, "tools/ARENA2/Importador")
   
   action = actionManager.createAction(
     extension, 
@@ -80,4 +90,4 @@ def selfRegister():
     "_Show_the_ARENA2_tables_creator_tool" # Tooltip
   )
   action = actionManager.registerAction(action)
-  application.addMenu(action, "Tools/ARENA2/Crear tablas")
+  application.addMenu(action, "tools/ARENA2/Crear tablas")
