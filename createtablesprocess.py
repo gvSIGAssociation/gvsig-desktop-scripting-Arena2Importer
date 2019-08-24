@@ -71,8 +71,8 @@ class CreateTablesProcess(Runnable):
       )
   
       if self.createWorkspace:
-        if not workspace.existsTable(TABLE_RESOURCES):
-          workspace.createTable(TABLE_RESOURCES)
+        self.status.message("Creando espacio de trabajo")
+        workspace.create("ARENA2_DB","ARENA2 (db)")
         
       if self.createBaseTables:
         self.status.message("Creando ARENA2_ACCIDENTES")
@@ -125,28 +125,21 @@ class CreateTablesProcess(Runnable):
           store_dst.dispose()
   
       if self.createWorkspace:
-        self.status.message("Creando espacio de trabajo")
-        if not workspace.existsTable(TABLE_CONFIGURATION):
-          workspace.createTable(TABLE_CONFIGURATION)
-        if not workspace.existsTable(TABLE_REPOSITORY):
-          workspace.createTable(TABLE_REPOSITORY)
-        workspace.set(CONFIG_NAME_STORESREPOSITORYID,"ARENA2_DB")
-        workspace.set(CONFIG_NAME_STORESREPOSITORYLABEL,"ARENA2 (db)")
-        
+        self.status.message("Actualizando espacio de trabajo")
         for tableName in ("ARENA2_ACCIDENTES",
           "ARENA2_CONDUCTORES", "ARENA2_CROQUIS", 
           "ARENA2_INFORMES","ARENA2_PASAJEROS", 
           "ARENA2_PEATONES", "ARENA2_VEHICULOS"):
-          self.status.message("Creando espacio de trabajo ("+tableName+")")
+          self.status.message("Actualizando espacio de trabajo ("+tableName+")")
           self.status.incrementCurrentValue()
           params = server.get(tableName)
-          workspace.storesRepositoryWriteEntry(tableName, params)
+          workspace.writeStoresRepositoryEntry(tableName, params)
           
           resourcesStorage_src = recursos.getResourcesStorage(tableName)
           resourcesStorage_dst = server.getResourcesStorage(params)
-          print "recursos de ",repr(tableName), repr(recursos.getResourceNames(tableName))
+          #print "recursos de ",repr(tableName), repr(recursos.getResourceNames(tableName))
           for resourceName in recursos.getResourceNames(tableName):
-            self.status.message("Creando espacio de trabajo (%s/%s)" % (tableName,resourceName))
+            self.status.message("Actualizando espacio de trabajo (%s/%s)" % (tableName,resourceName))
             resource_src = resourcesStorage_src.getResource(resourceName)
             resource_dst = resourcesStorage_dst.getResource(resourceName)
             IOUtils.copy(
@@ -155,13 +148,13 @@ class CreateTablesProcess(Runnable):
             )
             resource_src.close()
             resource_dst.close()
-            
+              
         for tableName in diccionarios.getNames():
-          self.status.message("Creando espacio de trabajo ("+tableName+")")
+          self.status.message("Actualizando espacio de trabajo ("+tableName+")")
           self.status.incrementCurrentValue()
           params = server.get(tableName)
-          workspace.storesRepositoryWriteEntry(tableName, params)
-  
+          workspace.writeStoresRepositoryEntry(tableName, params)
+            
         self.status.incrementCurrentValue()
         
       self.status.message("Creacion completada")

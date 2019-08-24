@@ -178,11 +178,13 @@ class ImportPanel(FormPanel, Observer):
       if self.process.getName()=="import":
         if not isRunning():
           self.btnClose.setEnabled(True)
-          self.btnImportar.setEnabled(True)
           self.btnCheckIntegrity.setEnabled(True)
           if not observable.isAborted():
             self.setVisibleTaskStatus(False)
-          
+            self.btnImportar.setEnabled(False)
+          else:
+            self.btnImportar.setEnabled(True)
+
       elif self.process.getName()=="validator":
         if not isRunning():
           self.btnClose.setEnabled(True)

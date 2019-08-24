@@ -2,4 +2,3 @@
 
 import gvsig
 
-print repr(__path__)
