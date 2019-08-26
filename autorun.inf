@@ -1,5 +1,5 @@
 [Script]
-enable = true
+enable = false
 main = main
 Lang = python
 
@@ -9,4 +9,9 @@ name = autorun
 description = 
 createdBy = 
 version = 
+
+[properties]
+autorun.group.name = gvsig-gva
+autorun.group.order = 2000
+autorun.order = 2000
 
