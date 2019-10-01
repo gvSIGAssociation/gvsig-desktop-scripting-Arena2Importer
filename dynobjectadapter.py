@@ -4,7 +4,7 @@ import gvsig
 
 from java.lang import UnsupportedOperationException, Runnable
 from org.gvsig.tools.dynobject import DynObject
-from org.gvsig.tools.util import Callable, Invocable
+from org.gvsig.tools.util import Callable, Invocable, GetItemByKey
 
 class DynObjectAdapter(DynObject, Runnable, Callable, Invocable):
   def __init__(self, delegated):
@@ -19,8 +19,19 @@ class DynObjectAdapter(DynObject, Runnable, Callable, Invocable):
   def delegate(self, dynObject):
     pass
 
+  def wrap(self, value):
+    if value == None:
+      return None
+    for t in (int, long, float, double,basestring, tuple, list, dict):
+      if isinstance(value, t):
+        return value
+    return DynObjectAdapter(value)
+
+  def get(self, name):
+    return self.wrap(getattr(self.__delegated, name))
+
   def getDynValue(self, name):
-    return getattr(self.__delegated, name)
+    return self.wrap(getattr(self.__delegated, name))
 
   def setDynValue(self, name, value):
     setattr(self.__delegated,name,value)
@@ -33,9 +44,7 @@ class DynObjectAdapter(DynObject, Runnable, Callable, Invocable):
       return self.__delegated
     fn = getattr(self.__delegated, name)
     r = fn(*args)
-    if r == None:
-      return None
-    return DynObjectAdapter(r)
+    return self.wrap(r)
 
   def run(self):
     if hasattr(self.__delegated,"run"):
@@ -45,9 +54,16 @@ class DynObjectAdapter(DynObject, Runnable, Callable, Invocable):
       
   def call(self, *args):
     if hasattr(self.__delegated,"call"):
-      return DynObjectAdapter(self.__delegated.call(*args))
+      r = self.__delegated.call(*args)
     elif callable(self.__delegated):
-      return DynObjectAdapter(self.__delegated(*args))
+      r = self.__delegated(*args)
+    elif len(args)>0:
+      fn = getattr(self.__delegated,args[0])
+      r = fn(*(args[1:]))
+    else:
+      raise Error("Can't invoke call method")
+
+    return self.wrap(r)
       
   def clear(self):
     pass

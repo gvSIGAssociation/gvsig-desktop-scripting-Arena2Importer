@@ -569,7 +569,7 @@ def add_attribute_MAPA(ft):
   attr.setPrecision(0)
   attr.setReadOnly(False)
   attr.setRelationType(0)
-  attr.setSRS(u'EPSG:4326(+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs )')
+  attr.setSRS(u'EPSG:25830')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
 

@@ -8,6 +8,8 @@ from org.gvsig.tools.util import Validator
 
 from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager, selfRegister
 
+from addons.AccidentRate import geocode 
+
 TITULARIDADES = (
   LabeledValueImpl("01 - Estatal",1),
   LabeledValueImpl("02 - Autonomica",2),
@@ -24,35 +26,20 @@ def testImport():
   )
   dialog.showWindow("ARENA2 Importar accidentes")
 
-class TestValidator(Validator):
-  def __init__(self):
-    self.__message = None
-    self.__cause = None
-
-  def isValid(self, value, *args):
-    if value.get("CARRETERA") == "N-332":
-      self.__message = "Carretera N-332"
-      self.__cause = None
-      return False
-    return True
-
-  def getMessage(self):
-    return self.__message
-
-  def getCause(self):
-    return self.__cause
-
 def testCreateTables():
   manager = getArena2ImportManager()
   dialog = manager.createTablestDialog()
   dialog.showWindow("ARENA2 Crear tablas de accidentes")
 
 def main(*args):
+  testCreateTables()()
   
-  selfRegister()
-  manager = getArena2ImportManager()
-  manager.addValidator(TestValidator())
-  manager.setValidOwnershipsOfRoads(TITULARIDADES)
+  #selfRegister()
+  #geocode.selfRegister()
+  
+  #manager = getArena2ImportManager()
+  #manager.addValidator(TestValidator())
+  #manager.setValidOwnershipsOfRoads(TITULARIDADES)
   #testImport()
-  testCreateTables()
+  #testCreateTables()
 

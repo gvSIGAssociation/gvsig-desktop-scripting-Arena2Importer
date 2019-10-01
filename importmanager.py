@@ -8,72 +8,52 @@ from org.gvsig.tools import ToolsLocator
 from org.gvsig.tools.util import Validator
 from org.gvsig.tools.swing.api import ToolsSwingLocator
 
-class CompoundValidator(Validator):
-  def __init__(self):
-    self.__validators = list() # List<org.gvsig.tools.util.Validator>
-    self.__message = None
-    self.__cause = None
-
-  def add(self, validator): 
-    if not isinstance(validator, Validator):
-      raise IllegalArgumentException("Required a Validator instance ("+ str(validator.__class__)+")")
-    self.__validators.append(validator)
-
-  def getValidators(self):
-    return tuple(self.__validators)
-
-  def isValid(self, value, *args):
-    for validator in self.__validators:
-      if not validator.isValid(value, *args):
-        self.__message = validator.getMessage()
-        self.__cause = validator.getCause()
-        return False
-    self.__message = None
-    self.__cause = None
-    return True
-
-  def getMessage(self):
-    return self.__message
-
-  def getCause(self):
-    return self.__cause
 
 class ImportManager(object):
   def __init__(self):
-    self.__validator = CompoundValidator()
-    self.__ownerships = None
+    self.__ruleFactories = list() 
+    self.__transformFactories = list() # Factory
     
-  def addValidator(self, validator): 
-    self.__validator.add(validator)
+  def addRuleFactory(self, ruleFactory): 
+    self.__ruleFactories.append(ruleFactory)
 
-  def getValidators(self):
-    return self.__validator.getValidators()
+  def getRuleFactories(self):
+    return self.__ruleFactories
 
-  def getValidator(self):
-    return self.__validator
+  def getRules(self):
+    rules = list()
+    for factory in self.__ruleFactories:
+      print "getRules: Create rule ", factory.getName()
+      rules.append(factory.create())
+    print "getRules return: ", rules
+    return rules
 
-  def setValidOwnershipsOfRoads(self, ownerships):
-    # List<LabeledValue<Integer>>
-    self.__ownerships = ownerships
-
-  def getValidOwnershipOfRoads(self):
-    if self.__ownerships == None:
-      return tuple()
-    return self.__ownerships
+  def addTransformFactory(self, transform):
+    self.__transformFactories.append(transform)
+    
+  def getTransformFactories(self):
+    return self.__transformFactories
+    
+  def getTransforms(self):
+    transforms = list()
+    for factory in self.__transformFactories:
+      print "getTransforms: Create transform ", factory.getName()
+      transforms.append(factory.create())
+    return transforms
     
   def createImportDialog(self): 
     from addons.Arena2Importer.importpanel import ImportPanel
     dialog = ImportPanel(self)
     return dialog
     
-  def createImportProcess(self, input_store, status=None, report=None):
+  def createImportProcess(self, input_store, workspace, report, status=None):
     from addons.Arena2Importer.importprocess import ImportProcess
-    process = ImportProcess(self, input_store, status, report)
+    process = ImportProcess(self, input_store, workspace, report, status)
     return process
 
-  def createValidatorProcess(self, input_store, status=None):
+  def createValidatorProcess(self, input_store, report, status=None):
     from addons.Arena2Importer.importprocess import ValidatorProcess
-    process = ValidatorProcess(self, input_store, status)
+    process = ValidatorProcess(self, input_store, report, status)
     return process
 
   def createTablestDialog(self):
@@ -93,10 +73,9 @@ class ImportManager(object):
       status.addObserver(observer)
     return status
 
-"""
-from addons.Arena2Importer.importprocess import ImportProcess, ValidatorProcess
-from addons.Arena2Importer.importpanel import ImportPanel
-from addons.Arena2Importer.createtablesprocess import CreateTablesProcess
-from addons.Arena2Importer.createtablespanel import CreateTablesDialog
-"""
+  def createReport(self):
+    from addons.Arena2Importer.integrity.report import Report
+    report = Report(self)
+    return report
+    
 
