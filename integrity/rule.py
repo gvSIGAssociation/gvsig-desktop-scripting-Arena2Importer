@@ -33,10 +33,12 @@ class RuleFactory(object):
   def getName(self):
     return self.__id
 
-  def create(self, *args):
-    rule = Rule(self)
+  def create(self, **args):
+    rule = Rule(self, **args)
     return rule
     
+  def isSelectedByDefault(self):
+    return True
         
 def main(*args):
 

@@ -8,7 +8,7 @@ from org.gvsig.tools.util import Validator
 
 from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager, selfRegister
 
-from addons.AccidentRate import geocode 
+#from addons.AccidentRate import geocode 
 
 TITULARIDADES = (
   LabeledValueImpl("01 - Estatal",1),
@@ -32,14 +32,14 @@ def testCreateTables():
   dialog.showWindow("ARENA2 Crear tablas de accidentes")
 
 def main(*args):
-  testCreateTables()()
+  #testCreateTables()()
   
-  #selfRegister()
+  selfRegister()
   #geocode.selfRegister()
   
   #manager = getArena2ImportManager()
   #manager.addValidator(TestValidator())
   #manager.setValidOwnershipsOfRoads(TITULARIDADES)
-  #testImport()
+  testImport()
   #testCreateTables()
 

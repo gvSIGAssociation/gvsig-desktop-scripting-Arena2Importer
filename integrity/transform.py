@@ -24,7 +24,9 @@ class TransformFactory(object):
   def create(self, *args):
     transform = Transform(self)
     return transform
-  
+    
+  def isSelectedByDefault(self):
+    return True
 
 def main(*args):
     pass
