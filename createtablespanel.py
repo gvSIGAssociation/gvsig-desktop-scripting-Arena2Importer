@@ -69,7 +69,6 @@ class CreateTablesDialog(FormPanel, Observer):
       status,
       createBaseTables=self.chkCreateBaseTables.isSelected(),
       createDicTables=self.chkCreateDicTables.isSelected(),
-      createLogTables=self.chkCreateLogTables.isSelected(),
       loadDics=self.chkLoadDic.isSelected(),
       createWorkspace=self.chkCreateWorkspace.isSelected()
     )

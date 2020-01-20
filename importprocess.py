@@ -224,6 +224,7 @@ class ValidatorProcess(Runnable):
     
     
   def run(self):
+    fname = "???"
     try:
       for fname in self.files:
         self.input_store = self.openStore(fname)
@@ -247,9 +248,15 @@ class ValidatorProcess(Runnable):
     
       self.status.terminate()
 
-    except Throwable as ex:
+    except java.lang.Throwable, ex:
+      ex.printStackTrace()
+      self.status.message("Error validando accidentes (%s)" % fname )
       self.status.abort()
       raise ex
+
+    except:
+      print "Error validando accidentes", sys.exc_info()[1]
+      self.status.message("Error validando accidentes (%s)" % fname )
       
     finally:
       pass

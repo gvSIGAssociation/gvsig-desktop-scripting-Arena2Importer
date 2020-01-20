@@ -775,7 +775,6 @@ class CreateTablesProcess(Runnable):
       status,
       createBaseTables=True,
       createDicTables=True,
-      createLogTables=True,
       loadDics=True,
       createWorkspace=True
     ):
@@ -787,7 +786,6 @@ class CreateTablesProcess(Runnable):
       self.status = status
     self.createBaseTables=createBaseTables
     self.createDicTables=createDicTables
-    self.createLogTables=createLogTables
     self.loadDics=loadDics
     self.createWorkspace=createWorkspace
 
@@ -796,8 +794,6 @@ class CreateTablesProcess(Runnable):
       count = 0
       if self.createBaseTables:
         count += 7
-      if self.createLogTables:
-        count += 0
       if self.createDicTables:
         count += len(getDictionaryNames())
       if self.loadDics:
@@ -841,9 +837,6 @@ class CreateTablesProcess(Runnable):
         server.execute(CREATE_VIEW_ARENA2_AC_VE_CO_PA_PE)
         server.execute(CREATE_VIEW_ARENA2_AC_VE_CO_PA)
 
-      if self.createLogTables:
-        pass
-  
       if self.createDicTables:
         for tableName in getDictionaryNames():
           self.status.message("Creando "+tableName)
@@ -874,7 +867,7 @@ class CreateTablesProcess(Runnable):
         for tableName in ("ARENA2_ACCIDENTES",
           "ARENA2_CONDUCTORES", "ARENA2_CROQUIS", 
           "ARENA2_INFORMES","ARENA2_PASAJEROS", 
-          "ARENA2_PEATONES", "ARENA2_VEHICULOS"):
+          "ARENA2_PEATONES", "ARENA2_VEHICULOS", "ARENA2_AC_VE_CO_PA"):
           self.status.message("Actualizando espacio de trabajo ("+tableName+")")
           self.status.incrementCurrentValue()
           params = server.get(tableName)
