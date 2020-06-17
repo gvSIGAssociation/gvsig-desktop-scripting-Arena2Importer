@@ -6,7 +6,7 @@ from org.gvsig.fmap.dal import DALLocator
 
 def add_attribute_LID_PASAJERO(ft):
   attr = ft.add("LID_PASAJERO",8)
-  attr.setSize(20)
+  attr.setSize(30)
   attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)

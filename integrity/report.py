@@ -66,13 +66,17 @@ class Report(AbstractTableModel):
     self.__dataManager = DALLocator.getDataManager()
     self.__importManager = importManager
     self.__ftype = None
-    self.__issues = self.createMemoryStore()
-    self.__issues_list = None    
     self.__columnNames = list()
+    self.__issues_list = None    
+    self.__issues_cache = None
+    self.__issues = self.createMemoryStore()
     for attr in self.__ftype:
       if not attr.isHidden():
         self.__columnNames.append(attr.getName())
 
+  def __len__(self):
+    return len(self.getIssuesAsList())
+    
   def getAttributeByColumnIndex(self, columnIndex):
     name = self.__columnNames[columnIndex]
     attr = self.__ftype.get(name)
@@ -98,7 +102,6 @@ class Report(AbstractTableModel):
 
   def removeAll(self):
     self.__issues = self.createMemoryStore()
-    self.__issues_list = None    
     self.fireTableDataChanged()
   
   def createMemoryStore(self):    
@@ -129,6 +132,8 @@ class Report(AbstractTableModel):
     store.update(eft)
     store.finishEditing()  
     self.__ftype = store.getDefaultFeatureType()
+    self.__issues_cache = None
+    self.__issues_list = None
     return store
 
   def __buildAvailableValues(self):
@@ -139,7 +144,7 @@ class Report(AbstractTableModel):
     return l
     
   def add(self, accidentId, errcode, description, selected=None, fixerId=None, **args):
-    trace("add(%r,%r,%r)" % (accidentId, type, description))
+    trace("add(accidentId=%r,errcode=%r,description=%r)" % (accidentId, errcode, description))
     self.__issues.edit()
     issue = self.__issues.createNewFeature()
     issue.set("ID", self.__dataManager.createUniqueID())
@@ -155,13 +160,24 @@ class Report(AbstractTableModel):
       issue.set(name,value)
     self.__issues.insert(issue)
     self.__issues.finishEditing()
-    self.__issues_list = self.__issues.getFeatures()
+    self.__issues_list = None
+    self.__issues_cache = None
     self.fireTableDataChanged()
 
+  def addIssues(self, issues_fset):
+    self.__issues.edit()
+    self.__issues.insert(issues_fset)
+    self.__issues.finishEditing()
+    self.__issues_list = None
+    self.__issues_cache = None
+    
+  def getIssuesAsList(self):
+    if self.__issues_list == None:
+      self.__issues_list = self.__issues.getFeatures()
+    return self.__issues_list
+    
   def getIssue(self, index):
-    if self.__issues_list==None:
-      return None
-    issue = self.__issues_list[index]
+    issue = self.getIssuesAsList()[index]
     return issue
 
   def putIssue(self, row, issue):
@@ -169,15 +185,35 @@ class Report(AbstractTableModel):
     self.__issues.edit()
     self.__issues.update(issue)
     self.__issues.finishEditing()
-    self.__issues_list = self.__issues.getFeatures()
+    self.__issues_list = None
+    self.__issues_cache = None
 
   def refresh(self):
     self.fireTableDataChanged()
-  
+
+  def __getIssuesCache(self):
+    if self.__issues_cache==None:
+      cache = dict()
+      for issue in self.__issues:
+        accidentId = issue.get("ID_ACCIDENTE")
+        accident_issues = cache.get(accidentId,None)
+        if accident_issues == None:
+          accident_issues = list()
+          cache[accidentId] = accident_issues
+        accident_issues.append(issue.getCopy())
+      self.__issues_cache = cache
+    return self.__issues_cache
+      
   def fix(self, feature):
     accidentId = feature.get("ID_ACCIDENTE")
-    for issue in self.__issues:
+    issues = self.__getIssuesCache().get(accidentId, None)
+    if issues == None:
+      return True
+
+    for issue in issues:
       if issue.get("ID_ACCIDENTE") != accidentId:
+        continue
+      if not issue.get("SELECTED") :
         continue
       fixerID=issue.get("FIXERID")
       if fixerID==None:
@@ -204,19 +240,22 @@ class Report(AbstractTableModel):
   
   def isSelected(self, accidentId):
     #trace("isSelected(%r)" % accidentId)
-    issue = self.__issues.findFirst("ID_ACCIDENTE = '%s'" % accidentId)
-    trace("isSelected(%r) issue=%s" % (accidentId, issue))
-    if issue == None:
+    issues = self.__getIssuesCache().get(accidentId, None)
+    if issues == None:
       return True
-    return issue.get("SELECTED")
+
+    for issue in issues:
+      if issue.get("ID_ACCIDENTE") != accidentId:
+        continue
+      if issue.get("SELECTED") :
+        return True
+    return False
      
   def getTableModel(self):
     return self
 
   def getRowCount(self):
-    if self.__issues_list == None:
-      return 0
-    return len(self.__issues_list)
+    return len(self.getIssuesAsList())
 
   def getColumnCount(self):
     return len(self.__columnNames)

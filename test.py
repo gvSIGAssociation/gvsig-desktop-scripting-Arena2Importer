@@ -34,12 +34,13 @@ def testCreateTables():
 def main(*args):
   #testCreateTables()()
   
-  selfRegister()
+  #selfRegister()
   #geocode.selfRegister()
   
-  #manager = getArena2ImportManager()
+  manager = getArena2ImportManager()
+  print manager.checkRequirements()
   #manager.addValidator(TestValidator())
   #manager.setValidOwnershipsOfRoads(TITULARIDADES)
-  testImport()
+  #testImport()
   #testCreateTables()
 

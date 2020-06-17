@@ -867,7 +867,7 @@ class CreateTablesProcess(Runnable):
         for tableName in ("ARENA2_ACCIDENTES",
           "ARENA2_CONDUCTORES", "ARENA2_CROQUIS", 
           "ARENA2_INFORMES","ARENA2_PASAJEROS", 
-          "ARENA2_PEATONES", "ARENA2_VEHICULOS", "ARENA2_AC_VE_CO_PA"):
+          "ARENA2_PEATONES", "ARENA2_VEHICULOS", "ARENA2_AC_VE_CO_PA", "ARENA2_AC_VE_CO_PA_PE"):
           self.status.message("Actualizando espacio de trabajo ("+tableName+")")
           self.status.incrementCurrentValue()
           params = server.get(tableName)

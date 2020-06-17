@@ -21,6 +21,9 @@ class TransformFactory(object):
   def getName(self):
     return self.__id
 
+  def checkRequirements(self):
+    return None
+
   def create(self, *args):
     transform = Transform(self)
     return transform

@@ -247,7 +247,7 @@ class ImportPanel(FormPanel, Observer):
     self.btnVerAccidente2.setEnabled(False)
     self.btnModifyIssues.setEnabled(False)
     
-    self.setPreferredSize(700,500)
+    self.setPreferredSize(800,500)
 
   def btnModifyIssues_click(self, *args):
     selectionModel = self.tblIssues.getSelectionModel()
@@ -284,6 +284,9 @@ class ImportPanel(FormPanel, Observer):
     self.pgbTaskProgress.setVisible(visible)
     self.lblTaskMessage.setVisible(visible)
 
+  def message(self, s):
+    self.lblIssuesMessage.setText(s)
+    
   def issuesSelectionChanged(self, event):
     row = self.tblIssues.getSelectedRow()
     if row<0 :
@@ -294,7 +297,7 @@ class ImportPanel(FormPanel, Observer):
     self.btnModifyIssues.setEnabled(True)
     model = self.tblIssues.getModel()
     x = model.getValueAt(row,model.getColumnCount()-1)
-    self.lblIssuesMessage.setText(x)
+    self.message(x)
     
   def doFileChanged(self, *args):
     arena2files = self.arena2filePicker.get()
@@ -373,9 +376,18 @@ class ImportPanel(FormPanel, Observer):
       rules = rules,
       workspace=self.cboWorkspace.getSelectedItem()
     )
+    self.process.add(self.showValidatorFinishMessage)
     th = Thread(self.process, "ARENA2_validator")
     th.start()
+
+  def showValidatorFinishMessage(self, process):
+    self.message("Total %s incidencias en %s accidentes" % (
+        len(process.getReport()),
+        len(process)
+      )
+    )
     
+  
   def btnImportar_click(self, *args):
     files = self.arena2filePicker.get()
     if files == None:

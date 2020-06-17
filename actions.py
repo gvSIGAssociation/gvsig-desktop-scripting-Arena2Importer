@@ -2,6 +2,7 @@
 
 import gvsig
 from gvsig import getResource
+from gvsig.commonsdialog import msgbox
 
 from java.io import File
 from org.gvsig.andami import PluginsLocator
@@ -34,19 +35,27 @@ class Arena2ImporterExtension(ScriptingExtension):
         
   def createTables(self):
     manager = getArena2ImportManager()
+    messages = manager.checkRequirements()
+    if messages!=None:
+      msgbox("\n".join(messages))
+      return
     dialog = manager.createTablestDialog()
     dialog.showWindow("ARENA2 Crear tablas de accidentes")
 
   def importData(self):
     manager = getArena2ImportManager()
+    messages = manager.checkRequirements()
+    if messages!=None:
+      msgbox("\n".join(messages))
+      return
     dialog = manager.createImportDialog()
     dialog.arena2filePicker.coerceAndSet(
       getResource(__file__,"..","Arena2Reader","datos", "test","TV_03_2019_01_Q1","victimas.xml")
     )
     dialog.showWindow("ARENA2 Importar accidentes")
-    
-def selfRegister():
-  application = ApplicationLocator.getManager()
+   
+def registerAction():
+  #application = ApplicationLocator.getManager()
 
   #
   # Registramos las traducciones
@@ -76,8 +85,7 @@ def selfRegister():
     650700600, # Position 
     "_Show_the_ARENA2_import_tool" # Tooltip
   )
-  action = actionManager.registerAction(action)
-  application.addMenu(action, "tools/ARENA2/Importador")
+  action = actionManager.registerAction(action, True)
   
   action = actionManager.createAction(
     extension, 
@@ -89,5 +97,23 @@ def selfRegister():
     650700600, # Position 
     "_Show_the_ARENA2_tables_creator_tool" # Tooltip
   )
-  action = actionManager.registerAction(action)
-  application.addMenu(action, "tools/ARENA2/Crear tablas")
+  action = actionManager.registerAction(action, True)
+
+def selfRegister():
+  registerAction()
+  
+  application = ApplicationLocator.getManager()
+  actionManager = PluginsLocator.getActionInfoManager()
+  
+  application.addMenu(
+    actionManager.getAction("arena2-importer-showimporter"), 
+    "tools/ARENA2/Importador"
+  )
+  application.addMenu(
+    actionManager.getAction("arena2-importer-showtablecreator"), 
+    "tools/ARENA2/Crear tablas"
+  )
+
+def main(*args):
+  registerAction()
+  

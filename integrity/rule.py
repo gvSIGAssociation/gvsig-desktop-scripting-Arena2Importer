@@ -36,6 +36,9 @@ class RuleFactory(object):
   def create(self, **args):
     rule = Rule(self, **args)
     return rule
+
+  def checkRequirements(self):
+    return None
     
   def isSelectedByDefault(self):
     return True

@@ -56,7 +56,21 @@ class ImportManager(object):
     self.__transformFactories = list() # Factory
     self.__ruleErrorCodes = OrderedDict()
     self.__reportAttributes = OrderedDict()
-    
+
+  def checkRequirements(self):
+    messages = list()
+    for factory in self.__ruleFactories:
+      msg = factory.checkRequirements()
+      if msg!=None:
+        messages.append(msg)
+    for factory in self.__transformFactories:
+      msg = factory.checkRequirements()
+      if msg!=None:
+        messages.append(msg)
+    if len(messages)==0 :
+      return None
+    return messages
+  
   def addRuleFactory(self, ruleFactory): 
     self.__ruleFactories.append(ruleFactory)
 
