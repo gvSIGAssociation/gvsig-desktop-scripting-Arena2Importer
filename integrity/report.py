@@ -1,11 +1,13 @@
 # encoding: utf-8
 
 import gvsig
+import threading
 
 from java.lang import Throwable, String, Boolean, Integer
 
 from javax.swing.table import AbstractTableModel
 
+from org.gvsig.tools import ToolsLocator
 from org.gvsig.tools.dynobject import DynObjectValueItem
 from org.gvsig.fmap.geom import GeometryUtils, Geometry
 from org.gvsig.fmap.dal import DALLocator
@@ -59,7 +61,7 @@ class ShowLabelCellEditor(DefaultTableCellRenderer):
         x.setText(availableValue.getLabel())
         break
     return x
-  
+
 class Report(AbstractTableModel):
 
   def __init__(self, importManager):
@@ -68,12 +70,39 @@ class Report(AbstractTableModel):
     self.__ftype = None
     self.__columnNames = list()
     self.__issues_list = None    
-    self.__issues_cache = None
-    self.__issues = self.createMemoryStore()
+    #self.__issues = self.createMemoryStore()
+    self.__issues = self.createH2Store()
     for attr in self.__ftype:
       if not attr.isHidden():
         self.__columnNames.append(attr.getName())
+    self.__timer = None
+    self.__delayed_events = 0
+    self.__eventsEnableds = True
 
+  def setEnabledEvents(self, enable):
+    self.__eventsEnableds = enable
+    
+  def __fireDelayedsEvents(self):
+    if not self.__eventsEnableds:
+      return
+    self.__delayed_events = 0
+    self.__issues_list = None
+    self.fireTableDataChanged()
+
+  def __delayfireTableDataChanged(self):
+    if not self.__eventsEnableds:
+      return
+    if self.__timer!=None:
+      self.__timer.cancel()
+      self.__timer = None
+    self.__delayed_events += 1
+    if self.__delayed_events > 100:
+      self.__fireDelayedsEvents()
+    else:
+      self.__timer = threading.Timer(4,self.__fireDelayedsEvents)
+      self.__timer.setName("ARENA2_REPORT_DELAYEVENTS")
+      self.__timer.start()
+  
   def __len__(self):
     return len(self.getIssuesAsList())
     
@@ -88,6 +117,7 @@ class Report(AbstractTableModel):
     for columnIndex in range(len(self.__columnNames)):
       name = self.__columnNames[columnIndex]
       attr = self.__ftype.get(name)
+      trace("Report.setCellEditors() %r: %r" % (attr.getName(), attr.getAvailableValues()))
       values = attr.getAvailableValues()
       if values != None:
         col = columnModel.getColumn(columnIndex)
@@ -103,6 +133,42 @@ class Report(AbstractTableModel):
   def removeAll(self):
     self.__issues = self.createMemoryStore()
     self.fireTableDataChanged()
+  
+  def createH2Store(self):
+    foldersManager = ToolsLocator.getFoldersManager()
+    f = foldersManager.getUniqueTemporaryFile("arena2_import.db").getAbsolutePath()
+    pathnamedb = f[:-3]
+    dataManager = DALLocator.getDataManager()
+    serverParameters = dataManager.createServerExplorerParameters("H2Spatial")
+    serverParameters.setDynValue("database_file",pathnamedb)
+    serverExplorer = dataManager.openServerExplorer("H2Spatial",serverParameters)
+    storeparams = serverExplorer.getAddParameters()
+    storeparams.setTable("issues")
+    eft = storeparams.getDefaultFeatureType()
+    eft.setLabel("Incidencias importacion ARENA2")
+    eft.setHasOID(False)
+    eft.add("ID", 'STRING', 40).setHidden(True).setIsPrimaryKey(True)
+    eft.add("SELECTED", "BOOLEAN").setLabel("Importar").getTags().set("editable",True)
+    eft.add("ID_ACCIDENTE", "STRING", 20).setLabel("Cod.accidente").getTags().set("editable",False)
+    eft.get("ID_ACCIDENTE").setIsIndexed(True)
+    eft.get("ID_ACCIDENTE").setAllowIndexDuplicateds(True)
+    eft.add("ERRCODE", "INTEGER").setAvailableValues(self.__buildAvailableValues()).setLabel("Cod.error").getTags().set("editable",False)
+    eft.add("FIXERID", "STRING", 45).setHidden(True).setLabel("FixerID").getTags().set("editable",False)
+    for attr in self.__importManager.getReportAttributes():
+      if attr.getSize() == None:
+        desc = eft.add(attr.getName(), attr.getTypeName())
+      else:
+        desc = eft.add(attr.getName(), attr.getTypeName(), attr.getSize())
+      desc.setAvailableValues(attr.getAvailableValues())
+      desc.getTags().set("editable",attr.isEditable())
+      desc.setLabel(attr.getLabel())
+      #trace("Create ISSUES store: %s, size=%s, label=%r, editable=%s, values=%s" % (attr.getName(), attr.getSize(), attr.getLabel(), attr.isEditable(), attr.getAvailableValues()))
+    eft.add("DESCRIPTION", "STRING", 200).setLabel("Descripcion").getTags().set("editable",False)
+    serverExplorer.add("H2Spatial",storeparams,False)
+    store = dataManager.openStore("H2Spatial", serverExplorer.get("issues"))
+    self.__ftype = store.getDefaultFeatureType()
+    self.__issues_list = None
+    return store
   
   def createMemoryStore(self):    
     trace("Create ISSUES store")
@@ -132,7 +198,6 @@ class Report(AbstractTableModel):
     store.update(eft)
     store.finishEditing()  
     self.__ftype = store.getDefaultFeatureType()
-    self.__issues_cache = None
     self.__issues_list = None
     return store
 
@@ -160,16 +225,13 @@ class Report(AbstractTableModel):
       issue.set(name,value)
     self.__issues.insert(issue)
     self.__issues.finishEditing()
-    self.__issues_list = None
-    self.__issues_cache = None
-    self.fireTableDataChanged()
+    self.__delayfireTableDataChanged()
 
   def addIssues(self, issues_fset):
     self.__issues.edit()
     self.__issues.insert(issues_fset)
     self.__issues.finishEditing()
-    self.__issues_list = None
-    self.__issues_cache = None
+    self.__delayfireTableDataChanged()
     
   def getIssuesAsList(self):
     if self.__issues_list == None:
@@ -177,7 +239,10 @@ class Report(AbstractTableModel):
     return self.__issues_list
     
   def getIssue(self, index):
-    issue = self.getIssuesAsList()[index]
+    if isinstance(index, basestring):
+      issue = self.__issues.findFirst("ID_ACCIDENTE = '%s'" % index)
+    else:
+      issue = self.getIssuesAsList()[index]
     return issue
 
   def putIssue(self, row, issue):
@@ -185,45 +250,33 @@ class Report(AbstractTableModel):
     self.__issues.edit()
     self.__issues.update(issue)
     self.__issues.finishEditing()
-    self.__issues_list = None
-    self.__issues_cache = None
 
   def refresh(self):
     self.fireTableDataChanged()
 
-  def __getIssuesCache(self):
-    if self.__issues_cache==None:
-      cache = dict()
-      for issue in self.__issues:
-        accidentId = issue.get("ID_ACCIDENTE")
-        accident_issues = cache.get(accidentId,None)
-        if accident_issues == None:
-          accident_issues = list()
-          cache[accidentId] = accident_issues
-        accident_issues.append(issue.getCopy())
-      self.__issues_cache = cache
-    return self.__issues_cache
       
   def fix(self, feature):
     accidentId = feature.get("ID_ACCIDENTE")
-    issues = self.__getIssuesCache().get(accidentId, None)
+    issues = self.__issues.getFeatureSet("ID_ACCIDENTE = '%s'" % accidentId)
     if issues == None:
       return True
-
-    for issue in issues:
-      if issue.get("ID_ACCIDENTE") != accidentId:
-        continue
-      if not issue.get("SELECTED") :
-        continue
-      fixerID=issue.get("FIXERID")
-      if fixerID==None:
-        continue
-      trace("fix(%s) fixerID %r" % (accidentId, fixerID))
-      fixer = self.__importManager.getFixer(fixerID)
-      if fixer==None:
-        continue
-      fixer.fix(feature, issue)
-    
+    try:
+      for issue in issues:
+        if issue.get("ID_ACCIDENTE") != accidentId:
+          continue
+        if not issue.get("SELECTED") :
+          continue
+        fixerID=issue.get("FIXERID")
+        if fixerID==None:
+          continue
+        trace("fix(%s) fixerID %r" % (accidentId, fixerID))
+        fixer = self.__importManager.getFixer(fixerID)
+        if fixer==None:
+          continue
+        fixer.fix(feature, issue)
+    finally:
+      issues.dispose()
+      
   def getAccidenteId(self, row):
     issue = self.getIssue(row)
     return issue.get("ID_ACCIDENTE")
@@ -240,16 +293,18 @@ class Report(AbstractTableModel):
   
   def isSelected(self, accidentId):
     #trace("isSelected(%r)" % accidentId)
-    issues = self.__getIssuesCache().get(accidentId, None)
+    issues = self.__issues.getFeatureSet("ID_ACCIDENTE = '%s'" % accidentId)
     if issues == None:
       return True
-
-    for issue in issues:
-      if issue.get("ID_ACCIDENTE") != accidentId:
-        continue
-      if issue.get("SELECTED") :
-        return True
-    return False
+    try:
+      for issue in issues:
+        if issue.get("ID_ACCIDENTE") != accidentId:
+          continue
+        if issue.get("SELECTED") :
+          return True
+      return False
+    finally:
+      issues.dispose()
      
   def getTableModel(self):
     return self
@@ -295,6 +350,13 @@ class Report(AbstractTableModel):
     issue = issue.getEditable()
     issue.set(attr.getName(),aValue)
     self.putIssue(rowIndex, issue)
-    
+
+def hola():
+  print "hola"
+  
 def main(*args):
-    pass
+  timer = threading.Timer(5,hola)
+  timer.setName("Hola")
+  timer.start()
+  
+  

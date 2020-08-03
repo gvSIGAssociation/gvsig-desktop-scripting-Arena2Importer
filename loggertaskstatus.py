@@ -3,6 +3,8 @@
 import gvsig
 
 from org.gvsig.tools.task import SimpleTaskStatus
+from org.gvsig.app import ApplicationLocator
+from java.lang import System
 
 class LoggerTaskStatus(SimpleTaskStatus):
   def __init__(self, title):
@@ -12,9 +14,18 @@ class LoggerTaskStatus(SimpleTaskStatus):
     self.__max = 0
     self.__min = 0
     self.__state = "init"
+    application = ApplicationLocator.getApplicationManager()
+    arguments = application.getArguments()
+    self.__consolelogger = arguments.get("consolelogger",True)
 
   def __print(self):
-    gvsig.logger(self.getLabel())
+    s = self.getLabel()
+    self.logger(s)
+    
+  def logger(self, msg, mode=gvsig.LOGGER_INFO):
+    gvsig.logger(msg)
+    if not self.__consolelogger:
+      print msg
   
   def getTitle(self):
     return self.__title
@@ -125,5 +136,6 @@ class LoggerTaskStatus(SimpleTaskStatus):
     
 def main(*args):
   status = LoggerTaskStatus("ARENA2")
-  status.message("Test")
+  for n in range(10):
+    status.logger("Test")
   pass

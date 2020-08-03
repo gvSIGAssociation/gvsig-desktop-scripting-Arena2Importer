@@ -20,6 +20,7 @@ class ReportAttribute(object):
     self.__isEditable = isEditable
     self.__celleditor = celleditor
     self.__availableValues = availableValues
+    #print "ReportAttribute(%r) %r" % (self.__name, self.__availableValues)
 
   def getLabel(self):
     if self.__label == None:
@@ -42,11 +43,13 @@ class ReportAttribute(object):
     return self.__isEditable
     
   def getAvailableValues(self):
+    #print "ReportAttribute(%r).getAvailableValues(1) %r" % (self.__name, self.__availableValues)
     if self.__availableValues == None:
       return None
     l = list()
     for code,label in self.__availableValues.iteritems():
       l.append(DynObjectValueItem(code,label))
+    #print "ReportAttribute(%r).getAvailableValues(2) %r" % (self.__name, l)
     return l
       
 class ImportManager(object):

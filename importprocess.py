@@ -6,16 +6,15 @@ from gvsig import logger, LOGGER_WARN
 import os.path
 
 import sys
-import traceback
 
 import java.lang.Exception
 import java.lang.Throwable
-
 from java.lang import Thread, Runnable
 from java.lang import Throwable, String, Boolean, Integer
 
 from javax.swing.table import AbstractTableModel
 
+from org.gvsig.app import ApplicationLocator
 from org.gvsig.fmap.dal import DALLocator
 from org.gvsig.fmap.dal.feature import FeatureStore
 
@@ -59,8 +58,8 @@ class ImportProcess(Runnable):
       self.status.message("Error Cargando accidentes (%s)" % fname )
       return None
     except:
-      ex = sys.exc_info()
-      logger("Error cargando accidentes. %s\n%s" % (ex[1], "".join(traceback.format_exception(*ex))), LOGGER_WARN)
+      ex = sys.exc_info()[1]
+      logger("Error cargando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
       self.status.message("Error cargando accidentes (%s)" % fname )
       return None
     
@@ -107,20 +106,19 @@ class ImportProcess(Runnable):
             else:
               self.copyTable(sourceStore, targetStore)
     
-        self.status.message("Creacion completada")
-        self.status.terminate()
-        
-        for action in self.__actions:
-          action(self)
+      self.status.message("Creacion completada")
+      self.status.terminate()
+      
+      for action in self.__actions:
+        action(self)
   
     
     except java.lang.Exception, ex:
       logger("Error importando accidentes.", LOGGER_WARN, ex)
       self.status.abort()
-
     except:
-      ex = sys.exc_info()
-      logger("Error importando accidentes. %s\n%s" % (ex[1], "".join(traceback.format_exception(*ex))), LOGGER_WARN)
+      ex = sys.exc_info()[1]
+      logger("Error importando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
       self.status.abort()
 
     finally:
@@ -135,7 +133,13 @@ class ImportProcess(Runnable):
       targetStore.edit(FeatureStore.MODE_APPEND)
       transforms = self.transforms
       for f_src in sourceStore:
-        if report==None or report.isSelected(f_src.get("ID_ACCIDENTE")):
+        accidentId = f_src.get("ID_ACCIDENTE")
+        process = True
+        if report != None:
+          issue = report.getIssue(accidentId)
+          if issue!=None:
+            process = issue.get("SELECTED")
+        if process:
           f_dst = targetStore.createNewFeature(f_src)
           for transform in transforms:
             transform.apply(f_dst)
@@ -163,13 +167,12 @@ class ImportProcess(Runnable):
         f_dst = targetStore.findFirst("LID_INFORME = '%s'" % lid_informe)
         if f_dst!=None:
           continue
-        if report==None or report.isSelected(f_src.get("ID_ACCIDENTE")):
-          f_dst = targetStore.createNewFeature(f_src)
-          for transform in transforms:
-            transform.apply(f_dst)
-          if report!=None:
-            report.fix(f_dst)
-          targetStore.insert(f_dst)
+        f_dst = targetStore.createNewFeature(f_src)
+        for transform in transforms:
+          transform.apply(f_dst)
+        if report!=None:
+          report.fix(f_dst)
+        targetStore.insert(f_dst)
         self.status.incrementCurrentValue()
       targetStore.finishEditing()
     except Throwable as ex:
@@ -184,9 +187,17 @@ class ImportProcess(Runnable):
       transforms = self.transforms
       targetType = targetStore[1].getDefaultFeatureType()
       sourceType = sourceStore.getDefaultFeatureType()
+      #count = 0
       for f_src in sourceStore:
         accidentId = f_src.get("ID_ACCIDENTE")
-        if report==None or report.isSelected(accidentId):
+        process = True
+        if report != None:
+          issue = report.getIssue(accidentId)
+          if issue!=None:
+            process = issue.get("SELECTED")
+        #print "[%3d] %s import %s" % (count, accidentId, process)
+        #count += 1
+        if process:
           f_dst = targetStore[1].findFirst("ID_ACCIDENTE = '%s'" % accidentId)
           if f_dst == None:
             f_dst = targetStore[0].createNewFeature(f_src)
@@ -282,13 +293,14 @@ class ValidatorProcess(Runnable):
       self.status.message("Cargando accidentes...(%s)" % fname_tail )
       store = dataManager.openStore("ARENA2", "file", fname, "CRS", "EPSG:25830")
       return store
+
     except java.lang.Throwable, ex:
       logger("Error cargando accidentes.", LOGGER_WARN, ex)
       self.status.message("Error cargando accidentes (%s)" % fname )
       return None
     except:
-      ex = sys.exc_info()
-      logger("Error cargando accidentes. %s\n%s" % (ex[1], "".join(traceback.format_exception(*ex))), LOGGER_WARN)
+      ex = sys.exc_info()[1]
+      logger("Error cargando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
       self.status.message("Error cargando accidentes (%s)" % fname )
       return None
     
@@ -320,7 +332,10 @@ class ValidatorProcess(Runnable):
               rule.execute(self.report, feature)
           self.__count += 1
           self.status.incrementCurrentValue()
-    
+        
+        self.input_store.dispose()
+        self.input_store = None
+        
         self.status.message("Comprobacion completada")
     
       self.status.terminate()
@@ -333,153 +348,200 @@ class ValidatorProcess(Runnable):
       self.status.message("Error validando accidentes (%s)" % fname )
       self.status.abort()
       raise ex
-
     except:
-      ex = sys.exc_info()
-      logger("Error validando accidentes. %s\n%s" % (ex[1], "".join(traceback.format_exception(*ex))), LOGGER_WARN)
+      ex = sys.exc_info()[1]
+      logger("Error validando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
       self.status.message("Error validando accidentes (%s)" % fname )
-      
     finally:
       pass
 
 
-def testValidate():
-  import addons.Arena2Importer.loggertaskstatus
-  reload(addons.Arena2Importer.loggertaskstatus)
-  
-  from java.io import File
-  from addons.Arena2Reader.arena2reader import Arena2ReaderFactory
-  from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
-  from addons.Arena2Importer.integrity.report import Report
-  from addons.Arena2Importer.loggertaskstatus import LoggerTaskStatus
+from java.io import File
 
-  class MyReport(Report):
-    def __init__(self, importManager):
-      Report.__init__(self, importManager)
-      self.count = 0
-      
-    def add(self, accidentId, errcode, description, selected=None, fixerId=None, **args):
-      gvsig.logger("add issue[%03d]: accidentId=%r errcode=%r description=%r" % (
-          self.count,
-          accidentId,
-          errcode,
-          description
-        )
-      )
-      selected=True
-      self.count+=1
-      Report.add(self,accidentId, errcode, description, selected, fixerId, **args)
+import addons.Arena2Importer.loggertaskstatus
+reload(addons.Arena2Importer.loggertaskstatus)
+
+from addons.Arena2Importer.loggertaskstatus import LoggerTaskStatus
+from addons.Arena2Importer.integrity.report import Report
+from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
+from addons.Arena2Reader.arena2reader import Arena2ReaderFactory
+
+class MyReport(Report):
+  def __init__(self, importManager):
+    Report.__init__(self, importManager)
+    self.count = 0
     
+  def add(self, accidentId, errcode, description, selected=None, fixerId=None, **args):
+    gvsig.logger("add issue[%03d]: accidentId=%r errcode=%r description=%r" % (
+        self.count,
+        accidentId,
+        errcode,
+        description
+      )
+    )
+    selected=True
+    self.count+=1
+    Report.add(self,accidentId, errcode, description, selected, fixerId, **args)
 
+def calculateSlots(folderData, slotsize, slot=0, status=None):
+  if status == None:
+    status = LoggerTaskStatus("ImportArena2Files")
+
+  status.logger("Searching files in %r" % folderData)
   factory = Arena2ReaderFactory()
-  folder = '/home/jjdelcerro/arena2/quincenas'
   fnames = list()
-  for root, dirs, files in os.walk(folder, followlinks=True):
+  for root, dirs, files in os.walk(folderData, followlinks=True):
      for name in files:
        pathname = os.path.join(root, name)
        if pathname.lower().endswith(".xml"):
         if factory.accept(File(pathname)):
-          gvsig.logger("found file: %r" % pathname)
           fnames.append(pathname)
         else:
-          gvsig.logger("skip file: %r" % pathname, gvsig.LOGGER_WARN)
-  fnames.sort()
-  sufix = "all"
-  
-  #fnames = fnames[:1] ; sufix="00"
-  
-  #fnames = fnames[  0: 30] ; sufix="0"
-  #fnames = fnames[ 31: 60] ; sufix="1"
-  #fnames = fnames[ 61: 90] ; sufix="2"
-  #fnames = fnames[121:150] ; sufix="3"
-  #fnames = fnames[151:180] ; sufix="4"
-  #fnames = fnames[181:210] ; sufix="5"
-  #fnames = fnames[211:240] ; sufix="6"
-  #fnames = fnames[241:270] ; sufix="7"
-  #fnames = fnames[271:] ; sufix="8"
-  
-  issues_pathname = "/home/jjdelcerro/arena2/issues-%s.csv" % sufix
-  gvsig.logger("block %r" % sufix)
+          status.logger("skip file: %r" % pathname, gvsig.LOGGER_WARN)
+  fnames.sort() 
 
+  status.logger("Found %d files" % len(fnames))
+  for n in range(0,len(fnames)):
+    status.logger("File: %r" % fnames[n])
+
+  slots = (len(fnames)/slotsize)
+  if (len(fnames) % slotsize) > 0 :
+    slots += 1
+  status.logger("Slots:")
+  for n in range(0,slots):
+    slide_start = n*slotsize
+    slide_end = (n+1)*slotsize -1
+    if slide_end > len(fnames):
+      slide_end = len(fnames)
+    status.logger("Slot %3d: [%3d : %3d]" %  (n, slide_start, slide_end))
+  
+  slide_start = slot*slotsize
+  slide_end = (slot+1)*slotsize -1
+  if slide_end > len(fnames):
+    slide_end = len(fnames)
+  status.logger("Slot size   : %d" % slotsize)
+  status.logger("Total files : %d" % len(fnames))
+  status.logger("Total slots : %d" % slots)
+  status.logger("Current slot: %d [%3d : %3d]" % (slot, slide_start, slide_end))
+  if slot+1 > slots :
+    status.logger("Next slot   : None (process finished)")
+  else:
+    status.logger("Next slot   : %d" % (slot+1))
+
+  return fnames[slide_start:slide_end], slots
+  
+def validateData(folderData, issues_pathname, slot, slotsize, workspaceName):
+  status = LoggerTaskStatus("ValidateArena2Files")
+    
+  issues_pathname = issues_pathname % slot
+  fnames, slots = calculateSlots(folderData, slotsize, slot, status)
+  status.logger("validate slot %d/%d" % (slot, slots))
+
+  if not connectToWorkspace(workspaceName, status):
+    return
+    
   importManager = getArena2ImportManager()
   report = MyReport(importManager)
-  status = LoggerTaskStatus("CheckArena2Files")
+  report.setEnabledEvents(False)
   dataManager = DALLocator.getDataManager()
   workspace = dataManager.getDatabaseWorkspace("ARENA2_DB")
   if workspace==None:
-    gvsig.logger("Can't access to workspace ARENA2_DB", gvsig.LOGGER_WARN)
+    status.logger("Can't access to workspace ARENA2_DB", gvsig.LOGGER_WARN)
     
   p = ValidatorProcess(importManager, fnames, report, workspace, status)
   p.run()
 
   if os.path.exists(issues_pathname):
-    gvsig.logger("removing file %r" % issues_pathname)
+    status.logger("removing file %r" % issues_pathname)
     os.unlink(issues_pathname)
   explorer = dataManager.openServerExplorer("FilesystemExplorer")
   store = report.getStore()
-  gvsig.logger("export issues to %r" % issues_pathname)
+  status.logger("export issues to %r" % issues_pathname)
   store.export(explorer,"CSV",explorer.getAddParameters(File(issues_pathname)))
 
-def testInsert():
-  import addons.Arena2Importer.loggertaskstatus
-  reload(addons.Arena2Importer.loggertaskstatus)
-  
-  from java.io import File
-  from addons.Arena2Reader.arena2reader import Arena2ReaderFactory
-  from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
-  from addons.Arena2Importer.integrity.report import Report
-  from addons.Arena2Importer.loggertaskstatus import LoggerTaskStatus
+def importData(folderData, issues_pathname, slot, slotsize, workspaceName):
+  status = LoggerTaskStatus("ImportArena2Files")
 
+  issues_pathname = issues_pathname % slot
+  fnames, slots = calculateSlots(folderData, slotsize, slot, status)
+  status.logger("import slot %d/%d" % (slot, slots))
 
-  factory = Arena2ReaderFactory()
-  folder = '/home/jjdelcerro/arena2/quincenas'
-  fnames = list()
-  for root, dirs, files in os.walk(folder, followlinks=True):
-     for name in files:
-       pathname = os.path.join(root, name)
-       if pathname.lower().endswith(".xml"):
-        if factory.accept(File(pathname)):
-          gvsig.logger("found file: %r" % pathname)
-          fnames.append(pathname)
-        else:
-          gvsig.logger("skip file: %r" % pathname, gvsig.LOGGER_WARN)
-  fnames.sort() 
-  sufix = "all"
-  
-  #fnames = fnames[  0:  1] ; sufix="0"
-  
-  #fnames = fnames[  0: 30] ; sufix="0"
-  #fnames = fnames[ 31: 60] ; sufix="1"
-  #fnames = fnames[ 61: 90] ; sufix="2"
-  #fnames = fnames[121:150] ; sufix="3"
-  #fnames = fnames[151:180] ; sufix="4"
-  #fnames = fnames[181:210] ; sufix="5"
-  #fnames = fnames[211:240] ; sufix="6"
-  #fnames = fnames[241:270] ; sufix="7"
-  #fnames = fnames[271:] ; sufix="8"
-  
-  issues_pathname = "/home/jjdelcerro/arena2/issues-%s.csv" % sufix
-  gvsig.logger("block %r" % sufix)
-
+  if not connectToWorkspace(workspaceName, status):
+    return
+    
   importManager = getArena2ImportManager()
   report = Report(importManager)
-  status = LoggerTaskStatus("ImportArena2Files")
+  report.setEnabledEvents(False)
   dataManager = DALLocator.getDataManager()
   workspace = dataManager.getDatabaseWorkspace("ARENA2_DB")
   if workspace==None:
-    gvsig.logger("Can't access to workspace ARENA2_DB", gvsig.LOGGER_WARN)
+    status.logger("Can't access to workspace ARENA2_DB", gvsig.LOGGER_WARN)
     return
 
   issues = dataManager.openStore("CSV","File", issues_pathname)
   report.addIssues(issues.getFeatureSet())
   if len(report) != issues.getFeatureCount():
-    gvsig.logger("Can't load issues in repprt", gvsig.LOGGER_WARN)
+    status.logger("Can't load issues in report", gvsig.LOGGER_WARN)
     return
     
   p = ImportProcess(importManager, fnames, workspace, report, status)
   p.run()
+
+def connectToWorkspace(name, status=None):
+  if status == None:
+    status = LoggerTaskStatus("ImportArena2Files")
     
+  dataManager = DALLocator.getDataManager()
+  pool = dataManager.getDataServerExplorerPool()
+  poolentry = pool.get(name)
+  if poolentry==None:
+    status.logger("Can't locate connection %r" % name, gvsig.LOGGER_WARN)
+    return False
+  conn = poolentry.getExplorerParameters()
+  workspace = dataManager.createDatabaseWorkspaceManager(conn)
+  workspace.connect()
+  status.logger("Connected to workspace %r" % name)
+  return True
+
+def genetareScript(folderData, slotsize):
+  fnames, slots = calculateSlots(folderData, slotsize)
+  
+  for slot in range(0,slots):
+    print "./gvSIG.sh --splash=false --showgui=false --consolelogger=false --runScript=/addons/Arena2Importer/importprocess --closeAtFinish --slotsize=%d --validate --slot=%d" % (slotsize,slot)   
+  for slot in range(0,slots):
+    print "./gvSIG.sh --splash=false --showgui=false --consolelogger=false --runScript=/addons/Arena2Importer/importprocess --closeAtFinish --slotsize=%d --import --slot=%d" % (slotsize,slot)   
+
 def main(*args):
-  testValidate()
-  #testInsert()
-  pass
+  application = ApplicationLocator.getApplicationManager()
+
+  arguments = application.getArguments()
+
+  folderData = '/home/jjdelcerro/arena2/quincenas'
+  issues_pathname = "/home/jjdelcerro/arena2/issuesB-%s.csv"
+  workspaceName = "a2_1"
+  slot = 0
+  slotsize = 10
+  closeAtFinish = False
+  
+  workspaceName = arguments.get("workspaceName",workspaceName)
+  folderData = arguments.get("folderData",folderData)
+  issues_pathname = arguments.get("issues",issues_pathname)
+  slotsize = arguments.get("slotsize",slotsize)
+  slot = arguments.get("slot",slot)
+  closeAtFinish = arguments.get("closeAtFinish",closeAtFinish)
+ 
+  if arguments.contains("generateScript","true"):
+    genetareScript(folderData, slotsize)
+
+  if arguments.contains("calculateSlots","true"):
+    calculateSlots(folderData, slotsize)
+
+  if arguments.contains("validate","true"):
+    validateData(folderData, issues_pathname, slot, slotsize, workspaceName)
+  
+  if True or arguments.contains("import","true"):
+    importData(folderData, issues_pathname, slot, slotsize, workspaceName)
+  
+  if closeAtFinish:
+    application.close(True)
+  

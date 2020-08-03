@@ -34,6 +34,19 @@ from addons.Arena2Reader.arena2readerutils import createArena2XMLFileFilter, isA
 from javax.swing import JFileChooser
 
 from org.gvsig.tools.dynform import DynFormLocator
+from org.gvsig.tools.util import ToolsUtilLocator
+
+def createFileChooserDialog(title, type, selectionMode, multiselection, initialPath, filter, fileHidingEnabled):
+    fcdManager = ToolsUtilLocator.getFileDialogChooserManager()
+    dialog = fcdManager.create("arena2_importxml")
+    dialog.setDialogTitle(title)
+    dialog.setDialogType(type)
+    dialog.setFileSelectionMode(selectionMode)
+    dialog.setMultiSelectionEnabled(multiselection)
+    dialog.setCurrentDirectory(fcdManager.getLastPath("arena2_importxml",initialPath))
+    dialog.setFileFilter(filter)
+    dialog.setFileHidingEnabled(fileHidingEnabled)
+    return dialog
 
 class ShowFormFromIssueActionContext(AbstractDALActionContext):
   def __init__(self, panel):
@@ -88,9 +101,8 @@ class FilesPickerController(FormComponent):
       return
     self.__changeListener()
     
-  def btnAddFile_click(self, *args):
-    manager = ToolsSwingLocator.getThreadSafeDialogsManager()
-    files = dialog = manager.showChooserDialog(
+  def btnAddFile_click(self, *args):    
+    dialog = createFileChooserDialog(
       "Seleccione fichero ARENA2",
       JFileChooser.OPEN_DIALOG,
       JFileChooser.FILES_AND_DIRECTORIES,
@@ -99,6 +111,8 @@ class FilesPickerController(FormComponent):
       createArena2XMLFileFilter(), # Filter
       False # ocultar archivos ocultos
     )
+    dialog.showOpenDialog(None)
+    files = dialog.getSelectedFiles()
     if files==None or len(files)<1:
       return
     model = self.lstFileNames.getModel()
@@ -107,8 +121,7 @@ class FilesPickerController(FormComponent):
     self.fireChengeEvent()
     
   def btnAddFolder_click(self, *args):
-    manager = ToolsSwingLocator.getThreadSafeDialogsManager()
-    files = dialog = manager.showChooserDialog(
+    dialog = createFileChooserDialog(
       "Seleccione carpeta",
       JFileChooser.OPEN_DIALOG,
       JFileChooser.DIRECTORIES_ONLY,
@@ -117,15 +130,22 @@ class FilesPickerController(FormComponent):
       None, # Filter
       False # ocultar archivos ocultos
     )
-    if files==None or len(files)<1:
+    dialog.showOpenDialog(None)
+    folder = dialog.getSelectedFile()
+    if folder==None:
       return
-    folder = files[0].getAbsolutePath()
-    model = self.lstFileNames.getModel()
+    folder = folder.getAbsolutePath()
+    print folder
+    paths = list()
     for root, dirs, files in os.walk(folder, followlinks=True):
        for name in files:
          pathname = os.path.join(root, name)
          if isArena2File(pathname):
-          model.addElement(pathname)
+           paths.append(pathname)
+    paths.sort()
+    model = self.lstFileNames.getModel()
+    for pathname in paths:
+      model.addElement(pathname)
     self.fireChengeEvent()
 
   def btnRemoveFile_click(self, *args):
@@ -249,6 +269,25 @@ class ImportPanel(FormPanel, Observer):
     
     self.setPreferredSize(800,500)
 
+  def btnImportAll_click(self, *args):
+    self.doSelectImport(True)
+    
+  def btnImportNone_click(self, *args):
+    self.doSelectImport(False)
+
+  def doSelectImport(self, select):
+    report = self.report
+    selectionModel = self.tblIssues.getSelectionModel()
+    if selectionModel.isSelectionEmpty():
+      for row in range(len(report)):
+        report.setSelected(row, select)
+    else:
+      for row in xrange(selectionModel.getMinSelectionIndex(), selectionModel.getMaxSelectionIndex()+1):
+        if selectionModel.isSelectedIndex(row):
+          row = self.tblIssues.convertRowIndexToModel(row)
+          print "report.setSelected(%s, %s)" % (row, selected)
+          report.setSelected(row, select)
+  
   def btnModifyIssues_click(self, *args):
     selectionModel = self.tblIssues.getSelectionModel()
     if selectionModel.isSelectionEmpty():
@@ -257,8 +296,9 @@ class ImportPanel(FormPanel, Observer):
     store = report.getStore()
     ft = store.getDefaultFeatureType().getCopy()
     for attr in ft:
-      attr.setHidden(not attr.getTags().getBoolean("editable",False))
-      #print "%s.isHidden() %s" % (attr.getName(), attr.isHidden())
+      isHidden = not attr.getTags().getBoolean("editable",False)
+      attr.setHidden(isHidden)
+      #print "%s.isHidden() %s" % (attr.getName(), isHidden)
     f = store.createNewFeature(ft,False)
     dynformManager = DynFormLocator.getDynFormManager()
     x = f.getAsDynObject()
@@ -417,4 +457,13 @@ class ImportPanel(FormPanel, Observer):
 
 
 def main(*args):
-  pass  
+    from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
+    
+    manager = getArena2ImportManager()
+    messages = manager.checkRequirements()
+    if messages!=None:
+      msgbox("\n".join(messages))
+      return
+    dialog = manager.createImportDialog()
+    dialog.showWindow("ARENA2 Importar accidentes")
+    

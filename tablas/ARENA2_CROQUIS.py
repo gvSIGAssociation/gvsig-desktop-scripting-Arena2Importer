@@ -3,7 +3,7 @@
 import gvsig
 
 from org.gvsig.fmap.dal import DALLocator
-
+from org.gvsig.tools.dynobject.DynField import RELATION_TYPE_COLLABORATION, RELATION_TYPE_AGGREGATE
 from org.gvsig.tools.dataTypes import DataTypes
 
 def add_attribute_LID_CROQUIS(ft):
@@ -40,7 +40,7 @@ def add_attribute_ID_ACCIDENTE(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -48,7 +48,7 @@ def add_attribute_ID_ACCIDENTE(ft):
   attr.setOrder(10)
   attr.setPrecision(0)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
   attr.getForeingKey().setCodeName(u'ID_ACCIDENTE')
   attr.getForeingKey().setForeingKey(True)
   attr.getForeingKey().setLabelFormula(u"FORMAT('%s',ID_ACCIDENTE)")
