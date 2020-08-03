@@ -3,6 +3,7 @@
 import gvsig
 
 from org.gvsig.fmap.dal import DALLocator
+from org.gvsig.tools.dynobject.DynField import RELATION_TYPE_COLLABORATION, RELATION_TYPE_AGGREGATE
 
 def add_attribute_LID_INFORME(ft):
   attr = ft.add("LID_INFORME",8)
@@ -115,8 +116,8 @@ def add_attribute_ACCIDENTES(ft):
   attr.setOrder(40)
   attr.setPrecision(0)
   attr.setReadOnly(True)
-  attr.setRelationType(0)
-  attr.setFeatureAttributeEmulator(u"FEATURES('ARENA2_ACCIDENTES',FORMAT('COD_INFORME = ''%s''',COD_INFORME))")
+  attr.setRelationType(RELATION_TYPE_AGGREGATE)
+  attr.setFeatureAttributeEmulator(u"SELECT * FROM ARENA2_ACCIDENTES WHERE ARENA2_INFORMES.COD_INFORME = ARENA2_ACCIDENTES.COD_INFORME")
   tags = attr.getTags()
   tags.set(u'dynform.label.empty', u'True')
   tags.set(u'dal.relatedfeatures.table', u'ARENA2_ACCIDENTES')

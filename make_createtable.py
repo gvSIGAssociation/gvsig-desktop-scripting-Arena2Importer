@@ -61,8 +61,7 @@ def descriptor(builder, desc):
   builder.append("\n")
   
 
-def generateTable(tableName, ft):
-  print "%s..." % tableName
+def generateTable(pathname,tableName, ft):
   builder = StringBuilder()
   builder.append("""# encoding: utf-8
 
@@ -110,16 +109,35 @@ def crearTabla_%s(connection):
 def main(*args):
     pass
 """ % (tableName,tableName,tableName,tableName) )
-  f = open(getResource(__file__,"tablas",tableName+".py"),"w")
+  f = open(pathname,"w")
   f.write(builder.toString())
   f.close()
-    
-def main(*args):
+
+def create_arena2_tables():
   f = File("/home/jjdelcerro/datos/geodata/vector/ARENA2/TV_03_2019_01_Q1/victimas.xml")
   dataManager = DALLocator.getDataManager()
   print "Cargando ARENA2 file..."
   store = dataManager.openStore("ARENA2", "file", f)
 
-  generateTable("ARENA2_ACCIDENTES", store.getDefaultFeatureType())
+  tableName = "ARENA2_ACCIDENTES"
+  print "%s..." % tableName
+  pathname = getResource(__file__,"tablas",tableName+".py")  
+  generateTable(pathname, tableName, store.getDefaultFeatureType())
+
   for child in store.getChildren():
-    generateTable(child.getName(), child.getDefaultFeatureType())
+    tableName = child.getName()
+    print "%s..." % tableName
+    pathname = getResource(__file__,"tablas",tableName+".py")  
+    generateTable(pathname, tableName, child.getDefaultFeatureType())
+
+def create_ARENA2_AC_VE_CO_PA_PE_CR():
+  tableName = "ARENA2_AC_VE_CO_PA_PE_CR"
+  dataManager = DALLocator.getDataManager()
+  store = dataManager.getStoresRepository().getStore(tableName)
+  pathname = getResource(__file__,"tablas",tableName+".py")  
+  generateTable(pathname, tableName, store.getDefaultFeatureType())
+  
+def main(*args):
+  #create_arena2_tables()
+  create_ARENA2_AC_VE_CO_PA_PE_CR()
+  
