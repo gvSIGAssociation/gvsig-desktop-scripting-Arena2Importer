@@ -1035,7 +1035,12 @@ def add_attribute_AC_TIPO_ACC_SALIDA(ft):
   attr.setOrder(460)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_ACCIDENTE_SALIDA')
 
 def add_attribute_AC_TIPO_ACC_COLISION(ft):
   attr = ft.add("AC_TIPO_ACC_COLISION",4)
@@ -1489,7 +1494,12 @@ def add_attribute_AC_SENTIDOS_VIA(ft):
   attr.setOrder(650)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_SENTIDOS_VIA')
 
 def add_attribute_AC_NUMERO_CALZADAS(ft):
   attr = ft.add("AC_NUMERO_CALZADAS",4)
@@ -1510,7 +1520,12 @@ def add_attribute_AC_NUMERO_CALZADAS(ft):
   attr.setOrder(660)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_NUMERO_CALZADAS')
 
 def add_attribute_AC_CARRILES_APTOS_CIRC_ASC(ft):
   attr = ft.add("AC_CARRILES_APTOS_CIRC_ASC",4)
@@ -1573,7 +1588,12 @@ def add_attribute_AC_ANCHURA_CARRIL(ft):
   attr.setOrder(690)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ANCHURA_CARRIL')
 
 def add_attribute_AC_ARCEN(ft):
   attr = ft.add("AC_ARCEN",4)
@@ -1594,7 +1614,12 @@ def add_attribute_AC_ARCEN(ft):
   attr.setOrder(700)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ANCHURA_ARCEN')
 
 def add_attribute_AC_ACERA(ft):
   attr = ft.add("AC_ACERA",4)
@@ -1615,7 +1640,12 @@ def add_attribute_AC_ACERA(ft):
   attr.setOrder(710)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ACERA')
 
 def add_attribute_AC_INFU_ACERA(ft):
   attr = ft.add("AC_INFU_ACERA",1)
@@ -1678,7 +1708,12 @@ def add_attribute_AC_TRAZADO_PLANTA(ft):
   attr.setOrder(740)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_TRAZADO_PLANTA')
 
 def add_attribute_AC_TRAZADO_ALZADO(ft):
   attr = ft.add("AC_TRAZADO_ALZADO",4)
@@ -1699,7 +1734,12 @@ def add_attribute_AC_TRAZADO_ALZADO(ft):
   attr.setOrder(750)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_TRAZADO_ALZADO')
 
 def add_attribute_AC_MARCAS_VIALES(ft):
   attr = ft.add("AC_MARCAS_VIALES",4)
@@ -1720,7 +1760,12 @@ def add_attribute_AC_MARCAS_VIALES(ft):
   attr.setOrder(760)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_MARCAS_VIALES')
 
 def add_attribute_AC_DESCRIPCION(ft):
   attr = ft.add("AC_DESCRIPCION",8)
@@ -2287,7 +2332,12 @@ def add_attribute_AC_BARRERA_SEG_LAT_ASC(ft):
   attr.setOrder(1030)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_BARRERA')
 
 def add_attribute_AC_BARRERA_SEG_LAT_ASC_MOTO(ft):
   attr = ft.add("AC_BARRERA_SEG_LAT_ASC_MOTO",1)
@@ -2329,7 +2379,12 @@ def add_attribute_AC_BARRERA_SEG_LAT_DESC(ft):
   attr.setOrder(1050)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_BARRERA')
 
 def add_attribute_AC_BARRERA_SEG_LAT_DESC_MOTO(ft):
   attr = ft.add("AC_BARRERA_SEG_LAT_DESC_MOTO",1)
@@ -2371,7 +2426,12 @@ def add_attribute_AC_BARRERA_SEG_MEDIANA_ASC(ft):
   attr.setOrder(1070)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_BARRERA')
 
 def add_attribute_AC_BARRERA_SEG_MEDIANA_ASC_MOTO(ft):
   attr = ft.add("AC_BARRERA_SEG_MEDIANA_ASC_MOTO",1)
@@ -2413,7 +2473,12 @@ def add_attribute_AC_BARRERA_SEG_MEDIANA_DESC(ft):
   attr.setOrder(1090)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_BARRERA')
 
 def add_attribute_AC_BARRERA_SEG_MEDIANA_DESC_MOTO(ft):
   attr = ft.add("AC_BARRERA_SEG_MEDIANA_DESC_MOTO",1)
@@ -3841,7 +3906,12 @@ def add_attribute_VE_LID_CONDUCTOR(ft):
   attr.setOrder(1770)
   attr.setPrecision(-1)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'LID_CONDUCTOR')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d %s %s %s',TOINTEGER(ID_VEHICULO), TOSTR(FECHA_NACIMIENTO), NACIONALIDAD, MUNICIPIO_RESIDENCIA)")
+  attr.getForeingKey().setClosedList(False)
+  attr.getForeingKey().setTableName(u'ARENA2_CONDUCTORES')
 
 def add_attribute_VE_FECHA_MATRICULACION(ft):
   attr = ft.add("VE_FECHA_MATRICULACION",9)
@@ -3904,7 +3974,12 @@ def add_attribute_VE_TIPO_VEHICULO(ft):
   attr.setOrder(1800)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_VEHICULO')
 
 def add_attribute_VE_MMA(ft):
   attr = ft.add("VE_MMA",4)
@@ -3925,7 +4000,12 @@ def add_attribute_VE_MMA(ft):
   attr.setOrder(1810)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_MMA')
 
 def add_attribute_VE_MARCA_NOMBRE(ft):
   attr = ft.add("VE_MARCA_NOMBRE",8)
@@ -3988,7 +4068,12 @@ def add_attribute_VE_ITV(ft):
   attr.setOrder(1840)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ITV')
 
 def add_attribute_VE_SEGURO(ft):
   attr = ft.add("VE_SEGURO",4)
@@ -4009,7 +4094,12 @@ def add_attribute_VE_SEGURO(ft):
   attr.setOrder(1850)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_GENERICO2')
 
 def add_attribute_VE_NUM_OCUPANTES(ft):
   attr = ft.add("VE_NUM_OCUPANTES",4)
@@ -4156,7 +4246,12 @@ def add_attribute_VE_MP_NUMERO_ONU(ft):
   attr.setOrder(1920)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',CODIGO,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ONU')
 
 def add_attribute_VE_DANYOS(ft):
   attr = ft.add("VE_DANYOS",4)
@@ -4177,7 +4272,12 @@ def add_attribute_VE_DANYOS(ft):
   attr.setOrder(1930)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_DANYOS')
 
 def add_attribute_VE_REMOLQUE(ft):
   attr = ft.add("VE_REMOLQUE",1)
@@ -4282,7 +4382,12 @@ def add_attribute_VE_POS_VIA(ft):
   attr.setOrder(1980)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_POSICION_VIA')
 
 def add_attribute_VE_APROXIMACION_NUDO(ft):
   attr = ft.add("VE_APROXIMACION_NUDO",4)
@@ -4303,7 +4408,12 @@ def add_attribute_VE_APROXIMACION_NUDO(ft):
   attr.setOrder(1990)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_NUDO_APROX')
 
 def add_attribute_VE_SENTIDO_CIRCULACION(ft):
   attr = ft.add("VE_SENTIDO_CIRCULACION",4)
@@ -4324,7 +4434,12 @@ def add_attribute_VE_SENTIDO_CIRCULACION(ft):
   attr.setOrder(2000)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_SENTIDO_CIRCULA')
 
 def add_attribute_VE_LUGAR_CIRCULABA(ft):
   attr = ft.add("VE_LUGAR_CIRCULABA",4)
@@ -4345,7 +4460,12 @@ def add_attribute_VE_LUGAR_CIRCULABA(ft):
   attr.setOrder(2010)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_LUGAR_CIRCULA')
 
 def add_attribute_VE_FACT_LUGAR_CIRCULA(ft):
   attr = ft.add("VE_FACT_LUGAR_CIRCULA",1)
@@ -5038,7 +5158,12 @@ def add_attribute_CO_SEXO(ft):
   attr.setOrder(2340)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_SEXO')
 
 def add_attribute_CO_NACIONALIDAD(ft):
   attr = ft.add("CO_NACIONALIDAD",8)
@@ -5143,7 +5268,12 @@ def add_attribute_CO_ASISTENCIA_SANITARIA(ft):
   attr.setOrder(2390)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ASISTENCIA_SANITARIA')
 
 def add_attribute_CO_INFLU_FACT_ATENCION(ft):
   attr = ft.add("CO_INFLU_FACT_ATENCION",1)
@@ -5185,7 +5315,12 @@ def add_attribute_CO_FACTORES_ATENCION(ft):
   attr.setOrder(2410)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_FACTORES_ATENCION_COND')
 
 def add_attribute_CO_INFLU_PRES_ERROR(ft):
   attr = ft.add("CO_INFLU_PRES_ERROR",1)
@@ -5227,7 +5362,12 @@ def add_attribute_CO_PRESUNTOS_ERRORES(ft):
   attr.setOrder(2430)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ERRORES_COND')
 
 def add_attribute_CO_CARACT_PERMISO(ft):
   attr = ft.add("CO_CARACT_PERMISO",4)
@@ -5248,7 +5388,12 @@ def add_attribute_CO_CARACT_PERMISO(ft):
   attr.setOrder(2440)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_CARACTERISTICAS_PERMISO')
 
 def add_attribute_CO_CLASE_PERMISO(ft):
   attr = ft.add("CO_CLASE_PERMISO",4)
@@ -5270,6 +5415,11 @@ def add_attribute_CO_CLASE_PERMISO(ft):
   attr.setPrecision(10)
   attr.setReadOnly(False)
   attr.setRelationType(0)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_CLASE_PERMISO')
 
 def add_attribute_CO_FECHA_PERMISO(ft):
   attr = ft.add("CO_FECHA_PERMISO",9)
@@ -5311,7 +5461,12 @@ def add_attribute_CO_MOTIVO_DESPLAZAMIENTO(ft):
   attr.setOrder(2470)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_MOTIVO_DESPLAZA_COND')
 
 def add_attribute_CO_DESPLAZAMIENTO_PREVISTO(ft):
   attr = ft.add("CO_DESPLAZAMIENTO_PREVISTO",4)
@@ -5332,7 +5487,12 @@ def add_attribute_CO_DESPLAZAMIENTO_PREVISTO(ft):
   attr.setOrder(2480)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_DESPLAZAMIENTO_PREVISTO')
 
 def add_attribute_CO_ACC_SEG_CINTURON(ft):
   attr = ft.add("CO_ACC_SEG_CINTURON",1)
@@ -5374,7 +5534,12 @@ def add_attribute_CO_ACC_SEG_CASCO(ft):
   attr.setOrder(2500)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ACC_SEG_CASCO')
 
 def add_attribute_CO_ACC_SEG_BRAZOS(ft):
   attr = ft.add("CO_ACC_SEG_BRAZOS",1)
@@ -5563,7 +5728,12 @@ def add_attribute_CO_PRUEBA_ALCOHOLEMIA(ft):
   attr.setOrder(2590)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_PRUEBA_ALCOHOLEMIA')
 
 def add_attribute_CO_TASA_ALCOHOLEMIA1(ft):
   attr = ft.add("CO_TASA_ALCOHOLEMIA1",4)
@@ -5689,7 +5859,12 @@ def add_attribute_CO_PRUEBA_DROGAS(ft):
   attr.setOrder(2650)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_PRUEBA_DROGAS')
 
 def add_attribute_CO_AMP(ft):
   attr = ft.add("CO_AMP",1)
@@ -6046,7 +6221,12 @@ def add_attribute_CO_PRES_INFRAC_COND(ft):
   attr.setOrder(2820)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_INFRACCIONES_CODUCTOR')
 
 def add_attribute_CO_PRES_INFRAC_SIN_LUCES(ft):
   attr = ft.add("CO_PRES_INFRAC_SIN_LUCES",1)
@@ -6130,7 +6310,12 @@ def add_attribute_CO_PRES_INFRAC_VEL_COND(ft):
   attr.setOrder(2860)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_INFRACCIONES_VELOCIDAD')
 
 def add_attribute_CO_INFLU_OTRA_INFRAC(ft):
   attr = ft.add("CO_INFLU_OTRA_INFRAC",1)
@@ -6172,7 +6357,12 @@ def add_attribute_CO_OTRA_INFRAC_COND(ft):
   attr.setOrder(2880)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_INFRACCIONES_OTRAS')
 
 def add_attribute_ID_PASAJERO(ft):
   attr = ft.add("ID_PASAJERO",4)
@@ -6235,7 +6425,12 @@ def add_attribute_PA_SEXO(ft):
   attr.setOrder(2910)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_SEXO')
 
 def add_attribute_PA_PAIS_RESIDENCIA(ft):
   attr = ft.add("PA_PAIS_RESIDENCIA",8)
@@ -6319,7 +6514,12 @@ def add_attribute_PA_ASISTENCIA_SANITARIA(ft):
   attr.setOrder(2950)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ASISTENCIA_SANITARIA')
 
 def add_attribute_PA_POSICION_VEHI(ft):
   attr = ft.add("PA_POSICION_VEHI",4)
@@ -6340,7 +6540,12 @@ def add_attribute_PA_POSICION_VEHI(ft):
   attr.setOrder(2960)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_POSICION_VEHICULO')
 
 def add_attribute_PA_NINYO_EN_BRAZO(ft):
   attr = ft.add("PA_NINYO_EN_BRAZO",1)
@@ -6403,7 +6608,12 @@ def add_attribute_PA_ACC_SEG_CASCO(ft):
   attr.setOrder(2990)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ACC_SEG_CASCO')
 
 def add_attribute_PA_ACC_SEG_SIS_RETEN_INFANTIL(ft):
   attr = ft.add("PA_ACC_SEG_SIS_RETEN_INFANTIL",1)
@@ -6655,7 +6865,12 @@ def add_attribute_PE_SEXO(ft):
   attr.setOrder(3110)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_SEXO')
 
 def add_attribute_PE_NACIONALIDAD(ft):
   attr = ft.add("PE_NACIONALIDAD",8)
@@ -6760,7 +6975,12 @@ def add_attribute_PE_ASISTENCIA_SANITARIA(ft):
   attr.setOrder(3160)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ASISTENCIA_SANITARIA')
 
 def add_attribute_PE_INFLU_FACT_ATENCION(ft):
   attr = ft.add("PE_INFLU_FACT_ATENCION",1)
@@ -6802,7 +7022,12 @@ def add_attribute_PE_FACTORES_ATENCION(ft):
   attr.setOrder(3180)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_FACTORES_ATENCION_PEA')
 
 def add_attribute_PE_INFLU_PRES_ERROR(ft):
   attr = ft.add("PE_INFLU_PRES_ERROR",1)
@@ -6844,7 +7069,12 @@ def add_attribute_PE_PRESUNTOS_ERRORES(ft):
   attr.setOrder(3200)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ERRORES_PEA')
 
 def add_attribute_PE_INFLU_PRES_INFRAC(ft):
   attr = ft.add("PE_INFLU_PRES_INFRAC",1)
@@ -6886,7 +7116,12 @@ def add_attribute_PE_PRES_INFRAC_PEA(ft):
   attr.setOrder(3220)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_INFRACCIONES_PEATON')
 
 def add_attribute_PE_MOTIVO_DESPLAZAMIENTO(ft):
   attr = ft.add("PE_MOTIVO_DESPLAZAMIENTO",4)
@@ -6907,7 +7142,12 @@ def add_attribute_PE_MOTIVO_DESPLAZAMIENTO(ft):
   attr.setOrder(3230)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_MOTIVO_DESPLAZA_PEA')
 
 def add_attribute_PE_ACCION_PEA(ft):
   attr = ft.add("PE_ACCION_PEA",4)
@@ -6928,7 +7168,12 @@ def add_attribute_PE_ACCION_PEA(ft):
   attr.setOrder(3240)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ACCION_PEA')
 
 def add_attribute_PE_INFLU_ALCOHOL(ft):
   attr = ft.add("PE_INFLU_ALCOHOL",1)
@@ -6970,7 +7215,12 @@ def add_attribute_PE_PRUEBA_ALCOHOLEMIA(ft):
   attr.setOrder(3260)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_PRUEBA_ALCOHOLEMIA')
 
 def add_attribute_PE_TASA_ALCOHOLEMIA1(ft):
   attr = ft.add("PE_TASA_ALCOHOLEMIA1",4)
@@ -7096,7 +7346,12 @@ def add_attribute_PE_PRUEBA_DROGAS(ft):
   attr.setOrder(3320)
   attr.setPrecision(10)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_PRUEBA_DROGAS')
 
 def add_attribute_PE_AMP(ft):
   attr = ft.add("PE_AMP",1)
