@@ -17,6 +17,7 @@ from javax.swing.table import AbstractTableModel
 from org.gvsig.app import ApplicationLocator
 from org.gvsig.fmap.dal import DALLocator
 from org.gvsig.fmap.dal.feature import FeatureStore
+from org.gvsig.tools.dispose import DisposeUtils
 
 from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
 
@@ -105,7 +106,8 @@ class ImportProcess(Runnable):
               self.copyTableInformes(sourceStore, targetStore)
             else:
               self.copyTable(sourceStore, targetStore)
-    
+            DisposeUtils.dispose(sourceStore)
+        DisposeUtils.dispose(self.input_store)
       self.status.message("Creacion completada")
       self.status.terminate()
       
@@ -326,13 +328,15 @@ class ValidatorProcess(Runnable):
         rules = self.rules
   
         self.status.message("Comprobando accidentes (%s)..." % fname_tail)
-        for feature in self.input_store:
+        input_features = self.input_store.iterable()
+        for feature in input_features:
           for rule in rules:
             if rule != None:
               rule.execute(self.report, feature)
           self.__count += 1
           self.status.incrementCurrentValue()
-        
+
+        DisposeUtils.dispose(input_features)
         self.input_store.dispose()
         self.input_store = None
         
