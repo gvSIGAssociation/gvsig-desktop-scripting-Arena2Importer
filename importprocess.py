@@ -75,17 +75,20 @@ class ImportProcess(Runnable):
         count_files+=1
         fname_tail = os.path.sep.join(fname.split(os.path.sep)[-3:])
         
-        self.input_store = self.openStore(fname)
-        if self.input_store == None:
+        input_store = self.openStore(fname)
+        if input_store == None:
           self.status.abort()
           return
           
-        children = self.input_store.getChildren()
+        children = input_store.getChildren()
   
         count = 0
+        
         for name in children.keySet():
           sourceStore = children.get(name)
           count += sourceStore.getFeatureCount()
+          DisposeUtils.dispose(sourceStore)
+        
     
         self.status.setRangeOfValues(0,count)
         self.status.setCurValue(0)
@@ -93,9 +96,11 @@ class ImportProcess(Runnable):
         name = "ARENA2_ACCIDENTES"
         self.status.message("Importando %s (%s)..." % (name,fname_tail))
         #print "Import "+name+"..."
-        sourceStore = self.input_store
+        #sourceStore = input_store
         targetStore = ( repo.getStore(name), repo.getStore(name))
-        self.copyTableAccidentes(sourceStore, targetStore)
+        self.copyTableAccidentes(input_store, targetStore)
+        DisposeUtils.dispose(targetStore[0])
+        DisposeUtils.dispose(targetStore[1])
         
         for name in children.keySet():
             self.status.message("Importando %s (%s)..." % (name,fname_tail))
@@ -107,7 +112,13 @@ class ImportProcess(Runnable):
             else:
               self.copyTable(sourceStore, targetStore)
             DisposeUtils.dispose(sourceStore)
-        DisposeUtils.dispose(self.input_store)
+            DisposeUtils.dispose(targetStore)
+        
+        DisposeUtils.dispose(input_store)
+        input_store = None
+        
+
+        
       self.status.message("Creacion completada")
       self.status.terminate()
       
@@ -255,9 +266,10 @@ class ImportProcess(Runnable):
         tableName,
         accidentId
       )
-      gvsig.logger("deleteChilds %r" % sql)
+      #gvsig.logger("deleteChilds %r" % sql)
       
       server.execute(sql)
+    DisposeUtils.dispose(server)
 
 class ValidatorProcess(Runnable):
   def __init__(self, importManager, files, report, workspace=None, status=None, rules=None):
@@ -328,7 +340,7 @@ class ValidatorProcess(Runnable):
         rules = self.rules
   
         self.status.message("Comprobando accidentes (%s)..." % fname_tail)
-        input_features = self.input_store.iterable()
+        input_features = self.input_store.iterator()
         for feature in input_features:
           for rule in rules:
             if rule != None:
@@ -336,7 +348,7 @@ class ValidatorProcess(Runnable):
           self.__count += 1
           self.status.incrementCurrentValue()
 
-        DisposeUtils.dispose(input_features)
+        DisposeUtils.disposeQuietly(input_features)
         self.input_store.dispose()
         self.input_store = None
         
