@@ -87,7 +87,7 @@ class Report(AbstractTableModel):
       return
     self.__delayed_events = 0
     if self.__issues_list != None:
-      self.__issues_list.dispose()
+      self.__issues_list.getFeaturePagingHelper().dispose()
     self.__issues_list = None
     self.fireTableDataChanged()
 
