@@ -7689,26 +7689,6 @@ def add_attribute_CR_ID_CROQUIS(ft):
   attr.setReadOnly(False)
   attr.setRelationType(0)
 
-def add_attribute_CR_IMAGEN(ft):
-  attr = ft.add("CR_IMAGEN",12)
-  attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
-  attr.setAllowNull(True)
-  attr.setDataProfileName(None)
-  attr.setDescription(u'CR_IMAGEN')
-  attr.setGroup(None)
-  attr.setHidden(False)
-  attr.setIsAutomatic(False)
-  attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
-  attr.setIsPrimaryKey(False)
-  attr.setIsReadOnly(False)
-  attr.setIsTime(False)
-  attr.setLabel(u'CR_IMAGEN')
-  attr.setOrder(3490)
-  attr.setPrecision(-1)
-  attr.setReadOnly(False)
-  attr.setRelationType(0)
 
 def add_attributes_ARENA2_AC_VE_CO_PA_PE_CR(ft):
   add_attribute_LID_ACCIDENTE(ft)
@@ -8060,7 +8040,6 @@ def add_attributes_ARENA2_AC_VE_CO_PA_PE_CR(ft):
   add_attribute_PE_CONFIRMADO_OTRAS(ft)
   add_attribute_PE_SIGNOS_INFLU_DROGAS(ft)
   add_attribute_CR_ID_CROQUIS(ft)
-  add_attribute_CR_IMAGEN(ft)
 
 
 def configurar_featuretype_ARENA2_AC_VE_CO_PA_PE_CR(ft):
