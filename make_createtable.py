@@ -6,6 +6,7 @@ from java.io import File
 from java.lang import StringBuilder
 from org.gvsig.fmap.dal import DALLocator
 from org.gvsig.fmap.dal.expressionevaluator import FeatureAttributeEmulatorExpression 
+from org.gvsig.fmap.dal.feature.impl import DALFile
 
 def toSource(x):
   return repr(x)
@@ -136,8 +137,26 @@ def create_ARENA2_AC_VE_CO_PA_PE_CR():
   store = dataManager.getStoresRepository().getStore(tableName)
   pathname = getResource(__file__,"tablas",tableName+".py")  
   generateTable(pathname, tableName, store.getDefaultFeatureType())
-  
+
+def create_DAL_ARENA2_AC_VE_CO_PA_PE_CR():
+  from tablas.ARENA2_AC_VE_CO_PA_PE_CR import configurar_featuretype_ARENA2_AC_VE_CO_PA_PE_CR
+  tableName = "ARENA2_AC_VE_CO_PA_PE_CR"
+  dataManager = DALLocator.getDataManager()
+  ft = dataManager.createFeatureType()
+  configurar_featuretype_ARENA2_AC_VE_CO_PA_PE_CR(ft)
+  dalfile = DALFile.getDALFile()
+  dalfile.setFeatureType(ft)
+  pathname = getResource(__file__,"../Arena2Reader/datos/recursos/",tableName+".dal")
+  dalfile.write(File(pathname))
+
+def create_AFOROS_IMDS():
+  tableName = "AFOROS_IMDS"
+  dataManager = DALLocator.getDataManager()
+  store = dataManager.getStoresRepository().getStore(tableName)
+  pathname = getResource(__file__,"tablas",tableName+".py")  
+  generateTable(pathname, tableName, store.getDefaultFeatureType())
+
 def main(*args):
   #create_arena2_tables()
-  create_ARENA2_AC_VE_CO_PA_PE_CR()
-  
+  #create_ARENA2_AC_VE_CO_PA_PE_CR()
+  create_DAL_ARENA2_AC_VE_CO_PA_PE_CR()
