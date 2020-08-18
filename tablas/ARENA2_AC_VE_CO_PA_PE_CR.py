@@ -1647,13 +1647,13 @@ def add_attribute_AC_ACERA(ft):
   attr.getForeingKey().setClosedList(True)
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ACERA')
 
-def add_attribute_AC_INFU_ACERA(ft):
-  attr = ft.add("AC_INFU_ACERA",1)
+def add_attribute_AC_INFLU_ACERA(ft):
+  attr = ft.add("AC_INFLU_ACERA",1)
   attr.setSize(0)
   attr.setAllowIndexDuplicateds(False)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
-  attr.setDescription(u'AC_INFU_ACERA')
+  attr.setDescription(u'AC_INFLU_ACERA')
   attr.setGroup(None)
   attr.setHidden(False)
   attr.setIsAutomatic(False)
@@ -1662,7 +1662,7 @@ def add_attribute_AC_INFU_ACERA(ft):
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'AC_INFU_ACERA')
+  attr.setLabel(u'AC_INFLU_ACERA')
   attr.setOrder(720)
   attr.setPrecision(-1)
   attr.setReadOnly(False)
@@ -7763,7 +7763,7 @@ def add_attributes_ARENA2_AC_VE_CO_PA_PE_CR(ft):
   add_attribute_AC_ANCHURA_CARRIL(ft)
   add_attribute_AC_ARCEN(ft)
   add_attribute_AC_ACERA(ft)
-  add_attribute_AC_INFU_ACERA(ft)
+  add_attribute_AC_INFLU_ACERA(ft)
   add_attribute_AC_ANCHURA_ACERA(ft)
   add_attribute_AC_TRAZADO_PLANTA(ft)
   add_attribute_AC_TRAZADO_ALZADO(ft)
@@ -8039,7 +8039,7 @@ def add_attributes_ARENA2_AC_VE_CO_PA_PE_CR(ft):
   add_attribute_PE_OTRAS(ft)
   add_attribute_PE_CONFIRMADO_OTRAS(ft)
   add_attribute_PE_SIGNOS_INFLU_DROGAS(ft)
-  add_attribute_CR_ID_CROQUIS(ft)
+#  add_attribute_CR_ID_CROQUIS(ft)
 
 
 def configurar_featuretype_ARENA2_AC_VE_CO_PA_PE_CR(ft):

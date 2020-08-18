@@ -1800,13 +1800,13 @@ def add_attribute_ACERA(ft):
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
 
-def add_attribute_INFU_ACERA(ft):
-  attr = ft.add("INFU_ACERA",1)
+def add_attribute_INFLU_ACERA(ft):
+  attr = ft.add("INFLU_ACERA",1)
   attr.setSize(0)
   attr.setAllowIndexDuplicateds(False)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
-  attr.setDescription(u'INFU_ACERA')
+  attr.setDescription(u'INFLU_ACERA')
   attr.setGroup(None)
   attr.setHidden(False)
   attr.setIsAutomatic(False)
@@ -4360,7 +4360,7 @@ def add_attributes_ARENA2_ACCIDENTES(ft):
   add_attribute_ANCHURA_CARRIL(ft)
   add_attribute_ARCEN(ft)
   add_attribute_ACERA(ft)
-  add_attribute_INFU_ACERA(ft)
+  add_attribute_INFLU_ACERA(ft)
   add_attribute_ANCHURA_ACERA(ft)
   add_attribute_TRAZADO_PLANTA(ft)
   add_attribute_TRAZADO_ALZADO(ft)

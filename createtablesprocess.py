@@ -22,6 +22,7 @@ from addons.Arena2Importer.tablas.ARENA2_INFORMES import add_attributes_ARENA2_I
 from addons.Arena2Importer.tablas.ARENA2_PASAJEROS import add_attributes_ARENA2_PASAJEROS
 from addons.Arena2Importer.tablas.ARENA2_PEATONES import add_attributes_ARENA2_PEATONES
 from addons.Arena2Importer.tablas.ARENA2_VEHICULOS import add_attributes_ARENA2_VEHICULOS
+from addons.Arena2Importer.tablas.AFOROS_IMDS import add_attributes_imds_2018
 
 from addons.Arena2Reader.arena2readerutils import getDictionaryNames, getOpenStoreParametersOfDictionary
 from addons.Arena2Reader.arena2readerutils import getResourcesStorage, getResourceNames
@@ -83,7 +84,8 @@ class CreateTablesProcess(Runnable):
           ("ARENA2_INFORMES",add_attributes_ARENA2_INFORMES),
           ("ARENA2_PASAJEROS",add_attributes_ARENA2_PASAJEROS), 
           ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES), 
-          ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS)
+          ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS),
+          ("AFOROS_IMDS",add_attributes_imds_2018)
           ):
           self.status.message("Creando "+tableName)
           params = server.getAddParameters(tableName)
@@ -124,7 +126,7 @@ class CreateTablesProcess(Runnable):
         for tableName in ("ARENA2_ACCIDENTES",
           "ARENA2_CONDUCTORES", "ARENA2_CROQUIS", 
           "ARENA2_INFORMES","ARENA2_PASAJEROS", 
-          "ARENA2_PEATONES", "ARENA2_VEHICULOS", "ARENA2_AC_VE_CO_PA_PE_CR"):
+          "ARENA2_PEATONES", "ARENA2_VEHICULOS", "AFOROS_IMDS", "ARENA2_AC_VE_CO_PA_PE_CR"):
           self.status.message("Actualizando espacio de trabajo ("+tableName+")")
           self.status.incrementCurrentValue()
           params = server.get(tableName)
