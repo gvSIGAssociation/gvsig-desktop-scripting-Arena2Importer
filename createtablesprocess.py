@@ -22,7 +22,7 @@ from addons.Arena2Importer.tablas.ARENA2_INFORMES import add_attributes_ARENA2_I
 from addons.Arena2Importer.tablas.ARENA2_PASAJEROS import add_attributes_ARENA2_PASAJEROS
 from addons.Arena2Importer.tablas.ARENA2_PEATONES import add_attributes_ARENA2_PEATONES
 from addons.Arena2Importer.tablas.ARENA2_VEHICULOS import add_attributes_ARENA2_VEHICULOS
-from addons.Arena2Importer.tablas.AFOROS_IMDS import add_attributes_imds_2018
+from addons.Arena2Importer.tablas.AFOROS_IMDS import add_attributes_imds
 
 from addons.Arena2Reader.arena2readerutils import getDictionaryNames, getOpenStoreParametersOfDictionary
 from addons.Arena2Reader.arena2readerutils import getResourcesStorage, getResourceNames
@@ -85,7 +85,7 @@ class CreateTablesProcess(Runnable):
           ("ARENA2_PASAJEROS",add_attributes_ARENA2_PASAJEROS), 
           ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES), 
           ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS),
-          ("AFOROS_IMDS",add_attributes_imds_2018)
+          ("AFOROS_IMDS",add_attributes_imds)
           ):
           self.status.message("Creando "+tableName)
           params = server.getAddParameters(tableName)

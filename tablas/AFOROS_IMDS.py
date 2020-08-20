@@ -28,7 +28,7 @@ def add_attribute_LID_IMDS(ft):
   tags.set(u'dynform.readonly', u'True')
 
 def add_attribute_ANO(ft):
-  attr = ft.add("ANO",19)
+  attr = ft.add("ANY",19)
   attr.setSize(0)
   attr.setAllowIndexDuplicateds(False)
   attr.setAllowNull(True)
@@ -279,13 +279,13 @@ def add_attribute_PK_EST(ft):
   attr.setReadOnly(False)
   attr.setRelationType(0)
 
-def add_attribute_IMD18(ft):
-  attr = ft.add("IMD18",5)
+def add_attribute_IMD(ft):
+  attr = ft.add("IMD",5)
   attr.setSize(0)
   attr.setAllowIndexDuplicateds(False)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
-  attr.setDescription(u'IMD18')
+  attr.setDescription(u'IMD')
   attr.setGroup(None)
   attr.setHidden(False)
   attr.setIsAutomatic(False)
@@ -294,19 +294,19 @@ def add_attribute_IMD18(ft):
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'IMD18')
+  attr.setLabel(u'IMD')
   attr.setOrder(110)
   attr.setPrecision(19)
   attr.setReadOnly(False)
   attr.setRelationType(0)
 
-def add_attribute_ZP18(ft):
-  attr = ft.add("ZP18",19)
+def add_attribute_ZP(ft):
+  attr = ft.add("ZP",19)
   attr.setSize(0)
   attr.setAllowIndexDuplicateds(False)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
-  attr.setDescription(u'ZP18')
+  attr.setDescription(u'ZP')
   attr.setGroup(None)
   attr.setHidden(False)
   attr.setIsAutomatic(False)
@@ -315,7 +315,7 @@ def add_attribute_ZP18(ft):
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'ZP18')
+  attr.setLabel(u'ZP')
   attr.setOrder(120)
   attr.setPrecision(14)
   attr.setReadOnly(False)
@@ -344,7 +344,7 @@ def add_attribute_GEOMETRY(ft):
   attr.setRelationType(0)
   attr.setSRS(u'EPSG:4326(+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs )')
 
-def add_attributes_imds_2018(ft):
+def add_attributes_imds(ft):
   add_attribute_LID_IMDS(ft)
   add_attribute_ANO(ft)
   add_attribute_TRAMO(ft)
@@ -358,17 +358,17 @@ def add_attributes_imds_2018(ft):
   add_attribute_HASTA(ft)
   add_attribute_CALZADA(ft)
   add_attribute_PK_EST(ft)
-  add_attribute_IMD18(ft)
-  add_attribute_ZP18(ft)
+  add_attribute_IMD(ft)
+  add_attribute_ZP(ft)
   add_attribute_GEOMETRY(ft)
 
 
-def configurar_featuretype_imds_2018(ft):
+def configurar_featuretype_imds(ft):
 
-  add_attributes_imds_2018(ft)
+  add_attributes_imds(ft)
 
-def crearTabla_imds_2018(connection):
-  tableName = "imds_2018"
+def crearTabla_imds(connection):
+  tableName = "imds"
   dataManager = DALLocator.getDataManager()
   server = dataManager.openServerExplorer(
       connection.getProviderName(),
@@ -376,7 +376,7 @@ def crearTabla_imds_2018(connection):
   )
   params = server.getAddParameters(tableName)
   ft = params.getDefaultFeatureType()
-  configurar_featuretype_imds_2018(ft)
+  configurar_featuretype_imds(ft)
   
   server.add(tableName, params, False)
 
