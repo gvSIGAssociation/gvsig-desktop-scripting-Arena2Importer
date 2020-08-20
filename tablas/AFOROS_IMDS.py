@@ -4,6 +4,50 @@ import gvsig
 
 from org.gvsig.fmap.dal import DALLocator
 
+def add_attribute_LID_IMDS(ft):
+  attr = ft.add("LID_IMDS",8)
+  attr.setSize(20)
+  attr.setAllowIndexDuplicateds(True)
+  attr.setAllowNull(True)
+  attr.setDataProfileName(None)
+  attr.setDescription(u'LID_IMDS')
+  attr.setGroup(None)
+  attr.setHidden(False)
+  attr.setIsAutomatic(False)
+  attr.setIsIndexAscending(True)
+  attr.setIsIndexed(False)
+  attr.setIsPrimaryKey(True)
+  attr.setIsReadOnly(False)
+  attr.setIsTime(False)
+  attr.setLabel(u'_Id_Imds')
+  attr.setOrder(0)
+  attr.setPrecision(0)
+  attr.setReadOnly(False)
+  attr.setRelationType(0)
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
+
+def add_attribute_ANO(ft):
+  attr = ft.add("ANO",19)
+  attr.setSize(0)
+  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowNull(True)
+  attr.setDataProfileName(None)
+  attr.setDescription(u'Año')
+  attr.setGroup(None)
+  attr.setHidden(False)
+  attr.setIsAutomatic(False)
+  attr.setIsIndexAscending(True)
+  attr.setIsIndexed(False)
+  attr.setIsPrimaryKey(False)
+  attr.setIsReadOnly(False)
+  attr.setIsTime(False)
+  attr.setLabel(u'AÑO')
+  attr.setOrder(1)
+  attr.setPrecision(16)
+  attr.setReadOnly(False)
+  attr.setRelationType(0)
+  
 def add_attribute_TRAMO(ft):
   attr = ft.add("TRAMO",8)
   attr.setSize(254)
@@ -20,7 +64,7 @@ def add_attribute_TRAMO(ft):
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
   attr.setLabel(u'TRAMO')
-  attr.setOrder(0)
+  attr.setOrder(5)
   attr.setPrecision(-1)
   attr.setReadOnly(False)
   attr.setRelationType(0)
@@ -301,6 +345,8 @@ def add_attribute_GEOMETRY(ft):
   attr.setSRS(u'EPSG:4326(+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs )')
 
 def add_attributes_imds_2018(ft):
+  add_attribute_LID_IMDS(ft)
+  add_attribute_ANO(ft)
   add_attribute_TRAMO(ft)
   add_attribute_LONGITUD(ft)
   add_attribute_CTRA(ft)
