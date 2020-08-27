@@ -35,7 +35,7 @@ from javax.swing import JFileChooser
 
 from org.gvsig.tools.dynform import DynFormLocator
 from org.gvsig.tools.util import ToolsUtilLocator
-
+from org.gvsig.tools.swing.api import ToolsSwingLocator
 def createFileChooserDialog(title, type, selectionMode, multiselection, initialPath, filter, fileHidingEnabled):
     fcdManager = ToolsUtilLocator.getFileDialogChooserManager()
     dialog = fcdManager.create("arena2_importxml")
@@ -256,6 +256,7 @@ class ImportPanel(FormPanel, Observer):
     self.cboWorkspace.addActionListener(self.doFileChanged)
 
     self.tblIssues.setModel(self.report.getTableModel())
+    
     self.report.setCellEditors(self.tblIssues)
     
     if workspace == None:
@@ -264,6 +265,9 @@ class ImportPanel(FormPanel, Observer):
     self.lblIssuesMessage.setText("")
     self.tblIssues.getSelectionModel().addListSelectionListener(self.issuesSelectionChanged)
     self.tblIssues.setAutoCreateRowSorter(True)
+    
+    swingManager = ToolsSwingLocator.getToolsSwingManager()
+    swingManager.createTableColumnAdjuster(self.tblIssues)
     self.btnVerAccidente2.setEnabled(False)
     self.btnModifyIssues.setEnabled(False)
     
@@ -285,7 +289,7 @@ class ImportPanel(FormPanel, Observer):
       for row in xrange(selectionModel.getMinSelectionIndex(), selectionModel.getMaxSelectionIndex()+1):
         if selectionModel.isSelectedIndex(row):
           row = self.tblIssues.convertRowIndexToModel(row)
-          print "report.setSelected(%s, %s)" % (row, selected)
+          print "report.setSelected(%s, %s)" % (row, select)
           report.setSelected(row, select)
   
   def btnModifyIssues_click(self, *args):

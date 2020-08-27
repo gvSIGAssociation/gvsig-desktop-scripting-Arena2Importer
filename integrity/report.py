@@ -155,6 +155,7 @@ class Report(AbstractTableModel):
     eft.get("ID_ACCIDENTE").setIsIndexed(True)
     eft.get("ID_ACCIDENTE").setAllowIndexDuplicateds(True)
     eft.add("ERRCODE", "INTEGER").setAvailableValues(self.__buildAvailableValues()).setLabel("Cod.error").getTags().set("editable",False)
+    eft.add("DESCRIPTION", "STRING", 200).setLabel("Descripcion").getTags().set("editable",False)
     eft.add("FIXERID", "STRING", 45).setHidden(True).setLabel("FixerID").getTags().set("editable",False)
     for attr in self.__importManager.getReportAttributes():
       if attr.getSize() == None:
@@ -165,7 +166,7 @@ class Report(AbstractTableModel):
       desc.getTags().set("editable",attr.isEditable())
       desc.setLabel(attr.getLabel())
       #trace("Create ISSUES store: %s, size=%s, label=%r, editable=%s, values=%s" % (attr.getName(), attr.getSize(), attr.getLabel(), attr.isEditable(), attr.getAvailableValues()))
-    eft.add("DESCRIPTION", "STRING", 200).setLabel("Descripcion").getTags().set("editable",False)
+    
     serverExplorer.add("H2Spatial",storeparams,False)
     store = dataManager.openStore("H2Spatial", serverExplorer.get("issues"))
     self.__ftype = store.getDefaultFeatureType()
@@ -185,6 +186,7 @@ class Report(AbstractTableModel):
     eft.add("SELECTED", "BOOLEAN").setLabel("Importar").getTags().set("editable",True)
     eft.add("ID_ACCIDENTE", "STRING", 20).setLabel("Cod.accidente").getTags().set("editable",False)
     eft.add("ERRCODE", "INTEGER").setAvailableValues(self.__buildAvailableValues()).setLabel("Cod.error").getTags().set("editable",False)
+    eft.add("DESCRIPTION", "STRING", 200).setLabel("Descripcion").getTags().set("editable",False)
     eft.add("FIXERID", "STRING", 45).setHidden(True).setLabel("FixerID").getTags().set("editable",False)
     for attr in self.__importManager.getReportAttributes():
       if attr.getSize() == None:
@@ -195,7 +197,7 @@ class Report(AbstractTableModel):
       desc.getTags().set("editable",attr.isEditable())
       desc.setLabel(attr.getLabel())
       #trace("Create ISSUES store: %s, size=%s, label=%r, editable=%s, values=%s" % (attr.getName(), attr.getSize(), attr.getLabel(), attr.isEditable(), attr.getAvailableValues()))
-    eft.add("DESCRIPTION", "STRING", 200).setLabel("Descripcion").getTags().set("editable",False)
+    
     
     store.edit()
     store.update(eft)
