@@ -84,8 +84,7 @@ class CreateTablesProcess(Runnable):
           ("ARENA2_INFORMES",add_attributes_ARENA2_INFORMES),
           ("ARENA2_PASAJEROS",add_attributes_ARENA2_PASAJEROS), 
           ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES), 
-          ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS),
-          ("AFOROS_IMDS",add_attributes_imds)
+          ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS) #, ("AFOROS_IMDS",add_attributes_imds)
           ):
           self.status.message("Creando "+tableName)
           params = server.getAddParameters(tableName)

@@ -147,6 +147,7 @@ class ImportProcess(Runnable):
       transforms = self.transforms
       for f_src in sourceStore:
         accidentId = f_src.get("ID_ACCIDENTE")
+        ### comprobarsi el accidente esta fuera de la fecha de cierrr
         process = True
         if report != None:
           issue = report.getIssue(accidentId)
@@ -158,6 +159,7 @@ class ImportProcess(Runnable):
             transform.apply(f_dst)
           if report!=None:
             report.fix(f_dst)
+          
           targetStore.insert(f_dst)
         self.status.incrementCurrentValue()
       targetStore.finishEditing()
@@ -218,6 +220,7 @@ class ImportProcess(Runnable):
               transform.apply(f_dst)
             if report!=None:
               report.fix(f_dst)
+            f_dst.set("QUINCENA", self.getQuincenaFromCodInforme(f_dst.get("COD_INFORME"))) ## Insertar quincena
             targetStore[0].insert(f_dst)
           else:
             f_dst = f_dst.getEditable()
@@ -235,7 +238,8 @@ class ImportProcess(Runnable):
               transform.apply(f_dst)
             if report!=None:
               report.fix(f_dst)
-            self.deleteChilds(accidentId)
+            f_dst.set("ACTUALIZADO", True)
+            self.deleteChilds(accidentId)  #poner el campo a actualizado a true
             targetStore[1].update(f_dst)
         self.__count += 1
         self.status.incrementCurrentValue()
@@ -245,7 +249,12 @@ class ImportProcess(Runnable):
       targetStore[0].cancelEditing()
       targetStore[1].cancelEditing()
       raise ex
-
+      
+  def getQuincenaFromCodInforme(self, cod):
+    if cod == None:
+      return None
+    return cod.replace('_', '')[-8:]
+    
   def deleteChilds(self, accidentId):
     server = self.workspace.getServerExplorer()
     params = server.getOpenParameters()

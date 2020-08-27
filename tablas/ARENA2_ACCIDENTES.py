@@ -4288,6 +4288,54 @@ def add_attribute_CROQUIS(ft):
   tags.set(u'dal.relatedfeatures.columns', u'ID_CROQUIS/IMAGEN')
   tags.set(u'dal.relatedfeatures.unique.field.name', u'LID_CROQUIS')
 
+
+def add_attribute_QUINCENA(ft):
+  attr = ft.add("QUINCENA",8)
+  attr.setSize(8)
+  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowNull(True)
+  attr.setDataProfileName(None)
+  attr.setDescription(u'Quincena')
+  attr.setGroup(u'Importacion')
+  attr.setHidden(False)
+  attr.setIsAutomatic(False)
+  attr.setIsIndexAscending(True)
+  attr.setIsIndexed(True)
+  attr.setIsPrimaryKey(False)
+  attr.setIsReadOnly(False)
+  attr.setIsTime(False)
+  attr.setLabel(u'_Quincena')
+  attr.setOrder(1800)
+  attr.setPrecision(0)
+  attr.setReadOnly(False)
+  attr.setRelationType(0)
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
+
+def add_attribute_ACTUALIZADO(ft):
+  attr = ft.add("ACTUALIZADO",1)
+  attr.setSize(0)
+  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowNull(True)
+  attr.setDataProfileName(None)
+  attr.setDescription(u'ACTUALIZADO')
+  attr.setGroup(u'_Importacion')
+  attr.setHidden(False)
+  attr.setIsAutomatic(False)
+  attr.setIsIndexAscending(True)
+  attr.setIsIndexed(False)
+  attr.setIsPrimaryKey(False)
+  attr.setIsReadOnly(False)
+  attr.setIsTime(False)
+  attr.setLabel(u'_Dato_actualizado')
+  attr.setOrder(1810)
+  attr.setPrecision(0)
+  attr.setReadOnly(False)
+  attr.setRelationType(0)
+  attr.setDefaultValue(False)
+  tags = attr.getTags()
+  tags.set(u'dynform.readonly', u'True')
+
 def add_attributes_ARENA2_ACCIDENTES(ft):
   add_attribute_LID_ACCIDENTE(ft)
   add_attribute_COD_INFORME(ft)
@@ -4467,6 +4515,8 @@ def add_attributes_ARENA2_ACCIDENTES(ft):
   add_attribute_VEHICULOS(ft)
   add_attribute_PEATONES(ft)
   add_attribute_CROQUIS(ft)
+  add_attribute_QUINCENA(ft)
+  add_attribute_ACTUALIZADO(ft)
 
 
 def configurar_featuretype_ARENA2_ACCIDENTES(ft):
