@@ -6,7 +6,7 @@ import threading
 from java.lang import Throwable, String, Boolean, Integer
 
 from javax.swing.table import AbstractTableModel
-
+from org.gvsig.tools.dispose import DisposeUtils
 from org.gvsig.tools import ToolsLocator
 from org.gvsig.tools.dynobject import DynObjectValueItem
 from org.gvsig.fmap.geom import GeometryUtils, Geometry
@@ -285,6 +285,18 @@ class Report(AbstractTableModel):
   def getAccidenteId(self, row):
     issue = self.getIssue(row)
     return issue.get("ID_ACCIDENTE")
+    
+  def setSelectedAll(self, value):
+    self.__issues.edit()
+    fset = self.__issues.getFeatureSet()
+    itera = fset.iterable()
+    for issue in itera:
+      editable = issue.getEditable()
+      editable.set("SELECTED", value)
+      fset.update(editable)
+    self.__issues.finishEditing()
+    DisposeUtils.dispose(fset)
+    self.fireTableDataChanged()
     
   def setSelected(self, row, value):
     trace("setSelected(row=%s,value=%s)" % (row, value))

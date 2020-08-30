@@ -283,8 +283,9 @@ class ImportPanel(FormPanel, Observer):
     report = self.report
     selectionModel = self.tblIssues.getSelectionModel()
     if selectionModel.isSelectionEmpty():
-      for row in range(len(report)):
-        report.setSelected(row, select)
+      report.setSelectedAll(select)
+      #for row in range(len(report)):
+      #  report.setSelected(row, select)
     else:
       for row in xrange(selectionModel.getMinSelectionIndex(), selectionModel.getMaxSelectionIndex()+1):
         if selectionModel.isSelectedIndex(row):
