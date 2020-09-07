@@ -358,6 +358,23 @@ class ValidatorProcess(Runnable):
           self.status.incrementCurrentValue()
 
         DisposeUtils.disposeQuietly(input_features)
+
+        children = self.input_store.getChildren()
+        count = 0
+        for name in children.keySet():
+          childStore = children.get(name)
+          if childStore==None: 
+            continue
+          fset = childStore.iterator()
+          for feature in fset:
+            for rule in rules:
+              if rule != None:
+                rule.execute(self.report, feature)
+          DisposeUtils.disposeQuietly(fset)
+          DisposeUtils.dispose(childStore)
+
+
+        
         self.input_store.dispose()
         self.input_store = None
         
