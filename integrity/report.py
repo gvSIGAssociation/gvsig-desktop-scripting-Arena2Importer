@@ -106,7 +106,7 @@ class Report(AbstractTableModel):
       self.__timer.start()
   
   def __len__(self):
-    return len(self.getIssuesAsList())
+    return self.getIssuesAsList().size64()
     
   def getAttributeByColumnIndex(self, columnIndex):
     name = self.__columnNames[columnIndex]
@@ -155,7 +155,7 @@ class Report(AbstractTableModel):
     eft.get("ID_ACCIDENTE").setIsIndexed(True)
     eft.get("ID_ACCIDENTE").setAllowIndexDuplicateds(True)
     eft.add("ERRCODE", "INTEGER").setAvailableValues(self.__buildAvailableValues()).setLabel("Cod.error").getTags().set("editable",False)
-    eft.add("DESCRIPTION", "STRING", 200).setLabel("Descripcion").getTags().set("editable",False)
+    eft.add("DESCRIPTION", "STRING", 1000).setLabel("Descripcion").getTags().set("editable",False)
     eft.add("FIXERID", "STRING", 45).setHidden(True).setLabel("FixerID").getTags().set("editable",False)
     for attr in self.__importManager.getReportAttributes():
       if attr.getSize() == None:
@@ -186,7 +186,7 @@ class Report(AbstractTableModel):
     eft.add("SELECTED", "BOOLEAN").setLabel("Importar").getTags().set("editable",True)
     eft.add("ID_ACCIDENTE", "STRING", 20).setLabel("Cod.accidente").getTags().set("editable",False)
     eft.add("ERRCODE", "INTEGER").setAvailableValues(self.__buildAvailableValues()).setLabel("Cod.error").getTags().set("editable",False)
-    eft.add("DESCRIPTION", "STRING", 200).setLabel("Descripcion").getTags().set("editable",False)
+    eft.add("DESCRIPTION", "STRING", 1000).setLabel("Descripcion").getTags().set("editable",False)
     eft.add("FIXERID", "STRING", 45).setHidden(True).setLabel("FixerID").getTags().set("editable",False)
     for attr in self.__importManager.getReportAttributes():
       if attr.getSize() == None:
@@ -295,9 +295,7 @@ class Report(AbstractTableModel):
       editable.set("SELECTED", value)
       fset.update(editable)
     self.__issues.finishEditing()
-    DisposeUtils.dispose(fset)
-    self.fireTableDataChanged()
-    
+      
   def setSelected(self, row, value):
     trace("setSelected(row=%s,value=%s)" % (row, value))
     issue = self.getIssue(row)
@@ -327,8 +325,8 @@ class Report(AbstractTableModel):
     return self
 
   def getRowCount(self):
-    return len(self.getIssuesAsList())
-
+    return self.getIssuesAsList().size64()
+    
   def getColumnCount(self):
     return len(self.__columnNames)
 
