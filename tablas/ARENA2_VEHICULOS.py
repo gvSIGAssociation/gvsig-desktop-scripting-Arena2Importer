@@ -92,7 +92,7 @@ def add_attribute_SIN_CONDUCTOR(ft):
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
-  attr.setLabel(u'_Sin_conducor')
+  attr.setLabel(u'_Sin_conductor')
   attr.setOrder(30)
   attr.setPrecision(0)
   attr.setReadOnly(False)
