@@ -8,7 +8,7 @@ from org.gvsig.tools.dynobject.DynField import RELATION_TYPE_COLLABORATION, RELA
 def add_attribute_LID_INFORME(ft):
   attr = ft.add("LID_INFORME",8)
   attr.setSize(20)
-  attr.setAllowIndexDuplicateds(True)
+  attr.setAllowIndexDuplicateds(False)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'LID_INFORME')
@@ -31,7 +31,7 @@ def add_attribute_LID_INFORME(ft):
 def add_attribute_COD_INFORME(ft):
   attr = ft.add("COD_INFORME",8)
   attr.setSize(20)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'COD_INFORME')
@@ -54,7 +54,7 @@ def add_attribute_COD_INFORME(ft):
 def add_attribute_FECHA_INI_EXPORT(ft):
   attr = ft.add("FECHA_INI_EXPORT",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'FECHA_INI_EXPORT')
@@ -77,7 +77,7 @@ def add_attribute_FECHA_INI_EXPORT(ft):
 def add_attribute_FECHA_FIN_EXPORT(ft):
   attr = ft.add("FECHA_FIN_EXPORT",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'FECHA_FIN_EXPORT')
@@ -100,7 +100,7 @@ def add_attribute_FECHA_FIN_EXPORT(ft):
 def add_attribute_ACCIDENTES(ft):
   attr = ft.add("ACCIDENTES",34)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACCIDENTES')
@@ -123,14 +123,35 @@ def add_attribute_ACCIDENTES(ft):
   tags.set(u'dal.relatedfeatures.table', u'ARENA2_ACCIDENTES')
   tags.set(u'dal.relatedfeatures.columns', u'ID_ACCIDENTE/FECHA_ACCIDENTE/COD_PROVINCIA/COD_MUNICIPIO/COD_POBLACION')
   tags.set(u'dal.relatedfeatures.unique.field.name', u'ID_ACCIDENTE')
-
+  
+def add_attribute_EXTRA(ft):
+  attr = ft.add("EXTRA", DataTypes.STRING)
+  attr.setSize(10000)
+  attr.setAllowIndexDuplicateds(True)
+  attr.setAllowNull(True)
+  attr.setDataProfileName(None)
+  attr.setDescription(u'Extra')
+  attr.setGroup(None)
+  attr.setHidden(False)
+  attr.setIsAutomatic(False)
+  attr.setIsIndexAscending(True)
+  attr.setIsIndexed(False)
+  attr.setIsPrimaryKey(False)
+  attr.setIsReadOnly(False)
+  attr.setIsTime(False)
+  attr.setLabel(u'_Extra')
+  attr.setOrder(2000)
+  attr.setPrecision(-1)
+  attr.setReadOnly(False)
+  attr.setRelationType(0)
+  
 def add_attributes_ARENA2_INFORMES(ft):
   add_attribute_LID_INFORME(ft)
   add_attribute_COD_INFORME(ft)
   add_attribute_FECHA_INI_EXPORT(ft)
   add_attribute_FECHA_FIN_EXPORT(ft)
   add_attribute_ACCIDENTES(ft)
-
+  add_attribute_EXTRA(ft)
 
 def configurar_featuretype_ARENA2_INFORMES(ft):
   tags = ft.getTags()
@@ -148,7 +169,7 @@ def crearTabla_ARENA2_INFORMES(connection):
   params = server.getAddParameters(tableName)
   ft = params.getDefaultFeatureType()
   configurar_featuretype_ARENA2_INFORMES(ft)
-  
+
   server.add(tableName, params, False)
 
 def main(*args):

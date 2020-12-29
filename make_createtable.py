@@ -5,7 +5,7 @@ from gvsig import getResource
 from java.io import File
 from java.lang import StringBuilder
 from org.gvsig.fmap.dal import DALLocator
-from org.gvsig.fmap.dal.expressionevaluator import FeatureAttributeEmulatorExpression 
+from org.gvsig.fmap.dal.expressionevaluator import FeatureAttributeEmulatorExpression
 from org.gvsig.fmap.dal.feature.impl import DALFile
 
 def toSource(x):
@@ -20,7 +20,7 @@ def descriptor(builder, desc):
   builder.append("  attr.setDescription(").append(toSource(desc.getDescription())).append(")\n")
   if desc.getGeomType()!=None:
       builder.append("  attr.setGeometryType(").append(toSource(desc.getGeomType().getType())).append(", ").append(toSource(desc.getGeomType().getSubType())).append(")\n")
-  
+
   builder.append("  attr.setGroup(").append(toSource(desc.getGroup())).append(")\n")
   builder.append("  attr.setHidden(").append(toSource(desc.isHidden())).append(")\n")
   builder.append("  attr.setIsAutomatic(").append(toSource(desc.isAutomatic())).append(")\n")
@@ -38,7 +38,7 @@ def descriptor(builder, desc):
   builder.append("  attr.setRelationType(").append(toSource(desc.getRelationType())).append(")\n")
   if desc.getSRS()!=None:
       builder.append("  attr.setSRS(").append(toSource(desc.getSRS().toString())).append(")\n")
-  
+
   #builder.append("  #attr.setSubtype(").append(toSource(desc.getSubtype())).append(")\n")
   if desc.isForeingKey():
       fk = desc.getForeingKey()
@@ -47,7 +47,7 @@ def descriptor(builder, desc):
       builder.append("  attr.getForeingKey().setLabelFormula(").append(toSource(fk.getLabelFormula())).append(")\n")
       builder.append("  attr.getForeingKey().setClosedList(").append(toSource(fk.isClosedList())).append(")\n")
       builder.append("  attr.getForeingKey().setTableName(").append(toSource(fk.getTableName())).append(")\n")
-  
+
   emu = desc.getFeatureAttributeEmulator()
   if emu!=None and isinstance(emu,FeatureAttributeEmulatorExpression):
       builder.append("  attr.setFeatureAttributeEmulator(").append(toSource(emu.getExpression().getPhrase())).append(")\n")
@@ -58,9 +58,9 @@ def descriptor(builder, desc):
     for name in tags:
         value = tags.get(name)
         builder.append("  tags.set(").append(toSource(name)).append(", ").append(toSource(value)).append(")\n")
-              
+
   builder.append("\n")
-  
+
 
 def generateTable(pathname,tableName, ft):
   builder = StringBuilder()
@@ -75,11 +75,11 @@ from org.gvsig.fmap.dal import DALLocator
   for attr in ft:
     builder.append("def add_attribute_%s(ft):\n" % attr.getName())
     descriptor(builder, attr)
-    
+
   builder.append("def add_attributes_%s(ft):\n" % tableName)
   for attr in ft:
     builder.append("  add_attribute_%s(ft)\n" % attr.getName())
-    
+
   builder.append("""
 
 def configurar_featuretype_%s(ft):
@@ -90,7 +90,7 @@ def configurar_featuretype_%s(ft):
     for name in ft.getTags():
         value = tags.get(name)
         builder.append("  tags.set(").append(toSource(name)).append(", ").append(toSource(value)).append(")\n")
-              
+
   builder.append("""
   add_attributes_%s(ft)
 
@@ -104,7 +104,7 @@ def crearTabla_%s(connection):
   params = server.getAddParameters(tableName)
   ft = params.getDefaultFeatureType()
   configurar_featuretype_%s(ft)
-  
+
   server.add(tableName, params, False)
 
 def main(*args):
@@ -122,20 +122,20 @@ def create_arena2_tables():
 
   tableName = "ARENA2_ACCIDENTES"
   print "%s..." % tableName
-  pathname = getResource(__file__,"tablas",tableName+".py")  
+  pathname = getResource(__file__,"tablas",tableName+".py")
   generateTable(pathname, tableName, store.getDefaultFeatureType())
 
   for child in store.getChildren():
     tableName = child.getName()
     print "%s..." % tableName
-    pathname = getResource(__file__,"tablas",tableName+".py")  
+    pathname = getResource(__file__,"tablas",tableName+".py")
     generateTable(pathname, tableName, child.getDefaultFeatureType())
 
 def create_ARENA2_AC_VE_CO_PA_PE_CR():
   tableName = "ARENA2_AC_VE_CO_PA_PE_CR"
   dataManager = DALLocator.getDataManager()
   store = dataManager.getStoresRepository().getStore(tableName)
-  pathname = getResource(__file__,"tablas",tableName+".py")  
+  pathname = getResource(__file__,"tablas",tableName+".py")
   generateTable(pathname, tableName, store.getDefaultFeatureType())
 
 def create_DAL_ARENA2_AC_VE_CO_PA_PE_CR():
@@ -149,11 +149,11 @@ def create_DAL_ARENA2_AC_VE_CO_PA_PE_CR():
   pathname = getResource(__file__,"../Arena2Reader/datos/recursos/",tableName+".dal")
   dalfile.write(File(pathname))
 
-def create_AFOROS_IMDS():
-  tableName = "AFOROS_IMDS"
+def create_AFOROS_MEDIDAS():
+  tableName = "AFOROS_MEDIDAS"
   dataManager = DALLocator.getDataManager()
   store = dataManager.getStoresRepository().getStore(tableName)
-  pathname = getResource(__file__,"tablas",tableName+".py")  
+  pathname = getResource(__file__,"tablas",tableName+".py")
   generateTable(pathname, tableName, store.getDefaultFeatureType())
 
 def main(*args):

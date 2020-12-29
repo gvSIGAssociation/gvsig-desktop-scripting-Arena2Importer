@@ -6,7 +6,7 @@ import sys
 
 from java.lang import Runnable
 from java.lang import Thread
-import java.lang.Exception 
+import java.lang.Exception
 
 from org.gvsig.tools.util import HasAFile
 from org.apache.commons.io import IOUtils
@@ -22,13 +22,13 @@ from addons.Arena2Importer.tablas.ARENA2_INFORMES import add_attributes_ARENA2_I
 from addons.Arena2Importer.tablas.ARENA2_PASAJEROS import add_attributes_ARENA2_PASAJEROS
 from addons.Arena2Importer.tablas.ARENA2_PEATONES import add_attributes_ARENA2_PEATONES
 from addons.Arena2Importer.tablas.ARENA2_VEHICULOS import add_attributes_ARENA2_VEHICULOS
-from addons.Arena2Importer.tablas.AFOROS_IMDS import add_attributes_imds
+from addons.Arena2Importer.tablas.AFOROS_MEDIDAS import add_attributes_medidas
 
 from addons.Arena2Reader.arena2readerutils import getDictionaryNames, getOpenStoreParametersOfDictionary
 from addons.Arena2Reader.arena2readerutils import getResourcesStorage, getResourceNames
 
 class CreateTablesProcess(Runnable):
-  def __init__(self, 
+  def __init__(self,
       importProcess,
       connection,
       status,
@@ -59,18 +59,18 @@ class CreateTablesProcess(Runnable):
         count += len(getDictionaryNames())
       if self.createWorkspace:
         count += 7+len(getDictionaryNames())
-      
+
       self.status.setRangeOfValues(0,count)
       self.status.setCurValue(0)
-      
+
       dataManager = DALLocator.getDataManager()
       workspace = dataManager.createDatabaseWorkspaceManager(self.connection)
       server = workspace.getServerExplorer()
-  
+
       if self.createWorkspace:
         self.status.message("Creando espacio de trabajo")
         workspace.create("ARENA2_DB","ARENA2 (db)")
-        
+
       if self.createBaseTables:
         self.status.message("Creando ARENA2_ACCIDENTES")
         params = server.getAddParameters("ARENA2_ACCIDENTES")
@@ -79,12 +79,13 @@ class CreateTablesProcess(Runnable):
         server.add("ARENA2_ACCIDENTES", params, False)
         self.status.incrementCurrentValue()
         for tableName, add_attributes in (
-          ("ARENA2_CONDUCTORES",add_attributes_ARENA2_CONDUCTORES), 
-          ("ARENA2_CROQUIS",add_attributes_ARENA2_CROQUIS), 
+          ("ARENA2_CONDUCTORES",add_attributes_ARENA2_CONDUCTORES),
+          ("ARENA2_CROQUIS",add_attributes_ARENA2_CROQUIS),
           ("ARENA2_INFORMES",add_attributes_ARENA2_INFORMES),
-          ("ARENA2_PASAJEROS",add_attributes_ARENA2_PASAJEROS), 
-          ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES), 
-          ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS) #, ("AFOROS_IMDS",add_attributes_imds)
+          ("ARENA2_PASAJEROS",add_attributes_ARENA2_PASAJEROS),
+          ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES),
+          ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS),
+          ("AFOROS_MEDIDAS",add_attributes_medidas)
           ):
           self.status.message("Creando "+tableName)
           params = server.getAddParameters(tableName)
@@ -106,8 +107,8 @@ class CreateTablesProcess(Runnable):
           ft.copyFrom(store.getDefaultFeatureType())
           store.dispose()
           server.add(tableName, addparams, False)
-  
-  
+
+
       if self.loadDics:
         for tableName in getDictionaryNames():
           self.status.message("Importando "+tableName)
@@ -119,18 +120,18 @@ class CreateTablesProcess(Runnable):
           store_src.copyTo(store_dst)
           store_src.dispose()
           store_dst.dispose()
-  
+
       if self.createWorkspace:
         self.status.message("Actualizando espacio de trabajo")
         for tableName in ("ARENA2_ACCIDENTES",
-          "ARENA2_CONDUCTORES", "ARENA2_CROQUIS", 
-          "ARENA2_INFORMES","ARENA2_PASAJEROS", 
-          "ARENA2_PEATONES", "ARENA2_VEHICULOS", "AFOROS_IMDS", "ARENA2_AC_VE_CO_PA_PE_CR"):
+          "ARENA2_CONDUCTORES", "ARENA2_CROQUIS",
+          "ARENA2_INFORMES","ARENA2_PASAJEROS",
+          "ARENA2_PEATONES", "ARENA2_VEHICULOS", "AFOROS_MEDIDAS", "ARENA2_AC_VE_CO_PA_PE_CR"):
           self.status.message("Actualizando espacio de trabajo ("+tableName+")")
           self.status.incrementCurrentValue()
           params = server.get(tableName)
           workspace.writeStoresRepositoryEntry(tableName, params)
-          
+
           resourcesStorage_src = getResourcesStorage(tableName)
           resourcesStorage_dst = server.getResourcesStorage(params)
           #print "recursos de ",repr(tableName), repr(getResourceNames(tableName))
@@ -139,12 +140,12 @@ class CreateTablesProcess(Runnable):
             resource_src = resourcesStorage_src.getResource(resourceName)
             resource_dst = resourcesStorage_dst.getResource(resourceName)
             IOUtils.copy(
-              resource_src.asInputStream(), 
+              resource_src.asInputStream(),
               resource_dst.asOutputStream()
             )
             resource_src.close()
             resource_dst.close()
-              
+
         for tableName in getDictionaryNames():
           self.status.message("Actualizando espacio de trabajo ("+tableName+")")
           self.status.incrementCurrentValue()
@@ -153,7 +154,7 @@ class CreateTablesProcess(Runnable):
 
         dataManager.addDatabaseWorkspace(workspace)
         self.status.incrementCurrentValue()
-        
+
       self.status.message("Creacion completada")
       self.status.terminate()
 
@@ -173,7 +174,7 @@ def load_file(fname):
   contents = f.read()
   f.close()
   return contents
-  
+
 def main(*args):
     #print load_file("AC_VE_CO_PA_PE_CR.sql")
     pass

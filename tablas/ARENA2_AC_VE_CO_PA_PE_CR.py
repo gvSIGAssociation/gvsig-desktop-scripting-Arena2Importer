@@ -8,7 +8,7 @@ from org.gvsig.tools.dynobject.DynField import RELATION_TYPE_COLLABORATION, RELA
 def add_attribute_LID_ACCIDENTE(ft):
   attr = ft.add("LID_ACCIDENTE",8)
   attr.setSize(20)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'LID_ACCIDENTE')
@@ -29,7 +29,7 @@ def add_attribute_LID_ACCIDENTE(ft):
 def add_attribute_LID_VEHICULO(ft):
   attr = ft.add("LID_VEHICULO",8)
   attr.setSize(30)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'LID_VEHICULO')
@@ -50,7 +50,7 @@ def add_attribute_LID_VEHICULO(ft):
 def add_attribute_LID_CONDUCTOR(ft):
   attr = ft.add("LID_CONDUCTOR",8)
   attr.setSize(30)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'LID_CONDUCTOR')
@@ -71,7 +71,7 @@ def add_attribute_LID_CONDUCTOR(ft):
 def add_attribute_LID_PASAJERO(ft):
   attr = ft.add("LID_PASAJERO",8)
   attr.setSize(30)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'LID_PASAJERO')
@@ -92,7 +92,7 @@ def add_attribute_LID_PASAJERO(ft):
 def add_attribute_AC_COD_INFORME(ft):
   attr = ft.add("AC_COD_INFORME",8)
   attr.setSize(20)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_COD_INFORME')
@@ -118,7 +118,7 @@ def add_attribute_AC_COD_INFORME(ft):
 def add_attribute_AC_ID_ACCIDENTE(ft):
   attr = ft.add("AC_ID_ACCIDENTE",8)
   attr.setSize(20)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_ID_ACCIDENTE')
@@ -139,7 +139,7 @@ def add_attribute_AC_ID_ACCIDENTE(ft):
 def add_attribute_AC_FECHA_ACCIDENTE(ft):
   attr = ft.add("AC_FECHA_ACCIDENTE",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FECHA_ACCIDENTE')
@@ -160,7 +160,7 @@ def add_attribute_AC_FECHA_ACCIDENTE(ft):
 def add_attribute_AC_HORA_ACCIDENTE(ft):
   attr = ft.add("AC_HORA_ACCIDENTE",10)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_HORA_ACCIDENTE')
@@ -181,7 +181,7 @@ def add_attribute_AC_HORA_ACCIDENTE(ft):
 def add_attribute_AC_COD_PROVINCIA(ft):
   attr = ft.add("AC_COD_PROVINCIA",8)
   attr.setSize(45)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_COD_PROVINCIA')
@@ -202,7 +202,7 @@ def add_attribute_AC_COD_PROVINCIA(ft):
 def add_attribute_AC_COD_MUNICIPIO(ft):
   attr = ft.add("AC_COD_MUNICIPIO",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_COD_MUNICIPIO')
@@ -223,7 +223,7 @@ def add_attribute_AC_COD_MUNICIPIO(ft):
 def add_attribute_AC_COD_POBLACION(ft):
   attr = ft.add("AC_COD_POBLACION",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_COD_POBLACION')
@@ -244,7 +244,7 @@ def add_attribute_AC_COD_POBLACION(ft):
 def add_attribute_AC_ZONA(ft):
   attr = ft.add("AC_ZONA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_ZONA')
@@ -270,7 +270,7 @@ def add_attribute_AC_ZONA(ft):
 def add_attribute_AC_TIPO_VIA(ft):
   attr = ft.add("AC_TIPO_VIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TIPO_VIA')
@@ -296,7 +296,7 @@ def add_attribute_AC_TIPO_VIA(ft):
 def add_attribute_AC_TIPO_VIA_DGT(ft):
   attr = ft.add("AC_TIPO_VIA_DGT",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TIPO_VIA_DGT')
@@ -322,7 +322,7 @@ def add_attribute_AC_TIPO_VIA_DGT(ft):
 def add_attribute_AC_CARRETERA(ft):
   attr = ft.add("AC_CARRETERA",8)
   attr.setSize(50)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CARRETERA')
@@ -343,7 +343,7 @@ def add_attribute_AC_CARRETERA(ft):
 def add_attribute_AC_CARRETERA_DGT(ft):
   attr = ft.add("AC_CARRETERA_DGT",8)
   attr.setSize(50)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CARRETERA_DGT')
@@ -364,7 +364,7 @@ def add_attribute_AC_CARRETERA_DGT(ft):
 def add_attribute_AC_KM(ft):
   attr = ft.add("AC_KM",7)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_KM')
@@ -385,7 +385,7 @@ def add_attribute_AC_KM(ft):
 def add_attribute_AC_TITULARIDAD_VIA(ft):
   attr = ft.add("AC_TITULARIDAD_VIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TITULARIDAD_VIA')
@@ -411,7 +411,7 @@ def add_attribute_AC_TITULARIDAD_VIA(ft):
 def add_attribute_AC_TITULARIDAD_VIA_DGT(ft):
   attr = ft.add("AC_TITULARIDAD_VIA_DGT",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TITULARIDAD_VIA_DGT')
@@ -437,7 +437,7 @@ def add_attribute_AC_TITULARIDAD_VIA_DGT(ft):
 def add_attribute_AC_SENTIDO(ft):
   attr = ft.add("AC_SENTIDO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_SENTIDO')
@@ -463,7 +463,7 @@ def add_attribute_AC_SENTIDO(ft):
 def add_attribute_AC_CALLE_CODIGO(ft):
   attr = ft.add("AC_CALLE_CODIGO",8)
   attr.setSize(15)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CALLE_CODIGO')
@@ -484,7 +484,7 @@ def add_attribute_AC_CALLE_CODIGO(ft):
 def add_attribute_AC_CALLE_NOMBRE(ft):
   attr = ft.add("AC_CALLE_NOMBRE",8)
   attr.setSize(150)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CALLE_NOMBRE')
@@ -505,7 +505,7 @@ def add_attribute_AC_CALLE_NOMBRE(ft):
 def add_attribute_AC_CALLE_NUMERO(ft):
   attr = ft.add("AC_CALLE_NUMERO",8)
   attr.setSize(10)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CALLE_NUMERO')
@@ -526,7 +526,7 @@ def add_attribute_AC_CALLE_NUMERO(ft):
 def add_attribute_AC_MAPAY(ft):
   attr = ft.add("AC_MAPAY",7)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MAPAY')
@@ -547,7 +547,7 @@ def add_attribute_AC_MAPAY(ft):
 def add_attribute_AC_MAPAX(ft):
   attr = ft.add("AC_MAPAX",7)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MAPAX')
@@ -568,7 +568,7 @@ def add_attribute_AC_MAPAX(ft):
 def add_attribute_AC_NUDO(ft):
   attr = ft.add("AC_NUDO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUDO')
@@ -594,7 +594,7 @@ def add_attribute_AC_NUDO(ft):
 def add_attribute_AC_NUDO_INFO(ft):
   attr = ft.add("AC_NUDO_INFO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUDO_INFO')
@@ -620,7 +620,7 @@ def add_attribute_AC_NUDO_INFO(ft):
 def add_attribute_AC_CRUCE_CALLE(ft):
   attr = ft.add("AC_CRUCE_CALLE",8)
   attr.setSize(150)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CRUCE_CALLE')
@@ -641,7 +641,7 @@ def add_attribute_AC_CRUCE_CALLE(ft):
 def add_attribute_AC_CRUCE_INE_CALLE(ft):
   attr = ft.add("AC_CRUCE_INE_CALLE",8)
   attr.setSize(10)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CRUCE_INE_CALLE')
@@ -662,7 +662,7 @@ def add_attribute_AC_CRUCE_INE_CALLE(ft):
 def add_attribute_AC_TOTAL_VICTIMAS(ft):
   attr = ft.add("AC_TOTAL_VICTIMAS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TOTAL_VICTIMAS')
@@ -683,7 +683,7 @@ def add_attribute_AC_TOTAL_VICTIMAS(ft):
 def add_attribute_AC_TOTAL_MUERTOS(ft):
   attr = ft.add("AC_TOTAL_MUERTOS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TOTAL_MUERTOS')
@@ -704,7 +704,7 @@ def add_attribute_AC_TOTAL_MUERTOS(ft):
 def add_attribute_AC_TOTAL_GRAVES(ft):
   attr = ft.add("AC_TOTAL_GRAVES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TOTAL_GRAVES')
@@ -725,7 +725,7 @@ def add_attribute_AC_TOTAL_GRAVES(ft):
 def add_attribute_AC_TOTAL_LEVES(ft):
   attr = ft.add("AC_TOTAL_LEVES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TOTAL_LEVES')
@@ -746,7 +746,7 @@ def add_attribute_AC_TOTAL_LEVES(ft):
 def add_attribute_AC_TOTAL_ILESOS(ft):
   attr = ft.add("AC_TOTAL_ILESOS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TOTAL_ILESOS')
@@ -767,7 +767,7 @@ def add_attribute_AC_TOTAL_ILESOS(ft):
 def add_attribute_AC_TOTAL_VEHICULOS(ft):
   attr = ft.add("AC_TOTAL_VEHICULOS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TOTAL_VEHICULOS')
@@ -788,7 +788,7 @@ def add_attribute_AC_TOTAL_VEHICULOS(ft):
 def add_attribute_AC_TOTAL_CONDUCTORES(ft):
   attr = ft.add("AC_TOTAL_CONDUCTORES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TOTAL_CONDUCTORES')
@@ -809,7 +809,7 @@ def add_attribute_AC_TOTAL_CONDUCTORES(ft):
 def add_attribute_AC_TOTAL_PASAJEROS(ft):
   attr = ft.add("AC_TOTAL_PASAJEROS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TOTAL_PASAJEROS')
@@ -830,7 +830,7 @@ def add_attribute_AC_TOTAL_PASAJEROS(ft):
 def add_attribute_AC_TOTAL_PEATONES(ft):
   attr = ft.add("AC_TOTAL_PEATONES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TOTAL_PEATONES')
@@ -851,7 +851,7 @@ def add_attribute_AC_TOTAL_PEATONES(ft):
 def add_attribute_AC_NUM_TURISMOS(ft):
   attr = ft.add("AC_NUM_TURISMOS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUM_TURISMOS')
@@ -872,7 +872,7 @@ def add_attribute_AC_NUM_TURISMOS(ft):
 def add_attribute_AC_NUM_FURGONETAS(ft):
   attr = ft.add("AC_NUM_FURGONETAS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUM_FURGONETAS')
@@ -893,7 +893,7 @@ def add_attribute_AC_NUM_FURGONETAS(ft):
 def add_attribute_AC_NUM_CAMIONES(ft):
   attr = ft.add("AC_NUM_CAMIONES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUM_CAMIONES')
@@ -914,7 +914,7 @@ def add_attribute_AC_NUM_CAMIONES(ft):
 def add_attribute_AC_NUM_AUTOBUSES(ft):
   attr = ft.add("AC_NUM_AUTOBUSES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUM_AUTOBUSES')
@@ -935,7 +935,7 @@ def add_attribute_AC_NUM_AUTOBUSES(ft):
 def add_attribute_AC_NUM_CICLOMOTORES(ft):
   attr = ft.add("AC_NUM_CICLOMOTORES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUM_CICLOMOTORES')
@@ -956,7 +956,7 @@ def add_attribute_AC_NUM_CICLOMOTORES(ft):
 def add_attribute_AC_NUM_MOTOCICLETAS(ft):
   attr = ft.add("AC_NUM_MOTOCICLETAS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUM_MOTOCICLETAS')
@@ -977,7 +977,7 @@ def add_attribute_AC_NUM_MOTOCICLETAS(ft):
 def add_attribute_AC_NUM_BICICLETAS(ft):
   attr = ft.add("AC_NUM_BICICLETAS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUM_BICICLETAS')
@@ -998,7 +998,7 @@ def add_attribute_AC_NUM_BICICLETAS(ft):
 def add_attribute_AC_NUM_OTROS_VEHI(ft):
   attr = ft.add("AC_NUM_OTROS_VEHI",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUM_OTROS_VEHI')
@@ -1019,7 +1019,7 @@ def add_attribute_AC_NUM_OTROS_VEHI(ft):
 def add_attribute_AC_TIPO_ACC_SALIDA(ft):
   attr = ft.add("AC_TIPO_ACC_SALIDA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TIPO_ACC_SALIDA')
@@ -1045,7 +1045,7 @@ def add_attribute_AC_TIPO_ACC_SALIDA(ft):
 def add_attribute_AC_TIPO_ACC_COLISION(ft):
   attr = ft.add("AC_TIPO_ACC_COLISION",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TIPO_ACC_COLISION')
@@ -1071,7 +1071,7 @@ def add_attribute_AC_TIPO_ACC_COLISION(ft):
 def add_attribute_AC_TIPO_ACC_ANIMAL(ft):
   attr = ft.add("AC_TIPO_ACC_ANIMAL",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TIPO_ACC_ANIMAL')
@@ -1097,7 +1097,7 @@ def add_attribute_AC_TIPO_ACC_ANIMAL(ft):
 def add_attribute_AC_SENTIDO_CONTRARIO(ft):
   attr = ft.add("AC_SENTIDO_CONTRARIO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_SENTIDO_CONTRARIO')
@@ -1118,7 +1118,7 @@ def add_attribute_AC_SENTIDO_CONTRARIO(ft):
 def add_attribute_AC_CONDICION_NIVEL_CIRCULA(ft):
   attr = ft.add("AC_CONDICION_NIVEL_CIRCULA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CONDICION_NIVEL_CIRCULA')
@@ -1144,7 +1144,7 @@ def add_attribute_AC_CONDICION_NIVEL_CIRCULA(ft):
 def add_attribute_AC_INFLU_NIVEL_CIRC(ft):
   attr = ft.add("AC_INFLU_NIVEL_CIRC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_INFLU_NIVEL_CIRC')
@@ -1165,7 +1165,7 @@ def add_attribute_AC_INFLU_NIVEL_CIRC(ft):
 def add_attribute_AC_CONDICION_FIRME(ft):
   attr = ft.add("AC_CONDICION_FIRME",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CONDICION_FIRME')
@@ -1191,7 +1191,7 @@ def add_attribute_AC_CONDICION_FIRME(ft):
 def add_attribute_AC_INFLU_SUP_FIRME(ft):
   attr = ft.add("AC_INFLU_SUP_FIRME",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_INFLU_SUP_FIRME')
@@ -1212,7 +1212,7 @@ def add_attribute_AC_INFLU_SUP_FIRME(ft):
 def add_attribute_AC_CONDICION_ILUMINACION(ft):
   attr = ft.add("AC_CONDICION_ILUMINACION",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CONDICION_ILUMINACION')
@@ -1238,7 +1238,7 @@ def add_attribute_AC_CONDICION_ILUMINACION(ft):
 def add_attribute_AC_INFLU_ILUMINACION(ft):
   attr = ft.add("AC_INFLU_ILUMINACION",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_INFLU_ILUMINACION')
@@ -1259,7 +1259,7 @@ def add_attribute_AC_INFLU_ILUMINACION(ft):
 def add_attribute_AC_CONDICION_METEO(ft):
   attr = ft.add("AC_CONDICION_METEO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CONDICION_METEO')
@@ -1285,7 +1285,7 @@ def add_attribute_AC_CONDICION_METEO(ft):
 def add_attribute_AC_INFLU_METEO(ft):
   attr = ft.add("AC_INFLU_METEO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_INFLU_METEO')
@@ -1306,7 +1306,7 @@ def add_attribute_AC_INFLU_METEO(ft):
 def add_attribute_AC_CONDICION_NIEBLA(ft):
   attr = ft.add("AC_CONDICION_NIEBLA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CONDICION_NIEBLA')
@@ -1332,7 +1332,7 @@ def add_attribute_AC_CONDICION_NIEBLA(ft):
 def add_attribute_AC_CONDICION_VIENTO(ft):
   attr = ft.add("AC_CONDICION_VIENTO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CONDICION_VIENTO')
@@ -1358,7 +1358,7 @@ def add_attribute_AC_CONDICION_VIENTO(ft):
 def add_attribute_AC_VISIB_RESTRINGIDA_POR(ft):
   attr = ft.add("AC_VISIB_RESTRINGIDA_POR",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_VISIB_RESTRINGIDA_POR')
@@ -1384,7 +1384,7 @@ def add_attribute_AC_VISIB_RESTRINGIDA_POR(ft):
 def add_attribute_AC_INFLU_VISIBILIDAD(ft):
   attr = ft.add("AC_INFLU_VISIBILIDAD",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_INFLU_VISIBILIDAD')
@@ -1405,7 +1405,7 @@ def add_attribute_AC_INFLU_VISIBILIDAD(ft):
 def add_attribute_AC_CARACT_FUNCIONAL_VIA(ft):
   attr = ft.add("AC_CARACT_FUNCIONAL_VIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CARACT_FUNCIONAL_VIA')
@@ -1431,7 +1431,7 @@ def add_attribute_AC_CARACT_FUNCIONAL_VIA(ft):
 def add_attribute_AC_VEL_GENERICA_SENYALIZADA(ft):
   attr = ft.add("AC_VEL_GENERICA_SENYALIZADA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_VEL_GENERICA_SENYALIZADA')
@@ -1457,7 +1457,7 @@ def add_attribute_AC_VEL_GENERICA_SENYALIZADA(ft):
 def add_attribute_AC_VELOCIDAD(ft):
   attr = ft.add("AC_VELOCIDAD",7)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_VELOCIDAD')
@@ -1478,7 +1478,7 @@ def add_attribute_AC_VELOCIDAD(ft):
 def add_attribute_AC_SENTIDOS_VIA(ft):
   attr = ft.add("AC_SENTIDOS_VIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_SENTIDOS_VIA')
@@ -1504,7 +1504,7 @@ def add_attribute_AC_SENTIDOS_VIA(ft):
 def add_attribute_AC_NUMERO_CALZADAS(ft):
   attr = ft.add("AC_NUMERO_CALZADAS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_NUMERO_CALZADAS')
@@ -1530,7 +1530,7 @@ def add_attribute_AC_NUMERO_CALZADAS(ft):
 def add_attribute_AC_CARRILES_APTOS_CIRC_ASC(ft):
   attr = ft.add("AC_CARRILES_APTOS_CIRC_ASC",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CARRILES_APTOS_CIRC_ASC')
@@ -1551,7 +1551,7 @@ def add_attribute_AC_CARRILES_APTOS_CIRC_ASC(ft):
 def add_attribute_AC_CARRILES_APTOS_CIRC_DESC(ft):
   attr = ft.add("AC_CARRILES_APTOS_CIRC_DESC",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CARRILES_APTOS_CIRC_DESC')
@@ -1572,7 +1572,7 @@ def add_attribute_AC_CARRILES_APTOS_CIRC_DESC(ft):
 def add_attribute_AC_ANCHURA_CARRIL(ft):
   attr = ft.add("AC_ANCHURA_CARRIL",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_ANCHURA_CARRIL')
@@ -1598,7 +1598,7 @@ def add_attribute_AC_ANCHURA_CARRIL(ft):
 def add_attribute_AC_ARCEN(ft):
   attr = ft.add("AC_ARCEN",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_ARCEN')
@@ -1624,7 +1624,7 @@ def add_attribute_AC_ARCEN(ft):
 def add_attribute_AC_ACERA(ft):
   attr = ft.add("AC_ACERA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_ACERA')
@@ -1650,7 +1650,7 @@ def add_attribute_AC_ACERA(ft):
 def add_attribute_AC_INFLU_ACERA(ft):
   attr = ft.add("AC_INFLU_ACERA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_INFLU_ACERA')
@@ -1671,7 +1671,7 @@ def add_attribute_AC_INFLU_ACERA(ft):
 def add_attribute_AC_ANCHURA_ACERA(ft):
   attr = ft.add("AC_ANCHURA_ACERA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_ANCHURA_ACERA')
@@ -1692,7 +1692,7 @@ def add_attribute_AC_ANCHURA_ACERA(ft):
 def add_attribute_AC_TRAZADO_PLANTA(ft):
   attr = ft.add("AC_TRAZADO_PLANTA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TRAZADO_PLANTA')
@@ -1718,7 +1718,7 @@ def add_attribute_AC_TRAZADO_PLANTA(ft):
 def add_attribute_AC_TRAZADO_ALZADO(ft):
   attr = ft.add("AC_TRAZADO_ALZADO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TRAZADO_ALZADO')
@@ -1744,7 +1744,7 @@ def add_attribute_AC_TRAZADO_ALZADO(ft):
 def add_attribute_AC_MARCAS_VIALES(ft):
   attr = ft.add("AC_MARCAS_VIALES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MARCAS_VIALES')
@@ -1770,7 +1770,7 @@ def add_attribute_AC_MARCAS_VIALES(ft):
 def add_attribute_AC_DESCRIPCION(ft):
   attr = ft.add("AC_DESCRIPCION",8)
   attr.setSize(2147483647)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_DESCRIPCION')
@@ -1791,7 +1791,7 @@ def add_attribute_AC_DESCRIPCION(ft):
 def add_attribute_AC_OBSERVACIONES(ft):
   attr = ft.add("AC_OBSERVACIONES",8)
   attr.setSize(2147483647)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_OBSERVACIONES')
@@ -1812,7 +1812,7 @@ def add_attribute_AC_OBSERVACIONES(ft):
 def add_attribute_AC_INFLU_PRIORIDAD(ft):
   attr = ft.add("AC_INFLU_PRIORIDAD",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_INFLU_PRIORIDAD')
@@ -1833,7 +1833,7 @@ def add_attribute_AC_INFLU_PRIORIDAD(ft):
 def add_attribute_AC_PRIORI_NORMA(ft):
   attr = ft.add("AC_PRIORI_NORMA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_NORMA')
@@ -1854,7 +1854,7 @@ def add_attribute_AC_PRIORI_NORMA(ft):
 def add_attribute_AC_PRIORI_AGENTE(ft):
   attr = ft.add("AC_PRIORI_AGENTE",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_AGENTE')
@@ -1875,7 +1875,7 @@ def add_attribute_AC_PRIORI_AGENTE(ft):
 def add_attribute_AC_PRIORI_SEMAFORO(ft):
   attr = ft.add("AC_PRIORI_SEMAFORO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_SEMAFORO')
@@ -1896,7 +1896,7 @@ def add_attribute_AC_PRIORI_SEMAFORO(ft):
 def add_attribute_AC_PRIORI_VERT_STOP(ft):
   attr = ft.add("AC_PRIORI_VERT_STOP",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_VERT_STOP')
@@ -1917,7 +1917,7 @@ def add_attribute_AC_PRIORI_VERT_STOP(ft):
 def add_attribute_AC_PRIORI_VERT_CEDA(ft):
   attr = ft.add("AC_PRIORI_VERT_CEDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_VERT_CEDA')
@@ -1938,7 +1938,7 @@ def add_attribute_AC_PRIORI_VERT_CEDA(ft):
 def add_attribute_AC_PRIORI_HORIZ_STOP(ft):
   attr = ft.add("AC_PRIORI_HORIZ_STOP",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_HORIZ_STOP')
@@ -1959,7 +1959,7 @@ def add_attribute_AC_PRIORI_HORIZ_STOP(ft):
 def add_attribute_AC_PRIORI_HORIZ_CEDA(ft):
   attr = ft.add("AC_PRIORI_HORIZ_CEDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_HORIZ_CEDA')
@@ -1980,7 +1980,7 @@ def add_attribute_AC_PRIORI_HORIZ_CEDA(ft):
 def add_attribute_AC_PRIORI_MARCAS(ft):
   attr = ft.add("AC_PRIORI_MARCAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_MARCAS')
@@ -2001,7 +2001,7 @@ def add_attribute_AC_PRIORI_MARCAS(ft):
 def add_attribute_AC_PRIORI_PEA_NO_ELEV(ft):
   attr = ft.add("AC_PRIORI_PEA_NO_ELEV",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_PEA_NO_ELEV')
@@ -2022,7 +2022,7 @@ def add_attribute_AC_PRIORI_PEA_NO_ELEV(ft):
 def add_attribute_AC_PRIORI_PEA_ELEV(ft):
   attr = ft.add("AC_PRIORI_PEA_ELEV",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_PEA_ELEV')
@@ -2043,7 +2043,7 @@ def add_attribute_AC_PRIORI_PEA_ELEV(ft):
 def add_attribute_AC_PRIORI_MARCA_CICLOS(ft):
   attr = ft.add("AC_PRIORI_MARCA_CICLOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_MARCA_CICLOS')
@@ -2064,7 +2064,7 @@ def add_attribute_AC_PRIORI_MARCA_CICLOS(ft):
 def add_attribute_AC_PRIORI_CIRCUNSTANCIAL(ft):
   attr = ft.add("AC_PRIORI_CIRCUNSTANCIAL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_CIRCUNSTANCIAL')
@@ -2085,7 +2085,7 @@ def add_attribute_AC_PRIORI_CIRCUNSTANCIAL(ft):
 def add_attribute_AC_PRIORI_OTRA(ft):
   attr = ft.add("AC_PRIORI_OTRA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_PRIORI_OTRA')
@@ -2106,7 +2106,7 @@ def add_attribute_AC_PRIORI_OTRA(ft):
 def add_attribute_AC_EB_PANELES_DIRECCIONALES(ft):
   attr = ft.add("AC_EB_PANELES_DIRECCIONALES",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_EB_PANELES_DIRECCIONALES')
@@ -2127,7 +2127,7 @@ def add_attribute_AC_EB_PANELES_DIRECCIONALES(ft):
 def add_attribute_AC_EB_HITOS_ARISTA(ft):
   attr = ft.add("AC_EB_HITOS_ARISTA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_EB_HITOS_ARISTA')
@@ -2148,7 +2148,7 @@ def add_attribute_AC_EB_HITOS_ARISTA(ft):
 def add_attribute_AC_EB_CAPTAFAROS(ft):
   attr = ft.add("AC_EB_CAPTAFAROS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_EB_CAPTAFAROS')
@@ -2169,7 +2169,7 @@ def add_attribute_AC_EB_CAPTAFAROS(ft):
 def add_attribute_AC_SEPARA_LINEA_LONG_SEPARACION(ft):
   attr = ft.add("AC_SEPARA_LINEA_LONG_SEPARACION",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_SEPARA_LINEA_LONG_SEPARACION')
@@ -2190,7 +2190,7 @@ def add_attribute_AC_SEPARA_LINEA_LONG_SEPARACION(ft):
 def add_attribute_AC_SEPARA_CEBREADO(ft):
   attr = ft.add("AC_SEPARA_CEBREADO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_SEPARA_CEBREADO')
@@ -2211,7 +2211,7 @@ def add_attribute_AC_SEPARA_CEBREADO(ft):
 def add_attribute_AC_SEPARA_MEDIANA(ft):
   attr = ft.add("AC_SEPARA_MEDIANA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_SEPARA_MEDIANA')
@@ -2232,7 +2232,7 @@ def add_attribute_AC_SEPARA_MEDIANA(ft):
 def add_attribute_AC_SEPARA_BARRERA_SEGURIDAD(ft):
   attr = ft.add("AC_SEPARA_BARRERA_SEGURIDAD",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_SEPARA_BARRERA_SEGURIDAD')
@@ -2253,7 +2253,7 @@ def add_attribute_AC_SEPARA_BARRERA_SEGURIDAD(ft):
 def add_attribute_AC_SEPARA_ZONA_PEATONAL(ft):
   attr = ft.add("AC_SEPARA_ZONA_PEATONAL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_SEPARA_ZONA_PEATONAL')
@@ -2274,7 +2274,7 @@ def add_attribute_AC_SEPARA_ZONA_PEATONAL(ft):
 def add_attribute_AC_SEPARA_OTRA_SEPARACION(ft):
   attr = ft.add("AC_SEPARA_OTRA_SEPARACION",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_SEPARA_OTRA_SEPARACION')
@@ -2295,7 +2295,7 @@ def add_attribute_AC_SEPARA_OTRA_SEPARACION(ft):
 def add_attribute_AC_SEPARA_NINGUNA_SEPARACION(ft):
   attr = ft.add("AC_SEPARA_NINGUNA_SEPARACION",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_SEPARA_NINGUNA_SEPARACION')
@@ -2316,7 +2316,7 @@ def add_attribute_AC_SEPARA_NINGUNA_SEPARACION(ft):
 def add_attribute_AC_BARRERA_SEG_LAT_ASC(ft):
   attr = ft.add("AC_BARRERA_SEG_LAT_ASC",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_BARRERA_SEG_LAT_ASC')
@@ -2342,7 +2342,7 @@ def add_attribute_AC_BARRERA_SEG_LAT_ASC(ft):
 def add_attribute_AC_BARRERA_SEG_LAT_ASC_MOTO(ft):
   attr = ft.add("AC_BARRERA_SEG_LAT_ASC_MOTO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_BARRERA_SEG_LAT_ASC_MOTO')
@@ -2363,7 +2363,7 @@ def add_attribute_AC_BARRERA_SEG_LAT_ASC_MOTO(ft):
 def add_attribute_AC_BARRERA_SEG_LAT_DESC(ft):
   attr = ft.add("AC_BARRERA_SEG_LAT_DESC",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_BARRERA_SEG_LAT_DESC')
@@ -2389,7 +2389,7 @@ def add_attribute_AC_BARRERA_SEG_LAT_DESC(ft):
 def add_attribute_AC_BARRERA_SEG_LAT_DESC_MOTO(ft):
   attr = ft.add("AC_BARRERA_SEG_LAT_DESC_MOTO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_BARRERA_SEG_LAT_DESC_MOTO')
@@ -2410,7 +2410,7 @@ def add_attribute_AC_BARRERA_SEG_LAT_DESC_MOTO(ft):
 def add_attribute_AC_BARRERA_SEG_MEDIANA_ASC(ft):
   attr = ft.add("AC_BARRERA_SEG_MEDIANA_ASC",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_BARRERA_SEG_MEDIANA_ASC')
@@ -2436,7 +2436,7 @@ def add_attribute_AC_BARRERA_SEG_MEDIANA_ASC(ft):
 def add_attribute_AC_BARRERA_SEG_MEDIANA_ASC_MOTO(ft):
   attr = ft.add("AC_BARRERA_SEG_MEDIANA_ASC_MOTO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_BARRERA_SEG_MEDIANA_ASC_MOTO')
@@ -2457,7 +2457,7 @@ def add_attribute_AC_BARRERA_SEG_MEDIANA_ASC_MOTO(ft):
 def add_attribute_AC_BARRERA_SEG_MEDIANA_DESC(ft):
   attr = ft.add("AC_BARRERA_SEG_MEDIANA_DESC",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_BARRERA_SEG_MEDIANA_DESC')
@@ -2483,7 +2483,7 @@ def add_attribute_AC_BARRERA_SEG_MEDIANA_DESC(ft):
 def add_attribute_AC_BARRERA_SEG_MEDIANA_DESC_MOTO(ft):
   attr = ft.add("AC_BARRERA_SEG_MEDIANA_DESC_MOTO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_BARRERA_SEG_MEDIANA_DESC_MOTO')
@@ -2504,7 +2504,7 @@ def add_attribute_AC_BARRERA_SEG_MEDIANA_DESC_MOTO(ft):
 def add_attribute_AC_TRAMO_PUENTE(ft):
   attr = ft.add("AC_TRAMO_PUENTE",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TRAMO_PUENTE')
@@ -2525,7 +2525,7 @@ def add_attribute_AC_TRAMO_PUENTE(ft):
 def add_attribute_AC_TRAMO_TUNEL(ft):
   attr = ft.add("AC_TRAMO_TUNEL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TRAMO_TUNEL')
@@ -2546,7 +2546,7 @@ def add_attribute_AC_TRAMO_TUNEL(ft):
 def add_attribute_AC_TRAMO_PASO(ft):
   attr = ft.add("AC_TRAMO_PASO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TRAMO_PASO')
@@ -2567,7 +2567,7 @@ def add_attribute_AC_TRAMO_PASO(ft):
 def add_attribute_AC_TRAMO_ESTRECHA(ft):
   attr = ft.add("AC_TRAMO_ESTRECHA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TRAMO_ESTRECHA')
@@ -2588,7 +2588,7 @@ def add_attribute_AC_TRAMO_ESTRECHA(ft):
 def add_attribute_AC_TRAMO_RESALTOS(ft):
   attr = ft.add("AC_TRAMO_RESALTOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TRAMO_RESALTOS')
@@ -2609,7 +2609,7 @@ def add_attribute_AC_TRAMO_RESALTOS(ft):
 def add_attribute_AC_TRAMO_BADEN(ft):
   attr = ft.add("AC_TRAMO_BADEN",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TRAMO_BADEN')
@@ -2630,7 +2630,7 @@ def add_attribute_AC_TRAMO_BADEN(ft):
 def add_attribute_AC_TRAMO_APARTADERO(ft):
   attr = ft.add("AC_TRAMO_APARTADERO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TRAMO_APARTADERO')
@@ -2651,7 +2651,7 @@ def add_attribute_AC_TRAMO_APARTADERO(ft):
 def add_attribute_AC_TRAMO_NINGUNA(ft):
   attr = ft.add("AC_TRAMO_NINGUNA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_TRAMO_NINGUNA')
@@ -2672,7 +2672,7 @@ def add_attribute_AC_TRAMO_NINGUNA(ft):
 def add_attribute_AC_INFLU_MARGEN(ft):
   attr = ft.add("AC_INFLU_MARGEN",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_INFLU_MARGEN')
@@ -2693,7 +2693,7 @@ def add_attribute_AC_INFLU_MARGEN(ft):
 def add_attribute_AC_MARGEN_DESPEJADO(ft):
   attr = ft.add("AC_MARGEN_DESPEJADO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MARGEN_DESPEJADO')
@@ -2714,7 +2714,7 @@ def add_attribute_AC_MARGEN_DESPEJADO(ft):
 def add_attribute_AC_MARGEN_ARBOLES(ft):
   attr = ft.add("AC_MARGEN_ARBOLES",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MARGEN_ARBOLES')
@@ -2735,7 +2735,7 @@ def add_attribute_AC_MARGEN_ARBOLES(ft):
 def add_attribute_AC_MARGEN_OTROS_NATURALES(ft):
   attr = ft.add("AC_MARGEN_OTROS_NATURALES",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MARGEN_OTROS_NATURALES')
@@ -2756,7 +2756,7 @@ def add_attribute_AC_MARGEN_OTROS_NATURALES(ft):
 def add_attribute_AC_MARGEN_EDIFICIOS(ft):
   attr = ft.add("AC_MARGEN_EDIFICIOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MARGEN_EDIFICIOS')
@@ -2777,7 +2777,7 @@ def add_attribute_AC_MARGEN_EDIFICIOS(ft):
 def add_attribute_AC_MARGEN_POSTES(ft):
   attr = ft.add("AC_MARGEN_POSTES",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MARGEN_POSTES')
@@ -2798,7 +2798,7 @@ def add_attribute_AC_MARGEN_POSTES(ft):
 def add_attribute_AC_MARGEN_PUBLICIDAD(ft):
   attr = ft.add("AC_MARGEN_PUBLICIDAD",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MARGEN_PUBLICIDAD')
@@ -2819,7 +2819,7 @@ def add_attribute_AC_MARGEN_PUBLICIDAD(ft):
 def add_attribute_AC_MARGEN_OTROS_ARTIFICIALES(ft):
   attr = ft.add("AC_MARGEN_OTROS_ARTIFICIALES",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MARGEN_OTROS_ARTIFICIALES')
@@ -2840,7 +2840,7 @@ def add_attribute_AC_MARGEN_OTROS_ARTIFICIALES(ft):
 def add_attribute_AC_MARGEN_OTROS_OBSTACULOS(ft):
   attr = ft.add("AC_MARGEN_OTROS_OBSTACULOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MARGEN_OTROS_OBSTACULOS')
@@ -2861,7 +2861,7 @@ def add_attribute_AC_MARGEN_OTROS_OBSTACULOS(ft):
 def add_attribute_AC_MARGEN_DESC(ft):
   attr = ft.add("AC_MARGEN_DESC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_MARGEN_DESC')
@@ -2882,7 +2882,7 @@ def add_attribute_AC_MARGEN_DESC(ft):
 def add_attribute_AC_INFLU_CIRCUNS_ESP(ft):
   attr = ft.add("AC_INFLU_CIRCUNS_ESP",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_INFLU_CIRCUNS_ESP')
@@ -2903,7 +2903,7 @@ def add_attribute_AC_INFLU_CIRCUNS_ESP(ft):
 def add_attribute_AC_CIRCUNS_ESP_NINGUNA(ft):
   attr = ft.add("AC_CIRCUNS_ESP_NINGUNA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_NINGUNA')
@@ -2924,7 +2924,7 @@ def add_attribute_AC_CIRCUNS_ESP_NINGUNA(ft):
 def add_attribute_AC_CIRCUNS_ESP_CONOS(ft):
   attr = ft.add("AC_CIRCUNS_ESP_CONOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_CONOS')
@@ -2945,7 +2945,7 @@ def add_attribute_AC_CIRCUNS_ESP_CONOS(ft):
 def add_attribute_AC_CIRCUNS_ESP_ZANJA(ft):
   attr = ft.add("AC_CIRCUNS_ESP_ZANJA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_ZANJA')
@@ -2966,7 +2966,7 @@ def add_attribute_AC_CIRCUNS_ESP_ZANJA(ft):
 def add_attribute_AC_CIRCUNS_ESP_TAPA(ft):
   attr = ft.add("AC_CIRCUNS_ESP_TAPA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_TAPA')
@@ -2987,7 +2987,7 @@ def add_attribute_AC_CIRCUNS_ESP_TAPA(ft):
 def add_attribute_AC_CIRCUNS_ESP_OBRAS(ft):
   attr = ft.add("AC_CIRCUNS_ESP_OBRAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_OBRAS')
@@ -3008,7 +3008,7 @@ def add_attribute_AC_CIRCUNS_ESP_OBRAS(ft):
 def add_attribute_AC_CIRCUNS_ESP_OBSTACULO(ft):
   attr = ft.add("AC_CIRCUNS_ESP_OBSTACULO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_OBSTACULO')
@@ -3029,7 +3029,7 @@ def add_attribute_AC_CIRCUNS_ESP_OBSTACULO(ft):
 def add_attribute_AC_CIRCUNS_ESP_DESPREND(ft):
   attr = ft.add("AC_CIRCUNS_ESP_DESPREND",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_DESPREND')
@@ -3050,7 +3050,7 @@ def add_attribute_AC_CIRCUNS_ESP_DESPREND(ft):
 def add_attribute_AC_CIRCUNS_ESP_ESCALON(ft):
   attr = ft.add("AC_CIRCUNS_ESP_ESCALON",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_ESCALON')
@@ -3071,7 +3071,7 @@ def add_attribute_AC_CIRCUNS_ESP_ESCALON(ft):
 def add_attribute_AC_CIRCUNS_ESP_FBACHES(ft):
   attr = ft.add("AC_CIRCUNS_ESP_FBACHES",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_FBACHES')
@@ -3092,7 +3092,7 @@ def add_attribute_AC_CIRCUNS_ESP_FBACHES(ft):
 def add_attribute_AC_CIRCUNS_ESP_FDETERIORADO(ft):
   attr = ft.add("AC_CIRCUNS_ESP_FDETERIORADO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_FDETERIORADO')
@@ -3113,7 +3113,7 @@ def add_attribute_AC_CIRCUNS_ESP_FDETERIORADO(ft):
 def add_attribute_AC_CIRCUNS_ESP_OTRAS(ft):
   attr = ft.add("AC_CIRCUNS_ESP_OTRAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_OTRAS')
@@ -3134,7 +3134,7 @@ def add_attribute_AC_CIRCUNS_ESP_OTRAS(ft):
 def add_attribute_AC_CIRCUNS_ESP_DESC(ft):
   attr = ft.add("AC_CIRCUNS_ESP_DESC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_CIRCUNS_ESP_DESC')
@@ -3155,7 +3155,7 @@ def add_attribute_AC_CIRCUNS_ESP_DESC(ft):
 def add_attribute_AC_INFLU_DELIM_CALZADA(ft):
   attr = ft.add("AC_INFLU_DELIM_CALZADA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_INFLU_DELIM_CALZADA')
@@ -3176,7 +3176,7 @@ def add_attribute_AC_INFLU_DELIM_CALZADA(ft):
 def add_attribute_AC_DELIM_CALZADA_BORDILLO(ft):
   attr = ft.add("AC_DELIM_CALZADA_BORDILLO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_DELIM_CALZADA_BORDILLO')
@@ -3197,7 +3197,7 @@ def add_attribute_AC_DELIM_CALZADA_BORDILLO(ft):
 def add_attribute_AC_DELIM_CALZADA_VALLAS(ft):
   attr = ft.add("AC_DELIM_CALZADA_VALLAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_DELIM_CALZADA_VALLAS')
@@ -3218,7 +3218,7 @@ def add_attribute_AC_DELIM_CALZADA_VALLAS(ft):
 def add_attribute_AC_DELIM_CALZADA_SETOS(ft):
   attr = ft.add("AC_DELIM_CALZADA_SETOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_DELIM_CALZADA_SETOS')
@@ -3239,7 +3239,7 @@ def add_attribute_AC_DELIM_CALZADA_SETOS(ft):
 def add_attribute_AC_DELIM_CALZADA_MARCAS(ft):
   attr = ft.add("AC_DELIM_CALZADA_MARCAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_DELIM_CALZADA_MARCAS')
@@ -3260,7 +3260,7 @@ def add_attribute_AC_DELIM_CALZADA_MARCAS(ft):
 def add_attribute_AC_DELIM_CALZADA_BARRERA(ft):
   attr = ft.add("AC_DELIM_CALZADA_BARRERA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_DELIM_CALZADA_BARRERA')
@@ -3281,7 +3281,7 @@ def add_attribute_AC_DELIM_CALZADA_BARRERA(ft):
 def add_attribute_AC_DELIM_CALZADA_ISLETA(ft):
   attr = ft.add("AC_DELIM_CALZADA_ISLETA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_DELIM_CALZADA_ISLETA')
@@ -3302,7 +3302,7 @@ def add_attribute_AC_DELIM_CALZADA_ISLETA(ft):
 def add_attribute_AC_DELIM_CALZADA_PEATONAL(ft):
   attr = ft.add("AC_DELIM_CALZADA_PEATONAL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_DELIM_CALZADA_PEATONAL')
@@ -3323,7 +3323,7 @@ def add_attribute_AC_DELIM_CALZADA_PEATONAL(ft):
 def add_attribute_AC_DELIM_CALZADA_OTRA(ft):
   attr = ft.add("AC_DELIM_CALZADA_OTRA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_DELIM_CALZADA_OTRA')
@@ -3344,7 +3344,7 @@ def add_attribute_AC_DELIM_CALZADA_OTRA(ft):
 def add_attribute_AC_DELIM_CALZADA_SIN_DELIM(ft):
   attr = ft.add("AC_DELIM_CALZADA_SIN_DELIM",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_DELIM_CALZADA_SIN_DELIM')
@@ -3365,7 +3365,7 @@ def add_attribute_AC_DELIM_CALZADA_SIN_DELIM(ft):
 def add_attribute_AC_FC_CON_DISTRAIDA(ft):
   attr = ft.add("AC_FC_CON_DISTRAIDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_CON_DISTRAIDA')
@@ -3386,7 +3386,7 @@ def add_attribute_AC_FC_CON_DISTRAIDA(ft):
 def add_attribute_AC_FC_VEL_INADECUADA(ft):
   attr = ft.add("AC_FC_VEL_INADECUADA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_VEL_INADECUADA')
@@ -3407,7 +3407,7 @@ def add_attribute_AC_FC_VEL_INADECUADA(ft):
 def add_attribute_AC_FC_PRIORIDAD(ft):
   attr = ft.add("AC_FC_PRIORIDAD",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_PRIORIDAD')
@@ -3428,7 +3428,7 @@ def add_attribute_AC_FC_PRIORIDAD(ft):
 def add_attribute_AC_FC_SEGURIDAD(ft):
   attr = ft.add("AC_FC_SEGURIDAD",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_SEGURIDAD')
@@ -3449,7 +3449,7 @@ def add_attribute_AC_FC_SEGURIDAD(ft):
 def add_attribute_AC_FC_ADELANTAMIENTO(ft):
   attr = ft.add("AC_FC_ADELANTAMIENTO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_ADELANTAMIENTO')
@@ -3470,7 +3470,7 @@ def add_attribute_AC_FC_ADELANTAMIENTO(ft):
 def add_attribute_AC_FC_GIRO(ft):
   attr = ft.add("AC_FC_GIRO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_GIRO')
@@ -3491,7 +3491,7 @@ def add_attribute_AC_FC_GIRO(ft):
 def add_attribute_AC_FC_CON_NEGLIGENTE(ft):
   attr = ft.add("AC_FC_CON_NEGLIGENTE",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_CON_NEGLIGENTE')
@@ -3512,7 +3512,7 @@ def add_attribute_AC_FC_CON_NEGLIGENTE(ft):
 def add_attribute_AC_FC_CON_TEMERARIA(ft):
   attr = ft.add("AC_FC_CON_TEMERARIA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_CON_TEMERARIA')
@@ -3533,7 +3533,7 @@ def add_attribute_AC_FC_CON_TEMERARIA(ft):
 def add_attribute_AC_FC_IRRUPCION_ANIMAL(ft):
   attr = ft.add("AC_FC_IRRUPCION_ANIMAL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_IRRUPCION_ANIMAL')
@@ -3554,7 +3554,7 @@ def add_attribute_AC_FC_IRRUPCION_ANIMAL(ft):
 def add_attribute_AC_FC_IRRUPCION_PEATON(ft):
   attr = ft.add("AC_FC_IRRUPCION_PEATON",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_IRRUPCION_PEATON')
@@ -3575,7 +3575,7 @@ def add_attribute_AC_FC_IRRUPCION_PEATON(ft):
 def add_attribute_AC_FC_ALCOHOL(ft):
   attr = ft.add("AC_FC_ALCOHOL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_ALCOHOL')
@@ -3596,7 +3596,7 @@ def add_attribute_AC_FC_ALCOHOL(ft):
 def add_attribute_AC_FC_DROGAS(ft):
   attr = ft.add("AC_FC_DROGAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_DROGAS')
@@ -3617,7 +3617,7 @@ def add_attribute_AC_FC_DROGAS(ft):
 def add_attribute_AC_FC_ESTADO_VIA(ft):
   attr = ft.add("AC_FC_ESTADO_VIA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_ESTADO_VIA')
@@ -3638,7 +3638,7 @@ def add_attribute_AC_FC_ESTADO_VIA(ft):
 def add_attribute_AC_FC_METEORO(ft):
   attr = ft.add("AC_FC_METEORO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_METEORO')
@@ -3659,7 +3659,7 @@ def add_attribute_AC_FC_METEORO(ft):
 def add_attribute_AC_FC_CANSANCIO(ft):
   attr = ft.add("AC_FC_CANSANCIO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_CANSANCIO')
@@ -3680,7 +3680,7 @@ def add_attribute_AC_FC_CANSANCIO(ft):
 def add_attribute_AC_FC_INEXPERIENCIA(ft):
   attr = ft.add("AC_FC_INEXPERIENCIA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_INEXPERIENCIA')
@@ -3701,7 +3701,7 @@ def add_attribute_AC_FC_INEXPERIENCIA(ft):
 def add_attribute_AC_FC_AVERIA(ft):
   attr = ft.add("AC_FC_AVERIA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_AVERIA')
@@ -3722,7 +3722,7 @@ def add_attribute_AC_FC_AVERIA(ft):
 def add_attribute_AC_FC_OBRAS(ft):
   attr = ft.add("AC_FC_OBRAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_OBRAS')
@@ -3743,7 +3743,7 @@ def add_attribute_AC_FC_OBRAS(ft):
 def add_attribute_AC_FC_MAL_ESTADO_VEHI(ft):
   attr = ft.add("AC_FC_MAL_ESTADO_VEHI",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_MAL_ESTADO_VEHI')
@@ -3764,7 +3764,7 @@ def add_attribute_AC_FC_MAL_ESTADO_VEHI(ft):
 def add_attribute_AC_FC_ENFERMEDAD(ft):
   attr = ft.add("AC_FC_ENFERMEDAD",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_ENFERMEDAD')
@@ -3785,7 +3785,7 @@ def add_attribute_AC_FC_ENFERMEDAD(ft):
 def add_attribute_AC_FC_SENYALIZACION(ft):
   attr = ft.add("AC_FC_SENYALIZACION",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_SENYALIZACION')
@@ -3806,7 +3806,7 @@ def add_attribute_AC_FC_SENYALIZACION(ft):
 def add_attribute_AC_FC_OBSTACULO(ft):
   attr = ft.add("AC_FC_OBSTACULO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_OBSTACULO')
@@ -3827,7 +3827,7 @@ def add_attribute_AC_FC_OBSTACULO(ft):
 def add_attribute_AC_FC_OTRO_FACTOR(ft):
   attr = ft.add("AC_FC_OTRO_FACTOR",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'AC_FC_OTRO_FACTOR')
@@ -3848,7 +3848,7 @@ def add_attribute_AC_FC_OTRO_FACTOR(ft):
 def add_attribute_ID_VEHICULO(ft):
   attr = ft.add("ID_VEHICULO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ID_VEHICULO')
@@ -3869,7 +3869,7 @@ def add_attribute_ID_VEHICULO(ft):
 def add_attribute_VE_SIN_CONDUCTOR(ft):
   attr = ft.add("VE_SIN_CONDUCTOR",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_SIN_CONDUCTOR')
@@ -3890,7 +3890,7 @@ def add_attribute_VE_SIN_CONDUCTOR(ft):
 def add_attribute_VE_LID_CONDUCTOR(ft):
   attr = ft.add("VE_LID_CONDUCTOR",8)
   attr.setSize(20)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_LID_CONDUCTOR')
@@ -3916,7 +3916,7 @@ def add_attribute_VE_LID_CONDUCTOR(ft):
 def add_attribute_VE_FECHA_MATRICULACION(ft):
   attr = ft.add("VE_FECHA_MATRICULACION",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_FECHA_MATRICULACION')
@@ -3937,7 +3937,7 @@ def add_attribute_VE_FECHA_MATRICULACION(ft):
 def add_attribute_VE_NACIONALIDAD(ft):
   attr = ft.add("VE_NACIONALIDAD",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_NACIONALIDAD')
@@ -3958,7 +3958,7 @@ def add_attribute_VE_NACIONALIDAD(ft):
 def add_attribute_VE_TIPO_VEHICULO(ft):
   attr = ft.add("VE_TIPO_VEHICULO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_TIPO_VEHICULO')
@@ -3984,7 +3984,7 @@ def add_attribute_VE_TIPO_VEHICULO(ft):
 def add_attribute_VE_MMA(ft):
   attr = ft.add("VE_MMA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_MMA')
@@ -4010,7 +4010,7 @@ def add_attribute_VE_MMA(ft):
 def add_attribute_VE_MARCA_NOMBRE(ft):
   attr = ft.add("VE_MARCA_NOMBRE",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_MARCA_NOMBRE')
@@ -4031,7 +4031,7 @@ def add_attribute_VE_MARCA_NOMBRE(ft):
 def add_attribute_VE_MODELO(ft):
   attr = ft.add("VE_MODELO",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_MODELO')
@@ -4052,7 +4052,7 @@ def add_attribute_VE_MODELO(ft):
 def add_attribute_VE_ITV(ft):
   attr = ft.add("VE_ITV",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_ITV')
@@ -4078,7 +4078,7 @@ def add_attribute_VE_ITV(ft):
 def add_attribute_VE_SEGURO(ft):
   attr = ft.add("VE_SEGURO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_SEGURO')
@@ -4104,7 +4104,7 @@ def add_attribute_VE_SEGURO(ft):
 def add_attribute_VE_NUM_OCUPANTES(ft):
   attr = ft.add("VE_NUM_OCUPANTES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_NUM_OCUPANTES')
@@ -4125,7 +4125,7 @@ def add_attribute_VE_NUM_OCUPANTES(ft):
 def add_attribute_VE_VEHICULO_ADAPTADO(ft):
   attr = ft.add("VE_VEHICULO_ADAPTADO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_VEHICULO_ADAPTADO')
@@ -4146,7 +4146,7 @@ def add_attribute_VE_VEHICULO_ADAPTADO(ft):
 def add_attribute_VE_TRANSPORTE_ESPECIAL(ft):
   attr = ft.add("VE_TRANSPORTE_ESPECIAL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_TRANSPORTE_ESPECIAL')
@@ -4167,7 +4167,7 @@ def add_attribute_VE_TRANSPORTE_ESPECIAL(ft):
 def add_attribute_VE_FUGADO(ft):
   attr = ft.add("VE_FUGADO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_FUGADO')
@@ -4188,7 +4188,7 @@ def add_attribute_VE_FUGADO(ft):
 def add_attribute_VE_INCENDIADO(ft):
   attr = ft.add("VE_INCENDIADO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_INCENDIADO')
@@ -4209,7 +4209,7 @@ def add_attribute_VE_INCENDIADO(ft):
 def add_attribute_VE_MP(ft):
   attr = ft.add("VE_MP",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_MP')
@@ -4230,7 +4230,7 @@ def add_attribute_VE_MP(ft):
 def add_attribute_VE_MP_NUMERO_ONU(ft):
   attr = ft.add("VE_MP_NUMERO_ONU",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_MP_NUMERO_ONU')
@@ -4256,7 +4256,7 @@ def add_attribute_VE_MP_NUMERO_ONU(ft):
 def add_attribute_VE_DANYOS(ft):
   attr = ft.add("VE_DANYOS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_DANYOS')
@@ -4282,7 +4282,7 @@ def add_attribute_VE_DANYOS(ft):
 def add_attribute_VE_REMOLQUE(ft):
   attr = ft.add("VE_REMOLQUE",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_REMOLQUE')
@@ -4303,7 +4303,7 @@ def add_attribute_VE_REMOLQUE(ft):
 def add_attribute_VE_SEMIREMOLQUE(ft):
   attr = ft.add("VE_SEMIREMOLQUE",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_SEMIREMOLQUE')
@@ -4324,7 +4324,7 @@ def add_attribute_VE_SEMIREMOLQUE(ft):
 def add_attribute_VE_CARAVANA(ft):
   attr = ft.add("VE_CARAVANA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_CARAVANA')
@@ -4345,7 +4345,7 @@ def add_attribute_VE_CARAVANA(ft):
 def add_attribute_VE_REMOLQUE_OTROS(ft):
   attr = ft.add("VE_REMOLQUE_OTROS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_REMOLQUE_OTROS')
@@ -4366,7 +4366,7 @@ def add_attribute_VE_REMOLQUE_OTROS(ft):
 def add_attribute_VE_POS_VIA(ft):
   attr = ft.add("VE_POS_VIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_POS_VIA')
@@ -4392,7 +4392,7 @@ def add_attribute_VE_POS_VIA(ft):
 def add_attribute_VE_APROXIMACION_NUDO(ft):
   attr = ft.add("VE_APROXIMACION_NUDO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_APROXIMACION_NUDO')
@@ -4418,7 +4418,7 @@ def add_attribute_VE_APROXIMACION_NUDO(ft):
 def add_attribute_VE_SENTIDO_CIRCULACION(ft):
   attr = ft.add("VE_SENTIDO_CIRCULACION",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_SENTIDO_CIRCULACION')
@@ -4444,7 +4444,7 @@ def add_attribute_VE_SENTIDO_CIRCULACION(ft):
 def add_attribute_VE_LUGAR_CIRCULABA(ft):
   attr = ft.add("VE_LUGAR_CIRCULABA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_LUGAR_CIRCULABA')
@@ -4470,7 +4470,7 @@ def add_attribute_VE_LUGAR_CIRCULABA(ft):
 def add_attribute_VE_FACT_LUGAR_CIRCULA(ft):
   attr = ft.add("VE_FACT_LUGAR_CIRCULA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_FACT_LUGAR_CIRCULA')
@@ -4491,7 +4491,7 @@ def add_attribute_VE_FACT_LUGAR_CIRCULA(ft):
 def add_attribute_VE_TACOGRAFO_DISCO(ft):
   attr = ft.add("VE_TACOGRAFO_DISCO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_TACOGRAFO_DISCO')
@@ -4512,7 +4512,7 @@ def add_attribute_VE_TACOGRAFO_DISCO(ft):
 def add_attribute_VE_TACOGRAFO_LECTURA(ft):
   attr = ft.add("VE_TACOGRAFO_LECTURA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_TACOGRAFO_LECTURA')
@@ -4533,7 +4533,7 @@ def add_attribute_VE_TACOGRAFO_LECTURA(ft):
 def add_attribute_VE_DESCANSO_DIARIO(ft):
   attr = ft.add("VE_DESCANSO_DIARIO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_DESCANSO_DIARIO')
@@ -4554,7 +4554,7 @@ def add_attribute_VE_DESCANSO_DIARIO(ft):
 def add_attribute_VE_HORAS_COND_CONTINU_SUP(ft):
   attr = ft.add("VE_HORAS_COND_CONTINU_SUP",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_HORAS_COND_CONTINU_SUP')
@@ -4575,7 +4575,7 @@ def add_attribute_VE_HORAS_COND_CONTINU_SUP(ft):
 def add_attribute_VE_HORAS_COND_DIARIA_SUP(ft):
   attr = ft.add("VE_HORAS_COND_DIARIA_SUP",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_HORAS_COND_DIARIA_SUP')
@@ -4596,7 +4596,7 @@ def add_attribute_VE_HORAS_COND_DIARIA_SUP(ft):
 def add_attribute_VE_HORAS_COND_CONTINUADAS_H(ft):
   attr = ft.add("VE_HORAS_COND_CONTINUADAS_H",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_HORAS_COND_CONTINUADAS_H')
@@ -4617,7 +4617,7 @@ def add_attribute_VE_HORAS_COND_CONTINUADAS_H(ft):
 def add_attribute_VE_HORAS_COND_CONTINUADAS_MIN(ft):
   attr = ft.add("VE_HORAS_COND_CONTINUADAS_MIN",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_HORAS_COND_CONTINUADAS_MIN')
@@ -4638,7 +4638,7 @@ def add_attribute_VE_HORAS_COND_CONTINUADAS_MIN(ft):
 def add_attribute_VE_FACT_ANOMALIAS_PREVIAS(ft):
   attr = ft.add("VE_FACT_ANOMALIAS_PREVIAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_FACT_ANOMALIAS_PREVIAS')
@@ -4659,7 +4659,7 @@ def add_attribute_VE_FACT_ANOMALIAS_PREVIAS(ft):
 def add_attribute_VE_ANOMALIAS_NINGUNA(ft):
   attr = ft.add("VE_ANOMALIAS_NINGUNA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_ANOMALIAS_NINGUNA')
@@ -4680,7 +4680,7 @@ def add_attribute_VE_ANOMALIAS_NINGUNA(ft):
 def add_attribute_VE_ANOMALIAS_NEUMATICOS(ft):
   attr = ft.add("VE_ANOMALIAS_NEUMATICOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_ANOMALIAS_NEUMATICOS')
@@ -4701,7 +4701,7 @@ def add_attribute_VE_ANOMALIAS_NEUMATICOS(ft):
 def add_attribute_VE_ANOMALIAS_REVENTON(ft):
   attr = ft.add("VE_ANOMALIAS_REVENTON",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_ANOMALIAS_REVENTON')
@@ -4722,7 +4722,7 @@ def add_attribute_VE_ANOMALIAS_REVENTON(ft):
 def add_attribute_VE_ANOMALIAS_DIRECCION(ft):
   attr = ft.add("VE_ANOMALIAS_DIRECCION",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_ANOMALIAS_DIRECCION')
@@ -4743,7 +4743,7 @@ def add_attribute_VE_ANOMALIAS_DIRECCION(ft):
 def add_attribute_VE_ANOMALIAS_FRENOS(ft):
   attr = ft.add("VE_ANOMALIAS_FRENOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_ANOMALIAS_FRENOS')
@@ -4764,7 +4764,7 @@ def add_attribute_VE_ANOMALIAS_FRENOS(ft):
 def add_attribute_VE_ANOMALIAS_OTRAS(ft):
   attr = ft.add("VE_ANOMALIAS_OTRAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_ANOMALIAS_OTRAS')
@@ -4785,7 +4785,7 @@ def add_attribute_VE_ANOMALIAS_OTRAS(ft):
 def add_attribute_VE_ANOMALIAS_OTRA(ft):
   attr = ft.add("VE_ANOMALIAS_OTRA",8)
   attr.setSize(50)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_ANOMALIAS_OTRA')
@@ -4806,7 +4806,7 @@ def add_attribute_VE_ANOMALIAS_OTRA(ft):
 def add_attribute_VE_AIRBAG_COND(ft):
   attr = ft.add("VE_AIRBAG_COND",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_COND')
@@ -4827,7 +4827,7 @@ def add_attribute_VE_AIRBAG_COND(ft):
 def add_attribute_VE_AIRBAG_PAS_DEL(ft):
   attr = ft.add("VE_AIRBAG_PAS_DEL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_PAS_DEL')
@@ -4848,7 +4848,7 @@ def add_attribute_VE_AIRBAG_PAS_DEL(ft):
 def add_attribute_VE_AIRBAG_ROD_IZDA(ft):
   attr = ft.add("VE_AIRBAG_ROD_IZDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_ROD_IZDA')
@@ -4869,7 +4869,7 @@ def add_attribute_VE_AIRBAG_ROD_IZDA(ft):
 def add_attribute_VE_AIRBAG_ROD_DCHA(ft):
   attr = ft.add("VE_AIRBAG_ROD_DCHA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_ROD_DCHA')
@@ -4890,7 +4890,7 @@ def add_attribute_VE_AIRBAG_ROD_DCHA(ft):
 def add_attribute_VE_AIRBAG_LAT_DEL_IZDA(ft):
   attr = ft.add("VE_AIRBAG_LAT_DEL_IZDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_LAT_DEL_IZDA')
@@ -4911,7 +4911,7 @@ def add_attribute_VE_AIRBAG_LAT_DEL_IZDA(ft):
 def add_attribute_VE_AIRBAG_LAT_DEL_DCHA(ft):
   attr = ft.add("VE_AIRBAG_LAT_DEL_DCHA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_LAT_DEL_DCHA')
@@ -4932,7 +4932,7 @@ def add_attribute_VE_AIRBAG_LAT_DEL_DCHA(ft):
 def add_attribute_VE_AIRBAG_CORT_DEL_IZDA(ft):
   attr = ft.add("VE_AIRBAG_CORT_DEL_IZDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_CORT_DEL_IZDA')
@@ -4953,7 +4953,7 @@ def add_attribute_VE_AIRBAG_CORT_DEL_IZDA(ft):
 def add_attribute_VE_AIRBAG_CORT_DEL_DCHA(ft):
   attr = ft.add("VE_AIRBAG_CORT_DEL_DCHA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_CORT_DEL_DCHA')
@@ -4974,7 +4974,7 @@ def add_attribute_VE_AIRBAG_CORT_DEL_DCHA(ft):
 def add_attribute_VE_AIRBAG_LAT_TRAS_IZDA(ft):
   attr = ft.add("VE_AIRBAG_LAT_TRAS_IZDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_LAT_TRAS_IZDA')
@@ -4995,7 +4995,7 @@ def add_attribute_VE_AIRBAG_LAT_TRAS_IZDA(ft):
 def add_attribute_VE_AIRBAG_LAT_TRAS_DCHA(ft):
   attr = ft.add("VE_AIRBAG_LAT_TRAS_DCHA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_LAT_TRAS_DCHA')
@@ -5016,7 +5016,7 @@ def add_attribute_VE_AIRBAG_LAT_TRAS_DCHA(ft):
 def add_attribute_VE_AIRBAG_CORT_TRAS_IZDA(ft):
   attr = ft.add("VE_AIRBAG_CORT_TRAS_IZDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_CORT_TRAS_IZDA')
@@ -5037,7 +5037,7 @@ def add_attribute_VE_AIRBAG_CORT_TRAS_IZDA(ft):
 def add_attribute_VE_AIRBAG_CORT_TRAS_DCHA(ft):
   attr = ft.add("VE_AIRBAG_CORT_TRAS_DCHA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_CORT_TRAS_DCHA')
@@ -5058,7 +5058,7 @@ def add_attribute_VE_AIRBAG_CORT_TRAS_DCHA(ft):
 def add_attribute_VE_AIRBAG_OTROS(ft):
   attr = ft.add("VE_AIRBAG_OTROS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_OTROS')
@@ -5079,7 +5079,7 @@ def add_attribute_VE_AIRBAG_OTROS(ft):
 def add_attribute_VE_AIRBAG_DESCONOCIDO(ft):
   attr = ft.add("VE_AIRBAG_DESCONOCIDO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'VE_AIRBAG_DESCONOCIDO')
@@ -5100,7 +5100,7 @@ def add_attribute_VE_AIRBAG_DESCONOCIDO(ft):
 def add_attribute_CO_POSIBLE_RESPONSABLE(ft):
   attr = ft.add("CO_POSIBLE_RESPONSABLE",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_POSIBLE_RESPONSABLE')
@@ -5121,7 +5121,7 @@ def add_attribute_CO_POSIBLE_RESPONSABLE(ft):
 def add_attribute_CO_FECHA_NACIMIENTO(ft):
   attr = ft.add("CO_FECHA_NACIMIENTO",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_FECHA_NACIMIENTO')
@@ -5142,7 +5142,7 @@ def add_attribute_CO_FECHA_NACIMIENTO(ft):
 def add_attribute_CO_SEXO(ft):
   attr = ft.add("CO_SEXO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_SEXO')
@@ -5168,7 +5168,7 @@ def add_attribute_CO_SEXO(ft):
 def add_attribute_CO_NACIONALIDAD(ft):
   attr = ft.add("CO_NACIONALIDAD",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_NACIONALIDAD')
@@ -5189,7 +5189,7 @@ def add_attribute_CO_NACIONALIDAD(ft):
 def add_attribute_CO_PAIS_RESIDENCIA(ft):
   attr = ft.add("CO_PAIS_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_PAIS_RESIDENCIA')
@@ -5210,7 +5210,7 @@ def add_attribute_CO_PAIS_RESIDENCIA(ft):
 def add_attribute_CO_PROVINCIA_RESIDENCIA(ft):
   attr = ft.add("CO_PROVINCIA_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_PROVINCIA_RESIDENCIA')
@@ -5231,7 +5231,7 @@ def add_attribute_CO_PROVINCIA_RESIDENCIA(ft):
 def add_attribute_CO_MUNICIPIO_RESIDENCIA(ft):
   attr = ft.add("CO_MUNICIPIO_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_MUNICIPIO_RESIDENCIA')
@@ -5252,7 +5252,7 @@ def add_attribute_CO_MUNICIPIO_RESIDENCIA(ft):
 def add_attribute_CO_ASISTENCIA_SANITARIA(ft):
   attr = ft.add("CO_ASISTENCIA_SANITARIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_ASISTENCIA_SANITARIA')
@@ -5278,7 +5278,7 @@ def add_attribute_CO_ASISTENCIA_SANITARIA(ft):
 def add_attribute_CO_INFLU_FACT_ATENCION(ft):
   attr = ft.add("CO_INFLU_FACT_ATENCION",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_INFLU_FACT_ATENCION')
@@ -5299,7 +5299,7 @@ def add_attribute_CO_INFLU_FACT_ATENCION(ft):
 def add_attribute_CO_FACTORES_ATENCION(ft):
   attr = ft.add("CO_FACTORES_ATENCION",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_FACTORES_ATENCION')
@@ -5325,7 +5325,7 @@ def add_attribute_CO_FACTORES_ATENCION(ft):
 def add_attribute_CO_INFLU_PRES_ERROR(ft):
   attr = ft.add("CO_INFLU_PRES_ERROR",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_INFLU_PRES_ERROR')
@@ -5346,7 +5346,7 @@ def add_attribute_CO_INFLU_PRES_ERROR(ft):
 def add_attribute_CO_PRESUNTOS_ERRORES(ft):
   attr = ft.add("CO_PRESUNTOS_ERRORES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_PRESUNTOS_ERRORES')
@@ -5372,7 +5372,7 @@ def add_attribute_CO_PRESUNTOS_ERRORES(ft):
 def add_attribute_CO_CARACT_PERMISO(ft):
   attr = ft.add("CO_CARACT_PERMISO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_CARACT_PERMISO')
@@ -5398,7 +5398,7 @@ def add_attribute_CO_CARACT_PERMISO(ft):
 def add_attribute_CO_CLASE_PERMISO(ft):
   attr = ft.add("CO_CLASE_PERMISO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_CLASE_PERMISO')
@@ -5424,7 +5424,7 @@ def add_attribute_CO_CLASE_PERMISO(ft):
 def add_attribute_CO_FECHA_PERMISO(ft):
   attr = ft.add("CO_FECHA_PERMISO",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_FECHA_PERMISO')
@@ -5445,7 +5445,7 @@ def add_attribute_CO_FECHA_PERMISO(ft):
 def add_attribute_CO_MOTIVO_DESPLAZAMIENTO(ft):
   attr = ft.add("CO_MOTIVO_DESPLAZAMIENTO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_MOTIVO_DESPLAZAMIENTO')
@@ -5471,7 +5471,7 @@ def add_attribute_CO_MOTIVO_DESPLAZAMIENTO(ft):
 def add_attribute_CO_DESPLAZAMIENTO_PREVISTO(ft):
   attr = ft.add("CO_DESPLAZAMIENTO_PREVISTO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_DESPLAZAMIENTO_PREVISTO')
@@ -5497,7 +5497,7 @@ def add_attribute_CO_DESPLAZAMIENTO_PREVISTO(ft):
 def add_attribute_CO_ACC_SEG_CINTURON(ft):
   attr = ft.add("CO_ACC_SEG_CINTURON",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_ACC_SEG_CINTURON')
@@ -5518,7 +5518,7 @@ def add_attribute_CO_ACC_SEG_CINTURON(ft):
 def add_attribute_CO_ACC_SEG_CASCO(ft):
   attr = ft.add("CO_ACC_SEG_CASCO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_ACC_SEG_CASCO')
@@ -5544,7 +5544,7 @@ def add_attribute_CO_ACC_SEG_CASCO(ft):
 def add_attribute_CO_ACC_SEG_BRAZOS(ft):
   attr = ft.add("CO_ACC_SEG_BRAZOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_ACC_SEG_BRAZOS')
@@ -5565,7 +5565,7 @@ def add_attribute_CO_ACC_SEG_BRAZOS(ft):
 def add_attribute_CO_ACC_SEG_ESPALDA(ft):
   attr = ft.add("CO_ACC_SEG_ESPALDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_ACC_SEG_ESPALDA')
@@ -5586,7 +5586,7 @@ def add_attribute_CO_ACC_SEG_ESPALDA(ft):
 def add_attribute_CO_ACC_SEG_TORSO(ft):
   attr = ft.add("CO_ACC_SEG_TORSO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_ACC_SEG_TORSO')
@@ -5607,7 +5607,7 @@ def add_attribute_CO_ACC_SEG_TORSO(ft):
 def add_attribute_CO_ACC_SEG_MANOS(ft):
   attr = ft.add("CO_ACC_SEG_MANOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_ACC_SEG_MANOS')
@@ -5628,7 +5628,7 @@ def add_attribute_CO_ACC_SEG_MANOS(ft):
 def add_attribute_CO_ACC_SEG_PIERNAS(ft):
   attr = ft.add("CO_ACC_SEG_PIERNAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_ACC_SEG_PIERNAS')
@@ -5649,7 +5649,7 @@ def add_attribute_CO_ACC_SEG_PIERNAS(ft):
 def add_attribute_CO_ACC_SEG_PIES(ft):
   attr = ft.add("CO_ACC_SEG_PIES",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_ACC_SEG_PIES')
@@ -5670,7 +5670,7 @@ def add_attribute_CO_ACC_SEG_PIES(ft):
 def add_attribute_CO_ACC_SEG_PRENDA_REF(ft):
   attr = ft.add("CO_ACC_SEG_PRENDA_REF",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_ACC_SEG_PRENDA_REF')
@@ -5691,7 +5691,7 @@ def add_attribute_CO_ACC_SEG_PRENDA_REF(ft):
 def add_attribute_CO_INFLU_ALCOHOL(ft):
   attr = ft.add("CO_INFLU_ALCOHOL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_INFLU_ALCOHOL')
@@ -5712,7 +5712,7 @@ def add_attribute_CO_INFLU_ALCOHOL(ft):
 def add_attribute_CO_PRUEBA_ALCOHOLEMIA(ft):
   attr = ft.add("CO_PRUEBA_ALCOHOLEMIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_PRUEBA_ALCOHOLEMIA')
@@ -5738,7 +5738,7 @@ def add_attribute_CO_PRUEBA_ALCOHOLEMIA(ft):
 def add_attribute_CO_TASA_ALCOHOLEMIA1(ft):
   attr = ft.add("CO_TASA_ALCOHOLEMIA1",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_TASA_ALCOHOLEMIA1')
@@ -5759,7 +5759,7 @@ def add_attribute_CO_TASA_ALCOHOLEMIA1(ft):
 def add_attribute_CO_TASA_ALCOHOLEMIA2(ft):
   attr = ft.add("CO_TASA_ALCOHOLEMIA2",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_TASA_ALCOHOLEMIA2')
@@ -5780,7 +5780,7 @@ def add_attribute_CO_TASA_ALCOHOLEMIA2(ft):
 def add_attribute_CO_PRUEBA_ALC_SANGRE(ft):
   attr = ft.add("CO_PRUEBA_ALC_SANGRE",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_PRUEBA_ALC_SANGRE')
@@ -5801,7 +5801,7 @@ def add_attribute_CO_PRUEBA_ALC_SANGRE(ft):
 def add_attribute_CO_SIGNOS_INFLU_ALCOHOL(ft):
   attr = ft.add("CO_SIGNOS_INFLU_ALCOHOL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_SIGNOS_INFLU_ALCOHOL')
@@ -5822,7 +5822,7 @@ def add_attribute_CO_SIGNOS_INFLU_ALCOHOL(ft):
 def add_attribute_CO_INFLU_DROGAS(ft):
   attr = ft.add("CO_INFLU_DROGAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_INFLU_DROGAS')
@@ -5843,7 +5843,7 @@ def add_attribute_CO_INFLU_DROGAS(ft):
 def add_attribute_CO_PRUEBA_DROGAS(ft):
   attr = ft.add("CO_PRUEBA_DROGAS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_PRUEBA_DROGAS')
@@ -5869,7 +5869,7 @@ def add_attribute_CO_PRUEBA_DROGAS(ft):
 def add_attribute_CO_AMP(ft):
   attr = ft.add("CO_AMP",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_AMP')
@@ -5890,7 +5890,7 @@ def add_attribute_CO_AMP(ft):
 def add_attribute_CO_CONFIRMADO_AMP(ft):
   attr = ft.add("CO_CONFIRMADO_AMP",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_CONFIRMADO_AMP')
@@ -5911,7 +5911,7 @@ def add_attribute_CO_CONFIRMADO_AMP(ft):
 def add_attribute_CO_BDZ(ft):
   attr = ft.add("CO_BDZ",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_BDZ')
@@ -5932,7 +5932,7 @@ def add_attribute_CO_BDZ(ft):
 def add_attribute_CO_CONFIRMADO_BDZ(ft):
   attr = ft.add("CO_CONFIRMADO_BDZ",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_CONFIRMADO_BDZ')
@@ -5953,7 +5953,7 @@ def add_attribute_CO_CONFIRMADO_BDZ(ft):
 def add_attribute_CO_COC(ft):
   attr = ft.add("CO_COC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_COC')
@@ -5974,7 +5974,7 @@ def add_attribute_CO_COC(ft):
 def add_attribute_CO_CONFIRMADO_COC(ft):
   attr = ft.add("CO_CONFIRMADO_COC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_CONFIRMADO_COC')
@@ -5995,7 +5995,7 @@ def add_attribute_CO_CONFIRMADO_COC(ft):
 def add_attribute_CO_THC(ft):
   attr = ft.add("CO_THC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_THC')
@@ -6016,7 +6016,7 @@ def add_attribute_CO_THC(ft):
 def add_attribute_CO_CONFIRMADO_THC(ft):
   attr = ft.add("CO_CONFIRMADO_THC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_CONFIRMADO_THC')
@@ -6037,7 +6037,7 @@ def add_attribute_CO_CONFIRMADO_THC(ft):
 def add_attribute_CO_METH(ft):
   attr = ft.add("CO_METH",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_METH')
@@ -6058,7 +6058,7 @@ def add_attribute_CO_METH(ft):
 def add_attribute_CO_CONFIRMADO_METH(ft):
   attr = ft.add("CO_CONFIRMADO_METH",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_CONFIRMADO_METH')
@@ -6079,7 +6079,7 @@ def add_attribute_CO_CONFIRMADO_METH(ft):
 def add_attribute_CO_OPI(ft):
   attr = ft.add("CO_OPI",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_OPI')
@@ -6100,7 +6100,7 @@ def add_attribute_CO_OPI(ft):
 def add_attribute_CO_CONFIRMADO_OPI(ft):
   attr = ft.add("CO_CONFIRMADO_OPI",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_CONFIRMADO_OPI')
@@ -6121,7 +6121,7 @@ def add_attribute_CO_CONFIRMADO_OPI(ft):
 def add_attribute_CO_OTRAS(ft):
   attr = ft.add("CO_OTRAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_OTRAS')
@@ -6142,7 +6142,7 @@ def add_attribute_CO_OTRAS(ft):
 def add_attribute_CO_CONFIRMADO_OTRAS(ft):
   attr = ft.add("CO_CONFIRMADO_OTRAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_CONFIRMADO_OTRAS')
@@ -6163,7 +6163,7 @@ def add_attribute_CO_CONFIRMADO_OTRAS(ft):
 def add_attribute_CO_SIGNOS_INFLU_DROGAS(ft):
   attr = ft.add("CO_SIGNOS_INFLU_DROGAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_SIGNOS_INFLU_DROGAS')
@@ -6184,7 +6184,7 @@ def add_attribute_CO_SIGNOS_INFLU_DROGAS(ft):
 def add_attribute_CO_INFLU_PRES_INFRAC_COND(ft):
   attr = ft.add("CO_INFLU_PRES_INFRAC_COND",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_INFLU_PRES_INFRAC_COND')
@@ -6205,7 +6205,7 @@ def add_attribute_CO_INFLU_PRES_INFRAC_COND(ft):
 def add_attribute_CO_PRES_INFRAC_COND(ft):
   attr = ft.add("CO_PRES_INFRAC_COND",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_PRES_INFRAC_COND')
@@ -6231,7 +6231,7 @@ def add_attribute_CO_PRES_INFRAC_COND(ft):
 def add_attribute_CO_PRES_INFRAC_SIN_LUCES(ft):
   attr = ft.add("CO_PRES_INFRAC_SIN_LUCES",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_PRES_INFRAC_SIN_LUCES')
@@ -6252,7 +6252,7 @@ def add_attribute_CO_PRES_INFRAC_SIN_LUCES(ft):
 def add_attribute_CO_PRES_INFRAC_SIN_TRIANGULO(ft):
   attr = ft.add("CO_PRES_INFRAC_SIN_TRIANGULO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_PRES_INFRAC_SIN_TRIANGULO')
@@ -6273,7 +6273,7 @@ def add_attribute_CO_PRES_INFRAC_SIN_TRIANGULO(ft):
 def add_attribute_CO_INFLU_PRES_INFRAC_VEL(ft):
   attr = ft.add("CO_INFLU_PRES_INFRAC_VEL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_INFLU_PRES_INFRAC_VEL')
@@ -6294,7 +6294,7 @@ def add_attribute_CO_INFLU_PRES_INFRAC_VEL(ft):
 def add_attribute_CO_PRES_INFRAC_VEL_COND(ft):
   attr = ft.add("CO_PRES_INFRAC_VEL_COND",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_PRES_INFRAC_VEL_COND')
@@ -6320,7 +6320,7 @@ def add_attribute_CO_PRES_INFRAC_VEL_COND(ft):
 def add_attribute_CO_INFLU_OTRA_INFRAC(ft):
   attr = ft.add("CO_INFLU_OTRA_INFRAC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_INFLU_OTRA_INFRAC')
@@ -6341,7 +6341,7 @@ def add_attribute_CO_INFLU_OTRA_INFRAC(ft):
 def add_attribute_CO_OTRA_INFRAC_COND(ft):
   attr = ft.add("CO_OTRA_INFRAC_COND",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CO_OTRA_INFRAC_COND')
@@ -6367,7 +6367,7 @@ def add_attribute_CO_OTRA_INFRAC_COND(ft):
 def add_attribute_ID_PASAJERO(ft):
   attr = ft.add("ID_PASAJERO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ID_PASAJERO')
@@ -6388,7 +6388,7 @@ def add_attribute_ID_PASAJERO(ft):
 def add_attribute_PA_FECHA_NACIMIENTO(ft):
   attr = ft.add("PA_FECHA_NACIMIENTO",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_FECHA_NACIMIENTO')
@@ -6409,7 +6409,7 @@ def add_attribute_PA_FECHA_NACIMIENTO(ft):
 def add_attribute_PA_SEXO(ft):
   attr = ft.add("PA_SEXO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_SEXO')
@@ -6435,7 +6435,7 @@ def add_attribute_PA_SEXO(ft):
 def add_attribute_PA_PAIS_RESIDENCIA(ft):
   attr = ft.add("PA_PAIS_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_PAIS_RESIDENCIA')
@@ -6456,7 +6456,7 @@ def add_attribute_PA_PAIS_RESIDENCIA(ft):
 def add_attribute_PA_PROVINCIA_RESIDENCIA(ft):
   attr = ft.add("PA_PROVINCIA_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_PROVINCIA_RESIDENCIA')
@@ -6477,7 +6477,7 @@ def add_attribute_PA_PROVINCIA_RESIDENCIA(ft):
 def add_attribute_PA_MUNICIPIO_RESIDENCIA(ft):
   attr = ft.add("PA_MUNICIPIO_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_MUNICIPIO_RESIDENCIA')
@@ -6498,7 +6498,7 @@ def add_attribute_PA_MUNICIPIO_RESIDENCIA(ft):
 def add_attribute_PA_ASISTENCIA_SANITARIA(ft):
   attr = ft.add("PA_ASISTENCIA_SANITARIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ASISTENCIA_SANITARIA')
@@ -6524,7 +6524,7 @@ def add_attribute_PA_ASISTENCIA_SANITARIA(ft):
 def add_attribute_PA_POSICION_VEHI(ft):
   attr = ft.add("PA_POSICION_VEHI",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_POSICION_VEHI')
@@ -6550,7 +6550,7 @@ def add_attribute_PA_POSICION_VEHI(ft):
 def add_attribute_PA_NINYO_EN_BRAZO(ft):
   attr = ft.add("PA_NINYO_EN_BRAZO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_NINYO_EN_BRAZO')
@@ -6571,7 +6571,7 @@ def add_attribute_PA_NINYO_EN_BRAZO(ft):
 def add_attribute_PA_ACC_SEG_CINTURON(ft):
   attr = ft.add("PA_ACC_SEG_CINTURON",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ACC_SEG_CINTURON')
@@ -6592,7 +6592,7 @@ def add_attribute_PA_ACC_SEG_CINTURON(ft):
 def add_attribute_PA_ACC_SEG_CASCO(ft):
   attr = ft.add("PA_ACC_SEG_CASCO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ACC_SEG_CASCO')
@@ -6618,7 +6618,7 @@ def add_attribute_PA_ACC_SEG_CASCO(ft):
 def add_attribute_PA_ACC_SEG_SIS_RETEN_INFANTIL(ft):
   attr = ft.add("PA_ACC_SEG_SIS_RETEN_INFANTIL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ACC_SEG_SIS_RETEN_INFANTIL')
@@ -6639,7 +6639,7 @@ def add_attribute_PA_ACC_SEG_SIS_RETEN_INFANTIL(ft):
 def add_attribute_PA_ACC_SEG_BRAZOS(ft):
   attr = ft.add("PA_ACC_SEG_BRAZOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ACC_SEG_BRAZOS')
@@ -6660,7 +6660,7 @@ def add_attribute_PA_ACC_SEG_BRAZOS(ft):
 def add_attribute_PA_ACC_SEG_ESPALDA(ft):
   attr = ft.add("PA_ACC_SEG_ESPALDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ACC_SEG_ESPALDA')
@@ -6681,7 +6681,7 @@ def add_attribute_PA_ACC_SEG_ESPALDA(ft):
 def add_attribute_PA_ACC_SEG_TORSO(ft):
   attr = ft.add("PA_ACC_SEG_TORSO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ACC_SEG_TORSO')
@@ -6702,7 +6702,7 @@ def add_attribute_PA_ACC_SEG_TORSO(ft):
 def add_attribute_PA_ACC_SEG_MANOS(ft):
   attr = ft.add("PA_ACC_SEG_MANOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ACC_SEG_MANOS')
@@ -6723,7 +6723,7 @@ def add_attribute_PA_ACC_SEG_MANOS(ft):
 def add_attribute_PA_ACC_SEG_PIERNAS(ft):
   attr = ft.add("PA_ACC_SEG_PIERNAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ACC_SEG_PIERNAS')
@@ -6744,7 +6744,7 @@ def add_attribute_PA_ACC_SEG_PIERNAS(ft):
 def add_attribute_PA_ACC_SEG_PIES(ft):
   attr = ft.add("PA_ACC_SEG_PIES",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ACC_SEG_PIES')
@@ -6765,7 +6765,7 @@ def add_attribute_PA_ACC_SEG_PIES(ft):
 def add_attribute_PA_ACC_SEG_PRENDA_REF(ft):
   attr = ft.add("PA_ACC_SEG_PRENDA_REF",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PA_ACC_SEG_PRENDA_REF')
@@ -6786,7 +6786,7 @@ def add_attribute_PA_ACC_SEG_PRENDA_REF(ft):
 def add_attribute_ID_PEATON(ft):
   attr = ft.add("ID_PEATON",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ID_PEATON')
@@ -6807,7 +6807,7 @@ def add_attribute_ID_PEATON(ft):
 def add_attribute_PE_POSIBLE_RESPONSABLE(ft):
   attr = ft.add("PE_POSIBLE_RESPONSABLE",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_POSIBLE_RESPONSABLE')
@@ -6828,7 +6828,7 @@ def add_attribute_PE_POSIBLE_RESPONSABLE(ft):
 def add_attribute_PE_FECHA_NACIMIENTO(ft):
   attr = ft.add("PE_FECHA_NACIMIENTO",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_FECHA_NACIMIENTO')
@@ -6849,7 +6849,7 @@ def add_attribute_PE_FECHA_NACIMIENTO(ft):
 def add_attribute_PE_SEXO(ft):
   attr = ft.add("PE_SEXO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_SEXO')
@@ -6875,7 +6875,7 @@ def add_attribute_PE_SEXO(ft):
 def add_attribute_PE_NACIONALIDAD(ft):
   attr = ft.add("PE_NACIONALIDAD",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_NACIONALIDAD')
@@ -6896,7 +6896,7 @@ def add_attribute_PE_NACIONALIDAD(ft):
 def add_attribute_PE_PAIS_RESIDENCIA(ft):
   attr = ft.add("PE_PAIS_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_PAIS_RESIDENCIA')
@@ -6917,7 +6917,7 @@ def add_attribute_PE_PAIS_RESIDENCIA(ft):
 def add_attribute_PE_PROVINCIA_RESIDENCIA(ft):
   attr = ft.add("PE_PROVINCIA_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_PROVINCIA_RESIDENCIA')
@@ -6938,7 +6938,7 @@ def add_attribute_PE_PROVINCIA_RESIDENCIA(ft):
 def add_attribute_PE_MUNICIPIO_RESIDENCIA(ft):
   attr = ft.add("PE_MUNICIPIO_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_MUNICIPIO_RESIDENCIA')
@@ -6959,7 +6959,7 @@ def add_attribute_PE_MUNICIPIO_RESIDENCIA(ft):
 def add_attribute_PE_ASISTENCIA_SANITARIA(ft):
   attr = ft.add("PE_ASISTENCIA_SANITARIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_ASISTENCIA_SANITARIA')
@@ -6985,7 +6985,7 @@ def add_attribute_PE_ASISTENCIA_SANITARIA(ft):
 def add_attribute_PE_INFLU_FACT_ATENCION(ft):
   attr = ft.add("PE_INFLU_FACT_ATENCION",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_INFLU_FACT_ATENCION')
@@ -7006,7 +7006,7 @@ def add_attribute_PE_INFLU_FACT_ATENCION(ft):
 def add_attribute_PE_FACTORES_ATENCION(ft):
   attr = ft.add("PE_FACTORES_ATENCION",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_FACTORES_ATENCION')
@@ -7032,7 +7032,7 @@ def add_attribute_PE_FACTORES_ATENCION(ft):
 def add_attribute_PE_INFLU_PRES_ERROR(ft):
   attr = ft.add("PE_INFLU_PRES_ERROR",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_INFLU_PRES_ERROR')
@@ -7053,7 +7053,7 @@ def add_attribute_PE_INFLU_PRES_ERROR(ft):
 def add_attribute_PE_PRESUNTOS_ERRORES(ft):
   attr = ft.add("PE_PRESUNTOS_ERRORES",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_PRESUNTOS_ERRORES')
@@ -7079,7 +7079,7 @@ def add_attribute_PE_PRESUNTOS_ERRORES(ft):
 def add_attribute_PE_INFLU_PRES_INFRAC(ft):
   attr = ft.add("PE_INFLU_PRES_INFRAC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_INFLU_PRES_INFRAC')
@@ -7100,7 +7100,7 @@ def add_attribute_PE_INFLU_PRES_INFRAC(ft):
 def add_attribute_PE_PRES_INFRAC_PEA(ft):
   attr = ft.add("PE_PRES_INFRAC_PEA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_PRES_INFRAC_PEA')
@@ -7126,7 +7126,7 @@ def add_attribute_PE_PRES_INFRAC_PEA(ft):
 def add_attribute_PE_MOTIVO_DESPLAZAMIENTO(ft):
   attr = ft.add("PE_MOTIVO_DESPLAZAMIENTO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_MOTIVO_DESPLAZAMIENTO')
@@ -7152,7 +7152,7 @@ def add_attribute_PE_MOTIVO_DESPLAZAMIENTO(ft):
 def add_attribute_PE_ACCION_PEA(ft):
   attr = ft.add("PE_ACCION_PEA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_ACCION_PEA')
@@ -7178,7 +7178,7 @@ def add_attribute_PE_ACCION_PEA(ft):
 def add_attribute_PE_INFLU_ALCOHOL(ft):
   attr = ft.add("PE_INFLU_ALCOHOL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_INFLU_ALCOHOL')
@@ -7199,7 +7199,7 @@ def add_attribute_PE_INFLU_ALCOHOL(ft):
 def add_attribute_PE_PRUEBA_ALCOHOLEMIA(ft):
   attr = ft.add("PE_PRUEBA_ALCOHOLEMIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_PRUEBA_ALCOHOLEMIA')
@@ -7225,7 +7225,7 @@ def add_attribute_PE_PRUEBA_ALCOHOLEMIA(ft):
 def add_attribute_PE_TASA_ALCOHOLEMIA1(ft):
   attr = ft.add("PE_TASA_ALCOHOLEMIA1",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_TASA_ALCOHOLEMIA1')
@@ -7246,7 +7246,7 @@ def add_attribute_PE_TASA_ALCOHOLEMIA1(ft):
 def add_attribute_PE_TASA_ALCOHOLEMIA2(ft):
   attr = ft.add("PE_TASA_ALCOHOLEMIA2",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_TASA_ALCOHOLEMIA2')
@@ -7267,7 +7267,7 @@ def add_attribute_PE_TASA_ALCOHOLEMIA2(ft):
 def add_attribute_PE_PRUEBA_ALC_SANGRE(ft):
   attr = ft.add("PE_PRUEBA_ALC_SANGRE",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_PRUEBA_ALC_SANGRE')
@@ -7288,7 +7288,7 @@ def add_attribute_PE_PRUEBA_ALC_SANGRE(ft):
 def add_attribute_PE_SIGNOS_INFLU_ALCOHOL(ft):
   attr = ft.add("PE_SIGNOS_INFLU_ALCOHOL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_SIGNOS_INFLU_ALCOHOL')
@@ -7309,7 +7309,7 @@ def add_attribute_PE_SIGNOS_INFLU_ALCOHOL(ft):
 def add_attribute_PE_INFLU_DROGAS(ft):
   attr = ft.add("PE_INFLU_DROGAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_INFLU_DROGAS')
@@ -7330,7 +7330,7 @@ def add_attribute_PE_INFLU_DROGAS(ft):
 def add_attribute_PE_PRUEBA_DROGAS(ft):
   attr = ft.add("PE_PRUEBA_DROGAS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_PRUEBA_DROGAS')
@@ -7356,7 +7356,7 @@ def add_attribute_PE_PRUEBA_DROGAS(ft):
 def add_attribute_PE_AMP(ft):
   attr = ft.add("PE_AMP",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_AMP')
@@ -7377,7 +7377,7 @@ def add_attribute_PE_AMP(ft):
 def add_attribute_PE_CONFIRMADO_AMP(ft):
   attr = ft.add("PE_CONFIRMADO_AMP",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_CONFIRMADO_AMP')
@@ -7398,7 +7398,7 @@ def add_attribute_PE_CONFIRMADO_AMP(ft):
 def add_attribute_PE_BDZ(ft):
   attr = ft.add("PE_BDZ",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_BDZ')
@@ -7419,7 +7419,7 @@ def add_attribute_PE_BDZ(ft):
 def add_attribute_PE_CONFIRMADO_BDZ(ft):
   attr = ft.add("PE_CONFIRMADO_BDZ",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_CONFIRMADO_BDZ')
@@ -7440,7 +7440,7 @@ def add_attribute_PE_CONFIRMADO_BDZ(ft):
 def add_attribute_PE_COC(ft):
   attr = ft.add("PE_COC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_COC')
@@ -7461,7 +7461,7 @@ def add_attribute_PE_COC(ft):
 def add_attribute_PE_CONFIRMADO_COC(ft):
   attr = ft.add("PE_CONFIRMADO_COC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_CONFIRMADO_COC')
@@ -7482,7 +7482,7 @@ def add_attribute_PE_CONFIRMADO_COC(ft):
 def add_attribute_PE_THC(ft):
   attr = ft.add("PE_THC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_THC')
@@ -7503,7 +7503,7 @@ def add_attribute_PE_THC(ft):
 def add_attribute_PE_CONFIRMADO_THC(ft):
   attr = ft.add("PE_CONFIRMADO_THC",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_CONFIRMADO_THC')
@@ -7524,7 +7524,7 @@ def add_attribute_PE_CONFIRMADO_THC(ft):
 def add_attribute_PE_METH(ft):
   attr = ft.add("PE_METH",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_METH')
@@ -7545,7 +7545,7 @@ def add_attribute_PE_METH(ft):
 def add_attribute_PE_CONFIRMADO_METH(ft):
   attr = ft.add("PE_CONFIRMADO_METH",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_CONFIRMADO_METH')
@@ -7566,7 +7566,7 @@ def add_attribute_PE_CONFIRMADO_METH(ft):
 def add_attribute_PE_OPI(ft):
   attr = ft.add("PE_OPI",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_OPI')
@@ -7587,7 +7587,7 @@ def add_attribute_PE_OPI(ft):
 def add_attribute_PE_CONFIRMADO_OPI(ft):
   attr = ft.add("PE_CONFIRMADO_OPI",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_CONFIRMADO_OPI')
@@ -7608,7 +7608,7 @@ def add_attribute_PE_CONFIRMADO_OPI(ft):
 def add_attribute_PE_OTRAS(ft):
   attr = ft.add("PE_OTRAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_OTRAS')
@@ -7629,7 +7629,7 @@ def add_attribute_PE_OTRAS(ft):
 def add_attribute_PE_CONFIRMADO_OTRAS(ft):
   attr = ft.add("PE_CONFIRMADO_OTRAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_CONFIRMADO_OTRAS')
@@ -7650,7 +7650,7 @@ def add_attribute_PE_CONFIRMADO_OTRAS(ft):
 def add_attribute_PE_SIGNOS_INFLU_DROGAS(ft):
   attr = ft.add("PE_SIGNOS_INFLU_DROGAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PE_SIGNOS_INFLU_DROGAS')
@@ -7671,7 +7671,7 @@ def add_attribute_PE_SIGNOS_INFLU_DROGAS(ft):
 def add_attribute_CR_ID_CROQUIS(ft):
   attr = ft.add("CR_ID_CROQUIS",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'CR_ID_CROQUIS')
@@ -8056,7 +8056,7 @@ def crearTabla_ARENA2_AC_VE_CO_PA_PE_CR(connection):
   params = server.getAddParameters(tableName)
   ft = params.getDefaultFeatureType()
   configurar_featuretype_ARENA2_AC_VE_CO_PA_PE_CR(ft)
-  
+
   server.add(tableName, params, False)
 
 def main(*args):
