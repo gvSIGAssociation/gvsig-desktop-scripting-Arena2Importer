@@ -4,7 +4,7 @@ import gvsig
 
 from org.gvsig.fmap.dal import DALLocator
 from org.gvsig.tools.dynobject.DynField import RELATION_TYPE_COLLABORATION, RELATION_TYPE_AGGREGATE
-
+from org.gvsig.tools.dataTypes import DataTypes
 
 def add_attribute_LID_CONDUCTOR(ft):
   attr = ft.add("LID_CONDUCTOR",8)

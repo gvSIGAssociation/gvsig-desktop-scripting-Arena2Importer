@@ -29,19 +29,19 @@ def add_attribute_COD_AFORO(ft):
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
   
-def add_attribute_COD_ESTACION_AFORO(ft):
-  attr = ft.add("COD_ESTACION_AFORO",DataTypes.STRING)
+def add_attribute_COD_ESTACI(ft):
+  attr = ft.add("COD_ESTACI",DataTypes.STRING)
   attr.setSize(40)
   attr.setAllowIndexDuplicateds(False)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
-  attr.setDescription(u'COD_ESTACION_AFORO')
+  attr.setDescription(u'COD_ESTACI')
   attr.setGroup(None)
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
   attr.setIsIndexed(False)
-  attr.setIsPrimaryKey(True)
+  attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
   attr.setLabel(u'_Cod_Estacion_Aforo')
@@ -52,7 +52,7 @@ def add_attribute_COD_ESTACION_AFORO(ft):
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
   
-def add_attribute_M_PROVINCIA(ft):
+def add_attribute_M_PROV(ft):
   attr = ft.add("M_PROV", DataTypes.INT)
   #attr.setSize(254)
   attr.setAllowIndexDuplicateds(True)
@@ -116,7 +116,7 @@ def add_attribute_M_CTRA(ft):
     attr.setRelationType(0)
 
 def add_attribute_M_TRAMO(ft):
-  attr = ft.add("TRAMO", DataTypes.STRING)
+  attr = ft.add("M_TRAMO", DataTypes.STRING)
   attr.setSize(16)
   attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
@@ -1172,7 +1172,7 @@ def add_attribute_M_EXTRA(ft):
 def add_attributes_medidas(ft):
     add_attribute_COD_AFORO(ft)
     add_attribute_COD_ESTACION_AFORO(ft)
-    add_attribute_M_PROVINCIA(ft)
+    add_attribute_M_PROV(ft)
     add_attribute_M_TIT(ft)
     add_attribute_M_CTRA(ft)
     add_attribute_M_TRAMO(ft)
