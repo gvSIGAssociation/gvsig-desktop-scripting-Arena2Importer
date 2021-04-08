@@ -135,7 +135,7 @@ def add_attribute_ID_ACCIDENTE(ft):
 def add_attribute_ID_TRAMO(ft):
   attr = ft.add("ID_TRAMO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ID_TRAMO')

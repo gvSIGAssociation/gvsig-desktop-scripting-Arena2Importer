@@ -9,7 +9,7 @@ def add_attribute_COD_AFORO(ft):
   attr = ft.add("COD_AFORO",DataTypes.STRING)
   attr.setSize(40)
   attr.setAllowIndexDuplicateds(False)
-  attr.setAllowNull(True)
+  attr.setAllowNull(False)
   attr.setDataProfileName(None)
   attr.setDescription(u'COD_AFORO')
   attr.setGroup(None)
@@ -1171,7 +1171,7 @@ def add_attribute_M_EXTRA(ft):
   
 def add_attributes_medidas(ft):
     add_attribute_COD_AFORO(ft)
-    add_attribute_COD_ESTACION_AFORO(ft)
+    add_attribute_COD_ESTACI(ft)
     add_attribute_M_PROV(ft)
     add_attribute_M_TIT(ft)
     add_attribute_M_CTRA(ft)
