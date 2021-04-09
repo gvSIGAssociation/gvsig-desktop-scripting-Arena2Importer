@@ -133,7 +133,7 @@ class Report(AbstractTableModel):
     return self.__issues
 
   def removeAll(self):
-    self.__issues = self.createMemoryStore()
+    self.__issues = self.createH2Store()
     self.fireTableDataChanged()
   
   def createH2Store(self):
