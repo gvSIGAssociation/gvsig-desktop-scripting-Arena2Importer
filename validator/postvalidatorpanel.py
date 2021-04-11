@@ -37,7 +37,7 @@ from org.gvsig.tools.dynform import DynFormLocator
 from org.gvsig.tools.util import ToolsUtilLocator
 from org.gvsig.tools.swing.api import ToolsSwingLocator
 from org.gvsig.expressionevaluator.swing import ExpressionEvaluatorSwingLocator
- 
+from org.gvsig.fmap.dal.swing import DALSwingLocator
 
 class ShowFormFromIssueActionContext(AbstractDALActionContext):
   def __init__(self, panel):
@@ -92,8 +92,6 @@ class PostValidatorPanel(FormPanel, Observer):
     workspace = dataManager.getDatabaseWorkspace("ARENA2_DB")
 
     #Filter
-    
-    #self.filterPicker = ExpressionEvaluatorSwingLocator.getManager().createExpressionPickerController(self.txtFilter, self.btnFilter)
     self.cltTransforms = toolsSwingManager.createJListWithCheckbox(self.lstTransforms)
     self.cltRules = toolsSwingManager.createJListWithCheckbox(self.lstRules)
 
@@ -250,8 +248,7 @@ class PostValidatorPanel(FormPanel, Observer):
     self.btnCheckIntegrity.setEnabled(True)
     self.btnUpdate.setEnabled(True)
     self.btnClose.setEnabled(True)
-    from org.gvsig.fmap.dal.swing import DALSwingLocator
-    print "arena2workspace", arena2workspace, type(arena2workspace)
+
     repo = arena2workspace.getStoresRepository()
     accidentesStore = repo.getStore("ARENA2_ACCIDENTES")
     if self.filterPicker !=None:

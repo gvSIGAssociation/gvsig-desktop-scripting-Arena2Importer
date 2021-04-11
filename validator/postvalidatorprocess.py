@@ -22,7 +22,7 @@ from org.gvsig.tools.dispose import DisposeUtils
 from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
 
 class PostUpdateProcess(Runnable):
-  def __init__(self, importManager, files, workspace, report, status=None, transforms=None):
+  def __init__(self, importManager, workspace, report, status=None, transforms=None):
     self.importManager = importManager
     if status == None:
       self.status = self.importManager.createStatus()
@@ -30,7 +30,6 @@ class PostUpdateProcess(Runnable):
       self.status = status
     self.workspace = workspace
     self.report = report
-    self.files = files
     if transforms == None:
       self.transforms = self.importManager.getTransforms()
     else:
@@ -45,26 +44,18 @@ class PostUpdateProcess(Runnable):
     return self.__count
 
   def getName(self):
-    return "import"
+    return "postupdate"
 
-  def openStore(self, fname):
-    dataManager = DALLocator.getDataManager()
-    try:
-      fname_tail = os.path.sep.join(fname.split(os.path.sep)[-3:])
-      self.status.message("Cargando accidentes...(%s)" % fname_tail )
-      store = dataManager.openStore("ARENA2", "file", fname, "CRS", "EPSG:25830")
-      return store
-    except java.lang.Throwable, ex:
-      logger("Error cargando accidentes.", LOGGER_WARN, ex)
-      self.status.message("Error Cargando accidentes (%s)" % fname )
-      return None
-    except:
-      ex = sys.exc_info()[1]
-      logger("Error cargando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
-      self.status.message("Error cargando accidentes (%s)" % fname )
-      return None
-    
   def run(self):
+    repo = self.workspace.getStoresRepository()
+    issues = self.report.getIssuesAsList()
+    for issue in issues:
+      print issue
+      store = repo.getStore("ARENA2_ACCIDENTES")
+      feature = store.findFirst("ID_ACCIDENTE='%s'" % issue.get("ID_ACCIDENTE"))
+      print "Updaing.. ", feature
+    
+  def run1(self):
     repo = self.workspace.getStoresRepository()
     try:
       self.__count = 0
@@ -331,7 +322,7 @@ class PostValidatorProcess(Runnable):
 
       for feature in fsetAccidentes:
         n+=1
-        self.status.setTitle("%s (%d/%d)" % (title, self.status.getCurValue(), count))
+        self.status.setTitle("%s (%d/%d)" % (title, n, count))
         
         rules = self.rules
 
@@ -457,17 +448,51 @@ def validateData(issues_pathname, workspaceName):
   explorer = dataManager.openServerExplorer("FilesystemExplorer")
   store = report.getStore()
   status.logger("export issues to %r" % issues_pathname)
-  #store.export(explorer,"CSV",explorer.getAddParameters(File(issues_pathname)), "testing_validating_process")
+  import ntpath
+  base = ntpath.basename(issues_pathname)
+  store.export(explorer,"CSV",explorer.getAddParameters(File(issues_pathname)), base)
+  print "## DONE EXPORT"
+  
+def importData(issues_pathname, slot, slotsize, workspaceName):
+  status = LoggerTaskStatus("ImportArena2Files")
+
+  issues_pathname = issues_pathname % slot
+  fnames, slots = calculateSlots(folderData, slotsize, slot, status)
+  status.logger("import slot %d/%d" % (slot, slots))
+
+  if not connectToWorkspace(workspaceName, status):
+    return
+    
+  importManager = getArena2ImportManager()
+  report = Report(importManager)
+  report.setEnabledEvents(False)
+  dataManager = DALLocator.getDataManager()
+  workspace = dataManager.getDatabaseWorkspace("ARENA2_DB")
+  if workspace==None:
+    status.logger("Can't access to workspace ARENA2_DB", gvsig.LOGGER_WARN)
+    return
+
+  issues = dataManager.openStore("CSV","File", issues_pathname)
+  report.addIssues(issues.getFeatureSet())
+  if len(report) != issues.getFeatureCount():
+    status.logger("Can't load issues in report", gvsig.LOGGER_WARN)
+    return
+    
+  p = ImportProcess(importManager, fnames, workspace, report, status)
+  p.run()
 
 def main(*args):
   application = ApplicationLocator.getApplicationManager()
 
   arguments = application.getArguments()
 
-  issues_pathname = "/home/osc/gva_arena2/develtest/issuesB-%s.csv"
+  #issues_pathname = "/home/osc/gva_arena2/develtest/issuesB-%s.csv"
   workspaceName = "a2testquincena1"
   closeAtFinish = False
-  
+  from gvsig.utils import getTempFile
+  issues_pathname = getTempFile('a2testquincena1', '.csv', tempdir='/home/osc/gva_arena2/develtest')
+  print issues_pathname
+
   workspaceName = arguments.get("workspaceName",workspaceName)
   issues_pathname = arguments.get("issues",issues_pathname)
   closeAtFinish = arguments.get("closeAtFinish",closeAtFinish)
