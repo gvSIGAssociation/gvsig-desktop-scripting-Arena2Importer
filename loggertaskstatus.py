@@ -17,7 +17,10 @@ class LoggerTaskStatus(SimpleTaskStatus):
     application = ApplicationLocator.getApplicationManager()
     arguments = application.getArguments()
     self.__consolelogger = arguments.get("consolelogger",True)
-
+    
+  def getCurValue(self):
+    return self.__curvalue
+    
   def __print(self):
     s = self.getLabel()
     self.logger(s)

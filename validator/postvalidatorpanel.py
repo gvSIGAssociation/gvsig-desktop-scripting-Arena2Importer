@@ -36,7 +36,8 @@ from javax.swing import JFileChooser
 from org.gvsig.tools.dynform import DynFormLocator
 from org.gvsig.tools.util import ToolsUtilLocator
 from org.gvsig.tools.swing.api import ToolsSwingLocator
-
+from org.gvsig.expressionevaluator.swing import ExpressionEvaluatorSwingLocator
+ 
 
 class ShowFormFromIssueActionContext(AbstractDALActionContext):
   def __init__(self, panel):
@@ -91,9 +92,8 @@ class PostValidatorPanel(FormPanel, Observer):
     workspace = dataManager.getDatabaseWorkspace("ARENA2_DB")
 
     #Filter
-    from org.gvsig.expressionevaluator.swing import ExpressionEvaluatorSwingLocator
-    self.filterPicker = ExpressionEvaluatorSwingLocator.getManager().createExpressionPickerController(self.txtFilter, self.btnFilter)
-
+    
+    #self.filterPicker = ExpressionEvaluatorSwingLocator.getManager().createExpressionPickerController(self.txtFilter, self.btnFilter)
     self.cltTransforms = toolsSwingManager.createJListWithCheckbox(self.lstTransforms)
     self.cltRules = toolsSwingManager.createJListWithCheckbox(self.lstRules)
 
@@ -139,14 +139,18 @@ class PostValidatorPanel(FormPanel, Observer):
       if isinstance(entry.getExplorerParameters(), JDBCServerExplorerParameters):
         conn = entry.getExplorerParameters()
         workspace = dataManager.createDatabaseWorkspaceManager(conn)
-        if workspace.isValidStoresRepository():
-          model.addElement(workspace)
-          if "arena" in workspace.getId().lower():
-            select = n
-          n += 1
+        try:
+          if workspace.isValidStoresRepository():
+            model.addElement(workspace)
+            if "arena" in workspace.getId().lower():
+              select = n
+            n += 1
+        except:
+          print "Not valid workspace"
     self.cboWorkspace.setModel(model)
     self.cboWorkspace.setSelectedIndex(select)
-    self.cboWorkspace.addActionListener(self.doFileChanged)
+    self.cboWorkspace.addActionListener(self.doDBChanged)
+    self.doDBChanged()
 
     self.tblIssues.setModel(self.report.getTableModel())
     
@@ -237,7 +241,7 @@ class PostValidatorPanel(FormPanel, Observer):
     x = model.getValueAt(row,model.getColumnCount()-1)
     self.message(x)
     
-  def doFileChanged(self, *args):
+  def doDBChanged(self, *args):
     arena2workspace = self.cboWorkspace.getSelectedItem()
     if arena2workspace==None:
       self.btnCheckIntegrity.setEnabled(False)
@@ -246,6 +250,13 @@ class PostValidatorPanel(FormPanel, Observer):
     self.btnCheckIntegrity.setEnabled(True)
     self.btnUpdate.setEnabled(True)
     self.btnClose.setEnabled(True)
+    from org.gvsig.fmap.dal.swing import DALSwingLocator
+    print "arena2workspace", arena2workspace, type(arena2workspace)
+    repo = arena2workspace.getStoresRepository()
+    accidentesStore = repo.getStore("ARENA2_ACCIDENTES")
+    if self.filterPicker !=None:
+      self.filterPicker.dispose()
+    self.filterPicker = DALSwingLocator.getDataSwingManager().createExpressionPickerController(accidentesStore, self.txtFilter, self.btnFilter)
 
   def update(self, observable, notification):
     try:
