@@ -27,7 +27,8 @@ from org.gvsig.fmap.dal.swing import DALSwingLocator
 from org.gvsig.fmap.dal.swing.AbstractDALActionFactory import AbstractDALActionContext
 from org.gvsig.expressionevaluator import ExpressionUtils
 from org.gvsig.fmap.dal.store.jdbc import JDBCServerExplorerParameters
-
+import addons.Arena2Importer
+reload(addons.Arena2Importer)
 from addons.Arena2Importer.tablas.ARENA2_ACCIDENTES import configurar_featuretype_ARENA2_ACCIDENTES
 from addons.Arena2Reader.arena2readerutils import createArena2XMLFileFilter, isArena2File
 
@@ -100,7 +101,8 @@ class PostValidatorPanel(FormPanel, Observer):
       self.lblTaskMessage,
       self.pgbTaskProgress
     )
-    self.btnUpdate.setEnabled(False)
+    self.btnApplyUpdate.setEnabled(False)
+    self.btnApplyTransform.setEnabled(False)
     self.btnCheckIntegrity.setEnabled(False)
     self.setVisibleTaskStatus(False)
 
@@ -123,11 +125,11 @@ class PostValidatorPanel(FormPanel, Observer):
         self.cltRules.toggleCheck(n)
       n+=1
 
-    n = 0
-    for factory in self.importManager.getTransformFactories():
-      if factory.isSelectedByDefault():
-        self.cltTransforms.toggleCheck(n)
-      n+=1
+    #n = 0
+    #for factory in self.importManager.getTransformFactories():
+    #  if factory.isSelectedByDefault():
+    #    self.cltTransforms.toggleCheck(n)
+    #  n+=1
 
     pool = dataManager.getDataServerExplorerPool()
     model = DefaultComboBoxModel()
@@ -243,10 +245,12 @@ class PostValidatorPanel(FormPanel, Observer):
     arena2workspace = self.cboWorkspace.getSelectedItem()
     if arena2workspace==None:
       self.btnCheckIntegrity.setEnabled(False)
-      self.btnUpdate.setEnabled(False)
+      self.btnApplyUpdate.setEnabled(False)
+      self.btnApplyTransform.setEnabled(False)
       return
     self.btnCheckIntegrity.setEnabled(True)
-    self.btnUpdate.setEnabled(True)
+    self.btnApplyUpdate.setEnabled(True)
+    self.btnApplyTransform.setEnabled(True)
     self.btnClose.setEnabled(True)
 
     repo = arena2workspace.getStoresRepository()
@@ -262,21 +266,24 @@ class PostValidatorPanel(FormPanel, Observer):
       isRunning = getattr(observable,"isRunning",None)
       if isRunning==None:
         return
-      if self.process.getName()=="import":
+      if self.process.getName()=="postupdate":
         if not isRunning():
           self.btnClose.setEnabled(True)
           self.btnCheckIntegrity.setEnabled(True)
           if not observable.isAborted():
             self.setVisibleTaskStatus(False)
-            self.btnUpdate.setEnabled(False)
+            self.btnApplyUpdate.setEnabled(False)
+            self.btnApplyTransform.setEnabled(False)
+            
           else:
-            self.btnUpdate.setEnabled(True)
-
-      elif self.process.getName()=="validator":
+            self.btnApplyUpdate.setEnabled(True)
+            self.btnApplyTransform.setEnabled(True)
+      elif self.process.getName()=="postvalidator":
         if not isRunning():
           self.btnClose.setEnabled(True)
           self.btnCheckIntegrity.setEnabled(True)
-          self.btnUpdate.setEnabled(True)
+          self.btnApplyUpdate.setEnabled(True)
+          self.btnApplyTransform.setEnabled(True)
           if not observable.isAborted():
             self.setVisibleTaskStatus(False)
 
@@ -289,7 +296,8 @@ class PostValidatorPanel(FormPanel, Observer):
   def btnCheckIntegrity_click(self, *args):
     
     self.btnClose.setEnabled(False)
-    self.btnUpdate.setEnabled(False)
+    self.btnApplyUpdate.setEnabled(False)
+    self.btnApplyTransform.setEnabled(False)
     self.btnCheckIntegrity.setEnabled(False)
 
     rules = list()
@@ -300,7 +308,8 @@ class PostValidatorPanel(FormPanel, Observer):
       n+=1
     if len(rules)==0 :
       self.btnClose.setEnabled(True)
-      self.btnUpdate.setEnabled(True)
+      self.btnApplyUpdate.setEnabled(True)
+      self.btnApplyTransform.setEnabled(True)
       self.btnCheckIntegrity.setEnabled(True)
       return 
       
@@ -317,9 +326,16 @@ class PostValidatorPanel(FormPanel, Observer):
       expressionFilter=self.filterPicker.get()
     )
     self.process.add(self.showValidatorFinishMessage)
+    self.process.add(self.activateButtons)
     th = Thread(self.process, "ARENA2_postvalidator")
     th.start()
-
+    
+  def activateButtons(self, process):
+      self.btnClose.setEnabled(True)
+      self.btnApplyUpdate.setEnabled(True)
+      self.btnApplyTransform.setEnabled(True)
+      self.btnCheckIntegrity.setEnabled(True)
+      
   def showValidatorFinishMessage(self, process):
     self.message("Total %s incidencias en %s accidentes" % (
         len(process.getReport()),
@@ -327,26 +343,40 @@ class PostValidatorPanel(FormPanel, Observer):
       )
     )
     
-  
-  def btnUpdate_click(self, *args):
-      
-    status = self.importManager.createStatus("ARENA2 Post Actualizando", self)
+  def btnApplyTransform_click(selkf, *args):
+    status = self.importManager.createStatus("ARENA2 Post transform Actualizando", self)
     self.taskStatusController.bind(status)
     self.setVisibleTaskStatus(True)
     self.btnClose.setEnabled(False)
-
+    
     transforms = list()
     n = 0
     for transform in self.importManager.getTransformFactories():
       if self.cltTransforms.getCheckedModel().isSelectedIndex(n):
         transforms.append(transform.create())
       n+=1
-    
-    self.process = self.importManager.createValidatorProcess(
+      
+    self.process = self.importManager.createPostTransformProcess(
       self.cboWorkspace.getSelectedItem(),
       self.report,
       status,
-      transforms = transforms
+      expressionFilter=self.filterPicker.get(),
+      transforms=transforms
+    )
+    th = Thread(self.process, "ARENA2_posttransform")
+    th.start()
+    
+  def btnApplyUpdate_click(self, *args):
+      
+    status = self.importManager.createStatus("ARENA2 Post Actualizando", self)
+    self.taskStatusController.bind(status)
+    self.setVisibleTaskStatus(True)
+    self.btnClose.setEnabled(False)
+    
+    self.process = self.importManager.createPostUpdateProcess(
+      self.cboWorkspace.getSelectedItem(),
+      self.report,
+      status
     )
     th = Thread(self.process, "ARENA2_postupdate")
     th.start()

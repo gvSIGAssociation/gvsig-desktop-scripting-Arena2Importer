@@ -132,7 +132,9 @@ class ImportManager(object):
     from addons.Arena2Importer.importprocess import ImportProcess
     process = ImportProcess(self, files, workspace, report, status, transforms)
     return process
+    
 
+    
   def createValidatorProcess(self, files, report, workspace=None, status=None, rules=None):
     import addons.Arena2Importer.importprocess 
     #reload(addons.Arena2Importer.importprocess)
@@ -144,7 +146,17 @@ class ImportManager(object):
     #reload(addons.Arena2Importer.importprocess)
     process = addons.Arena2Importer.validator.postvalidatorprocess.PostValidatorProcess(self, report, status=status, rules=rules, workspace=workspace, expressionFilter=expressionFilter)
     return process
-
+    
+  def createPostUpdateProcess(self, workspace, report, status=None):
+    import addons.Arena2Importer.validator.postvalidatorprocess
+    process = addons.Arena2Importer.validator.postvalidatorprocess.PostUpdateProcess(self, workspace, report, status)
+    return process
+    
+  def createPostTransformProcess(self, workspace, report, status=None, expressionFilter=None, transforms=None):
+    import addons.Arena2Importer.validator.postvalidatorprocess
+    process = addons.Arena2Importer.validator.postvalidatorprocess.PostTransformProcess(self, workspace, report, status, expressionFilter, transforms)
+    return process
+    
   def createTablestDialog(self):
     from addons.Arena2Importer.createtablespanel import CreateTablesDialog
     dialog = CreateTablesDialog(self)

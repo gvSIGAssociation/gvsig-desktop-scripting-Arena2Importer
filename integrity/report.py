@@ -259,7 +259,16 @@ class Report(AbstractTableModel):
   def refresh(self):
     self.fireTableDataChanged()
 
-      
+  def fixIssueFeature(self, issue, editableFeature):
+    fixerID=issue.get("FIXERID")
+    if fixerID==None:
+      return
+    trace("fix(%s) fixerID %r" % (editableFeature.get("ID_ACCIDENTE"), fixerID))
+    fixer = self.__importManager.getFixer(fixerID)
+    if fixer==None:
+      return
+    fixer.fix(editableFeature, issue)
+    
   def fix(self, feature):
     accidentId = feature.get("ID_ACCIDENTE")
     issues = self.__issues.getFeatureSet("ID_ACCIDENTE = '%s'" % accidentId)
