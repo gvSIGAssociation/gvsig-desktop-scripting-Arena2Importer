@@ -71,6 +71,8 @@ class CreateTablesProcess(Runnable):
       if self.createWorkspace:
         self.status.message("Creando espacio de trabajo")
         workspace.create("ARENA2_DB","ARENA2 (db)")
+        workspace.set("TRAMOS_CARRETERAS_NAME", "TRAMOS_CARRETERAS")
+        workspace.set("TRAMOS_CARRETERAS_SCHEMA", "layers")
 
       if self.createBaseTables:
         self.status.message("Creando ARENA2_ACCIDENTES")
