@@ -286,7 +286,17 @@ class PostValidatorPanel(FormPanel, Observer):
           self.btnApplyTransform.setEnabled(True)
           if not observable.isAborted():
             self.setVisibleTaskStatus(False)
-
+      elif self.process.getName()=="posttransform":
+        if not isRunning():
+          self.btnClose.setEnabled(True)
+          self.btnCheckIntegrity.setEnabled(True)
+          if not observable.isAborted():
+            self.setVisibleTaskStatus(False)
+            self.btnApplyUpdate.setEnabled(False)
+            self.btnApplyTransform.setEnabled(False)
+          else:
+            self.btnApplyUpdate.setEnabled(True)
+            self.btnApplyTransform.setEnabled(True)
     except:
       print "Ups!, se ha producido un error"
 
@@ -343,7 +353,7 @@ class PostValidatorPanel(FormPanel, Observer):
       )
     )
     
-  def btnApplyTransform_click(selkf, *args):
+  def btnApplyTransform_click(self, *args):
     status = self.importManager.createStatus("ARENA2 Post transform Actualizando", self)
     self.taskStatusController.bind(status)
     self.setVisibleTaskStatus(True)

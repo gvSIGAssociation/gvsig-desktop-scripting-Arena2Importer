@@ -161,7 +161,7 @@
                               <at name="scrollableTracksViewportHeight">true</at>
                               <at name="fillsViewportHeight">true</at>
                               <at name="name">tblIssues</at>
-                              <at name="width">715</at>
+                              <at name="width">637</at>
                               <at name="scollBars">
                                <object classname="com.jeta.forms.store.properties.ScrollBarsProperty">
                                 <at name="name">scollBars</at>
@@ -189,7 +189,7 @@
                                 </at>
                                </object>
                               </at>
-                              <at name="height">104</at>
+                              <at name="height">64</at>
                              </object>
                             </at>
                            </object>
@@ -320,7 +320,7 @@
                                     </object>
                                    </at>
                                    <at name="name">lblCountIncidents</at>
-                                   <at name="width">127</at>
+                                   <at name="width">49</at>
                                    <at name="fill">
                                     <object classname="com.jeta.forms.store.properties.effects.PaintProperty">
                                      <at name="name">fill</at>
@@ -651,7 +651,7 @@
                                     </object>
                                    </at>
                                    <at name="name">lblIssuesMessage</at>
-                                   <at name="width">661</at>
+                                   <at name="width">583</at>
                                    <at name="text">Xgfq</at>
                                    <at name="fill">
                                     <object classname="com.jeta.forms.store.properties.effects.PaintProperty">
@@ -1127,7 +1127,7 @@
                               <at name="scrollableTracksViewportHeight">true</at>
                               <at name="scrollableTracksViewportWidth">true</at>
                               <at name="name">lstTransforms</at>
-                              <at name="width">715</at>
+                              <at name="width">637</at>
                               <at name="items">
                                <object classname="com.jeta.forms.store.properties.ItemsProperty">
                                 <at name="name">items</at>
@@ -1275,7 +1275,7 @@
                               <at name="scrollableTracksViewportHeight">true</at>
                               <at name="scrollableTracksViewportWidth">true</at>
                               <at name="name">lstRules</at>
-                              <at name="width">715</at>
+                              <at name="width">637</at>
                               <at name="items">
                                <object classname="com.jeta.forms.store.properties.ItemsProperty">
                                 <at name="name">items</at>
@@ -1428,9 +1428,9 @@
               </at>
              </object>
             </at>
-            <at name="width">762</at>
+            <at name="width">684</at>
             <at name="tabCount">2</at>
-            <at name="height">355</at>
+            <at name="height">315</at>
            </object>
           </at>
          </object>
@@ -1527,7 +1527,7 @@
                        </object>
                       </at>
                       <at name="name">lblTaskTitle</at>
-                      <at name="width">514</at>
+                      <at name="width">436</at>
                       <at name="fill">
                        <object classname="com.jeta.forms.store.properties.effects.PaintProperty">
                         <at name="name">fill</at>
@@ -1586,7 +1586,7 @@
                        </object>
                       </at>
                       <at name="name">lblTaskMessage</at>
-                      <at name="width">514</at>
+                      <at name="width">436</at>
                       <at name="fill">
                        <object classname="com.jeta.forms.store.properties.effects.PaintProperty">
                         <at name="name">fill</at>
@@ -1645,7 +1645,7 @@
                        </object>
                       </at>
                       <at name="name">pgbTaskProgress</at>
-                      <at name="width">514</at>
+                      <at name="width">436</at>
                       <at name="percentComplete">0.25</at>
                       <at name="value">25</at>
                       <at name="height">14</at>
@@ -2200,7 +2200,7 @@
              </object>
             </at>
             <at name="name">cboWorkspace</at>
-            <at name="width">619</at>
+            <at name="width">541</at>
             <at name="items">
              <object classname="com.jeta.forms.store.properties.ItemsProperty">
               <at name="name">items</at>
@@ -2401,7 +2401,7 @@
                   </object>
                  </at>
                  <at name="name">txtFilter</at>
-                 <at name="width">577</at>
+                 <at name="width">499</at>
                  <at name="height">20</at>
                 </object>
                </at>

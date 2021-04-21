@@ -22,7 +22,7 @@ from org.gvsig.tools.dispose import DisposeUtils
 from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
 
 class PostTransformProcess(Runnable):
-  def __init__(self, importManager, workspace, report, status=None, expressionFilter=None, transforms = None)):
+  def __init__(self, importManager, workspace, report, status=None, expressionFilter=None, transforms = None):
     self.importManager = importManager
     if status == None:
       self.status = self.importManager.createStatus()
@@ -46,38 +46,53 @@ class PostTransformProcess(Runnable):
 
   def run(self):
     try:
-      self.__count = 0
-      count_files = 0
+
+      storeAccidentes = None
+      if self.transforms == None or len(self.transforms)==0:
+        self.status.message("No hay transformaciones activas")
+        self.status.abort()
+        return
       title = self.status.getTitle()
       repo = self.workspace.getStoresRepository()
-      accidentesStore = repo.getStore("ARENA2_ACCIDENTES")
+      storeAccidentes = repo.getStore("ARENA2_ACCIDENTES")
       if  self.expressionFilter != None and not self.expressionFilter.isEmpty():
-        fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet(self.expressionFilter)
+        fsetAccidentes = storeAccidentes.getFeatureStore().getFeatureSet(self.expressionFilter)
       else:
-        fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet() ### SET FILTER
-      print "MY FSET ACCIDENTES:", fsetAccidentes
+        fsetAccidentes = storeAccidentes.getFeatureStore().getFeatureSet() ### SET FILTER
+      
       count = fsetAccidentes.getSize()
       n = 0
-      self.status.message("Comprobando accidentes (%s)..." % "Accidentes")
+      title = "Transformando accidentes (Accidentes)..."
+      self.status.message(title)
       self.status.setRangeOfValues(0,count)
       self.status.setCurValue(0)
-
+      storeAccidentes.edit(FeatureStore.MODE_FULLEDIT)
       for feature in fsetAccidentes:
         n+=1
+        efeature = feature.getEditable()
         #apply transforms
+        for transform in self.transforms:
+          transform.apply(efeature)
+        fsetAccidentes.update(efeature)
+        self.status.incrementCurrentValue()
         self.status.setTitle("%s (%d/%d)" % (title, n, count))
-
     except java.lang.Throwable, ex:
-      logger("Error validando accidentes.", LOGGER_WARN, ex)
-      self.status.message("Error validando accidentes (%s)")
+      storeAccidentes.cancelEditing()
+      logger("Error transformando accidentes.", LOGGER_WARN, ex)
+      self.status.message("Error transformando accidentes (%s)")
       self.status.abort()
       raise ex
     except:
+      storeAccidentes.cancelEditing()
       ex = sys.exc_info()[1]
-      logger("Error validando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
-      self.status.message("Error validando accidentes (%s)")
+      logger("Error transformando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
+      self.status.message("Error transformando accidentes (%s)")
+      
     finally:
-      pass
+      if storeAccidentes!= None:
+        storeAccidentes.finishEditing()
+      DisposeUtils.dispose(storeAccidentes)
+
   
 class PostUpdateProcess(Runnable):
   def __init__(self, importManager, workspace, report, status=None):
@@ -107,16 +122,25 @@ class PostUpdateProcess(Runnable):
     print "post update process"
     try:
       storeAccidentes.edit(FeatureStore.MODE_FULLEDIT)
+      n = 0
+      count = len(issues)
+      title = "Actualizando accidentes (Accidentes)..."
+      self.status.message(title)
+      self.status.setRangeOfValues(0,count)
+      self.status.setCurValue(0)
       for issue in issues:
+        n+=1
+        self.status.incrementCurrentValue()
+        self.status.setTitle("%s (%d/%d)" % (title, n, count))
+        
         if not issue.get("SELECTED"):
-          print  "Issue is not selected"
+          logger("Issue is not selected (%s)"% (issue.get("ID_ACCIDENTE")))
           continue
-        print "issue"
         feature = storeAccidentes.findFirst("ID_ACCIDENTE='%s'" % issue.get("ID_ACCIDENTE"))
         efeature = feature.getEditable()
         self.report.fixIssueFeature(issue, efeature)
         storeAccidentes.update(efeature)
-        print "Updating.. ", issue.get("ID_ACCIDENTE")
+
     except java.lang.Throwable, ex:
       storeAccidentes.cancelEditing()
       logger("Error actualizando accidentes.", LOGGER_WARN, ex)
@@ -176,7 +200,7 @@ class PostValidatorProcess(Runnable):
         fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet(self.expressionFilter)
       else:
         fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet() ### SET FILTER
-      print "MY FSET ACCIDENTES:", fsetAccidentes
+
       count = fsetAccidentes.getSize()
       n = 0
       self.status.message("Comprobando accidentes (%s)..." % "Accidentes")
@@ -226,13 +250,13 @@ class PostValidatorProcess(Runnable):
 
     except java.lang.Throwable, ex:
       logger("Error validando accidentes.", LOGGER_WARN, ex)
-      self.status.message("Error validando accidentes (%s)")
+      self.status.message("Error validando accidentes (%s)" % "Accidentes")
       self.status.abort()
       raise ex
     except:
       ex = sys.exc_info()[1]
       logger("Error validando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
-      self.status.message("Error validando accidentes (%s)")
+      self.status.message("Error validando accidentes (%s)"  % "Accidentes")
     finally:
       pass
 
