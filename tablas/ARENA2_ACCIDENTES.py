@@ -228,7 +228,7 @@ def add_attribute_COD_PROVINCIA(ft):
   tags.set(u'dal.search.attribute.priority', u'2')
   
 def add_attribute_INE_PROVINCIA(ft):
-  attr = ft.add("INE_PROVINCIA",8)
+  attr = ft.add("INE_PROVINCIA",4)
   attr.setSize(2)
   attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
@@ -246,10 +246,16 @@ def add_attribute_INE_PROVINCIA(ft):
   attr.setOrder(50)
   attr.setPrecision(0)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'ID')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,PROVINCIA)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_PROVINCIA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
   tags.set(u'dal.search.attribute.priority', u'2')
+
   
 def add_attribute_COD_MUNICIPIO(ft):
   attr = ft.add("COD_MUNICIPIO",8)
@@ -275,7 +281,7 @@ def add_attribute_COD_MUNICIPIO(ft):
   tags.set(u'dynform.readonly', u'True')
   
 def add_attribute_INE_MUNICIPIO(ft):
-  attr = ft.add("INE_MUNICIPIO",8)
+  attr = ft.add("INE_MUNICIPIO",4)
   attr.setSize(5)
   attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
@@ -293,7 +299,12 @@ def add_attribute_INE_MUNICIPIO(ft):
   attr.setOrder(50)
   attr.setPrecision(0)
   attr.setReadOnly(False)
-  attr.setRelationType(0)
+  attr.setRelationType(RELATION_TYPE_COLLABORATION)
+  attr.getForeingKey().setCodeName(u'COD_INE')
+  attr.getForeingKey().setForeingKey(True)
+  attr.getForeingKey().setLabelFormula(u"FORMAT('%05d - %s',COD_INE,MUNICIPIO)")
+  attr.getForeingKey().setClosedList(True)
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_MUNICIPIO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
   tags.set(u'dal.search.attribute.priority', u'2')
