@@ -447,7 +447,7 @@ class ImportPanel(FormPanel, Observer):
     n = 0
     for transform in self.importManager.getTransformFactories():
       if self.cltTransforms.getCheckedModel().isSelectedIndex(n):
-        transforms.append(transform.create())
+        transforms.append(transform.create(workspace=self.cboWorkspace.getSelectedItem()))
       n+=1
     
     self.process = self.importManager.createImportProcess(
