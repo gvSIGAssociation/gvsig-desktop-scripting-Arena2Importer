@@ -7,6 +7,8 @@ import sys
 from java.lang import Runnable
 from java.lang import Thread
 import java.lang.Exception
+from java.sql import Date
+from java.text import SimpleDateFormat
 
 from org.gvsig.tools.util import HasAFile
 from org.apache.commons.io import IOUtils
@@ -73,7 +75,6 @@ class CreateTablesProcess(Runnable):
         workspace.create("ARENA2_DB","ARENA2 (db)")
         workspace.set("TRAMOS_CARRETERAS_NAME", "TRAMOS_CARRETERAS")
         workspace.set("TRAMOS_CARRETERAS_SCHEMA", "layers")
-
       if self.createBaseTables:
         self.status.message("Creando ARENA2_ACCIDENTES")
         params = server.getAddParameters("ARENA2_ACCIDENTES")

@@ -249,6 +249,10 @@ class Report(AbstractTableModel):
     else:
       issue = self.getIssuesAsList()[index]
     return issue
+    
+  def hasToProcessIssue(self, basestring):
+      issue = self.__issues.findFirst("ID_ACCIDENTE = '%s' AND SELECTED=False" % basestring)
+      return issue
 
   def putIssue(self, row, issue):
     trace("put(%s,%s)" % (row, issue))

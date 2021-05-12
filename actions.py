@@ -32,7 +32,18 @@ class Arena2ImporterExtension(ScriptingExtension):
       self.importData()
     elif actionCommand == "arena2-importer-showtablecreator":
       self.createTables()
-        
+    elif actionCommand == "arena2-importer-showvalidator":
+      self.validatorData()
+
+  def validatorData(self):
+    manager = getArena2ImportManager()
+    messages = manager.checkRequirements()
+    if messages!=None:
+      msgbox("\n".join(messages))
+      return
+    dialog = manager.createPostValidatorDialog()
+    dialog.showWindow("ARENA2 Validador accidentes")
+    
   def createTables(self):
     manager = getArena2ImportManager()
     messages = manager.checkRequirements()
@@ -69,7 +80,8 @@ def registerAction():
   iconTheme.registerDefault("scripting.Arena2ImporterExtension", "action", "arena2-importer-showimporter", None, icon)
   icon = File(getResource(__file__,"images","arena2-importer-showtablecreator.png")).toURI().toURL()
   iconTheme.registerDefault("scripting.Arena2ImporterExtension", "action", "arena2-importer-showtablecreator", None, icon)
-
+  icon = File(getResource(__file__,"images","arena2-importer-showvalidator.png")).toURI().toURL()
+  iconTheme.registerDefault("scripting.Arena2ImporterExtension", "action", "arena2-importer-showvalidator", None, icon)
   #
   # Creamos la accion 
   actionManager = PluginsLocator.getActionInfoManager()
@@ -98,7 +110,19 @@ def registerAction():
     "_Show_the_ARENA2_tables_creator_tool" # Tooltip
   )
   action = actionManager.registerAction(action, True)
-
+  
+  action = actionManager.createAction(
+    extension, 
+    "arena2-importer-showvalidator", # Action name
+    "ARENA2 validator", # Text
+    "arena2-importer-showvalidator", # Action command
+    "arena2-importer-showvalidator", # Icon name
+    None, # Accelerator
+    650700600, # Position 
+    "_Show_the_ARENA2_validator_tool" # Tooltip
+  )
+  action = actionManager.registerAction(action, True)
+  
 def selfRegister():
   registerAction()
   
@@ -113,7 +137,11 @@ def selfRegister():
     actionManager.getAction("arena2-importer-showtablecreator"), 
     "tools/ARENA2/Crear tablas"
   )
-
+  application.addMenu(
+    actionManager.getAction("arena2-importer-showvalidator"), 
+    "tools/ARENA2/Validador"
+  )
+  
 def main(*args):
   registerAction()
   

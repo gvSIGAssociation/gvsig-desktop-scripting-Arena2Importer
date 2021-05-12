@@ -206,10 +206,12 @@ class ImportProcess(Runnable):
       for f_src in sourceStore:
         accidentId = f_src.get("ID_ACCIDENTE")
         process = True
-        if report != None:
-          issue = report.getIssue(accidentId)
+        if report != None: ### hasToProcess
+          ### Cambiar
+          ### si uno no se marca, que no siga
+          issue = report.hasToProcessIssue(accidentId)
           if issue!=None:
-            process = issue.get("SELECTED")
+            process = False # Si alguno de los issue no estan marcados, no se importa
         #print "[%3d] %s import %s" % (count, accidentId, process)
         #count += 1
         if process:
