@@ -79,7 +79,7 @@ class ImportProcess(Runnable):
         if input_store == None:
           self.status.abort()
           return
-          
+
         children = input_store.getChildren()
   
         count = 0
@@ -341,6 +341,15 @@ class ValidatorProcess(Runnable):
         count_files+=1
         fname_tail = os.path.sep.join(fname.split(os.path.sep)[-3:])
         self.input_store = self.openStore(fname)
+        
+        # TODO
+        #Si el featureType tiene tags de errores de valores no encontrados
+        # 
+        tags = self.input_store.getDefaultFeatureType().getTags()
+        if tags.get("notSupportedKeys")!=None:
+           print "Tags new found: ", tags
+        #
+        
         if self.input_store == None:
           self.status.abort()
           return
@@ -352,6 +361,7 @@ class ValidatorProcess(Runnable):
   
         self.status.message("Comprobando accidentes (%s)..." % fname_tail)
         input_features = self.input_store.iterator()
+        
         for feature in input_features:
           for rule in rules:
             if rule != None:

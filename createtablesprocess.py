@@ -17,15 +17,16 @@ from org.gvsig.fmap.dal import DALLocator
 from org.gvsig.fmap.dal.DatabaseWorkspaceManager import TABLE_RESOURCES, TABLE_REPOSITORY, TABLE_CONFIGURATION
 from org.gvsig.fmap.dal.DatabaseWorkspaceManager import CONFIG_NAME_STORESREPOSITORYID, CONFIG_NAME_STORESREPOSITORYLABEL
 
-from addons.Arena2Importer.tablas.ARENA2_ACCIDENTES import add_attributes_ARENA2_ACCIDENTES
-from addons.Arena2Importer.tablas.ARENA2_CONDUCTORES import add_attributes_ARENA2_CONDUCTORES
-from addons.Arena2Importer.tablas.ARENA2_CROQUIS import add_attributes_ARENA2_CROQUIS
-from addons.Arena2Importer.tablas.ARENA2_INFORMES import add_attributes_ARENA2_INFORMES
-from addons.Arena2Importer.tablas.ARENA2_PASAJEROS import add_attributes_ARENA2_PASAJEROS
-from addons.Arena2Importer.tablas.ARENA2_PEATONES import add_attributes_ARENA2_PEATONES
-from addons.Arena2Importer.tablas.ARENA2_VEHICULOS import add_attributes_ARENA2_VEHICULOS
-from addons.Arena2Importer.tablas.AFOROS_MEDIDAS import add_attributes_medidas
-from addons.Arena2Importer.tablas.AFOROS_ESTACIONES import add_attributes_estaciones
+from addons.Arena2Importer.readerTablas.ARENA2_ACCIDENTES import add_attributes_ARENA2_ACCIDENTES
+from addons.Arena2Importer.readerTablas.ARENA2_CONDUCTORES import add_attributes_ARENA2_CONDUCTORES
+from addons.Arena2Importer.readerTablas.ARENA2_CROQUIS import add_attributes_ARENA2_CROQUIS
+from addons.Arena2Importer.readerTablas.ARENA2_INFORMES import add_attributes_ARENA2_INFORMES
+from addons.Arena2Importer.readerTablas.ARENA2_PASAJEROS import add_attributes_ARENA2_PASAJEROS
+from addons.Arena2Importer.readerTablas.ARENA2_PEATONES import add_attributes_ARENA2_PEATONES
+from addons.Arena2Importer.readerTablas.ARENA2_VEHICULOS import add_attributes_ARENA2_VEHICULOS
+
+from addons.Arena2Importer.importerTablas.AFOROS_MEDIDAS import add_attributes_medidas
+from addons.Arena2Importer.importerTablas.AFOROS_ESTACIONES import add_attributes_estaciones
 
 from addons.Arena2Reader.arena2readerutils import getDictionaryNames, getOpenStoreParametersOfDictionary
 from addons.Arena2Reader.arena2readerutils import getResourcesStorage, getResourceNames
@@ -80,6 +81,7 @@ class CreateTablesProcess(Runnable):
         params = server.getAddParameters("ARENA2_ACCIDENTES")
         ft = params.getDefaultFeatureType()
         add_attributes_ARENA2_ACCIDENTES(ft)
+        #add_impòrt_attr_ARENA2_ACCIDENTES(ft)
         server.add("ARENA2_ACCIDENTES", params, False)
         self.status.incrementCurrentValue()
         for tableName, add_attributes in (
@@ -90,7 +92,7 @@ class CreateTablesProcess(Runnable):
           ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES),
           ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS),
           ("AFOROS_MEDIDAS",add_attributes_medidas),
-          ("AFOROS_ESTACIONES",add_attributes_medidas)
+          ("AFOROS_ESTACIONES",add_attributes_estaciones)
           ):
           self.status.message("Creando "+tableName)
           params = server.getAddParameters(tableName)
@@ -158,6 +160,13 @@ class CreateTablesProcess(Runnable):
           workspace.writeStoresRepositoryEntry(tableName, params)
 
         dataManager.addDatabaseWorkspace(workspace)
+        
+        #factorias de las reglas, va llamando al selfconfigure
+        # self.connection pasarselo JDBCServerExplorerParameters
+        
+        #factorias de las transformacioens
+        # self.connection pasarselo JDBCServerExplorerParameters
+        
         self.status.incrementCurrentValue()
 
       self.status.message("Creacion completada")

@@ -42,6 +42,10 @@ class RuleFactory(object):
     
   def isSelectedByDefault(self):
     return True
+
+  def selfConfigure(self): 
+    # Crea los requisitos como tablas o nuevas columnas
+    return
         
 def main(*args):
 
