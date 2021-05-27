@@ -593,68 +593,15 @@ def add_attribute_NUM_OTROS_VEHI_DGT(ft):
     .set("relation","Collaboration")\
     .closedlistfk("u'ARENA2_DIC_INE_MUNICIPIO", label="FORMAT('%05d - %s',COD_INE,MUNICIPIO)"),
 """
-def add_attribute_INE_PROVINCIA(ft):
-  attr = ft.add("INE_PROVINCIA",4)
-  attr.setSize(10)
-  attr.setAllowIndexDuplicateds(True)
-  attr.setAllowNull(True)
-  attr.setDataProfileName(None)
-  attr.setDescription(u'INE_PROVINCIA')
-  attr.setGroup(None)
-  attr.setHidden(False)
-  attr.setIsAutomatic(False)
-  attr.setIsIndexAscending(True)
-  attr.setIsIndexed(True)
-  attr.setIsPrimaryKey(False)
-  attr.setIsReadOnly(False)
-  attr.setIsTime(False)
-  attr.setLabel(u'_INE_Provincia')
-  attr.setOrder(140)
-  attr.setPrecision(0)
-  attr.setReadOnly(False)
-  attr.setRelationType(RELATION_TYPE_COLLABORATION)
-  attr.getForeingKey().setCodeName(u'ID')
-  attr.getForeingKey().setForeingKey(True)
-  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',PROV_INE,PROVINCIA)")
-  attr.getForeingKey().setClosedList(True)
-  attr.getForeingKey().setTableName(u'ARENA2_DIC_INE_MUNICIPIO')
+
   
-def add_attribute_INE_MUNICIPIO(ft):
-  attr = ft.add("INE_MUNICIPIO",4)
-  attr.setSize(10)
-  attr.setAllowIndexDuplicateds(True)
-  attr.setAllowNull(True)
-  attr.setDataProfileName(None)
-  attr.setDescription(u'INE_MUNICIPIO')
-  attr.setGroup(None)
-  attr.setHidden(False)
-  attr.setIsAutomatic(False)
-  attr.setIsIndexAscending(True)
-  attr.setIsIndexed(True)
-  attr.setIsPrimaryKey(False)
-  attr.setIsReadOnly(False)
-  attr.setIsTime(False)
-  attr.setLabel(u'_INE_Municipio')
-  attr.setOrder(140)
-  attr.setPrecision(0)
-  attr.setReadOnly(False)
-  attr.setRelationType(RELATION_TYPE_COLLABORATION)
-  attr.getForeingKey().setCodeName(u'ID')
-  attr.getForeingKey().setForeingKey(True)
-  attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',COD_INE,PROVINCIA)")
-  attr.getForeingKey().setClosedList(True)
-  attr.getForeingKey().setTableName(u'ARENA2_DIC_INE_PROVINCIA')
-  
-def add_attributes_ARENA2_ACCIDENTES(ft):
+def add_import_attr_ARENA2_ACCIDENTES(ft):
   add_attribute_COD_AFORO(ft)
   add_attribute_COD_ESTACION_AFORO(ft)
   add_attribute_TIPO_VIA_DGT(ft)
   add_attribute_CARRETERA_DGT(ft)
   add_attribute_KM_DGT(ft)
   add_attribute_TITULARIDAD_VIA_DGT(ft)
-  add_attribute_INE_PROVINCIA(ft)
-  add_attribute_INE_MUNICIPIO(ft)
-  
   add_attribute_TOTAL_VICTIMAS_DGT(ft)
   add_attribute_TOTAL_MUERTOS_DGT(ft)
   add_attribute_TOTAL_GRAVES_DGT(ft)
@@ -679,5 +626,5 @@ def add_attributes_ARENA2_ACCIDENTES(ft):
 def main(*args):
   import gvsig
   ft = gvsig.createFeatureType()
-  add_attributes_ARENA2_ACCIDENTES(ft)
+  add_import_attr_ARENA2_ACCIDENTES(ft)
   print ft

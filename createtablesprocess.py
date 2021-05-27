@@ -27,6 +27,7 @@ from addons.Arena2Importer.readerTablas.ARENA2_VEHICULOS import add_attributes_A
 
 from addons.Arena2Importer.importerTablas.AFOROS_MEDIDAS import add_attributes_medidas
 from addons.Arena2Importer.importerTablas.AFOROS_ESTACIONES import add_attributes_estaciones
+from addons.Arena2Importer.importerTablas.ARENA2_ACCIDENTES_IMPORTER import add_import_attr_ARENA2_ACCIDENTES
 
 from addons.Arena2Reader.arena2readerutils import getDictionaryNames, getOpenStoreParametersOfDictionary
 from addons.Arena2Reader.arena2readerutils import getResourcesStorage, getResourceNames
@@ -81,23 +82,26 @@ class CreateTablesProcess(Runnable):
         params = server.getAddParameters("ARENA2_ACCIDENTES")
         ft = params.getDefaultFeatureType()
         add_attributes_ARENA2_ACCIDENTES(ft)
-        #add_impòrt_attr_ARENA2_ACCIDENTES(ft)
+        add_import_attr_ARENA2_ACCIDENTES(ft)
         server.add("ARENA2_ACCIDENTES", params, False)
         self.status.incrementCurrentValue()
-        for tableName, add_attributes in (
-          ("ARENA2_CONDUCTORES",add_attributes_ARENA2_CONDUCTORES),
-          ("ARENA2_CROQUIS",add_attributes_ARENA2_CROQUIS),
-          ("ARENA2_INFORMES",add_attributes_ARENA2_INFORMES),
-          ("ARENA2_PASAJEROS",add_attributes_ARENA2_PASAJEROS),
-          ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES),
-          ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS),
-          ("AFOROS_MEDIDAS",add_attributes_medidas),
-          ("AFOROS_ESTACIONES",add_attributes_estaciones)
+        for tableName, add_attributes, add_attributes_importer in (
+          ("ARENA2_CONDUCTORES",add_attributes_ARENA2_CONDUCTORES, None),
+          ("ARENA2_CROQUIS",add_attributes_ARENA2_CROQUIS, None),
+          ("ARENA2_INFORMES",add_attributes_ARENA2_INFORMES, None),
+          ("ARENA2_PASAJEROS",add_attributes_ARENA2_PASAJEROS, None),
+          ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES, None),
+          ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS, None),
+          ("AFOROS_MEDIDAS",add_attributes_medidas, None),
+          ("AFOROS_ESTACIONES",add_attributes_estaciones, None)
           ):
           self.status.message("Creando "+tableName)
           params = server.getAddParameters(tableName)
           ft = params.getDefaultFeatureType()
+          
           add_attributes(ft)
+          if add_attributes_importer!=None:
+              add_attributes_importer(ft)
           server.add(tableName, params, False)
           self.status.incrementCurrentValue()
 

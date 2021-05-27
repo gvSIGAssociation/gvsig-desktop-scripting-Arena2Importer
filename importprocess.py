@@ -222,15 +222,19 @@ class ImportProcess(Runnable):
               transform.apply(f_dst)
             if report!=None:
               report.fix(f_dst)
-            f_dst.set("QUINCENA", self.getQuincenaFromCodInforme(f_dst.get("COD_INFORME"))) ## Insertar quincena
             targetStore[0].insert(f_dst)
           else:
             f_dst = f_dst.getEditable()
             for attr in targetType:
               if attr==None or attr.isAutomatic() or attr.isReadOnly() or attr.isComputed():
                 continue
-              if targetType.get(attr.getName()+"_DGT")!=None:
-                continue
+              if attr.getName().endswith("_DGT"): # Rellenar los DGT que no existen en el parser
+                notAttrDGT = attr.getName()[:-len(suffix)]
+                value = f_src.get(notAttrDGT)
+                if value == None and not attr.allowNull():
+                    continue
+                f_dst.set(attr.getIndex(), value)
+                
               if sourceType.get(attr.getName())!=None:
                 value = f_src.get(attr.getName())
                 if value == None and not attr.allowNull():
@@ -252,10 +256,6 @@ class ImportProcess(Runnable):
       targetStore[1].cancelEditing()
       raise ex
       
-  def getQuincenaFromCodInforme(self, cod):
-    if cod == None:
-      return None
-    return cod.replace('_', '')[-8:]
     
   def deleteChilds(self, accidentId):
     server = self.workspace.getServerExplorer()
