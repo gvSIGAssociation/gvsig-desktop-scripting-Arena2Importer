@@ -103,7 +103,7 @@ def add_attribute_ESTADO_ACCIDENTE(ft):
   attr.getForeingKey().setForeingKey(True)
   attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
   attr.getForeingKey().setClosedList(True)
-  attr.getForeingKey().setTableName(u"u'ARENA2_DIC_ESTADO_ACCIDENTE")
+  attr.getForeingKey().setTableName(u'ARENA2_DIC_ESTADO_ACCIDENTE')
 
 def add_attribute_OPERACION(ft):
   attr = ft.add("OPERACION",8)
