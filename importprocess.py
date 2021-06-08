@@ -2,7 +2,7 @@
 
 import gvsig
 
-from gvsig import logger, LOGGER_WARN
+from gvsig import logger, LOGGER_WARN, LOGGER_ERROR
 import os.path
 
 import sys
@@ -193,7 +193,25 @@ class ImportProcess(Runnable):
     except Throwable as ex:
       targetStore.cancelEditing()
       raise ex
-      
+
+  
+  def updateFeatureWithValues(self, f_src, f_dst, sourceType, targetType):
+    for attr in targetType:
+      if attr==None or attr.isAutomatic() or attr.isReadOnly() or attr.isComputed():
+        continue
+      if attr.getName().endswith("_DGT"): # Rellenar los DGT que no existen en el parser
+        notAttrDGT = attr.getName()[:-len("_DGT")]
+        value = f_src.get(notAttrDGT)
+        if value == None and not attr.allowNull():
+            continue
+        f_dst.set(attr.getIndex(), value)
+        
+      if sourceType.get(attr.getName())!=None:
+        value = f_src.get(attr.getName())
+        if value == None and not attr.allowNull():
+            continue
+        f_dst.set(attr.getIndex(), value)
+  
   def copyTableAccidentes(self, sourceStore, targetStore):
     try:
       report = self.report
@@ -206,18 +224,28 @@ class ImportProcess(Runnable):
       for f_src in sourceStore:
         accidentId = f_src.get("ID_ACCIDENTE")
         process = True
-        if report != None: ### hasToProcess
-          ### Cambiar
-          ### si uno no se marca, que no siga
-          issue = report.hasToProcessIssue(accidentId)
-          if issue!=None:
-            process = False # Si alguno de los issue no estan marcados, no se importa
+        #if report != None: ### hasToProcess
+        #  ### Cambiar
+        #  ### si uno no se marca, que no siga
+        #  issue = report.hasToProcessIssue(accidentId)
+        #  if issue!=None:
+        #    process = False # Si alguno de los issue no estan marcados, no se importa
         #print "[%3d] %s import %s" % (count, accidentId, process)
         #count += 1
         if process:
           f_dst = targetStore[1].findFirst("ID_ACCIDENTE = '%s'" % accidentId)
           if f_dst == None:
             f_dst = targetStore[0].createNewFeature(f_src)
+            # update DGT with new features
+            for attr in targetType:
+              if attr==None or attr.isAutomatic() or attr.isReadOnly() or attr.isComputed():
+                continue
+              if attr.getName().endswith("_DGT"): # Rellenar los DGT que no existen en el parser
+                notAttrDGT = attr.getName()[:-len("_DGT")]
+                value = f_src.get(notAttrDGT)
+                if value == None and not attr.allowNull():
+                    continue
+                f_dst.set(attr.getIndex(), value)
             for transform in transforms:
               transform.apply(f_dst)
             if report!=None:
@@ -225,21 +253,7 @@ class ImportProcess(Runnable):
             targetStore[0].insert(f_dst)
           else:
             f_dst = f_dst.getEditable()
-            for attr in targetType:
-              if attr==None or attr.isAutomatic() or attr.isReadOnly() or attr.isComputed():
-                continue
-              if attr.getName().endswith("_DGT"): # Rellenar los DGT que no existen en el parser
-                notAttrDGT = attr.getName()[:-len(suffix)]
-                value = f_src.get(notAttrDGT)
-                if value == None and not attr.allowNull():
-                    continue
-                f_dst.set(attr.getIndex(), value)
-                
-              if sourceType.get(attr.getName())!=None:
-                value = f_src.get(attr.getName())
-                if value == None and not attr.allowNull():
-                    continue
-                f_dst.set(attr.getIndex(), value)
+            self.updateFeatureWithValues(f_src, f_dst, sourceType, targetType)
             for transform in transforms:
               transform.apply(f_dst)
             if report!=None:
@@ -247,13 +261,23 @@ class ImportProcess(Runnable):
             f_dst.set("ACTUALIZADO", True)
             self.deleteChilds(accidentId)  #poner el campo a actualizado a true
             targetStore[1].update(f_dst)
+            
         self.__count += 1
         self.status.incrementCurrentValue()
       targetStore[0].finishEditing()
       targetStore[1].finishEditing()
     except Throwable as ex:
+      logger("Error copiando a tabla accidentes.", LOGGER_ERROR, ex)
+      self.status.message("Error copiando a tabla accidentes" )
       targetStore[0].cancelEditing()
       targetStore[1].cancelEditing()
+      raise ex
+    except:
+      targetStore[0].cancelEditing()
+      targetStore[1].cancelEditing()
+      ex = sys.exc_info()[1]
+      logger("Error copiando a tabla accidentes. ", gvsig.LOGGER_ERROR, ex)
+      self.status.message("Error copiando a tabla accidentes")
       raise ex
       
     
