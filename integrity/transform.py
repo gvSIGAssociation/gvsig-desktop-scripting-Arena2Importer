@@ -17,15 +17,22 @@ class Transform(object):
 class TransformFactory(object):
   def __init__(self, id):
     self.__id = id
+    self.values = {}
     
   def getName(self):
     return self.__id
-
+    
+  def getWorkspace(self):
+    if "workspace" in self.values.keys():
+      return self.values["workspace"]
+    return None
+    
   def checkRequirements(self):
     return None
 
   def create(self, *args):
     transform = Transform(self)
+    self.values.update(args)
     return transform
     
   def isSelectedByDefault(self):

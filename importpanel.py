@@ -2,8 +2,9 @@
 
 import gvsig
 
-import os
-
+import os, sys
+from gvsig import logger
+from gvsig import LOGGER_WARN,LOGGER_INFO,LOGGER_ERROR
 from gvsig import getResource
 from gvsig.commonsdialog import filechooser
 
@@ -28,7 +29,7 @@ from org.gvsig.fmap.dal.swing.AbstractDALActionFactory import AbstractDALActionC
 from org.gvsig.expressionevaluator import ExpressionUtils
 from org.gvsig.fmap.dal.store.jdbc import JDBCServerExplorerParameters
 
-from addons.Arena2Importer.tablas.ARENA2_ACCIDENTES import configurar_featuretype_ARENA2_ACCIDENTES
+#from addons.Arena2Importer.tablas.ARENA2_ACCIDENTES import configurar_featuretype_ARENA2_ACCIDENTES
 from addons.Arena2Reader.arena2readerutils import createArena2XMLFileFilter, isArena2File
 
 from javax.swing import JFileChooser
@@ -445,14 +446,23 @@ class ImportPanel(FormPanel, Observer):
 
     transforms = list()
     n = 0
+    ws = self.cboWorkspace.getSelectedItem()
     for transform in self.importManager.getTransformFactories():
       if self.cltTransforms.getCheckedModel().isSelectedIndex(n):
-        transforms.append(transform.create(workspace=self.cboWorkspace.getSelectedItem()))
+        try:
+          transform.selfConfigure(ws)
+        except:
+          ex = sys.exc_info()[1]
+          status.message("No es posible configurar workspace para la regla: "+str(type(transform)))
+          logger("No es posible configurar workspace para la regla." + str(ex), gvsig.LOGGER_ERROR, ex)
+          return
+
+        transforms.append(transform.create(workspace=ws))
       n+=1
-    
+      
     self.process = self.importManager.createImportProcess(
       files,
-      self.cboWorkspace.getSelectedItem(),
+      ws,
       self.report,
       status,
       transforms = transforms

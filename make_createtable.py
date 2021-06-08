@@ -115,10 +115,13 @@ def main(*args):
   f.close()
 
 def create_arena2_tables():
-  f = File("/home/jjdelcerro/datos/geodata/vector/ARENA2/TV_03_2019_01_Q1/victimas.xml")
+  f = File("/home/osc/gva_arena2/test/TV_12_2020_07_Q1/victimas.xml")
   dataManager = DALLocator.getDataManager()
   print "Cargando ARENA2 file..."
   store = dataManager.openStore("ARENA2", "file", f)
+  if store == None:
+    print "No ha sido posible abrir el store file: ", f
+    return
 
   tableName = "ARENA2_ACCIDENTES"
   print "%s..." % tableName
@@ -157,6 +160,6 @@ def create_AFOROS_MEDIDAS():
   generateTable(pathname, tableName, store.getDefaultFeatureType())
 
 def main(*args):
-  #create_arena2_tables()
+  create_arena2_tables()
   #create_ARENA2_AC_VE_CO_PA_PE_CR()
-  create_DAL_ARENA2_AC_VE_CO_PA_PE_CR()
+  #create_DAL_ARENA2_AC_VE_CO_PA_PE_CR()
