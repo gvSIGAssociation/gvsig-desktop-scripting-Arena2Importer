@@ -31,16 +31,42 @@ def testCreateTables():
   dialog = manager.createTablestDialog()
   dialog.showWindow("ARENA2 Crear tablas de accidentes")
 
+
+def testDeleteChildrenSQL():
+    
+    from org.gvsig.fmap.dal import DALLocator
+    dataManager = DALLocator.getDataManager()
+    pool = dataManager.getDataServerExplorerPool()
+    #explorerParams = pool.get("carreteras_gva")#.getExplorerParameters()
+    #if explorerParams==None:
+
+    ws = dataManager.getDatabaseWorkspace("ARENA2_DB")
+    server = ws.getServerExplorer()
+    params = server.getOpenParameters()
+    tableName = "ARENA2_CROQUIS"
+    accidentId = "201903090000013"
+    builder = server.createSQLBuilder()
+    delete = builder.delete()
+    delete.table().database(params.getDBName()).schema(params.getSchema()).name(tableName)
+    delete.where().and(delete.where().eq(
+            builder.column("ID_ACCIDENTE"),
+            builder.expression().constant(accidentId)
+    ))
+    sql = delete.toString()
+    print builder, type(builder)
+    print sql
+      
 def main(*args):
   #testCreateTables()()
   
   #selfRegister()
   #geocode.selfRegister()
   
-  manager = getArena2ImportManager()
-  print manager.checkRequirements()
+  #manager = getArena2ImportManager()
+  #print manager.checkRequirements()
   #manager.addValidator(TestValidator())
   #manager.setValidOwnershipsOfRoads(TITULARIDADES)
   #testImport()
   #testCreateTables()
+  testDeleteChildrenSQL()
 

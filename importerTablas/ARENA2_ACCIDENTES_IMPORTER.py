@@ -580,20 +580,26 @@ def add_attribute_NUM_OTROS_VEHI_DGT(ft):
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
 
-"""
-  Descriptor("INE_PROVINCIA","Integer",
-  label="_INE_Provincia",
-  shortLabel="_INE_Provincia")\
-  .set("relation","Collaboration")\
-  .closedlistfk("u'ARENA2_DIC_INE_PROVINCIA", label="FORMAT('%02d - %s',COD_INE,PROVINCIA)"),
-  
-  Descriptor("INE_MUNICIPIO","Integer",
-    label="_INE_Municipio",
-    shortLabel="_INE_Municipio")\
-    .set("relation","Collaboration")\
-    .closedlistfk("u'ARENA2_DIC_INE_MUNICIPIO", label="FORMAT('%05d - %s',COD_INE,MUNICIPIO)"),
-"""
-
+def add_attribute_EXTRA(ft):
+  attr = ft.add("EXTRA", DataTypes.STRING)
+  attr.setSize(10000)
+  attr.setAllowIndexDuplicateds(True)
+  attr.setAllowNull(True)
+  attr.setDataProfileName(None)
+  attr.setDescription(u'Extra')
+  attr.setGroup(None)
+  attr.setHidden(False)
+  attr.setIsAutomatic(False)
+  attr.setIsIndexAscending(True)
+  attr.setIsIndexed(False)
+  attr.setIsPrimaryKey(False)
+  attr.setIsReadOnly(False)
+  attr.setIsTime(False)
+  attr.setLabel(u'_Extra')
+  attr.setOrder(2000)
+  attr.setPrecision(-1)
+  attr.setReadOnly(False)
+  attr.setRelationType(0)
   
 def add_import_attr_ARENA2_ACCIDENTES(ft):
   add_attribute_COD_AFORO(ft)
@@ -621,7 +627,7 @@ def add_import_attr_ARENA2_ACCIDENTES(ft):
   add_attribute_NUM_OTROS_VEHI_DGT(ft)
   
   add_attribute_ACTUALIZADO(ft)
-
+  add_attribute_EXTRA(ft)
 
 def main(*args):
   import gvsig

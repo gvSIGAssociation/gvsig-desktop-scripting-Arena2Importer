@@ -28,6 +28,15 @@ from addons.Arena2Importer.readerTablas.ARENA2_VEHICULOS import add_attributes_A
 from addons.Arena2Importer.importerTablas.AFOROS_MEDIDAS import add_attributes_medidas
 from addons.Arena2Importer.importerTablas.AFOROS_ESTACIONES import add_attributes_estaciones
 from addons.Arena2Importer.importerTablas.ARENA2_ACCIDENTES_IMPORTER import add_import_attr_ARENA2_ACCIDENTES
+from addons.Arena2Importer.importerTablas.ARENA2_CONDUCTORES_IMPORTER import add_import_attr_ARENA2_CONDUCTORES
+from addons.Arena2Importer.importerTablas.ARENA2_CROQUIS_IMPORTER import add_import_attr_ARENA2_CROQUIS
+from addons.Arena2Importer.importerTablas.ARENA2_INFORMES_IMPORTER import add_import_attr_ARENA2_INFORMES
+from addons.Arena2Importer.importerTablas.ARENA2_PASAJEROS_IMPORTER import add_import_attr_ARENA2_PASAJEROS
+from addons.Arena2Importer.importerTablas.ARENA2_PEATONES_IMPORTER import add_import_attr_ARENA2_PEATONES
+from addons.Arena2Importer.importerTablas.ARENA2_VEHICULOS_IMPORTER import add_import_attr_ARENA2_VEHICULOS
+
+
+
 
 from addons.Arena2Reader.arena2readerutils import getDictionaryNames, getOpenStoreParametersOfDictionary
 from addons.Arena2Reader.arena2readerutils import getResourcesStorage, getResourceNames
@@ -76,22 +85,35 @@ class CreateTablesProcess(Runnable):
         self.status.message("Creando espacio de trabajo")
         workspace.create("ARENA2_DB","ARENA2 (db)")
         workspace.set("TRAMOS_CARRETERAS_NAME", "TRAMOS_CARRETERAS")
-        workspace.set("TRAMOS_CARRETERAS_SCHEMA", "layers")
+        workspace.set("TRAMOS_CARRETERAS_SCHEMA", "public")
       if self.createBaseTables:
         self.status.message("Creando ARENA2_ACCIDENTES")
         params = server.getAddParameters("ARENA2_ACCIDENTES")
         ft = params.getDefaultFeatureType()
         add_attributes_ARENA2_ACCIDENTES(ft)
         add_import_attr_ARENA2_ACCIDENTES(ft)
+        
+        
+        #add_import_attr_ARENA2_CONDUCTORES
+        #add_import_attr_ARENA2_CROQUIS
+        #add_import_attr_ARENA2_INFORMES
+        #add_import_attr_ARENA2_PASAJEROS
+        #add_import_attr_ARENA2_PEATONES
+        #add_import_attr_ARENA2_VEHICULOS
+
+
+
+
+        
         server.add("ARENA2_ACCIDENTES", params, False)
         self.status.incrementCurrentValue()
         for tableName, add_attributes, add_attributes_importer in (
-          ("ARENA2_CONDUCTORES",add_attributes_ARENA2_CONDUCTORES, None),
-          ("ARENA2_CROQUIS",add_attributes_ARENA2_CROQUIS, None),
-          ("ARENA2_INFORMES",add_attributes_ARENA2_INFORMES, None),
-          ("ARENA2_PASAJEROS",add_attributes_ARENA2_PASAJEROS, None),
-          ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES, None),
-          ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS, None),
+          ("ARENA2_CONDUCTORES",add_attributes_ARENA2_CONDUCTORES, add_import_attr_ARENA2_CONDUCTORES),
+          ("ARENA2_CROQUIS",add_attributes_ARENA2_CROQUIS, add_import_attr_ARENA2_CROQUIS),
+          ("ARENA2_INFORMES",add_attributes_ARENA2_INFORMES, add_import_attr_ARENA2_INFORMES),
+          ("ARENA2_PASAJEROS",add_attributes_ARENA2_PASAJEROS, add_import_attr_ARENA2_PASAJEROS),
+          ("ARENA2_PEATONES",add_attributes_ARENA2_PEATONES, add_import_attr_ARENA2_PEATONES),
+          ("ARENA2_VEHICULOS",add_attributes_ARENA2_VEHICULOS, add_import_attr_ARENA2_VEHICULOS),
           ("AFOROS_MEDIDAS",add_attributes_medidas, None),
           ("AFOROS_ESTACIONES",add_attributes_estaciones, None)
           ):

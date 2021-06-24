@@ -400,6 +400,10 @@ class ImportPanel(FormPanel, Observer):
 
     rules = list()
     n = 0
+    status = self.importManager.createStatus("ARENA2 validando", self)
+    self.taskStatusController.bind(status)
+    self.setVisibleTaskStatus(True)
+    ws = self.cboWorkspace.getSelectedItem()
     for rule in self.importManager.getRuleFactories():
       if self.cltRules.getCheckedModel().isSelectedIndex(n):
         rules.append(rule.create(workspace=self.cboWorkspace.getSelectedItem()))
@@ -410,11 +414,6 @@ class ImportPanel(FormPanel, Observer):
       self.btnCheckIntegrity.setEnabled(True)
       return 
       
-    status = self.importManager.createStatus("ARENA2 validando", self)
-    self.taskStatusController.bind(status)
-        
-    self.setVisibleTaskStatus(True)
-
     self.process = self.importManager.createValidatorProcess(
       files,
       self.report,
@@ -449,14 +448,6 @@ class ImportPanel(FormPanel, Observer):
     ws = self.cboWorkspace.getSelectedItem()
     for transform in self.importManager.getTransformFactories():
       if self.cltTransforms.getCheckedModel().isSelectedIndex(n):
-        try:
-          transform.selfConfigure(ws)
-        except:
-          ex = sys.exc_info()[1]
-          status.message("No es posible configurar workspace para la regla: "+str(type(transform)))
-          logger("No es posible configurar workspace para la regla." + str(ex), gvsig.LOGGER_ERROR, ex)
-          return
-
         transforms.append(transform.create(workspace=ws))
       n+=1
       

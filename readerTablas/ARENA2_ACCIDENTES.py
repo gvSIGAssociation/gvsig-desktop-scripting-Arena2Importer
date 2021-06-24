@@ -38,7 +38,7 @@ def add_attribute_COD_INFORME(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -66,7 +66,7 @@ def add_attribute_ID_ACCIDENTE(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -104,10 +104,12 @@ def add_attribute_ESTADO_ACCIDENTE(ft):
   attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
   attr.getForeingKey().setClosedList(True)
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ESTADO_ACCIDENTE')
+  tags = attr.getTags()
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_OPERACION(ft):
   attr = ft.add("OPERACION",8)
-  attr.setSize(10)
+  attr.setSize(30)
   attr.setAllowIndexDuplicateds(False)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
@@ -187,7 +189,7 @@ def add_attribute_COD_PROVINCIA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -211,7 +213,7 @@ def add_attribute_COD_MUNICIPIO(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -234,7 +236,7 @@ def add_attribute_COD_POBLACION(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -257,7 +259,7 @@ def add_attribute_ZONA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -273,6 +275,7 @@ def add_attribute_ZONA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ZONA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_TIPO_VIA(ft):
   attr = ft.add("TIPO_VIA",4)
@@ -285,7 +288,7 @@ def add_attribute_TIPO_VIA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -299,6 +302,8 @@ def add_attribute_TIPO_VIA(ft):
   attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
   attr.getForeingKey().setClosedList(True)
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_VIA')
+  tags = attr.getTags()
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_CARRETERA(ft):
   attr = ft.add("CARRETERA",8)
@@ -358,7 +363,7 @@ def add_attribute_TITULARIDAD_VIA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -372,6 +377,8 @@ def add_attribute_TITULARIDAD_VIA(ft):
   attr.getForeingKey().setLabelFormula(u"FORMAT('%02d - %s',ID,DESCRIPCION)")
   attr.getForeingKey().setClosedList(True)
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TITULARIDAD_VIA')
+  tags = attr.getTags()
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_SENTIDO(ft):
   attr = ft.add("SENTIDO",4)
@@ -384,7 +391,7 @@ def add_attribute_SENTIDO(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -401,6 +408,7 @@ def add_attribute_SENTIDO(ft):
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
   tags.set(u'dal.search.attribute.priority', u'5')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_CALLE_CODIGO(ft):
   attr = ft.add("CALLE_CODIGO",8)
@@ -553,7 +561,7 @@ def add_attribute_NUDO(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -569,6 +577,7 @@ def add_attribute_NUDO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NUDO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_NUDO_INFO(ft):
   attr = ft.add("NUDO_INFO",4)
@@ -581,7 +590,7 @@ def add_attribute_NUDO_INFO(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -597,6 +606,7 @@ def add_attribute_NUDO_INFO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NUDO_INFORMACION')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_CRUCE_CALLE(ft):
   attr = ft.add("CRUCE_CALLE",8)
@@ -1018,7 +1028,7 @@ def add_attribute_TIPO_ACC_SALIDA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1034,6 +1044,7 @@ def add_attribute_TIPO_ACC_SALIDA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_ACCIDENTE_SALIDA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_TIPO_ACC_COLISION(ft):
   attr = ft.add("TIPO_ACC_COLISION",4)
@@ -1046,7 +1057,7 @@ def add_attribute_TIPO_ACC_COLISION(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1062,6 +1073,7 @@ def add_attribute_TIPO_ACC_COLISION(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_ACCIDENTE_COLISION')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_TIPO_ACC_ANIMAL(ft):
   attr = ft.add("TIPO_ACC_ANIMAL",4)
@@ -1074,7 +1086,7 @@ def add_attribute_TIPO_ACC_ANIMAL(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1090,6 +1102,7 @@ def add_attribute_TIPO_ACC_ANIMAL(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_ACCIDENTE_ANIMAL')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_SENTIDO_CONTRARIO(ft):
   attr = ft.add("SENTIDO_CONTRARIO",1)
@@ -1125,7 +1138,7 @@ def add_attribute_CONDICION_NIVEL_CIRCULA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1141,6 +1154,7 @@ def add_attribute_CONDICION_NIVEL_CIRCULA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NIVEL_CIRCULACION')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_INFLU_NIVEL_CIRC(ft):
   attr = ft.add("INFLU_NIVEL_CIRC",1)
@@ -1176,7 +1190,7 @@ def add_attribute_CONDICION_FIRME(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1192,6 +1206,7 @@ def add_attribute_CONDICION_FIRME(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_CONDICION_FIRME')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_INFLU_SUP_FIRME(ft):
   attr = ft.add("INFLU_SUP_FIRME",1)
@@ -1227,7 +1242,7 @@ def add_attribute_CONDICION_ILUMINACION(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1243,6 +1258,7 @@ def add_attribute_CONDICION_ILUMINACION(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ILUMINACION')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_INFLU_ILUMINACION(ft):
   attr = ft.add("INFLU_ILUMINACION",1)
@@ -1278,7 +1294,7 @@ def add_attribute_CONDICION_METEO(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1294,6 +1310,7 @@ def add_attribute_CONDICION_METEO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_METEO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_INFLU_METEO(ft):
   attr = ft.add("INFLU_METEO",1)
@@ -1329,7 +1346,7 @@ def add_attribute_CONDICION_NIEBLA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1345,6 +1362,7 @@ def add_attribute_CONDICION_NIEBLA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NIEBLA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_CONDICION_VIENTO(ft):
   attr = ft.add("CONDICION_VIENTO",4)
@@ -1357,7 +1375,7 @@ def add_attribute_CONDICION_VIENTO(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1373,6 +1391,7 @@ def add_attribute_CONDICION_VIENTO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_VIENTO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_VISIB_RESTRINGIDA_POR(ft):
   attr = ft.add("VISIB_RESTRINGIDA_POR",4)
@@ -1385,7 +1404,7 @@ def add_attribute_VISIB_RESTRINGIDA_POR(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1401,6 +1420,7 @@ def add_attribute_VISIB_RESTRINGIDA_POR(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_VISIBILIDAD_RESTRINGIDA_POR')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_INFLU_VISIBILIDAD(ft):
   attr = ft.add("INFLU_VISIBILIDAD",1)
@@ -1436,7 +1456,7 @@ def add_attribute_CARACT_FUNCIONAL_VIA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1452,6 +1472,7 @@ def add_attribute_CARACT_FUNCIONAL_VIA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_CARACT_FUNCIONAL_VIA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_VEL_GENERICA_SENYALIZADA(ft):
   attr = ft.add("VEL_GENERICA_SENYALIZADA",4)
@@ -1464,7 +1485,7 @@ def add_attribute_VEL_GENERICA_SENYALIZADA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1480,6 +1501,7 @@ def add_attribute_VEL_GENERICA_SENYALIZADA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_VEL_GENERICA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_VELOCIDAD(ft):
   attr = ft.add("VELOCIDAD",7)
@@ -1515,7 +1537,7 @@ def add_attribute_SENTIDOS_VIA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1531,6 +1553,7 @@ def add_attribute_SENTIDOS_VIA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_SENTIDOS_VIA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_NUMERO_CALZADAS(ft):
   attr = ft.add("NUMERO_CALZADAS",4)
@@ -1543,7 +1566,7 @@ def add_attribute_NUMERO_CALZADAS(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1559,6 +1582,7 @@ def add_attribute_NUMERO_CALZADAS(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NUMERO_CALZADAS')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_CARRILES_APTOS_CIRC_ASC(ft):
   attr = ft.add("CARRILES_APTOS_CIRC_ASC",4)
@@ -1571,7 +1595,7 @@ def add_attribute_CARRILES_APTOS_CIRC_ASC(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1617,7 +1641,7 @@ def add_attribute_ANCHURA_CARRIL(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1633,6 +1657,7 @@ def add_attribute_ANCHURA_CARRIL(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ANCHURA_CARRIL')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_ARCEN(ft):
   attr = ft.add("ARCEN",4)
@@ -1645,7 +1670,7 @@ def add_attribute_ARCEN(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1661,6 +1686,7 @@ def add_attribute_ARCEN(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ANCHURA_ARCEN')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_ACERA(ft):
   attr = ft.add("ACERA",4)
@@ -1673,7 +1699,7 @@ def add_attribute_ACERA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1689,6 +1715,7 @@ def add_attribute_ACERA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ACERA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_INFLU_ACERA(ft):
   attr = ft.add("INFLU_ACERA",1)
@@ -1747,7 +1774,7 @@ def add_attribute_TRAZADO_PLANTA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1763,6 +1790,7 @@ def add_attribute_TRAZADO_PLANTA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TRAZADO_PLANTA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_TRAZADO_ALZADO(ft):
   attr = ft.add("TRAZADO_ALZADO",4)
@@ -1775,7 +1803,7 @@ def add_attribute_TRAZADO_ALZADO(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1791,6 +1819,7 @@ def add_attribute_TRAZADO_ALZADO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TRAZADO_ALZADO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_MARCAS_VIALES(ft):
   attr = ft.add("MARCAS_VIALES",4)
@@ -1803,7 +1832,7 @@ def add_attribute_MARCAS_VIALES(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -1819,6 +1848,7 @@ def add_attribute_MARCAS_VIALES(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_MARCAS_VIALES')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_DESCRIPCION(ft):
   attr = ft.add("DESCRIPCION",8)
@@ -2429,7 +2459,7 @@ def add_attribute_BARRERA_SEG_LAT_ASC(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -2480,7 +2510,7 @@ def add_attribute_BARRERA_SEG_LAT_DESC(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -2531,7 +2561,7 @@ def add_attribute_BARRERA_SEG_MEDIANA_ASC(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -2582,7 +2612,7 @@ def add_attribute_BARRERA_SEG_MEDIANA_DESC(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -4117,29 +4147,6 @@ def add_attribute_QUINCENA(ft):
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
 
-def add_attribute_EXTRA(ft):
-  attr = ft.add("EXTRA",8)
-  attr.setSize(10000)
-  attr.setAllowIndexDuplicateds(False)
-  attr.setAllowNull(True)
-  attr.setDataProfileName(None)
-  attr.setDescription(u'EXTRA')
-  attr.setGroup(u'_Extra')
-  attr.setHidden(False)
-  attr.setIsAutomatic(False)
-  attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
-  attr.setIsPrimaryKey(False)
-  attr.setIsReadOnly(False)
-  attr.setIsTime(False)
-  attr.setLabel(u'_Extra')
-  attr.setOrder(1730)
-  attr.setPrecision(-1)
-  attr.setReadOnly(False)
-  attr.setRelationType(0)
-  tags = attr.getTags()
-  tags.set(u'dynform.readonly', u'True')
-
 def add_attribute_VEHICULOS(ft):
   attr = ft.add("VEHICULOS",34)
   attr.setSize(0)
@@ -4156,7 +4163,7 @@ def add_attribute_VEHICULOS(ft):
   attr.setIsReadOnly(True)
   attr.setIsTime(False)
   attr.setLabel(u'_Vehiculos')
-  attr.setOrder(1740)
+  attr.setOrder(1730)
   attr.setPrecision(-1)
   attr.setReadOnly(True)
   attr.setRelationType(0)
@@ -4184,11 +4191,11 @@ def add_attribute_PEATONES(ft):
   attr.setIsReadOnly(True)
   attr.setIsTime(False)
   attr.setLabel(u'_Peatones')
-  attr.setOrder(1750)
+  attr.setOrder(1740)
   attr.setPrecision(-1)
   attr.setReadOnly(True)
   attr.setRelationType(0)
-  attr.setFeatureAttributeEmulator(u'SELECT * FROM ARENA2_PEATONES WHERE ARENA2_ACCIDENTES.ID_ACCIDENTE = VEHICULOS.ID_ACCIDENTE;')
+  attr.setFeatureAttributeEmulator(u'SELECT * FROM ARENA2_PEATONES WHERE ARENA2_ACCIDENTES.ID_ACCIDENTE = ARENA2_PEATONES.ID_ACCIDENTE;')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
   tags.set(u'dynform.label.empty', u'True')
@@ -4212,11 +4219,11 @@ def add_attribute_CROQUIS(ft):
   attr.setIsReadOnly(True)
   attr.setIsTime(False)
   attr.setLabel(u'_Croquis')
-  attr.setOrder(1760)
+  attr.setOrder(1750)
   attr.setPrecision(-1)
   attr.setReadOnly(True)
   attr.setRelationType(0)
-  attr.setFeatureAttributeEmulator(u'SELECT * FROM ARENA2_CROQUIS WHERE ARENA2_ACCIDNETES.ID_ACCIDENTE = VEHICULOS.ID_ACCIDENTE;')
+  attr.setFeatureAttributeEmulator(u'SELECT * FROM ARENA2_CROQUIS WHERE ARENA2_ACCIDNETES.ID_ACCIDENTE = ARENA2_CROQUIS.ID_ACCIDENTE;')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
   tags.set(u'dynform.label.empty', u'True')
@@ -4398,7 +4405,6 @@ def add_attributes_ARENA2_ACCIDENTES(ft):
   add_attribute_FC_OBSTACULO(ft)
   add_attribute_FC_OTRO_FACTOR(ft)
   add_attribute_QUINCENA(ft)
-  add_attribute_EXTRA(ft)
   add_attribute_VEHICULOS(ft)
   add_attribute_PEATONES(ft)
   add_attribute_CROQUIS(ft)

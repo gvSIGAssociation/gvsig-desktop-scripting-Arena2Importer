@@ -36,7 +36,7 @@ def add_attribute_ID_ACCIDENTE(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -110,7 +110,7 @@ def add_attribute_LID_CONDUCTOR(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -184,7 +184,7 @@ def add_attribute_TIPO_VEHICULO(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -213,7 +213,7 @@ def add_attribute_MMA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -287,7 +287,7 @@ def add_attribute_ITV(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -481,7 +481,7 @@ def add_attribute_MP_NUMERO_ONU(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -497,6 +497,7 @@ def add_attribute_MP_NUMERO_ONU(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ONU')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_DANYOS(ft):
   attr = ft.add("DANYOS",4)
@@ -509,7 +510,7 @@ def add_attribute_DANYOS(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -525,6 +526,7 @@ def add_attribute_DANYOS(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_DANYOS')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_REMOLQUE(ft):
   attr = ft.add("REMOLQUE",1)
@@ -630,7 +632,7 @@ def add_attribute_POS_VIA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -646,6 +648,7 @@ def add_attribute_POS_VIA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_POSICION_VIA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
   tags.set(u'dynform.separator', u'_Posicion_en_la_via')
 
 def add_attribute_APROXIMACION_NUDO(ft):
@@ -659,7 +662,7 @@ def add_attribute_APROXIMACION_NUDO(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -675,6 +678,7 @@ def add_attribute_APROXIMACION_NUDO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NUDO_APROX')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_SENTIDO_CIRCULACION(ft):
   attr = ft.add("SENTIDO_CIRCULACION",4)
@@ -687,7 +691,7 @@ def add_attribute_SENTIDO_CIRCULACION(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -703,6 +707,7 @@ def add_attribute_SENTIDO_CIRCULACION(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_SENTIDO_CIRCULA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
 
 def add_attribute_LUGAR_CIRCULABA(ft):
   attr = ft.add("LUGAR_CIRCULABA",4)
@@ -715,7 +720,7 @@ def add_attribute_LUGAR_CIRCULABA(ft):
   attr.setHidden(False)
   attr.setIsAutomatic(False)
   attr.setIsIndexAscending(True)
-  attr.setIsIndexed(False)
+  attr.setIsIndexed(True)
   attr.setIsPrimaryKey(False)
   attr.setIsReadOnly(False)
   attr.setIsTime(False)
@@ -731,6 +736,7 @@ def add_attribute_LUGAR_CIRCULABA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_LUGAR_CIRCULA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
+  tags.set(u'report.attr.label', u'DESCRIPCION')
   tags.set(u'dynform.dropdown', u'label')
 
 def add_attribute_FACT_LUGAR_CIRCULA(ft):

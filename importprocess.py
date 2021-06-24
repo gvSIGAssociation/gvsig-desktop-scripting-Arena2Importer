@@ -292,15 +292,15 @@ class ImportProcess(Runnable):
       builder = server.createSQLBuilder()
       delete = builder.delete()
       delete.table().database(params.getDBName()).schema(params.getSchema()).name(tableName)
-      delete.where().eq(
+      delete.where().and(delete.where().eq(
               builder.column("ID_ACCIDENTE"),
               builder.expression().constant(accidentId)
-      )
+      ))
       sql = delete.toString()
-      sql = """DELETE FROM "%s" WHERE ID_ACCIDENTE = '%s'""" % (
-        tableName,
-        accidentId
-      )
+      #sql = """DELETE FROM "%s" WHERE ID_ACCIDENTE = '%s'""" % (
+      #  tableName,
+      #  accidentId
+      #)
       #gvsig.logger("deleteChilds %r" % sql)
       
       server.execute(sql)
