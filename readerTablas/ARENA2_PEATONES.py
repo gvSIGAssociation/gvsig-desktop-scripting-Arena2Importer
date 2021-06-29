@@ -152,7 +152,7 @@ def add_attribute_SEXO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_SEXO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('SEXO.DESCRIPCION')")
 
 def add_attribute_NACIONALIDAD(ft):
   attr = ft.add("NACIONALIDAD",8)
@@ -273,7 +273,7 @@ def add_attribute_ASISTENCIA_SANITARIA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ASISTENCIA_SANITARIA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('ASISTENCIA_SANITARIA.DESCRIPCION')")
 
 def add_attribute_INFLU_FACT_ATENCION(ft):
   attr = ft.add("INFLU_FACT_ATENCION",1)
@@ -326,7 +326,7 @@ def add_attribute_FACTORES_ATENCION(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_FACTORES_ATENCION_PEA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('FACTORES_ATENCION.DESCRIPCION')")
 
 def add_attribute_INFLU_PRES_ERROR(ft):
   attr = ft.add("INFLU_PRES_ERROR",1)
@@ -378,7 +378,7 @@ def add_attribute_PRESUNTOS_ERRORES(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ERRORES_PEA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('PRESUNTOS_ERRORES.DESCRIPCION')")
 
 def add_attribute_INFLU_PRES_INFRAC(ft):
   attr = ft.add("INFLU_PRES_INFRAC",1)
@@ -458,7 +458,7 @@ def add_attribute_MOTIVO_DESPLAZAMIENTO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_MOTIVO_DESPLAZA_PEA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('MOTIVO_DESPLAZAMIENTO.DESCRIPCION')")
   tags.set(u'dynform.separator', u'_Desplazamiento')
 
 def add_attribute_ACCION_PEA(ft):
@@ -488,7 +488,7 @@ def add_attribute_ACCION_PEA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ACCION_PEA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('ACCION_PEA.DESCRIPCION')")
 
 def add_attribute_INFLU_ALCOHOL(ft):
   attr = ft.add("INFLU_ALCOHOL",1)
@@ -541,7 +541,7 @@ def add_attribute_PRUEBA_ALCOHOLEMIA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_PRUEBA_ALCOHOLEMIA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('PRUEBA_ALCOHOLEMIA.DESCRIPCION')")
 
 def add_attribute_TASA_ALCOHOLEMIA1(ft):
   attr = ft.add("TASA_ALCOHOLEMIA1",4)
@@ -686,7 +686,7 @@ def add_attribute_PRUEBA_DROGAS(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_PRUEBA_DROGAS')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('PRUEBA_DROGAS.DESCRIPCION')")
 
 def add_attribute_AMP(ft):
   attr = ft.add("AMP",1)

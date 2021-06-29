@@ -79,7 +79,7 @@ def add_attribute_ID_CROQUIS(ft):
   tags.set(u'dynform.readonly', u'True')
 
 def add_attribute_IMAGEN(ft):
-  attr = ft.add("IMAGEN",12)
+  attr = ft.add("IMAGEN",16)
   attr.setSize(0)
   attr.setAllowIndexDuplicateds(False)
   attr.setAllowNull(True)

@@ -276,7 +276,7 @@ def add_attribute_ASISTENCIA_SANITARIA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ASISTENCIA_SANITARIA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('ASISTENCIA_SANITARIA.DESCRIPCION')")
 
 def add_attribute_POSICION_VEHI(ft):
   attr = ft.add("POSICION_VEHI",4)
@@ -379,7 +379,7 @@ def add_attribute_ACC_SEG_CASCO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ACC_SEG_CASCO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('ACC_SEG_CASCO.DESCRIPCION')")
 
 def add_attribute_ACC_SEG_SIS_RETEN_INFANTIL(ft):
   attr = ft.add("ACC_SEG_SIS_RETEN_INFANTIL",1)

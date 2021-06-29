@@ -497,7 +497,7 @@ def add_attribute_MP_NUMERO_ONU(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ONU')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('MP_NUMERO_ONU.DESCRIPCION')")
 
 def add_attribute_DANYOS(ft):
   attr = ft.add("DANYOS",4)
@@ -526,7 +526,7 @@ def add_attribute_DANYOS(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_DANYOS')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('DANYOS.DESCRIPCION')")
 
 def add_attribute_REMOLQUE(ft):
   attr = ft.add("REMOLQUE",1)
@@ -648,7 +648,7 @@ def add_attribute_POS_VIA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_POSICION_VIA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('POS_VIA.DESCRIPCION')")
   tags.set(u'dynform.separator', u'_Posicion_en_la_via')
 
 def add_attribute_APROXIMACION_NUDO(ft):
@@ -678,7 +678,7 @@ def add_attribute_APROXIMACION_NUDO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NUDO_APROX')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('APROXIMACION_NUDO.DESCRIPCION')")
 
 def add_attribute_SENTIDO_CIRCULACION(ft):
   attr = ft.add("SENTIDO_CIRCULACION",4)
@@ -707,7 +707,7 @@ def add_attribute_SENTIDO_CIRCULACION(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_SENTIDO_CIRCULA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('SENTIDO_CIRCULACION.DESCRIPCION')")
 
 def add_attribute_LUGAR_CIRCULABA(ft):
   attr = ft.add("LUGAR_CIRCULABA",4)
@@ -736,7 +736,7 @@ def add_attribute_LUGAR_CIRCULABA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_LUGAR_CIRCULA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('LUGAR_CIRCULABA.DESCRIPCION')")
   tags.set(u'dynform.dropdown', u'label')
 
 def add_attribute_FACT_LUGAR_CIRCULA(ft):

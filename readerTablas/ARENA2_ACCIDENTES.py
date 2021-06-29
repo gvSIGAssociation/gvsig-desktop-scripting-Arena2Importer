@@ -105,7 +105,7 @@ def add_attribute_ESTADO_ACCIDENTE(ft):
   attr.getForeingKey().setClosedList(True)
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ESTADO_ACCIDENTE')
   tags = attr.getTags()
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('ESTADO_ACCIDENTE.DESCRIPCION')")
 
 def add_attribute_OPERACION(ft):
   attr = ft.add("OPERACION",8)
@@ -275,7 +275,7 @@ def add_attribute_ZONA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ZONA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('ZONA.DESCRIPCION')")
 
 def add_attribute_TIPO_VIA(ft):
   attr = ft.add("TIPO_VIA",4)
@@ -303,7 +303,7 @@ def add_attribute_TIPO_VIA(ft):
   attr.getForeingKey().setClosedList(True)
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_VIA')
   tags = attr.getTags()
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('TIPO_VIA.DESCRIPCION')")
 
 def add_attribute_CARRETERA(ft):
   attr = ft.add("CARRETERA",8)
@@ -378,7 +378,7 @@ def add_attribute_TITULARIDAD_VIA(ft):
   attr.getForeingKey().setClosedList(True)
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TITULARIDAD_VIA')
   tags = attr.getTags()
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('TITULARIDAD_VIA.DESCRIPCION')")
 
 def add_attribute_SENTIDO(ft):
   attr = ft.add("SENTIDO",4)
@@ -408,7 +408,7 @@ def add_attribute_SENTIDO(ft):
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
   tags.set(u'dal.search.attribute.priority', u'5')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('SENTIDO.DESCRIPCION')")
 
 def add_attribute_CALLE_CODIGO(ft):
   attr = ft.add("CALLE_CODIGO",8)
@@ -577,7 +577,7 @@ def add_attribute_NUDO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NUDO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('NUDO.DESCRIPCION')")
 
 def add_attribute_NUDO_INFO(ft):
   attr = ft.add("NUDO_INFO",4)
@@ -606,7 +606,7 @@ def add_attribute_NUDO_INFO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NUDO_INFORMACION')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('NUDO_INFO.DESCRIPCION')")
 
 def add_attribute_CRUCE_CALLE(ft):
   attr = ft.add("CRUCE_CALLE",8)
@@ -1044,7 +1044,7 @@ def add_attribute_TIPO_ACC_SALIDA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_ACCIDENTE_SALIDA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('TIPO_ACC_SALIDA.DESCRIPCION')")
 
 def add_attribute_TIPO_ACC_COLISION(ft):
   attr = ft.add("TIPO_ACC_COLISION",4)
@@ -1073,7 +1073,7 @@ def add_attribute_TIPO_ACC_COLISION(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_ACCIDENTE_COLISION')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('TIPO_ACC_COLISION.DESCRIPCION')")
 
 def add_attribute_TIPO_ACC_ANIMAL(ft):
   attr = ft.add("TIPO_ACC_ANIMAL",4)
@@ -1102,7 +1102,7 @@ def add_attribute_TIPO_ACC_ANIMAL(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TIPO_ACCIDENTE_ANIMAL')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('TIPO_ACC_ANIMAL.DESCRIPCION')")
 
 def add_attribute_SENTIDO_CONTRARIO(ft):
   attr = ft.add("SENTIDO_CONTRARIO",1)
@@ -1154,7 +1154,7 @@ def add_attribute_CONDICION_NIVEL_CIRCULA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NIVEL_CIRCULACION')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('CONDICION_NIVEL_CIRCULA.DESCRIPCION')")
 
 def add_attribute_INFLU_NIVEL_CIRC(ft):
   attr = ft.add("INFLU_NIVEL_CIRC",1)
@@ -1206,7 +1206,7 @@ def add_attribute_CONDICION_FIRME(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_CONDICION_FIRME')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('CONDICION_FIRME.DESCRIPCION')")
 
 def add_attribute_INFLU_SUP_FIRME(ft):
   attr = ft.add("INFLU_SUP_FIRME",1)
@@ -1258,7 +1258,7 @@ def add_attribute_CONDICION_ILUMINACION(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ILUMINACION')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('CONDICION_ILUMINACION.DESCRIPCION')")
 
 def add_attribute_INFLU_ILUMINACION(ft):
   attr = ft.add("INFLU_ILUMINACION",1)
@@ -1310,7 +1310,7 @@ def add_attribute_CONDICION_METEO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_METEO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('CONDICION_METEO.DESCRIPCION')")
 
 def add_attribute_INFLU_METEO(ft):
   attr = ft.add("INFLU_METEO",1)
@@ -1362,7 +1362,7 @@ def add_attribute_CONDICION_NIEBLA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NIEBLA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('CONDICION_NIEBLA.DESCRIPCION')")
 
 def add_attribute_CONDICION_VIENTO(ft):
   attr = ft.add("CONDICION_VIENTO",4)
@@ -1391,7 +1391,7 @@ def add_attribute_CONDICION_VIENTO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_VIENTO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('CONDICION_VIENTO.DESCRIPCION')")
 
 def add_attribute_VISIB_RESTRINGIDA_POR(ft):
   attr = ft.add("VISIB_RESTRINGIDA_POR",4)
@@ -1420,7 +1420,7 @@ def add_attribute_VISIB_RESTRINGIDA_POR(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_VISIBILIDAD_RESTRINGIDA_POR')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('VISIB_RESTRINGIDA_POR.DESCRIPCION')")
 
 def add_attribute_INFLU_VISIBILIDAD(ft):
   attr = ft.add("INFLU_VISIBILIDAD",1)
@@ -1472,7 +1472,7 @@ def add_attribute_CARACT_FUNCIONAL_VIA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_CARACT_FUNCIONAL_VIA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('CARACT_FUNCIONAL_VIA.DESCRIPCION')")
 
 def add_attribute_VEL_GENERICA_SENYALIZADA(ft):
   attr = ft.add("VEL_GENERICA_SENYALIZADA",4)
@@ -1501,7 +1501,7 @@ def add_attribute_VEL_GENERICA_SENYALIZADA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_VEL_GENERICA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('VEL_GENERICA_SENYALIZADA.DESCRIPCION')")
 
 def add_attribute_VELOCIDAD(ft):
   attr = ft.add("VELOCIDAD",7)
@@ -1553,7 +1553,7 @@ def add_attribute_SENTIDOS_VIA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_SENTIDOS_VIA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('SENTIDOS_VIA.DESCRIPCION')")
 
 def add_attribute_NUMERO_CALZADAS(ft):
   attr = ft.add("NUMERO_CALZADAS",4)
@@ -1582,7 +1582,7 @@ def add_attribute_NUMERO_CALZADAS(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_NUMERO_CALZADAS')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('NUMERO_CALZADAS.DESCRIPCION')")
 
 def add_attribute_CARRILES_APTOS_CIRC_ASC(ft):
   attr = ft.add("CARRILES_APTOS_CIRC_ASC",4)
@@ -1657,7 +1657,7 @@ def add_attribute_ANCHURA_CARRIL(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ANCHURA_CARRIL')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('ANCHURA_CARRIL.DESCRIPCION')")
 
 def add_attribute_ARCEN(ft):
   attr = ft.add("ARCEN",4)
@@ -1686,7 +1686,7 @@ def add_attribute_ARCEN(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ANCHURA_ARCEN')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('ARCEN.DESCRIPCION')")
 
 def add_attribute_ACERA(ft):
   attr = ft.add("ACERA",4)
@@ -1715,7 +1715,7 @@ def add_attribute_ACERA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_ACERA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('ACERA.DESCRIPCION')")
 
 def add_attribute_INFLU_ACERA(ft):
   attr = ft.add("INFLU_ACERA",1)
@@ -1790,7 +1790,7 @@ def add_attribute_TRAZADO_PLANTA(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TRAZADO_PLANTA')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('TRAZADO_PLANTA.DESCRIPCION')")
 
 def add_attribute_TRAZADO_ALZADO(ft):
   attr = ft.add("TRAZADO_ALZADO",4)
@@ -1819,7 +1819,7 @@ def add_attribute_TRAZADO_ALZADO(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_TRAZADO_ALZADO')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('TRAZADO_ALZADO.DESCRIPCION')")
 
 def add_attribute_MARCAS_VIALES(ft):
   attr = ft.add("MARCAS_VIALES",4)
@@ -1848,7 +1848,7 @@ def add_attribute_MARCAS_VIALES(ft):
   attr.getForeingKey().setTableName(u'ARENA2_DIC_MARCAS_VIALES')
   tags = attr.getTags()
   tags.set(u'dynform.readonly', u'True')
-  tags.set(u'report.attr.label', u'DESCRIPCION')
+  tags.set(u'report.attr.label', u"FOREING_VALUE('MARCAS_VIALES.DESCRIPCION')")
 
 def add_attribute_DESCRIPCION(ft):
   attr = ft.add("DESCRIPCION",8)
