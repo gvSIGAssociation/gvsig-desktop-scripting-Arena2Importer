@@ -6,7 +6,7 @@ from org.gvsig.fmap.dal import DALLocator
 
 def add_attribute_LID_CROQUIS(ft):
   attr = ft.add("LID_CROQUIS",8)
-  attr.setSize(30)
+  attr.setSize(100)
   attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)

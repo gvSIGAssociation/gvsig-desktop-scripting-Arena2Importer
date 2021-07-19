@@ -29,7 +29,7 @@ from org.gvsig.expressionevaluator import ExpressionUtils
 from org.gvsig.fmap.dal.store.jdbc import JDBCServerExplorerParameters
 import addons.Arena2Importer
 reload(addons.Arena2Importer)
-from addons.Arena2Importer.tablas.ARENA2_ACCIDENTES import configurar_featuretype_ARENA2_ACCIDENTES
+#from addons.Arena2Importer.readerTablas.ARENA2_ACCIDENTES import configurar_featuretype_ARENA2_ACCIDENTES
 from addons.Arena2Reader.arena2readerutils import createArena2XMLFileFilter, isArena2File
 
 from javax.swing import JFileChooser
