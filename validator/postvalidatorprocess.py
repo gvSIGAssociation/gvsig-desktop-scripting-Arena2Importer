@@ -73,25 +73,39 @@ class PostTransformProcess(Runnable):
         #apply transforms
         for transform in self.transforms:
           transform.apply(efeature)
-        fsetAccidentes.update(efeature)
+          
+        if efeature.isModified():
+          fsetAccidentes.update(efeature)
         self.status.incrementCurrentValue()
         self.status.setTitle("%s (%d/%d)" % (title, n, count))
     except java.lang.Throwable, ex:
-      storeAccidentes.cancelEditing()
       logger("Error transformando accidentes.", LOGGER_WARN, ex)
+      storeAccidentes.cancelEditing()
       self.status.message("Error transformando accidentes (%s)")
       self.status.abort()
       raise ex
     except:
-      storeAccidentes.cancelEditing()
+      logger("Error transformando accidentes.")
       ex = sys.exc_info()[1]
       logger("Error transformando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
-      self.status.message("Error transformando accidentes (%s)")
+      self.status.message("Error transformando accidentes")
+      storeAccidentes.cancelEditing()
       
     finally:
+      logger("Finalizando proceso..")
       if storeAccidentes!= None:
-        storeAccidentes.finishEditing()
+        logger(".. proceso finishEditing..")
+        try:
+          storeAccidentes.finishEditing()
+        except ex:
+          logger("Error finalizando edicion.", LOGGER_WARN, ex)
+        
+        logger(".. finalizado proceso finishEditing..")
       DisposeUtils.dispose(storeAccidentes)
+      self.status.setTitle("Finalizado proceso")
+      self.status.setCurValue(0)
+      self.status.abort()
+      logger("..Finalizado proceso")
 
   
 class PostUpdateProcess(Runnable):
@@ -139,7 +153,8 @@ class PostUpdateProcess(Runnable):
         feature = storeAccidentes.findFirst("ID_ACCIDENTE='%s'" % issue.get("ID_ACCIDENTE"))
         efeature = feature.getEditable()
         self.report.fixIssueFeature(issue, efeature)
-        storeAccidentes.update(efeature)
+        if efeature.isModified():
+          storeAccidentes.update(efeature)
 
     except java.lang.Throwable, ex:
       storeAccidentes.cancelEditing()
