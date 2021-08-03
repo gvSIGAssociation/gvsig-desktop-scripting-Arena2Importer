@@ -30,7 +30,7 @@ def add_attribute_LID_ACCIDENTE(ft):
 def add_attribute_COD_INFORME(ft):
   attr = ft.add("COD_INFORME",8)
   attr.setSize(20)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'COD_INFORME')
