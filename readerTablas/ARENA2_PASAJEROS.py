@@ -30,7 +30,7 @@ def add_attribute_LID_PASAJERO(ft):
 def add_attribute_ID_ACCIDENTE(ft):
   attr = ft.add("ID_ACCIDENTE",8)
   attr.setSize(20)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ID_ACCIDENTE')
@@ -58,7 +58,7 @@ def add_attribute_ID_ACCIDENTE(ft):
 def add_attribute_LID_VEHICULO(ft):
   attr = ft.add("LID_VEHICULO",8)
   attr.setSize(20)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'LID_VEHICULO')
@@ -86,7 +86,7 @@ def add_attribute_LID_VEHICULO(ft):
 def add_attribute_ID_VEHICULO(ft):
   attr = ft.add("ID_VEHICULO",8)
   attr.setSize(5)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ID_VEHICULO')
@@ -132,7 +132,7 @@ def add_attribute_ID_PASAJERO(ft):
 def add_attribute_FECHA_NACIMIENTO(ft):
   attr = ft.add("FECHA_NACIMIENTO",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'FECHA_NACIMIENTO')
@@ -155,7 +155,7 @@ def add_attribute_FECHA_NACIMIENTO(ft):
 def add_attribute_SEXO(ft):
   attr = ft.add("SEXO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'SEXO')
@@ -183,7 +183,7 @@ def add_attribute_SEXO(ft):
 def add_attribute_PAIS_RESIDENCIA(ft):
   attr = ft.add("PAIS_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PAIS_RESIDENCIA')
@@ -206,7 +206,7 @@ def add_attribute_PAIS_RESIDENCIA(ft):
 def add_attribute_PROVINCIA_RESIDENCIA(ft):
   attr = ft.add("PROVINCIA_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'PROVINCIA_RESIDENCIA')
@@ -229,7 +229,7 @@ def add_attribute_PROVINCIA_RESIDENCIA(ft):
 def add_attribute_MUNICIPIO_RESIDENCIA(ft):
   attr = ft.add("MUNICIPIO_RESIDENCIA",8)
   attr.setSize(100)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'MUNICIPIO_RESIDENCIA')
@@ -252,7 +252,7 @@ def add_attribute_MUNICIPIO_RESIDENCIA(ft):
 def add_attribute_ASISTENCIA_SANITARIA(ft):
   attr = ft.add("ASISTENCIA_SANITARIA",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ASISTENCIA_SANITARIA')
@@ -281,7 +281,7 @@ def add_attribute_ASISTENCIA_SANITARIA(ft):
 def add_attribute_POSICION_VEHI(ft):
   attr = ft.add("POSICION_VEHI",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'POSICION_VEHI')
@@ -309,7 +309,7 @@ def add_attribute_POSICION_VEHI(ft):
 def add_attribute_NINYO_EN_BRAZO(ft):
   attr = ft.add("NINYO_EN_BRAZO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'NINYO_EN_BRAZO')
@@ -332,7 +332,7 @@ def add_attribute_NINYO_EN_BRAZO(ft):
 def add_attribute_ACC_SEG_CINTURON(ft):
   attr = ft.add("ACC_SEG_CINTURON",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACC_SEG_CINTURON')
@@ -355,7 +355,7 @@ def add_attribute_ACC_SEG_CINTURON(ft):
 def add_attribute_ACC_SEG_CASCO(ft):
   attr = ft.add("ACC_SEG_CASCO",4)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACC_SEG_CASCO')
@@ -384,7 +384,7 @@ def add_attribute_ACC_SEG_CASCO(ft):
 def add_attribute_ACC_SEG_SIS_RETEN_INFANTIL(ft):
   attr = ft.add("ACC_SEG_SIS_RETEN_INFANTIL",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACC_SEG_SIS_RETEN_INFANTIL')
@@ -407,7 +407,7 @@ def add_attribute_ACC_SEG_SIS_RETEN_INFANTIL(ft):
 def add_attribute_ACC_SEG_BRAZOS(ft):
   attr = ft.add("ACC_SEG_BRAZOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACC_SEG_BRAZOS')
@@ -431,7 +431,7 @@ def add_attribute_ACC_SEG_BRAZOS(ft):
 def add_attribute_ACC_SEG_ESPALDA(ft):
   attr = ft.add("ACC_SEG_ESPALDA",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACC_SEG_ESPALDA')
@@ -454,7 +454,7 @@ def add_attribute_ACC_SEG_ESPALDA(ft):
 def add_attribute_ACC_SEG_TORSO(ft):
   attr = ft.add("ACC_SEG_TORSO",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACC_SEG_TORSO')
@@ -477,7 +477,7 @@ def add_attribute_ACC_SEG_TORSO(ft):
 def add_attribute_ACC_SEG_MANOS(ft):
   attr = ft.add("ACC_SEG_MANOS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACC_SEG_MANOS')
@@ -500,7 +500,7 @@ def add_attribute_ACC_SEG_MANOS(ft):
 def add_attribute_ACC_SEG_PIERNAS(ft):
   attr = ft.add("ACC_SEG_PIERNAS",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACC_SEG_PIERNAS')
@@ -523,7 +523,7 @@ def add_attribute_ACC_SEG_PIERNAS(ft):
 def add_attribute_ACC_SEG_PIES(ft):
   attr = ft.add("ACC_SEG_PIES",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACC_SEG_PIES')
@@ -546,7 +546,7 @@ def add_attribute_ACC_SEG_PIES(ft):
 def add_attribute_ACC_SEG_PRENDA_REF(ft):
   attr = ft.add("ACC_SEG_PRENDA_REF",1)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACC_SEG_PRENDA_REF')

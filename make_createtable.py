@@ -14,7 +14,7 @@ def toSource(x):
 def descriptor(builder, desc):
   builder.append("  attr = ft.add(\"").append(desc.getName()).append("\",").append(desc.getDataType().getType()).append(")\n")
   builder.append("  attr.setSize(").append(toSource(desc.getSize())).append(")\n")
-  builder.append("  attr.setAllowIndexDuplicateds(").append(toSource(desc.isPrimaryKey())).append(")\n")
+  builder.append("  attr.setAllowIndexDuplicateds(").append(toSource(desc.allowIndexDuplicateds())).append(")\n")
   builder.append("  attr.setAllowNull(").append(toSource(desc.allowNull())).append(")\n")
   builder.append("  attr.setDataProfileName(").append(toSource(desc.getDataProfileName())).append(")\n")
   builder.append("  attr.setDescription(").append(toSource(desc.getDescription())).append(")\n")

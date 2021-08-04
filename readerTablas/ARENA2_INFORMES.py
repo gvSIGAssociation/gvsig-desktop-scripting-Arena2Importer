@@ -53,7 +53,7 @@ def add_attribute_COD_INFORME(ft):
 def add_attribute_FECHA_INI_EXPORT(ft):
   attr = ft.add("FECHA_INI_EXPORT",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'FECHA_INI_EXPORT')
@@ -76,7 +76,7 @@ def add_attribute_FECHA_INI_EXPORT(ft):
 def add_attribute_FECHA_FIN_EXPORT(ft):
   attr = ft.add("FECHA_FIN_EXPORT",9)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'FECHA_FIN_EXPORT')
@@ -99,7 +99,7 @@ def add_attribute_FECHA_FIN_EXPORT(ft):
 def add_attribute_ACCIDENTES(ft):
   attr = ft.add("ACCIDENTES",34)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ACCIDENTES')

@@ -3,6 +3,7 @@
 import gvsig
 
 from org.gvsig.fmap.dal import DALLocator
+from org.gvsig.tools.dataTypes import DataTypes
 
 def add_attribute_LID_CROQUIS(ft):
   attr = ft.add("LID_CROQUIS",8)
@@ -30,7 +31,7 @@ def add_attribute_LID_CROQUIS(ft):
 def add_attribute_ID_ACCIDENTE(ft):
   attr = ft.add("ID_ACCIDENTE",8)
   attr.setSize(20)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(None)
   attr.setDescription(u'ID_ACCIDENTE')
@@ -79,9 +80,9 @@ def add_attribute_ID_CROQUIS(ft):
   tags.set(u'dynform.readonly', u'True')
 
 def add_attribute_IMAGEN(ft):
-  attr = ft.add("IMAGEN",16)
+  attr = ft.add("IMAGEN",DataTypes.BYTEARRAY)
   attr.setSize(0)
-  attr.setAllowIndexDuplicateds(False)
+  attr.setAllowIndexDuplicateds(True)
   attr.setAllowNull(True)
   attr.setDataProfileName(u'Image')
   attr.setDescription(u'IMAGEN')
