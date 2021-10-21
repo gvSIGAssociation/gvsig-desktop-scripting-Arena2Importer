@@ -251,8 +251,11 @@ class Report(AbstractTableModel):
     return issue
     
   def hasToProcessIssue(self, basestring):
+      issue = self.__issues.findFirst("ID_ACCIDENTE = '%s'") # Si no hay accidente con incidencia se importa
+      if issue==None:
+        return True;
       issue = self.__issues.findFirst("ID_ACCIDENTE = '%s' AND SELECTED=False" % basestring)
-      return issue
+      return issue==None # Si no se encuentra desactivado en ninguno de sus reportes, hay que importarlo
 
   def putIssue(self, row, issue):
     trace("put(%s,%s)" % (row, issue))

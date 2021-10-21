@@ -83,7 +83,7 @@ class ImportProcess(Runnable):
         children = input_store.getChildren()
   
         count = 0
-        
+        #TODO: este count solo cuenta hijos directos, no hijos de hijos
         for name in children.keySet():
           sourceStore = children.get(name)
           count += sourceStore.getFeatureCount()
@@ -145,14 +145,28 @@ class ImportProcess(Runnable):
         report = self.report
       targetStore.edit(FeatureStore.MODE_APPEND)
       transforms = self.transforms
+      count = 0
       for f_src in sourceStore:
         accidentId = f_src.get("ID_ACCIDENTE")
         ### comprobarsi el accidente esta fuera de la fecha de cierrr
         process = True
-        if report != None:
-          issue = report.getIssue(accidentId)
-          if issue!=None:
-            process = issue.get("SELECTED")
+        if report != None: ### hasToProcess
+          ### Cambiar
+          ### si uno no se marca, que no siga
+          issue = report.hasToProcessIssue(accidentId)
+          #if issue!=None:
+          #  process = False # Si alguno de los issue no estan marcados, no se importa
+        print "copyTable [%3d] %s import %s" % (count, accidentId, process)
+        count += 1
+        ## Decidir procesamiento
+        # Si hay al menos un issue que esta deseleccionado, no se importa.
+        #process = True
+        #if report != None:
+        #  issue = report.getIssue(accidentId)
+        #  if issue!=None:
+        #    process = issue.get("SELECTED")
+        ##
+        
         if process:
           f_dst = targetStore.createNewFeature(f_src)
           for transform in transforms:
@@ -220,18 +234,19 @@ class ImportProcess(Runnable):
       transforms = self.transforms
       targetType = targetStore[1].getDefaultFeatureType()
       sourceType = sourceStore.getDefaultFeatureType()
-      #count = 0
+      count = 0
       for f_src in sourceStore:
+        count += 1
         accidentId = f_src.get("ID_ACCIDENTE")
         process = True
-        #if report != None: ### hasToProcess
-        #  ### Cambiar
-        #  ### si uno no se marca, que no siga
-        #  issue = report.hasToProcessIssue(accidentId)
-        #  if issue!=None:
-        #    process = False # Si alguno de los issue no estan marcados, no se importa
-        #print "[%3d] %s import %s" % (count, accidentId, process)
-        #count += 1
+        if report != None: ### hasToProcess
+          ### Cambiar
+          ### si uno no se marca, que no siga
+          process = report.hasToProcessIssue(accidentId)
+          #if issue!=None:
+          #  process = False # Si alguno de los issue no estan marcados, no se importa
+        print " copyTableAccidentes [%3d] %s import %s" % (count, accidentId, process)
+        
         if process:
           f_dst = targetStore[1].findFirst("ID_ACCIDENTE = '%s'" % accidentId)
           if f_dst == None:
