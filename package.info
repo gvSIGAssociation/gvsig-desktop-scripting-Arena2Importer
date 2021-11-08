@@ -1,16 +1,16 @@
 #
-#Thu Jun 24 11:40:47 CEST 2021
+#Mon Nov 08 19:36:14 CET 2021
 owner=gvSIG Association
 code=Arena2Importer
-download-url=https\://github.com/gvSIGAssociation/gvsig-desktop-scripting-Arena2Importer/releases/download/1.0.0-4/gvSIG-desktop-2.6.0-Arena2Importer-1.0.0-4-testing-all-all-j1_7.gvspkg
+download-url=https\://github.com/gvSIGAssociation/gvsig-desktop-scripting-Arena2Importer/releases/download/1.0.0-5/gvSIG-desktop-2.6.0-Arena2Importer-1.0.0-5-testing-all-all-j1_7.gvspkg
 java-version=j1_7
 operating-system=all
 description=Herramientas para crear y mantener una BBDD de accidentes a partir de los ficheros XML ARENA2 de la DGT
 official=true
 type=Script
 web-url=
-version=1.0.0-4
-buildNumber=4
+version=1.0.0-5
+buildNumber=5
 owner-url=
 dependencies=
 sources-url=
