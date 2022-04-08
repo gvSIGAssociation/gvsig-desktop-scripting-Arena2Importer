@@ -410,9 +410,11 @@ class ValidatorProcess(Runnable):
 
         DisposeUtils.disposeQuietly(input_features)
 
+        print "processing children"
         children = self.input_store.getChildren()
         count = 0
         for name in children.keySet():
+          print "process child ", name
           childStore = children.get(name)
           if childStore==None: 
             continue

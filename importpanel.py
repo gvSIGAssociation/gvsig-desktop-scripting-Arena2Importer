@@ -6,7 +6,7 @@ import os, sys
 from gvsig import logger
 from gvsig import LOGGER_WARN,LOGGER_INFO,LOGGER_ERROR
 from gvsig import getResource
-from gvsig.commonsdialog import filechooser
+from gvsig.commonsdialog import filechooser, confirmDialog, YES_NO_CANCEL, YES, CANCEL, QUESTION
 
 from gvsig.libs.formpanel import FormPanel, FormComponent
 from gvsig.commonsdialog import msgbox
@@ -20,7 +20,7 @@ from javax.swing import DefaultComboBoxModel, DefaultListModel
 
 from org.gvsig.tools import ToolsLocator
 from org.gvsig.tools.observer import Observer
-from org.gvsig.tools.swing.api import ToolsSwingLocator
+from org.gvsig.tools.swing.api import ToolsSwingLocator, ToolsSwingUtils
 from org.gvsig.tools.util import LabeledValueImpl
 
 from org.gvsig.fmap.dal import DALLocator
@@ -248,7 +248,14 @@ class ImportPanel(FormPanel, Observer):
         conn = entry.getExplorerParameters()
         workspace = dataManager.createDatabaseWorkspaceManager(conn)
         if workspace.isValidStoresRepository():
-          model.addElement(workspace)
+          label = workspace.getLabelOrId()
+          if label in (None,""):
+            label = conn.getUrl()
+          else:
+            label = label + " [" + conn.getUrl() + "]"
+          if workspace.isConnected():
+            label = "<html><b>%s</b></html>"%label
+          model.addElement(LabeledValueImpl(label, workspace))
           if "arena" in workspace.getId().lower():
             select = n
           n += 1
@@ -271,8 +278,8 @@ class ImportPanel(FormPanel, Observer):
     swingManager.createTableColumnAdjuster(self.tblIssues)
     self.btnVerAccidente2.setEnabled(False)
     self.btnModifyIssues.setEnabled(False)
-    
-    self.setPreferredSize(800,500)
+
+    ToolsSwingUtils.ensureRowsCols(self.asJComponent(),25,100,30,150)
 
   def btnImportAll_click(self, *args):
     self.doSelectImport(True)
@@ -403,10 +410,16 @@ class ImportPanel(FormPanel, Observer):
     status = self.importManager.createStatus("ARENA2 validando", self)
     self.taskStatusController.bind(status)
     self.setVisibleTaskStatus(True)
-    ws = self.cboWorkspace.getSelectedItem()
+    ws = self.cboWorkspace.getSelectedItem().getValue()
+    if not ws.isConnected():
+      n = confirmDialog(u"No está conectado al espacio de trabajo '%s' \n¿Desea conectarse antes de continuar?"%ws.getLabelOrId(),"ARENA2 Importar accidentes", YES_NO_CANCEL, QUESTION)
+      if n==CANCEL:
+        return
+      if n == YES:
+        ws.connect()
     for rule in self.importManager.getRuleFactories():
       if self.cltRules.getCheckedModel().isSelectedIndex(n):
-        rules.append(rule.create(workspace=self.cboWorkspace.getSelectedItem()))
+        rules.append(rule.create(workspace=ws))
       n+=1
     if len(rules)==0 :
       self.btnClose.setEnabled(True)
@@ -419,7 +432,7 @@ class ImportPanel(FormPanel, Observer):
       self.report,
       status=status,
       rules = rules,
-      workspace=self.cboWorkspace.getSelectedItem()
+      workspace=ws
     )
     self.process.add(self.showValidatorFinishMessage)
     th = Thread(self.process, "ARENA2_validator")
@@ -445,7 +458,13 @@ class ImportPanel(FormPanel, Observer):
 
     transforms = list()
     n = 0
-    ws = self.cboWorkspace.getSelectedItem()
+    ws = self.cboWorkspace.getSelectedItem().getValue()
+    if not ws.isConnected():
+      n = confirmDialog(u"No está conectado al espacio de trabajo '%s' \n¿Desea conectarse antes de continuar?"%ws.getLabelOrId(),"ARENA2 Importar accidentes", YES_NO_CANCEL, QUESTION)
+      if n==CANCEL:
+        return
+      if n == YES:
+        ws.connect()
     for transform in self.importManager.getTransformFactories():
       if self.cltTransforms.getCheckedModel().isSelectedIndex(n):
         transforms.append(transform.create(workspace=ws))

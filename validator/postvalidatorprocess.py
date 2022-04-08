@@ -68,6 +68,9 @@ class PostTransformProcess(Runnable):
       self.status.setCurValue(0)
       storeAccidentes.edit(FeatureStore.MODE_FULLEDIT)
       for feature in fsetAccidentes:
+        if self.status.isCancellationRequested():
+          self.status.cancel()
+          break
         n+=1
         efeature = feature.getEditable()
         #apply transforms
@@ -143,6 +146,10 @@ class PostUpdateProcess(Runnable):
       self.status.setRangeOfValues(0,count)
       self.status.setCurValue(0)
       for issue in issues:
+        if self.status.isCancellationRequested():
+          self.status.cancel()
+          storeAccidentes.cancelEditing()
+          return
         n+=1
         self.status.incrementCurrentValue()
         self.status.setTitle("%s (%d/%d)" % (title, n, count))
@@ -155,7 +162,8 @@ class PostUpdateProcess(Runnable):
         self.report.fixIssueFeature(issue, efeature)
         if efeature.isModified():
           storeAccidentes.update(efeature)
-
+          
+      storeAccidentes.finishEditing()
     except java.lang.Throwable, ex:
       storeAccidentes.cancelEditing()
       logger("Error actualizando accidentes.", LOGGER_WARN, ex)
@@ -168,7 +176,6 @@ class PostUpdateProcess(Runnable):
       logger("Error actualizando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
       self.status.message("Error actualizando accidentes (%s)")
     finally:
-      storeAccidentes.finishEditing()
       DisposeUtils.dispose(storeAccidentes)
 
 
@@ -223,6 +230,9 @@ class PostValidatorProcess(Runnable):
       self.status.setCurValue(0)
 
       for feature in fsetAccidentes:
+        if self.status.isCancellationRequested():
+          self.status.cancel()
+          break
         n+=1
         self.status.setTitle("%s (%d/%d)" % (title, n, count))
         
@@ -357,34 +367,6 @@ def validateData(issues_pathname, workspaceName):
   base = ntpath.basename(issues_pathname)
   #store.export(explorer,"CSV",explorer.getAddParameters(File(issues_pathname)), base)
   print "## DONE EXPORT"
-  
-def importData(issues_pathname, slot, slotsize, workspaceName):
-  status = LoggerTaskStatus("ImportArena2Files")
-
-  issues_pathname = issues_pathname % slot
-  fnames, slots = calculateSlots(folderData, slotsize, slot, status)
-  status.logger("import slot %d/%d" % (slot, slots))
-
-  if not connectToWorkspace(workspaceName, status):
-    return
-    
-  importManager = getArena2ImportManager()
-  report = Report(importManager)
-  report.setEnabledEvents(False)
-  dataManager = DALLocator.getDataManager()
-  workspace = dataManager.getDatabaseWorkspace("ARENA2_DB")
-  if workspace==None:
-    status.logger("Can't access to workspace ARENA2_DB", gvsig.LOGGER_WARN)
-    return
-
-  issues = dataManager.openStore("CSV","File", issues_pathname)
-  report.addIssues(issues.getFeatureSet())
-  if len(report) != issues.getFeatureCount():
-    status.logger("Can't load issues in report", gvsig.LOGGER_WARN)
-    return
-    
-  p = ImportProcess(importManager, fnames, workspace, report, status)
-  p.run()
 
 def main(*args):
   application = ApplicationLocator.getApplicationManager()
@@ -395,7 +377,7 @@ def main(*args):
   workspaceName = "a2testquincena1"
   closeAtFinish = False
   from gvsig.utils import getTempFile
-  issues_pathname = getTempFile('a2testquincena1', '.csv', tempdir='/home/osc/gva_arena2/develtest')
+  issues_pathname = getTempFile('a2testquincena1', '.csv', tempdir='/home/fdiaz/gva_arena2/develtest')
   print issues_pathname
 
   workspaceName = arguments.get("workspaceName",workspaceName)
@@ -412,9 +394,6 @@ def main(*args):
   #if arguments.contains("validate","true"):
   validateData(issues_pathname, workspaceName)
   print "Validated data"
-  
-  #if True or arguments.contains("import","true"):
-  #  importData(folderData, issues_pathname, slot, slotsize, workspaceName)
   
   if closeAtFinish:
     application.close(True)

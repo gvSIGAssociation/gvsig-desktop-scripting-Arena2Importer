@@ -364,11 +364,14 @@ class Report(AbstractTableModel):
     return False
 
   def getValueAt(self, rowIndex, columnIndex):
-    issue = self.getIssue(rowIndex)
-    if issue == None:
-      return None
-    attr = self.getAttributeByColumnIndex(columnIndex)
-    return issue.get(attr.getName())
+    try:
+      issue = self.getIssue(rowIndex)
+      if issue == None:
+        return None
+      attr = self.getAttributeByColumnIndex(columnIndex)
+      return issue.get(attr.getName())
+    except:
+      pass
 
   def setValueAt(self, aValue, rowIndex, columnIndex):
     trace("setValueAt(value=%s,row=%s,column=%s)" % (aValue, rowIndex, columnIndex))

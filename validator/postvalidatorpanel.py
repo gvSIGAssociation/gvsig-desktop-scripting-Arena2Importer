@@ -327,6 +327,8 @@ class PostValidatorPanel(FormPanel, Observer):
     self.taskStatusController.bind(status)
         
     self.setVisibleTaskStatus(True)
+    status.add()
+    status.setAutoremove(True)
 
     self.process = self.importManager.createPostValidatorProcess(
       self.report,
@@ -347,14 +349,17 @@ class PostValidatorPanel(FormPanel, Observer):
       self.btnCheckIntegrity.setEnabled(True)
       
   def showValidatorFinishMessage(self, process):
-    self.message("Total %s incidencias en %s accidentes" % (
+    msg = "Total %s incidencias en %s accidentes" % (
         len(process.getReport()),
         len(process)
       )
-    )
+    gvsig.logger(msg)
+    self.message(msg)
     
   def btnApplyTransform_click(self, *args):
     status = self.importManager.createStatus("ARENA2 Post transform Actualizando", self)
+    status.add()
+    status.setAutoremove(True)
     self.taskStatusController.bind(status)
     self.setVisibleTaskStatus(True)
     self.btnClose.setEnabled(False)
@@ -379,6 +384,9 @@ class PostValidatorPanel(FormPanel, Observer):
   def btnApplyUpdate_click(self, *args):
       
     status = self.importManager.createStatus("ARENA2 Post Actualizando", self)
+    status.add()
+    status.setAutoremove(True)
+
     self.taskStatusController.bind(status)
     self.setVisibleTaskStatus(True)
     self.btnClose.setEnabled(False)
