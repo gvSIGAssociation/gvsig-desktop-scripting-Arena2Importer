@@ -66,7 +66,7 @@ class PostTransformProcess(Runnable):
       self.status.message(title)
       self.status.setRangeOfValues(0,count)
       self.status.setCurValue(0)
-      storeAccidentes.edit(FeatureStore.MODE_FULLEDIT)
+      storeAccidentes.edit(FeatureStore.MODE_PASS_THROUGH)
       for feature in fsetAccidentes:
         if self.status.isCancellationRequested():
           self.status.cancel()
@@ -138,7 +138,7 @@ class PostUpdateProcess(Runnable):
     storeAccidentes = repo.getStore("ARENA2_ACCIDENTES")
     print "post update process"
     try:
-      storeAccidentes.edit(FeatureStore.MODE_FULLEDIT)
+      storeAccidentes.edit(FeatureStore.MODE_PASS_THROUGH)
       n = 0
       count = len(issues)
       title = "Actualizando accidentes (Accidentes)..."
