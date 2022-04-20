@@ -381,6 +381,9 @@ class ValidatorProcess(Runnable):
         fname_tail = os.path.sep.join(fname.split(os.path.sep)[-3:])
         self.input_store = self.openStore(fname)
         
+        if self.input_store == None:
+          self.status.abort()
+          return
         # TODO
         #Si el featureType tiene tags de errores de valores no encontrados
         # 
@@ -389,9 +392,6 @@ class ValidatorProcess(Runnable):
            print "Tags new found: ", tags
         #
         
-        if self.input_store == None:
-          self.status.abort()
-          return
         count = self.input_store.getFeatureCount()
     
         self.status.setRangeOfValues(0,count)
