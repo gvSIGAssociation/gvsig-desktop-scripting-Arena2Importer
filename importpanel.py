@@ -106,7 +106,7 @@ class FilesPickerController(FormComponent):
     dialog = createFileChooserDialog(
       "Seleccione fichero ARENA2",
       JFileChooser.OPEN_DIALOG,
-      JFileChooser.FILES_AND_DIRECTORIES,
+      JFileChooser.FILES_ONLY,
       True, # Multiseleccion
       None, # root path
       createArena2XMLFileFilter(), # Filter
