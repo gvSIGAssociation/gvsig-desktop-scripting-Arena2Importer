@@ -169,10 +169,10 @@ class ImportProcess(Runnable):
         
         if process:
           f_dst = targetStore.createNewFeature(f_src)
-          for transform in transforms:
-            transform.apply(f_dst)
           if report!=None:
             report.fix(f_dst)
+          for transform in transforms:
+            transform.apply(f_dst)
           
           targetStore.insert(f_dst)
         self.status.incrementCurrentValue()
@@ -197,10 +197,10 @@ class ImportProcess(Runnable):
         if f_dst!=None:
           continue
         f_dst = targetStore.createNewFeature(f_src)
-        for transform in transforms:
-          transform.apply(f_dst)
         if report!=None:
           report.fix(f_dst)
+        for transform in transforms:
+          transform.apply(f_dst)
         targetStore.insert(f_dst)
         self.status.incrementCurrentValue()
       targetStore.finishEditing()
@@ -261,18 +261,18 @@ class ImportProcess(Runnable):
                 if value == None and not attr.allowNull():
                     continue
                 f_dst.set(attr.getIndex(), value)
-            for transform in transforms:
-              transform.apply(f_dst)
             if report!=None:
               report.fix(f_dst)
+            for transform in transforms:
+              transform.apply(f_dst)
             targetStore[0].insert(f_dst)
           else:
             f_dst = f_dst.getEditable()
             self.updateFeatureWithValues(f_src, f_dst, sourceType, targetType)
-            for transform in transforms:
-              transform.apply(f_dst)
             if report!=None:
               report.fix(f_dst)
+            for transform in transforms:
+              transform.apply(f_dst)
             f_dst.set("ACTUALIZADO", True)
             self.deleteChilds(accidentId)  #poner el campo a actualizado a true
             targetStore[1].update(f_dst)
