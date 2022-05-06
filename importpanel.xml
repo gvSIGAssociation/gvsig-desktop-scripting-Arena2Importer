@@ -109,7 +109,7 @@
                       </at>
                       <at name="componentclass">com.jeta.forms.gui.form.FormComponent</at>
                      </super>
-                     <at name="id">embedded.1767310925</at>
+                     <at name="id">embedded.338191642</at>
                      <at name="rowspecs">CENTER:2DLU:NONE,FILL:DEFAULT:GROW(1.0),CENTER:2DLU:NONE,CENTER:DEFAULT:NONE,CENTER:4DLU:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE</at>
                      <at name="colspecs">FILL:4DLU:NONE,FILL:MIN(12DLU;DEFAULT):GROW(1.0),FILL:4DLU:NONE</at>
                      <at name="components">
@@ -214,7 +214,7 @@
                            </at>
                            <at name="componentclass">com.jeta.forms.gui.form.FormComponent</at>
                           </super>
-                          <at name="id">embedded.1036621937</at>
+                          <at name="id">embedded.1198694254</at>
                           <at name="rowspecs">CENTER:DEFAULT:NONE</at>
                           <at name="colspecs">FILL:MIN(12DLU;DEFAULT):GROW(1.0),FILL:4DLU:NONE,FILL:DEFAULT:NONE,FILL:4DLU:NONE,FILL:DEFAULT:NONE,FILL:4DLU:NONE,FILL:DEFAULT:NONE,FILL:4DLU:NONE,FILL:DEFAULT:NONE</at>
                           <at name="components">
@@ -320,7 +320,7 @@
                                     </object>
                                    </at>
                                    <at name="name">lblCountIncidents</at>
-                                   <at name="width">711</at>
+                                   <at name="width">709</at>
                                    <at name="fill">
                                     <object classname="com.jeta.forms.store.properties.effects.PaintProperty">
                                      <at name="name">fill</at>
@@ -380,8 +380,8 @@
                                    </at>
                                    <at name="actionCommand">...</at>
                                    <at name="name">btnVerAccidente2</at>
-                                   <at name="width">140</at>
-                                   <at name="text">Ver ficha accidente</at>
+                                   <at name="width">142</at>
+                                   <at name="text">Ver ficha incidencia</at>
                                    <at name="height">22</at>
                                   </object>
                                  </at>
@@ -601,7 +601,7 @@
                            </at>
                            <at name="componentclass">com.jeta.forms.gui.form.FormComponent</at>
                           </super>
-                          <at name="id">embedded.163383538</at>
+                          <at name="id">embedded.1114677223</at>
                           <at name="rowspecs">CENTER:DEFAULT:NONE</at>
                           <at name="colspecs">FILL:DEFAULT:NONE,FILL:DEFAULT:NONE,FILL:4DLU:NONE,FILL:DEFAULT:GROW(1.0)</at>
                           <at name="components">
@@ -1015,7 +1015,7 @@
                       </at>
                       <at name="componentclass">com.jeta.forms.gui.form.FormComponent</at>
                      </super>
-                     <at name="id">embedded.1768854734</at>
+                     <at name="id">embedded.1872188320</at>
                      <at name="rowspecs">CENTER:2DLU:NONE,CENTER:DEFAULT:NONE,CENTER:2DLU:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE,CENTER:DEFAULT:NONE,CENTER:2DLU:NONE,FILL:DEFAULT:GROW(1.0),CENTER:2DLU:NONE</at>
                      <at name="colspecs">FILL:4DLU:NONE,FILL:DEFAULT:NONE,FILL:4DLU:NONE,FILL:DEFAULT:GROW(1.0),FILL:4DLU:NONE</at>
                      <at name="components">
@@ -1634,7 +1634,7 @@
          </at>
          <at name="componentclass">com.jeta.forms.gui.form.FormComponent</at>
         </super>
-        <at name="id">embedded.419534399</at>
+        <at name="id">embedded.146359292</at>
         <at name="rowspecs">CENTER:DEFAULT:NONE</at>
         <at name="colspecs">FILL:DEFAULT:GROW(1.0),FILL:4DLU:NONE,FILL:DEFAULT:NONE,FILL:4DLU:NONE,FILL:DEFAULT:NONE,FILL:4DLU:NONE,FILL:DEFAULT:NONE</at>
         <at name="components">
@@ -1824,7 +1824,7 @@
               </at>
               <at name="componentclass">com.jeta.forms.gui.form.FormComponent</at>
              </super>
-             <at name="id">embedded.822379577</at>
+             <at name="id">embedded.96784797</at>
              <at name="rowspecs">CENTER:MAX(12DLU;DEFAULT):NONE,CENTER:MAX(12DLU;DEFAULT):NONE,CENTER:MAX(12DLU;DEFAULT):NONE</at>
              <at name="colspecs">FILL:DEFAULT:GROW(1.0)</at>
              <at name="components">
@@ -2190,7 +2190,7 @@
          </at>
          <at name="componentclass">com.jeta.forms.gui.form.FormComponent</at>
         </super>
-        <at name="id">embedded.1424921873</at>
+        <at name="id">embedded.2088406133</at>
         <at name="rowspecs">CENTER:DEFAULT:NONE,CENTER:2DLU:NONE,CENTER:DEFAULT:NONE,CENTER:2DLU:NONE,CENTER:DEFAULT:NONE,FILL:DEFAULT:GROW(1.0)</at>
         <at name="colspecs">FILL:DEFAULT:GROW(1.0),FILL:4DLU:NONE,FILL:DEFAULT:NONE</at>
         <at name="components">
