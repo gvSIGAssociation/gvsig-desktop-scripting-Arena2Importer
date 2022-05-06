@@ -231,6 +231,14 @@ class Report(AbstractTableModel):
     self.__issues.insert(issue)
     self.__issues.finishEditing()
     self.__delayfireTableDataChanged()
+    return issue
+
+  def updateIssue(self, issue):
+    self.__issues.edit()
+    self.__issues.update(issue)
+    self.__issues.finishEditing()
+    self.__delayfireTableDataChanged()
+    return issue
 
   def addIssues(self, issues_fset):
     self.__issues.edit()
