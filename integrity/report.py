@@ -332,24 +332,25 @@ class Report(AbstractTableModel):
   
   def isSelected(self, accidentId):
     #trace("isSelected(%r)" % accidentId)
-    issues = self.__issues.getFeatureSet("ID_ACCIDENTE = '%s'" % accidentId)
-    if issues == None:
-      return True
-    try:
-      for issue in issues:
-        if issue.get("ID_ACCIDENTE") != accidentId:
-          continue
-        if issue.get("SELECTED") :
-          return True
+    issue = self.__issues.findFirst("ID_ACCIDENTE = '%s'" % accidentId)
+    if issue == None:
       return False
-    finally:
-      issues.dispose()
+    if issue.get("SELECTED") :
+      return True
+    return False
      
   def getTableModel(self):
     return self
 
   def getRowCount(self):
-    return self.getIssuesAsList().size64()
+    try:
+      return self.getIssuesAsList().size64()
+    except:
+      self.__issues_list = None
+      try:
+        return self.getIssuesAsList().size64()
+      except:
+        return 0
     
   def getColumnCount(self):
     return len(self.__columnNames)
@@ -371,15 +372,22 @@ class Report(AbstractTableModel):
       return True
     return False
 
+  def getValueAt0(self, rowIndex, columnIndex):
+    issue = self.getIssue(rowIndex)
+    if issue == None:
+      return None
+    attr = self.getAttributeByColumnIndex(columnIndex)
+    return issue.get(attr.getName())
+  
   def getValueAt(self, rowIndex, columnIndex):
     try:
-      issue = self.getIssue(rowIndex)
-      if issue == None:
-        return None
-      attr = self.getAttributeByColumnIndex(columnIndex)
-      return issue.get(attr.getName())
+      return self.getValueAt0(rowIndex, columnIndex)
     except:
-      pass
+      self.__issues_list = None
+      try:
+        return self.getValueAt0(rowIndex, columnIndex)
+      except:
+        return None
 
   def setValueAt(self, aValue, rowIndex, columnIndex):
     trace("setValueAt(value=%s,row=%s,column=%s)" % (aValue, rowIndex, columnIndex))
