@@ -18,6 +18,8 @@ from org.gvsig.app import ApplicationLocator
 from org.gvsig.fmap.dal import DALLocator
 from org.gvsig.fmap.dal.feature import FeatureStore
 from org.gvsig.tools.dispose import DisposeUtils
+from org.gvsig.tools import ToolsLocator
+from org.gvsig.expressionevaluator import ExpressionEvaluatorLocator, ExpressionUtils, ExpressionBuilder
 
 from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
 
@@ -218,14 +220,33 @@ class PostValidatorProcess(Runnable):
       title = self.status.getTitle()
       repo = self.workspace.getStoresRepository()
       accidentesStore = repo.getStore("ARENA2_ACCIDENTES")
+      accidentesFeatureType = accidentesStore.getDefaultFeatureType()
       if  self.expressionFilter != None and not self.expressionFilter.isEmpty():
         fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet(self.expressionFilter)
       else:
-        fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet() ### SET FILTER
+        fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet()
 
       count = fsetAccidentes.getSize()
+      # Regla por las tablas principales
+      mainTables = {"ARENA2_CONDUCTORES", 
+      "ARENA2_PASAJEROS", 
+      "ARENA2_PEATONES",
+      "ARENA2_VEHICULOS"}
+      expressionTransform = ExpresionTransform(accidentesFeatureType)
+      
+      for mainTable in mainTables:
+        self.status.message("Comprobando %s..." % mainTable)
+        storeToValidate = repo.getStore(mainTable)
+        if  self.expressionFilter != None and not self.expressionFilter.isEmpty():
+          fset = storeToValidate.getFeatureSet(expressionTransform.applyTransform(self.expressionFilter))
+        else:
+          fset = storeToValidate.getFeatureSet()
+        count += fset.size()
+        DisposeUtils.disposeQuietly(fset)
+        DisposeUtils.dispose(storeToValidate)
+        
       n = 0
-      self.status.message("Comprobando accidentes (%s)..." % "Accidentes")
+      self.status.message("Comprobando accidentes...")
       self.status.setRangeOfValues(0,count)
       self.status.setCurValue(0)
 
@@ -246,26 +267,30 @@ class PostValidatorProcess(Runnable):
         self.__count += 1
         self.status.incrementCurrentValue()
 
-        # Regla por las tablas principales
-        mainTables = {"ARENA2_CONDUCTORES", 
-        "ARENA2_PASAJEROS", 
-        "ARENA2_PEATONES",
-        "ARENA2_VEHICULOS"}
-        idAccidente = feature.get("ID_ACCIDENTE")
+      # Regla por las tablas principales
+      mainTables = {"ARENA2_CONDUCTORES", 
+      "ARENA2_PASAJEROS", 
+      "ARENA2_PEATONES",
+      "ARENA2_VEHICULOS"}
+      expressionTransform = ExpresionTransform(accidentesFeatureType)
+      
+      for mainTable in mainTables:
+        self.status.message("Comprobando %s..." % mainTable)
+        storeToValidate = repo.getStore(mainTable)
+        if  self.expressionFilter != None and not self.expressionFilter.isEmpty():
+          fset = storeToValidate.getFeatureSet(expressionTransform.applyTransform(self.expressionFilter))
+        else:
+          fset = storeToValidate.getFeatureSet()
         
-        for mainTable in mainTables:
-          storeToValidate = repo.getStore(mainTable)
-          #print "storeToValidate:", storeToValidate
-          fset = storeToValidate.getFeatureSet("ID_ACCIDENTE='%s'" % idAccidente)
-          #print "check child table: ", fset.getSize(), " over ", idAccidente
-          if fset!=None and fset.getSize()>0:
-            for feature in fset:
-              for rule in rules:
-                if rule != None:
-                  rule.execute(self.report, feature)
-          DisposeUtils.disposeQuietly(fset)
-          DisposeUtils.dispose(storeToValidate)
-          storeToValidate = None
+        if fset!=None and fset.getSize()>0:
+          for feature in fset:
+            for rule in rules:
+              if rule != None:
+                rule.execute(self.report, feature)
+            self.status.incrementCurrentValue()
+        DisposeUtils.disposeQuietly(fset)
+        DisposeUtils.dispose(storeToValidate)
+        storeToValidate = None
         
         self.status.message("Comprobacion completada")
       DisposeUtils.disposeQuietly(fsetAccidentes)
@@ -368,7 +393,7 @@ def validateData(issues_pathname, workspaceName):
   #store.export(explorer,"CSV",explorer.getAddParameters(File(issues_pathname)), base)
   print "## DONE EXPORT"
 
-def main(*args):
+def main2(*args):
   application = ApplicationLocator.getApplicationManager()
 
   arguments = application.getArguments()
@@ -398,4 +423,33 @@ def main(*args):
   if closeAtFinish:
     application.close(True)
   print "Done test"
+
+def main(*args):
+  expressionEvaluatorManager = ExpressionEvaluatorLocator.getExpressionEvaluatorManager()
+  expression = expressionEvaluatorManager.createExpression()
+  expression.setPhrase("(FECHA_ACCIDENTE >=  DATE '2021-12-01' ) and (FECHA_ACCIDENTE <=  DATE '2021-12-02')" )
+  expressionTransform = ExpresionTransform()
+  print expressionTransform.applyTransform(expression)
   
+class ExpresionTransform(ExpressionBuilder.Visitor):
+  def __init__(self, featureType = None):
+    self.replacements = []
+    self.featType = featureType
+
+  def visit(self, value):
+    if not isinstance(value,ExpressionBuilder.Variable) :
+      return
+    if self.featType != None:
+      attr = self.featType.get(value.name())
+      if attr == None:
+        return
+    builder = ExpressionUtils.createExpressionBuilder()
+    v = builder.function("FOREING_VALUE",builder.constant("ID_ACCIDENTE."+value.name()))
+    self.replacements.append((value,v))
+
+  def applyTransform(self,expression):
+    value = expression.getCode().toValue()
+    value.accept(self, None)
+    for r in self.replacements:
+      value.replace(r[0], r[1])
+    return value.toString()

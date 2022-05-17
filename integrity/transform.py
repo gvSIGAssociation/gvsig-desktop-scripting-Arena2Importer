@@ -13,6 +13,9 @@ class Transform(object):
   def apply(self, *args):
     pass
 
+  def restart(self):
+    pass
+
 
 class TransformFactory(object):
   def __init__(self, id):

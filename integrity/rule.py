@@ -25,6 +25,9 @@ class Rule(object):
         return action
     return None
 
+  def restart(self):
+    pass
+
 
 class RuleFactory(object):
   def __init__(self, id):

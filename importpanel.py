@@ -476,6 +476,8 @@ class ImportPanel(FormPanel, Observer):
       self.report,
       status,
       transforms = transforms
+      #, deleteChildrensAlways = ??
+      
     )
     th = Thread(self.process, "ARENA2_import")
     th.start()

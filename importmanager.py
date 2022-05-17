@@ -102,7 +102,9 @@ class ImportManager(object):
   def getRules(self, **args):
     rules = list()
     for factory in self.__ruleFactories:
-      rules.append(factory.create(**args))
+      rule = factory.create(**args)
+      rule.restart()
+      rules.append(rule)
     return rules
 
   def addTransformFactory(self, transform):
@@ -115,7 +117,9 @@ class ImportManager(object):
     transforms = list()
     for factory in self.__transformFactories:
       print "getTransforms: Create transform ", factory.getName()
-      transforms.append(factory.create())
+      transform = factory.create()
+      transform.restart()
+      transforms.append(transform)
     return transforms
     
   def createImportDialog(self): 
@@ -128,9 +132,9 @@ class ImportManager(object):
     dialog = PostValidatorPanel(self)
     return dialog
 
-  def createImportProcess(self, files, workspace, report, status=None, transforms=None):
+  def createImportProcess(self, files, workspace, report, status=None, transforms=None, deleteChildrensAlways = True):
     from addons.Arena2Importer.importprocess import ImportProcess
-    process = ImportProcess(self, files, workspace, report, status, transforms)
+    process = ImportProcess(self, files, workspace, report, status, transforms, deleteChildrensAlways = deleteChildrensAlways)
     return process
     
 

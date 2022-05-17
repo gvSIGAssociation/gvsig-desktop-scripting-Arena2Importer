@@ -22,7 +22,7 @@ from org.gvsig.tools.dispose import DisposeUtils
 from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
 
 class ImportProcess(Runnable):
-  def __init__(self, importManager, files, workspace, report, status=None, transforms=None):
+  def __init__(self, importManager, files, workspace, report, status=None, transforms=None, deleteChildrensAlways = True):
     self.importManager = importManager
     if status == None:
       self.status = self.importManager.createStatus()
@@ -37,6 +37,7 @@ class ImportProcess(Runnable):
       self.transforms = transforms
     self.__count = 0
     self.__actions = list()
+    self.deleteChildrensAlways = deleteChildrensAlways
 
   def add(self, action):
     self.__actions.append(action)
@@ -248,6 +249,8 @@ class ImportProcess(Runnable):
         print " copyTableAccidentes [%3d] %s import %s" % (count, accidentId, process)
         
         if process:
+          if self.deleteChildrensAlways:
+            self.deleteChilds(accidentId)
           f_dst = targetStore[1].findFirst("ID_ACCIDENTE = '%s'" % accidentId)
           if f_dst == None:
             f_dst = targetStore[0].createNewFeature(f_src)
@@ -273,8 +276,9 @@ class ImportProcess(Runnable):
               report.fix(f_dst)
             for transform in transforms:
               transform.apply(f_dst)
-            f_dst.set("ACTUALIZADO", True)
-            self.deleteChilds(accidentId)  #poner el campo a actualizado a true
+            f_dst.set("ACTUALIZADO", True) #poner el campo a actualizado a true
+            if not self.deleteChildrensAlways:
+              self.deleteChilds(accidentId)
             targetStore[1].update(f_dst)
             
         self.__count += 1
@@ -413,6 +417,7 @@ class ValidatorProcess(Runnable):
         print "processing children"
         children = self.input_store.getChildren()
         count = 0
+        
         for name in children.keySet():
           print "process child ", name
           childStore = children.get(name)
