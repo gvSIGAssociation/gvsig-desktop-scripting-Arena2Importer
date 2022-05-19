@@ -15,7 +15,7 @@ from java.lang import Throwable, String, Boolean, Integer
 from javax.swing.table import AbstractTableModel
 
 from org.gvsig.app import ApplicationLocator
-from org.gvsig.fmap.dal import DALLocator
+from org.gvsig.fmap.dal import DALLocator, DataTransaction
 from org.gvsig.fmap.dal.feature import FeatureStore
 from org.gvsig.tools.dispose import DisposeUtils
 from org.gvsig.tools import ToolsLocator
@@ -47,6 +47,7 @@ class PostTransformProcess(Runnable):
     return "posttransform"
 
   def run(self):
+    trans = None
     try:
 
       storeAccidentes = None
@@ -56,7 +57,11 @@ class PostTransformProcess(Runnable):
         return
       title = self.status.getTitle()
       repo = self.workspace.getStoresRepository()
+      dataManager = DALLocator.getDataManager()
+      trans = dataManager.createTransaction()
+      trans.begin()
       storeAccidentes = repo.getStore("ARENA2_ACCIDENTES")
+      trans.add(storeAccidentes)
       if  self.expressionFilter != None and not self.expressionFilter.isEmpty():
         fsetAccidentes = storeAccidentes.getFeatureStore().getFeatureSet(self.expressionFilter)
       else:
@@ -83,9 +88,10 @@ class PostTransformProcess(Runnable):
           fsetAccidentes.update(efeature)
         self.status.incrementCurrentValue()
         self.status.setTitle("%s (%d/%d)" % (title, n, count))
+      trans.commit()
     except java.lang.Throwable, ex:
       logger("Error transformando accidentes.", LOGGER_WARN, ex)
-      storeAccidentes.cancelEditing()
+      DataTransaction.rollbackQuietly(trans)
       self.status.message("Error transformando accidentes (%s)")
       self.status.abort()
       raise ex
@@ -94,19 +100,11 @@ class PostTransformProcess(Runnable):
       ex = sys.exc_info()[1]
       logger("Error transformando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
       self.status.message("Error transformando accidentes")
-      storeAccidentes.cancelEditing()
+      DataTransaction.rollbackQuietly(trans)
       
     finally:
       logger("Finalizando proceso..")
-      if storeAccidentes!= None:
-        logger(".. proceso finishEditing..")
-        try:
-          storeAccidentes.finishEditing()
-        except ex:
-          logger("Error finalizando edicion.", LOGGER_WARN, ex)
-        
-        logger(".. finalizado proceso finishEditing..")
-      DisposeUtils.dispose(storeAccidentes)
+      DisposeUtils.disposeQuietly(trans)
       self.status.setTitle("Finalizado proceso")
       self.status.setCurValue(0)
       self.status.abort()
@@ -135,11 +133,16 @@ class PostUpdateProcess(Runnable):
     return "postupdate"
 
   def run(self):
-    repo = self.workspace.getStoresRepository()
-    issues = self.report.getIssuesAsList()
-    storeAccidentes = repo.getStore("ARENA2_ACCIDENTES")
     print "post update process"
+    trans = None
     try:
+      repo = self.workspace.getStoresRepository()
+      issues = self.report.getIssuesAsList()
+      dataManager = DALLocator.getDataManager()
+      trans = dataManager.createTransaction()
+      trans.begin()
+      storeAccidentes = repo.getStore("ARENA2_ACCIDENTES")
+      trans.add(storeAccidentes)
       storeAccidentes.edit(FeatureStore.MODE_PASS_THROUGH)
       n = 0
       count = len(issues)
@@ -165,20 +168,20 @@ class PostUpdateProcess(Runnable):
         if efeature.isModified():
           storeAccidentes.update(efeature)
           
-      storeAccidentes.finishEditing()
+      trans.commit()
     except java.lang.Throwable, ex:
-      storeAccidentes.cancelEditing()
+      DataTransaction.rollbackQuietly(trans)
       logger("Error actualizando accidentes.", LOGGER_WARN, ex)
       self.status.message("Error actualizando accidentes (%s)")
       self.status.abort()
       raise ex
     except:
-      storeAccidentes.cancelEditing()
+      DataTransaction.rollbackQuietly(trans)
       ex = sys.exc_info()[1]
       logger("Error actualizando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
       self.status.message("Error actualizando accidentes (%s)")
     finally:
-      DisposeUtils.dispose(storeAccidentes)
+      DisposeUtils.dispose(trans)
 
 
       
