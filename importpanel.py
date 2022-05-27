@@ -426,7 +426,8 @@ class ImportPanel(FormPanel, Observer):
       self.btnImportar.setEnabled(True)
       self.btnCheckIntegrity.setEnabled(True)
       return 
-      
+
+    self.report.setEnableUpdateUI(False)
     self.process = self.importManager.createValidatorProcess(
       files,
       self.report,
@@ -439,11 +440,17 @@ class ImportPanel(FormPanel, Observer):
     th.start()
 
   def showValidatorFinishMessage(self, process):
+    if not SwingUtilities.isEventDispatchThread():
+      SwingUtilities.invokeLater(lambda :self.showValidatorFinishMessage(process))
+      return
+  
     self.message("Total %s incidencias en %s accidentes" % (
         len(process.getReport()),
         len(process)
       )
     )
+    self.report.setEnableUpdateUI(True)
+
     
   
   def btnImportar_click(self, *args):

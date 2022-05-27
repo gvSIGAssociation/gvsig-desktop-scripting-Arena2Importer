@@ -16,7 +16,6 @@ from java.lang import Thread
 from javax.swing import JButton
 from javax.swing import SwingUtilities
 from javax.swing import DefaultComboBoxModel, DefaultListModel
-
 from org.gvsig.tools import ToolsLocator
 from org.gvsig.tools.observer import Observer
 from org.gvsig.tools.swing.api import ToolsSwingLocator
@@ -97,9 +96,12 @@ class PostValidatorPanel(FormPanel, Observer):
     self.cltRules = toolsSwingManager.createJListWithCheckbox(self.lstRules)
 
     self.taskStatusController = taskManager.createTaskStatusController(
+      None,
       self.lblTaskTitle,
       self.lblTaskMessage,
-      self.pgbTaskProgress
+      self.pgbTaskProgress,
+      self.btnCancelTask,
+      None
     )
     self.btnApplyUpdate.setEnabled(False)
     self.btnApplyTransform.setEnabled(False)
@@ -222,9 +224,13 @@ class PostValidatorPanel(FormPanel, Observer):
       report.refresh()
       
   def setVisibleTaskStatus(self, visible):
+    if not SwingUtilities.isEventDispatchThread():
+      SwingUtilities.invokeLater(lambda :self.setVisibleTaskStatus(visible))
+      return
     self.lblTaskTitle.setVisible(visible)
     self.pgbTaskProgress.setVisible(visible)
     self.lblTaskMessage.setVisible(visible)
+    self.btnCancelTask.setVisible(visible)
 
   def message(self, s):
     self.lblIssuesMessage.setText(s)
@@ -339,16 +345,25 @@ class PostValidatorPanel(FormPanel, Observer):
     )
     self.process.add(self.showValidatorFinishMessage)
     self.process.add(self.activateButtons)
+    self.report.setEnableUpdateUI(False)
+    
     th = Thread(self.process, "ARENA2_postvalidator")
     th.start()
     
   def activateButtons(self, process):
-      self.btnClose.setEnabled(True)
-      self.btnApplyUpdate.setEnabled(True)
-      self.btnApplyTransform.setEnabled(True)
-      self.btnCheckIntegrity.setEnabled(True)
-      
+    if not SwingUtilities.isEventDispatchThread():
+      SwingUtilities.invokeLater(lambda :self.activateButtons(process))
+      return
+    self.btnClose.setEnabled(True)
+    self.btnApplyUpdate.setEnabled(True)
+    self.btnApplyTransform.setEnabled(True)
+    self.btnCheckIntegrity.setEnabled(True)
+    self.report.setEnableUpdateUI(True)
+
   def showValidatorFinishMessage(self, process):
+    if not SwingUtilities.isEventDispatchThread():
+      SwingUtilities.invokeLater(lambda :self.showValidatorFinishMessage(process))
+      return
     msg = "Total %s incidencias en %s accidentes" % (
         len(process.getReport()),
         len(process)

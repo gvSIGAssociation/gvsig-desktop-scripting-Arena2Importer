@@ -3,6 +3,9 @@
 import gvsig
 import threading
 
+from gvsig import logger, LOGGER_WARN
+import sys
+
 from java.lang import Throwable, String, Boolean, Integer
 
 from javax.swing.table import AbstractTableModel
@@ -12,7 +15,7 @@ from org.gvsig.tools.dynobject import DynObjectValueItem
 from org.gvsig.fmap.geom import GeometryUtils, Geometry
 from org.gvsig.fmap.dal import DALLocator
 
-from javax.swing import AbstractCellEditor
+from javax.swing import AbstractCellEditor, Timer
 from javax.swing import DefaultComboBoxModel
 from javax.swing import JLabel, JComboBox
 from javax.swing.table import TableCellEditor, DefaultTableCellRenderer
@@ -49,7 +52,7 @@ class DropDownCellEditor(AbstractCellEditor,TableCellEditor):
       return
     return n.getValue()
 
-class ShowLabelCellEditor(DefaultTableCellRenderer):
+class ShowLabelCellRenderer(DefaultTableCellRenderer):
   def __init__(self, availableValues):
     DefaultTableCellRenderer.__init__(self)
     self.__availableValues = availableValues
@@ -76,16 +79,22 @@ class Report(AbstractTableModel):
       if not attr.isHidden():
         self.__columnNames.append(attr.getName())
     self.__timer = None
-    self.__delayed_events = 0
     self.__eventsEnableds = True
+    self.__lastSize = None
+    self.__lastFeature = None
+    self.__lastFeatureIndex = None
+    self.__updateUI = True
 
+  def setEnableUpdateUI(self, enable):
+    self.__updateUI = enable
+    self.fireTableDataChanged()    
+    
   def setEnabledEvents(self, enable):
     self.__eventsEnableds = enable
     
-  def __fireDelayedsEvents(self):
+  def __fireDelayedsEvents(self, *args):
     if not self.__eventsEnableds:
       return
-    self.__delayed_events = 0
     if self.__issues_list != None:
       self.__issues_list.getFeaturePagingHelper().dispose()
     self.__issues_list = None
@@ -95,15 +104,12 @@ class Report(AbstractTableModel):
     if not self.__eventsEnableds:
       return
     if self.__timer!=None:
-      self.__timer.cancel()
-      self.__timer = None
-    self.__delayed_events += 1
-    if self.__delayed_events > 100:
-      self.__fireDelayedsEvents()
-    else:
-      self.__timer = threading.Timer(4,self.__fireDelayedsEvents)
-      self.__timer.setName("ARENA2_REPORT_DELAYEVENTS")
-      self.__timer.start()
+      self.__timer.restart()
+      return
+    self.__timer = Timer(4000,self.__fireDelayedsEvents)
+    #self.__timer.setName("ARENA2_REPORT_DELAYEVENTS")
+    self.__timer.setRepeats(False)
+    self.__timer.start()
   
   def __len__(self):
     return self.getIssuesAsList().size64()
@@ -123,7 +129,7 @@ class Report(AbstractTableModel):
       values = attr.getAvailableValues()
       if values != None:
         col = columnModel.getColumn(columnIndex)
-        col.setCellRenderer(ShowLabelCellEditor(values))
+        col.setCellRenderer(ShowLabelCellRenderer(values))
         if attr.getTags().getBoolean("editable",True):
           col.setCellEditor(DropDownCellEditor(values, readOnly=False))
         else:
@@ -134,7 +140,10 @@ class Report(AbstractTableModel):
 
   def removeAll(self):
     self.__issues = self.createH2Store()
-    self.fireTableDataChanged()
+    self.__lastSize = None
+    self.__lastFeature = None
+    self.__lastFeatureIndex = None
+    self.__delayfireTableDataChanged()
   
   def createH2Store(self):
     foldersManager = ToolsLocator.getFoldersManager()
@@ -230,13 +239,20 @@ class Report(AbstractTableModel):
       issue.set(name,value)
     self.__issues.insert(issue)
     self.__issues.finishEditing()
+    if self.__lastSize != None:
+      self.__lastSize += 1
     self.__delayfireTableDataChanged()
     return issue
 
   def updateIssue(self, issue):
+    if issue == None:
+      return
     self.__issues.edit()
     self.__issues.update(issue)
     self.__issues.finishEditing()
+
+    if self.__lastFeature != None and not(self.__lastFeature.getReference().equals(issue.getReference())):
+      self.__lastFeature = issue
     self.__delayfireTableDataChanged()
     return issue
 
@@ -244,6 +260,8 @@ class Report(AbstractTableModel):
     self.__issues.edit()
     self.__issues.insert(issues_fset)
     self.__issues.finishEditing()
+    if self.__lastSize != None:
+      self.__lastSize += issues_fset.size64()
     self.__delayfireTableDataChanged()
     
   def getIssuesAsList(self):
@@ -270,9 +288,11 @@ class Report(AbstractTableModel):
     self.__issues.edit()
     self.__issues.update(issue)
     self.__issues.finishEditing()
+    if self.__lastFeature != None and not(self.__lastFeature.getReference().equals(issue.getReference())):
+      self.__lastFeature = issue
 
   def refresh(self):
-    self.fireTableDataChanged()
+    self.__delayfireTableDataChanged()
 
   def fixIssueFeature(self, issue, editableFeature):
     fixerID=issue.get("FIXERID")
@@ -295,14 +315,7 @@ class Report(AbstractTableModel):
           continue
         if not issue.get("SELECTED") :
           continue
-        fixerID=issue.get("FIXERID")
-        if fixerID==None:
-          continue
-        trace("fix(%s) fixerID %r" % (accidentId, fixerID))
-        fixer = self.__importManager.getFixer(fixerID)
-        if fixer==None:
-          continue
-        fixer.fix(feature, issue)
+        self.fixIssueFeature(issue, feature)
     finally:
       issues.dispose()
       
@@ -328,7 +341,7 @@ class Report(AbstractTableModel):
     issue = issue.getEditable()
     issue.set("SELECTED",value)
     self.putIssue(row, issue)
-    self.fireTableDataChanged()
+    self.__delayfireTableDataChanged()
   
   def isSelected(self, accidentId):
     #trace("isSelected(%r)" % accidentId)
@@ -343,12 +356,18 @@ class Report(AbstractTableModel):
     return self
 
   def getRowCount(self):
+    if not self.__updateUI:
+      return 0
+    if self.__lastSize != None and self.__lastSize > 0:
+      return self.__lastSize
     try:
-      return self.getIssuesAsList().size64()
+      self.__lastSize = self.getIssuesAsList().size64()
+      return self.__lastSize
     except:
       self.__issues_list = None
       try:
-        return self.getIssuesAsList().size64()
+        self.__lastSize = self.getIssuesAsList().size64()
+        return self.__lastSize
       except:
         return 0
     
@@ -377,12 +396,25 @@ class Report(AbstractTableModel):
     if issue == None:
       return None
     attr = self.getAttributeByColumnIndex(columnIndex)
+    self.__lastFeature = issue
+    self.__lastFeatureIndex = rowIndex
     return issue.get(attr.getName())
   
   def getValueAt(self, rowIndex, columnIndex):
+    if not self.__updateUI:
+      return None
     try:
+      if rowIndex == self.__lastFeatureIndex and self.__lastFeature != None:
+        try:
+          attr = self.getAttributeByColumnIndex(columnIndex)
+          return self.__lastFeature.get(attr.getName())
+        except:
+          ex = sys.exc_info()[1]
+          logger("Error transformando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
+          return None
       return self.getValueAt0(rowIndex, columnIndex)
     except:
+      ex = sys.exc_info()[1]
       self.__issues_list = None
       try:
         return self.getValueAt0(rowIndex, columnIndex)
@@ -401,12 +433,12 @@ class Report(AbstractTableModel):
     issue.set(attr.getName(),aValue)
     self.putIssue(rowIndex, issue)
 
-def hola():
+def hola(*args):
   print "hola"
   
 def main(*args):
-  timer = threading.Timer(5,hola)
-  timer.setName("Hola")
+  timer = Timer(5000,hola)
+  timer.setRepeats(False)
   timer.start()
   
   

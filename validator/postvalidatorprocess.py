@@ -259,7 +259,7 @@ class PostValidatorProcess(Runnable):
           break
         n+=1
         self.status.setTitle("%s (%d/%d)" % (title, n, count))
-        
+
         rules = self.rules
 
         # Regla para Accidentes
@@ -278,6 +278,9 @@ class PostValidatorProcess(Runnable):
       expressionTransform = ExpresionTransform(accidentesFeatureType)
       
       for mainTable in mainTables:
+        if self.status.isCancellationRequested():
+          self.status.cancel()
+          break
         self.status.message("Comprobando %s..." % mainTable)
         storeToValidate = repo.getStore(mainTable)
         if  self.expressionFilter != None and not self.expressionFilter.isEmpty():
@@ -287,6 +290,11 @@ class PostValidatorProcess(Runnable):
         
         if fset!=None and fset.getSize()>0:
           for feature in fset:
+            n+=1
+            if self.status.isCancellationRequested():
+              self.status.cancel()
+              break
+
             for rule in rules:
               if rule != None:
                 rule.execute(self.report, feature)
