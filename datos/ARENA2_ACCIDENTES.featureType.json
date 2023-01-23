@@ -2,7 +2,7 @@
 {
     "__classname__":"org.gvsig.fmap.dal.feature.impl.DefaultEditableFeatureType",
     "id":"default",
-    "internalID":"7c70ee6d",
+    "internalID":"b7984e32",
     "label":null,
     "description":null,
     "allowAtomaticValues":false,
@@ -13,6 +13,11 @@
     "checkFeaturesAtInsert":true,
     "tags":{
         "__classname__":"org.gvsig.tools.dynobject.impl.DefaultTags"
+    },
+    "rules":{
+        "__classname__":"org.gvsig.fmap.dal.feature.impl.DefaultFeatureRules",
+        "items":[
+        ]
     },
     "extraColumns":{
         "__classname__":"org.gvsig.fmap.dal.feature.impl.DefaultFeatureExtraColumns",
@@ -26,7 +31,7 @@
             "description":"LID_ACCIDENTE",
             "label":"_Id_accidente",
             "shortLabel":null,
-            "order":0,
+            "order":10,
             "groupName":null,
             "dataType":{
                 "__classname__":"org.gvsig.tools.dataTypes.impl.DefaultDataType",
@@ -52,7 +57,10 @@
             "srs":null,
             "relationType":0,
             "displaySize":0,
-            "locale":null,
+            "locale":{
+                "__classname__":"java.util.Locale",
+                "languageTag":"es"
+            },
             "expression":null,
             "availableValuesExpression":null,
             "defaultValue":null,
@@ -8377,7 +8385,10 @@
             "srs":null,
             "relationType":4,
             "displaySize":0,
-            "locale":null,
+            "locale":{
+                "__classname__":"java.util.Locale",
+                "languageTag":"es"
+            },
             "expression":{
                 "__classname__":"org.gvsig.fmap.dal.impl.expressionevaluator.DefaultFeatureAttributeEmulatorExpression",
                 "expression":{
@@ -8467,7 +8478,7 @@
             "description":"COD_AFORO",
             "label":"_Codigo_aforo",
             "shortLabel":null,
-            "order":10,
+            "order":136,
             "groupName":null,
             "dataType":{
                 "__classname__":"org.gvsig.tools.dataTypes.impl.DefaultDataType",
@@ -8499,19 +8510,19 @@
             },
             "expression":null,
             "fk":true,
-            "fk_table":"AFOROS_MEDIDAS",
-            "fk_code":"COD_AFORO",
-            "fk_label":"FORMAT('%s',COD_AFORO)",
+            "fk_table":"SIGCAR_MEDIDAS_AFORO",
+            "fk_code":"LID_MEDIDA_AFORO",
+            "fk_label":"BEGIN s:=FORMAT('%s, %s, %d-%d',MAFO_CARRETERA, MAFO_ANO, MAFO_PK_I, MAFO_PK_F); IF MAFO_REKI_FECHA IS NOT NULL THEN    s:=s||FORMAT(' rk-%s, %d-%d',MAFO_REKI_FECHA, MAFO_REKI_PK_I, MAFO_REKI_PK_F); END IF; s END",
             "fk_closedlist":false,
             "availableValuesExpression":null,
-            "defaultValue":null,
+            "defaultValue":"",
             "dataProfile":null,
             "tags":{
                 "__classname__":"org.gvsig.tools.dynobject.impl.DefaultTags"
             },
             "availableValues":null,
             "additionalInfo":null,
-            "defaultFormat":null
+            "defaultFormat":""
         },
         {
             "__classname__":"org.gvsig.fmap.dal.feature.impl.DefaultEditableFeatureAttributeDescriptor",
@@ -8797,7 +8808,10 @@
             "srs":null,
             "relationType":0,
             "displaySize":0,
-            "locale":null,
+            "locale":{
+                "__classname__":"java.util.Locale",
+                "languageTag":"es"
+            },
             "expression":null,
             "availableValuesExpression":null,
             "defaultValue":"false",
@@ -9709,7 +9723,10 @@
             "srs":null,
             "relationType":1,
             "displaySize":0,
-            "locale":null,
+            "locale":{
+                "__classname__":"java.util.Locale",
+                "languageTag":"en"
+            },
             "expression":null,
             "fk":true,
             "fk_table":"ARENA2_DIC_INE_PROVINCIA",
@@ -9781,10 +9798,10 @@
         {
             "__classname__":"org.gvsig.fmap.dal.feature.impl.DefaultEditableFeatureAttributeDescriptor",
             "name":"ID_TRAMO_CARRETERA",
-            "description":"ID_TRAMO_CARRETERA",
-            "label":"_ID_Tramo_carretera",
+            "description":"Identificador del tramo de carretera",
+            "label":"Tramo",
             "shortLabel":null,
-            "order":140,
+            "order":135,
             "groupName":null,
             "dataType":{
                 "__classname__":"org.gvsig.tools.dataTypes.impl.DefaultDataType",
@@ -9808,22 +9825,27 @@
             "avoidCachingAvailableValues":false,
             "geometryType":null,
             "srs":null,
-            "relationType":0,
+            "relationType":1,
             "displaySize":0,
             "locale":{
                 "__classname__":"java.util.Locale",
                 "languageTag":"en"
             },
             "expression":null,
+            "fk":true,
+            "fk_table":"SIGCAR_TRAMOS_CARRETERAS",
+            "fk_code":"ID_TRAMO_CARRETERA",
+            "fk_label":"FORMAT('%02d - %s (%02d,%02d)',ID_TRAMO_CARRETERA, TC_MATRICULA, TC_PK_I, TC_PK_F)",
+            "fk_closedlist":false,
             "availableValuesExpression":null,
-            "defaultValue":null,
+            "defaultValue":"",
             "dataProfile":null,
             "tags":{
                 "__classname__":"org.gvsig.tools.dynobject.impl.DefaultTags"
             },
             "availableValues":null,
             "additionalInfo":null,
-            "defaultFormat":null
+            "defaultFormat":""
         },
         {
             "__classname__":"org.gvsig.fmap.dal.feature.impl.DefaultEditableFeatureAttributeDescriptor",
