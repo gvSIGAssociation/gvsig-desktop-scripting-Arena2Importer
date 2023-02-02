@@ -12,13 +12,13 @@ from org.gvsig.tools.swing.api import ToolsSwingLocator
 from org.gvsig.tools.dynobject import  DynObjectValueItem
 
 class ReportAttribute(object):
-  def __init__(self, name, javatype, size=None, label=None, isEditable=False, availableValues=None, celleditor=None):
+  def __init__(self, name, javatype, size=None, label=None, isEditable=False, availableValues=None, cellEditor=None):
     self.__name = name
     self.__javatype = javatype
     self.__size = size
     self.__label = label
     self.__isEditable = isEditable
-    self.__celleditor = celleditor
+    self.__cellEditor = cellEditor
     self.__availableValues = availableValues
     #print "ReportAttribute(%r) %r" % (self.__name, self.__availableValues)
 
@@ -42,6 +42,9 @@ class ReportAttribute(object):
   def isEditable(self):
     return self.__isEditable
     
+  def setEditable(self, editable):
+    self.__isEditable=editable
+    
   def getAvailableValues(self):
     #print "ReportAttribute(%r).getAvailableValues(1) %r" % (self.__name, self.__availableValues)
     if self.__availableValues == None:
@@ -51,7 +54,16 @@ class ReportAttribute(object):
       l.append(DynObjectValueItem(code,label))
     #print "ReportAttribute(%r).getAvailableValues(2) %r" % (self.__name, l)
     return l
-      
+
+  def setAvailableValues(self, availableValues):
+    self.__availableValues = availableValues
+
+  def getCellEditor(self):
+    return self.__cellEditor
+    
+  def setCellEditor(self, cellEditor):
+    self.__cellEditor = cellEditor
+   
 class ImportManager(object):
   def __init__(self):
     self.__ruleFactories = list() 
@@ -70,7 +82,7 @@ class ImportManager(object):
       msg = factory.checkRequirements()
       if msg!=None:
         messages.append(msg)
-    if len(messages)==0 :
+    if len(messages)==0:
       return None
     return messages
   
@@ -83,9 +95,18 @@ class ImportManager(object):
   def addRuleErrorCode(self, errcode, description ):
     self.__ruleErrorCodes[errcode] = description
 
-  def addReportAttribute(self, name, javatype, size=None, label=None, isEditable=False, availableValues=None, celleditor=None):
-    desc = ReportAttribute(name, javatype, size=size, label=label, availableValues=availableValues, celleditor=celleditor, isEditable=isEditable)
-    self.__reportAttributes[name] = desc
+  def addReportAttribute(self, name, javatype, size=None, label=None, isEditable=False, availableValues=None, cellEditor=None):
+    if self.__reportAttributes.has_key(name):
+      desc = self.__reportAttributes[name]
+      if desc.getAvailableValues() == None:
+        desc.setAvailableValues(availableValues)
+      if desc.getCellEditor() == None:
+        desc.setCellEditor(cellEditor)
+      if not desc.isEditable():
+        desc.setEditable(isEditable)
+    else:
+      desc = ReportAttribute(name, javatype, size=size, label=label, availableValues=availableValues, cellEditor=cellEditor, isEditable=isEditable)
+      self.__reportAttributes[name] = desc
 
   def getReportAttributes(self):
     return self.__reportAttributes.values()
