@@ -3,6 +3,7 @@
 import gvsig
 
 import os
+import sys
 
 from gvsig import getResource
 from gvsig.commonsdialog import filechooser
@@ -83,6 +84,12 @@ class PostValidatorPanel(FormPanel, Observer):
     self.filterPicker = None
     self.initComponents()
 
+  def getSelectedWorkspace(self):
+    selectedItem = self.cboWorkspace.getSelectedItem()
+    if selectedItem == None:
+      return None
+    return selectedItem.getValue()
+    
   def initComponents(self):
     i18n = ToolsLocator.getI18nManager()
     toolsSwingManager = ToolsSwingLocator.getToolsSwingManager()
@@ -142,13 +149,18 @@ class PostValidatorPanel(FormPanel, Observer):
         conn = entry.getExplorerParameters()
         workspace = dataManager.createDatabaseWorkspaceManager(conn)
         try:
+          try:
+            gvsig.logger("Checking workspace %s" % workspace.getServerExplorerParameters().getUrl())
+          except:
+            gvsig.logger("Checking workspace %s" % workspace.getServerExplorerParameters())
           if workspace.isValidStoresRepository():
-            model.addElement(workspace)
+            model.addElement(LabeledValueImpl(workspace.getLabel(), workspace))
             if "arena" in workspace.getId().lower():
               select = n
             n += 1
         except:
-          print "Not valid workspace"
+          ex = sys.exc_info()[1]
+          print "Not valid workspace. %s"% str(ex)
     self.cboWorkspace.setModel(model)
     self.cboWorkspace.setSelectedIndex(select)
     self.cboWorkspace.addActionListener(self.doDBChanged)
@@ -248,7 +260,7 @@ class PostValidatorPanel(FormPanel, Observer):
     self.message(x)
     
   def doDBChanged(self, *args):
-    arena2workspace = self.cboWorkspace.getSelectedItem()
+    arena2workspace = self.getSelectedWorkspace()
     if arena2workspace==None:
       self.btnCheckIntegrity.setEnabled(False)
       self.btnApplyUpdate.setEnabled(False)
@@ -320,7 +332,7 @@ class PostValidatorPanel(FormPanel, Observer):
     n = 0
     for rule in self.importManager.getRuleFactories():
       if self.cltRules.getCheckedModel().isSelectedIndex(n):
-        rules.append(rule.create(workspace=self.cboWorkspace.getSelectedItem()))
+        rules.append(rule.create(workspace=self.getSelectedWorkspace()))
       n+=1
     if len(rules)==0 :
       self.btnClose.setEnabled(True)
@@ -340,7 +352,7 @@ class PostValidatorPanel(FormPanel, Observer):
       self.report,
       status=status,
       rules = rules,
-      workspace=self.cboWorkspace.getSelectedItem(),
+      workspace=self.getSelectedWorkspace(),
       expressionFilter=self.filterPicker.get()
     )
     self.process.add(self.showValidatorFinishMessage)
@@ -367,7 +379,7 @@ class PostValidatorPanel(FormPanel, Observer):
     msg = "Total %s incidencias en %s accidentes" % (
         len(process.getReport()),
         len(process)
-      )
+    )
     gvsig.logger(msg)
     self.message(msg)
     
@@ -383,11 +395,11 @@ class PostValidatorPanel(FormPanel, Observer):
     n = 0
     for transform in self.importManager.getTransformFactories():
       if self.cltTransforms.getCheckedModel().isSelectedIndex(n):
-        transforms.append(transform.create(workspace=self.cboWorkspace.getSelectedItem()))
+        transforms.append(transform.create(workspace=self.getSelectedWorkspace()))
       n+=1
       
     self.process = self.importManager.createPostTransformProcess(
-      self.cboWorkspace.getSelectedItem(),
+      self.getSelectedWorkspace(),
       self.report,
       status,
       expressionFilter=self.filterPicker.get(),
@@ -407,7 +419,7 @@ class PostValidatorPanel(FormPanel, Observer):
     self.btnClose.setEnabled(False)
     
     self.process = self.importManager.createPostUpdateProcess(
-      self.cboWorkspace.getSelectedItem(),
+      self.getSelectedWorkspace(),
       self.report,
       status
     )

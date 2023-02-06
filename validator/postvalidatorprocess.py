@@ -69,8 +69,8 @@ class PostTransformProcess(Runnable):
       
       count = fsetAccidentes.getSize()
       n = 0
-      title = "Transformando accidentes (Accidentes)..."
-      self.status.message(title)
+      self.status.setTitle("Transformando accidentes")
+      self.status.message("Transformando accidentes...")
       self.status.setRangeOfValues(0,count)
       self.status.setCurValue(0)
       storeAccidentes.edit(FeatureStore.MODE_PASS_THROUGH)
@@ -87,27 +87,27 @@ class PostTransformProcess(Runnable):
         if efeature.isModified():
           fsetAccidentes.update(efeature)
         self.status.incrementCurrentValue()
-        self.status.setTitle("%s (%d/%d)" % (title, n, count))
       trans.commit()
+      self.status.message("")
+      self.status.terminate()
     except java.lang.Throwable, ex:
       logger("Error transformando accidentes.", LOGGER_WARN, ex)
       DataTransaction.rollbackQuietly(trans)
-      self.status.message("Error transformando accidentes (%s)")
+      self.status.message("Error transformando accidentes (%s)" % str(ex))
       self.status.abort()
       raise ex
     except:
       logger("Error transformando accidentes.")
       ex = sys.exc_info()[1]
       logger("Error transformando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
-      self.status.message("Error transformando accidentes")
       DataTransaction.rollbackQuietly(trans)
+      self.status.message("Error transformando accidentes (%s)" % str(ex))
+      self.status.abort()
       
     finally:
       logger("Finalizando proceso..")
       DisposeUtils.disposeQuietly(trans)
       self.status.setTitle("Finalizado proceso")
-      self.status.setCurValue(0)
-      self.status.abort()
       logger("..Finalizado proceso")
 
   
@@ -146,8 +146,8 @@ class PostUpdateProcess(Runnable):
       storeAccidentes.edit(FeatureStore.MODE_PASS_THROUGH)
       n = 0
       count = len(issues)
-      title = "Actualizando accidentes (Accidentes)..."
-      self.status.message(title)
+      self.status.setTitle("Actualizando accidentes")
+      self.status.message("Actualizando accidentes...")
       self.status.setRangeOfValues(0,count)
       self.status.setCurValue(0)
       for issue in issues:
@@ -157,7 +157,6 @@ class PostUpdateProcess(Runnable):
           return
         n+=1
         self.status.incrementCurrentValue()
-        self.status.setTitle("%s (%d/%d)" % (title, n, count))
         
         if not issue.get("SELECTED"):
           logger("Issue is not selected (%s)"% (issue.get("ID_ACCIDENTE")))
@@ -169,17 +168,20 @@ class PostUpdateProcess(Runnable):
           storeAccidentes.update(efeature)
           
       trans.commit()
+      self.status.message("")
+      self.status.terminate()
     except java.lang.Throwable, ex:
       DataTransaction.rollbackQuietly(trans)
       logger("Error actualizando accidentes.", LOGGER_WARN, ex)
-      self.status.message("Error actualizando accidentes (%s)")
+      self.status.message("Error actualizando accidentes (%s)" % str(ex))
       self.status.abort()
       raise ex
     except:
       DataTransaction.rollbackQuietly(trans)
       ex = sys.exc_info()[1]
       logger("Error actualizando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
-      self.status.message("Error actualizando accidentes (%s)")
+      self.status.message("Error actualizando accidentes (%s)" % str(ex))
+      self.status.abort()
     finally:
       DisposeUtils.dispose(trans)
 
@@ -217,6 +219,7 @@ class PostValidatorProcess(Runnable):
     
     
   def run(self):
+    mainTable = "ARENA2_ACCIDENTES"
     try:
       self.__count = 0
       count_files = 0
@@ -231,10 +234,10 @@ class PostValidatorProcess(Runnable):
 
       count = fsetAccidentes.getSize()
       # Regla por las tablas principales
-      mainTables = {"ARENA2_CONDUCTORES", 
+      mainTables = ("ARENA2_CONDUCTORES", 
       "ARENA2_PASAJEROS", 
       "ARENA2_PEATONES",
-      "ARENA2_VEHICULOS"}
+      "ARENA2_VEHICULOS")
       expressionTransform = ExpresionTransform(accidentesFeatureType)
       
       for mainTable in mainTables:
@@ -253,12 +256,12 @@ class PostValidatorProcess(Runnable):
       self.status.setRangeOfValues(0,count)
       self.status.setCurValue(0)
 
+      mainTable = "ARENA2_ACCIDENTES"
       for feature in fsetAccidentes:
         if self.status.isCancellationRequested():
           self.status.cancel()
           break
         n+=1
-        self.status.setTitle("%s (%d/%d)" % (title, n, count))
 
         rules = self.rules
 
@@ -271,10 +274,6 @@ class PostValidatorProcess(Runnable):
         self.status.incrementCurrentValue()
 
       # Regla por las tablas principales
-      mainTables = {"ARENA2_CONDUCTORES", 
-      "ARENA2_PASAJEROS", 
-      "ARENA2_PEATONES",
-      "ARENA2_VEHICULOS"}
       expressionTransform = ExpresionTransform(accidentesFeatureType)
       
       for mainTable in mainTables:
@@ -303,21 +302,22 @@ class PostValidatorProcess(Runnable):
         DisposeUtils.dispose(storeToValidate)
         storeToValidate = None
         
-        self.status.message("Comprobacion completada")
       DisposeUtils.disposeQuietly(fsetAccidentes)
+      self.status.message(u"Comprobación completada")
       self.status.terminate()
       for action in self.__actions:
         action(self)
 
     except java.lang.Throwable, ex:
       logger("Error validando accidentes.", LOGGER_WARN, ex)
-      self.status.message("Error validando accidentes (%s)" % "Accidentes")
+      self.status.message("Error validando %s (%s)" %(mainTable,str(ex)))
       self.status.abort()
       raise ex
     except:
       ex = sys.exc_info()[1]
       logger("Error validando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
-      self.status.message("Error validando accidentes (%s)"  % "Accidentes")
+      self.status.message("Error validando %s (%s)" %(mainTable,str(ex)))
+      self.status.abort()
     finally:
       pass
 
