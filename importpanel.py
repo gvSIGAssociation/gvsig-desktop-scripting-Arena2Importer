@@ -136,7 +136,6 @@ class FilesPickerController(FormComponent):
     if folder==None:
       return
     folder = folder.getAbsolutePath()
-    print folder
     paths = list()
     for root, dirs, files in os.walk(folder, followlinks=True):
        for name in files:
@@ -173,7 +172,7 @@ class ExportFromIssueActionContext(AbstractDALActionContext):
   def getStore(self):
     return self.panel.report.getStore()
     
-class ImportPanel(FormPanel, Observer):
+class ImportPanel(FormPanel):
   def __init__(self, importManager):
     FormPanel.__init__(self,getResource(__file__,"importpanel.xml"))
     self.importManager = importManager
@@ -196,6 +195,7 @@ class ImportPanel(FormPanel, Observer):
 
     self.cltTransforms = toolsSwingManager.createJListWithCheckbox(self.lstTransforms)
     self.cltRules = toolsSwingManager.createJListWithCheckbox(self.lstRules)
+    self.cltPostProcesses = toolsSwingManager.createJListWithCheckbox(self.lstPostProcesses)
 
     self.arena2filePicker = FilesPickerController(
       self.lstArena2Files,
@@ -227,6 +227,11 @@ class ImportPanel(FormPanel, Observer):
       model.addElement(factory.getName())
     self.cltRules.setModel(model)
 
+    model = DefaultListModel()
+    for factory in self.importManager.getPostProcessFactories():
+      model.addElement(factory.getName())
+    self.cltPostProcesses.setModel(model)
+
     n = 0
     for factory in self.importManager.getRuleFactories():
       if factory.isSelectedByDefault():
@@ -237,6 +242,12 @@ class ImportPanel(FormPanel, Observer):
     for factory in self.importManager.getTransformFactories():
       if factory.isSelectedByDefault():
         self.cltTransforms.toggleCheck(n)
+      n+=1
+
+    n = 0
+    for factory in self.importManager.getPostProcessFactories():
+      if factory.isSelectedByDefault():
+        self.cltPostProcesses.toggleCheck(n)
       n+=1
 
     pool = dataManager.getDataServerExplorerPool()
@@ -298,7 +309,6 @@ class ImportPanel(FormPanel, Observer):
       for row in xrange(selectionModel.getMinSelectionIndex(), selectionModel.getMaxSelectionIndex()+1):
         if selectionModel.isSelectedIndex(row):
           row = self.tblIssues.convertRowIndexToModel(row)
-          print "report.setSelected(%s, %s)" % (row, select)
           report.setSelected(row, select)
   
   def btnModifyIssues_click(self, *args):
@@ -365,33 +375,30 @@ class ImportPanel(FormPanel, Observer):
     self.btnImportar.setEnabled(True)
     self.btnClose.setEnabled(True)
 
-  def update(self, observable, notification):
+  def updateComponents(self, process=None):
+    if not SwingUtilities.isEventDispatchThread():
+      SwingUtilities.invokeLater(lambda :self.updateComponents())
+      return
     try:
       if self.process == None:
+        self.btnClose.setEnabled(True)
+        self.btnCheckIntegrity.setEnabled(True)
+        self.btnImportar.setEnabled(True)
+        if self.report != None:
+         self.report.setEnableUpdateUI(True)
         return
-      isRunning = getattr(observable,"isRunning",None)
-      if isRunning==None:
-        return
-      if self.process.getName()=="import":
-        if not isRunning():
-          self.btnClose.setEnabled(True)
-          self.btnCheckIntegrity.setEnabled(True)
-          if not observable.isAborted():
-            self.setVisibleTaskStatus(False)
-            self.btnImportar.setEnabled(False)
-          else:
-            self.btnImportar.setEnabled(True)
 
-      elif self.process.getName()=="validator":
-        if not isRunning():
-          self.btnClose.setEnabled(True)
-          self.btnCheckIntegrity.setEnabled(True)
-          self.btnImportar.setEnabled(True)
-          if not observable.isAborted():
-            self.setVisibleTaskStatus(False)
+      status = self.process.getStatus()
+      self.btnClose.setEnabled(not status.isRunning())
+      self.btnCheckIntegrity.setEnabled(not status.isRunning())
+      self.btnImportar.setEnabled(not status.isRunning())
+      if self.report != None:
+        self.report.setEnableUpdateUI(not status.isRunning())
 
+      self.setVisibleTaskStatus(status.isAborted())
     except:
       print "Ups!, se ha producido un error"
+
 
   def btnRemoveIssues_click(self, *args):
     self.report.removeAll()
@@ -436,6 +443,7 @@ class ImportPanel(FormPanel, Observer):
       workspace=ws
     )
     self.process.add(self.showValidatorFinishMessage)
+    self.process.add(self.updateComponents)    
     th = Thread(self.process, "ARENA2_validator")
     th.start()
 
@@ -443,15 +451,21 @@ class ImportPanel(FormPanel, Observer):
     if not SwingUtilities.isEventDispatchThread():
       SwingUtilities.invokeLater(lambda :self.showValidatorFinishMessage(process))
       return
-  
-    self.message("Total %s incidencias en %s accidentes" % (
-        len(process.getReport()),
-        len(process)
-      )
-    )
-    self.report.setEnableUpdateUI(True)
 
-    
+    if not process.getStatus().isAborted():
+      self.message("Total %s incidencias en %s accidentes" % (
+          len(process.getReport()),
+          len(process)
+        )
+      )
+
+  def showImportFinishMessage(self, process):
+    if not SwingUtilities.isEventDispatchThread():
+      SwingUtilities.invokeLater(lambda :self.showImportFinishMessage(process))
+      return
+
+    if not process.getStatus().isAborted():
+      self.message(u"Importación terminada")
   
   def btnImportar_click(self, *args):
     files = self.arena2filePicker.get()
@@ -476,19 +490,36 @@ class ImportPanel(FormPanel, Observer):
       if self.cltTransforms.getCheckedModel().isSelectedIndex(n):
         transforms.append(transform.create(workspace=ws))
       n+=1
-      
+
+    names = list()
+    checkModel = self.cltPostProcesses.getCheckedModel()
+    for n in range(checkModel.getMinSelectionIndex(), checkModel.getMaxSelectionIndex()+1):
+      if checkModel.isSelectedIndex(n):
+        names.append(self.cltPostProcesses.getModel().getElementAt(n))
+    postprocess = None
+    if len(names) > 0:
+      postprocess = self.importManager.createPostProcessProcess(
+        ws,
+        names,
+        expressionFilter=None,
+        status=status
+      )
+
     self.process = self.importManager.createImportProcess(
       files,
       ws,
       self.report,
       status,
-      transforms = transforms
+      transforms = transforms,
+      postprocess = postprocess
       #, deleteChildrensAlways = ??
-      
     )
+
+    self.process.add(self.showImportFinishMessage)
+    self.process.add(self.updateComponents)
+
     th = Thread(self.process, "ARENA2_import")
     th.start()
-
 
 def main(*args):
     from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
@@ -500,4 +531,7 @@ def main(*args):
       return
     dialog = manager.createImportDialog()
     dialog.showWindow("ARENA2 Importar accidentes")
+
+def main0(*args):
+  pass  
     

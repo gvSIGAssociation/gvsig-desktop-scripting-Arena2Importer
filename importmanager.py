@@ -2,9 +2,14 @@
 
 import gvsig
 
+import sys
+from gvsig import logger, LOGGER_WARN, LOGGER_ERROR
+
 from collections import OrderedDict
 
-from java.lang import IllegalArgumentException
+from java.lang import IllegalArgumentException, Runnable
+import java.lang.Exception
+import java.lang.Throwable
 
 from org.gvsig.tools import ToolsLocator
 from org.gvsig.tools.util import Validator
@@ -71,6 +76,7 @@ class ImportManager(object):
     self.__transformFactories = list() # Factory
     self.__ruleErrorCodes = OrderedDict()
     self.__reportAttributes = OrderedDict()
+    self.__postProcessFactories = OrderedDict()
 
   def checkRequirements(self):
     messages = list()
@@ -79,6 +85,10 @@ class ImportManager(object):
       if msg!=None:
         messages.append(msg)
     for factory in self.__transformFactories:
+      msg = factory.checkRequirements()
+      if msg!=None:
+        messages.append(msg)
+    for factory in self.getPostProcessFactories():
       msg = factory.checkRequirements()
       if msg!=None:
         messages.append(msg)
@@ -91,6 +101,15 @@ class ImportManager(object):
 
   def addRuleFixer(self, fixer):
     self.__ruleFixers[fixer.getId()] = fixer
+
+  def addPostProcessFactory(self, postProcessFactory):
+    self.__postProcessFactories[postProcessFactory.getName()] = postProcessFactory
+
+  def getPostProcessFactories(self):
+    return self.__postProcessFactories.values()
+
+  def getPostProcessFactory(self, name):
+    return self.__postProcessFactories.get(name,None)
 
   def addRuleErrorCode(self, errcode, description ):
     self.__ruleErrorCodes[errcode] = description
@@ -137,7 +156,6 @@ class ImportManager(object):
   def getTransforms(self):
     transforms = list()
     for factory in self.__transformFactories:
-      print "getTransforms: Create transform ", factory.getName()
       transform = factory.create()
       transform.restart()
       transforms.append(transform)
@@ -153,9 +171,9 @@ class ImportManager(object):
     dialog = PostValidatorPanel(self)
     return dialog
 
-  def createImportProcess(self, files, workspace, report, status=None, transforms=None, deleteChildrensAlways = True):
+  def createImportProcess(self, files, workspace, report, status=None, transforms=None, deleteChildrensAlways = True, postprocess = None):
     from addons.Arena2Importer.importprocess import ImportProcess
-    process = ImportProcess(self, files, workspace, report, status, transforms, deleteChildrensAlways = deleteChildrensAlways)
+    process = ImportProcess(self, files, workspace, report, status, transforms, deleteChildrensAlways = deleteChildrensAlways, postprocess = postprocess)
     return process
     
 
@@ -192,18 +210,65 @@ class ImportManager(object):
     process = CreateTablesProcess(self, connection, status, **args)
     return process
 
-  def createStatus(self, title="ARENA2", observer=None):
+  def createStatus(self, title="ARENA2", obsolete=None):
     taskManager = ToolsLocator.getTaskStatusManager()
     status = taskManager.createDefaultSimpleTaskStatus(title)
-    if observer!=None:
-      status.addObserver(observer)
     return status
 
   def createReport(self):
     from addons.Arena2Importer.integrity.report import Report
     report = Report(self)
     return report
+
+  def createPostProcessProcess(self, workspace, names, expressionFilter, status):
+    return PostProcessProcess(self, workspace, names, expressionFilter, status)
+
+class PostProcessProcess(Runnable):
+  def __init__(self, importManager, workspace, names, expressionFilter, status):
+    self.importManager = importManager
+    if status == None:
+      self.status = self.importManager.createStatus()
+    else:
+      self.status = status
+    self.workspace = workspace
+    self.names = names
+    self.expressionFilter = expressionFilter
+    self.__actions = list()
+
+  def getName(self):
+    return "postprocess"
+
+  def getStatus(self):
+    return self.status
+
+  def add(self, action):
+    self.__actions.append(action)
     
+  def run(self):
+    try:
+      for factory in self.importManager.getPostProcessFactories():
+        self.status.message(factory.getName())
+        if factory.getName() in self.names:
+          self.status.push()
+          try:
+            postProcess = factory.create(self.workspace, self.expressionFilter, self.status)
+            postProcess.execute()
+          finally:
+            self.status.pop()
+      self.status.terminate()
+      for action in self.__actions:
+        action(self)
+    except java.lang.Exception, ex:
+      logger("Error importando accidentes.", LOGGER_WARN, ex)
+      self.status.message("Error importando accidentes. "+str(ex))
+      self.status.abort()
+    except:
+      ex = sys.exc_info()[1]
+      logger("Error importando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
+      self.status.message("Error importando accidentes. "+str(ex))
+      self.status.abort()
+
+
 def main(*args):
   pass
   

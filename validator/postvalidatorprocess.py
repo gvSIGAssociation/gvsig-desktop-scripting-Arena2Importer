@@ -46,6 +46,9 @@ class PostTransformProcess(Runnable):
   def getName(self):
     return "posttransform"
 
+  def getStatus(self):
+    return self.status
+    
   def run(self):
     trans = None
     try:
@@ -132,8 +135,10 @@ class PostUpdateProcess(Runnable):
   def getName(self):
     return "postupdate"
 
+  def getStatus(self):
+    return self.status
+    
   def run(self):
-    print "post update process"
     trans = None
     try:
       repo = self.workspace.getStoresRepository()
@@ -216,7 +221,8 @@ class PostValidatorProcess(Runnable):
   def getReport(self):
     return self.report
     
-    
+  def getStatus(self):
+    return self.status
     
   def run(self):
     mainTable = "ARENA2_ACCIDENTES"
@@ -435,13 +441,13 @@ def main2(*args):
     application.close(True)
   print "Done test"
 
-def main(*args):
+def main0(*args):
   expressionEvaluatorManager = ExpressionEvaluatorLocator.getExpressionEvaluatorManager()
   expression = expressionEvaluatorManager.createExpression()
   expression.setPhrase("(FECHA_ACCIDENTE >=  DATE '2021-12-01' ) and (FECHA_ACCIDENTE <=  DATE '2021-12-02')" )
   expressionTransform = ExpresionTransform()
   print expressionTransform.applyTransform(expression)
-  
+
 class ExpresionTransform(ExpressionBuilder.Visitor):
   def __init__(self, featureType = None):
     self.replacements = []
@@ -464,3 +470,7 @@ class ExpresionTransform(ExpressionBuilder.Visitor):
     for r in self.replacements:
       value.replace(r[0], r[1])
     return value.toString()
+
+def main(*args):
+  pass  
+  

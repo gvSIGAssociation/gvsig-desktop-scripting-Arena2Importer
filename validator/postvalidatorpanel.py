@@ -18,7 +18,6 @@ from javax.swing import JButton
 from javax.swing import SwingUtilities
 from javax.swing import DefaultComboBoxModel, DefaultListModel
 from org.gvsig.tools import ToolsLocator
-from org.gvsig.tools.observer import Observer
 from org.gvsig.tools.swing.api import ToolsSwingLocator
 from org.gvsig.tools.util import LabeledValueImpl
 
@@ -39,6 +38,8 @@ from org.gvsig.tools.util import ToolsUtilLocator
 from org.gvsig.tools.swing.api import ToolsSwingLocator
 from org.gvsig.expressionevaluator.swing import ExpressionEvaluatorSwingLocator
 from org.gvsig.fmap.dal.swing import DALSwingLocator
+
+from org.gvsig.tools.swing.api import ToolsSwingUtils
 
 class ShowFormFromIssueActionContext(AbstractDALActionContext):
   def __init__(self, panel):
@@ -70,7 +71,7 @@ class ExportFromIssueActionContext(AbstractDALActionContext):
   def getStore(self):
     return self.panel.report.getStore()
     
-class PostValidatorPanel(FormPanel, Observer):
+class PostValidatorPanel(FormPanel):
   def __init__(self, importManager):
     FormPanel.__init__(self,getResource(__file__,"postvalidatorpanel.xml"))
     self.importManager = importManager
@@ -101,7 +102,8 @@ class PostValidatorPanel(FormPanel, Observer):
     #Filter
     self.cltTransforms = toolsSwingManager.createJListWithCheckbox(self.lstTransforms)
     self.cltRules = toolsSwingManager.createJListWithCheckbox(self.lstRules)
-
+    self.cltPostProcesses = toolsSwingManager.createJListWithCheckbox(self.lstPostProcesses)
+    
     self.taskStatusController = taskManager.createTaskStatusController(
       None,
       self.lblTaskTitle,
@@ -128,6 +130,11 @@ class PostValidatorPanel(FormPanel, Observer):
       model.addElement(factory.getName())
     self.cltRules.setModel(model)
 
+    model = DefaultListModel()
+    for factory in self.importManager.getPostProcessFactories():
+      model.addElement(factory.getName())
+    self.cltPostProcesses.setModel(model)
+
     n = 0
     for factory in self.importManager.getRuleFactories():
       if factory.isSelectedByDefault():
@@ -139,6 +146,13 @@ class PostValidatorPanel(FormPanel, Observer):
     #  if factory.isSelectedByDefault():
     #    self.cltTransforms.toggleCheck(n)
     #  n+=1
+
+    n = 0
+    for factory in self.importManager.getPostProcessFactories():
+      if factory.isSelectedByDefault():
+        self.cltPostProcesses.toggleCheck(n)
+      n+=1
+
 
     pool = dataManager.getDataServerExplorerPool()
     model = DefaultComboBoxModel()
@@ -181,8 +195,8 @@ class PostValidatorPanel(FormPanel, Observer):
     swingManager.createTableColumnAdjuster(self.tblIssues)
     self.btnVerAccidente2.setEnabled(False)
     self.btnModifyIssues.setEnabled(False)
-    
-    self.setPreferredSize(800,500)
+
+    ToolsSwingUtils.ensureRowsCols(self.asJComponent(), 20, 120, 30, 150)
 
   def btnImportAll_click(self, *args):
     self.doSelectImport(True)
@@ -244,9 +258,13 @@ class PostValidatorPanel(FormPanel, Observer):
     self.lblTaskMessage.setVisible(visible)
     self.btnCancelTask.setVisible(visible)
 
-  def message(self, s):
+  def issuesMessage(self, s):
     self.lblIssuesMessage.setText(s)
-    
+
+  def message(self, s):
+    self.lblTaskMessage.setText(s)
+    self.lblTaskMessage.setVisible(True)
+
   def issuesSelectionChanged(self, event):
     row = self.tblIssues.getSelectedRow()
     if row<0 :
@@ -257,7 +275,7 @@ class PostValidatorPanel(FormPanel, Observer):
     self.btnModifyIssues.setEnabled(True)
     model = self.tblIssues.getModel()
     x = model.getValueAt(row,model.getColumnCount()-1)
-    self.message(x)
+    self.issuesMessage(x)
     
   def doDBChanged(self, *args):
     arena2workspace = self.getSelectedWorkspace()
@@ -277,44 +295,31 @@ class PostValidatorPanel(FormPanel, Observer):
       self.filterPicker.dispose()
     self.filterPicker = DALSwingLocator.getDataSwingManager().createExpressionPickerController(accidentesStore, self.txtFilter, self.btnFilter)
 
-  def update(self, observable, notification):
+  def updateComponents(self, process=None):
+    if not SwingUtilities.isEventDispatchThread():
+      SwingUtilities.invokeLater(lambda :self.updateComponents())
+      return
     try:
       if self.process == None:
+        self.btnClose.setEnabled(True)
+        self.btnCheckIntegrity.setEnabled(True)
+        self.btnApplyUpdate.setEnabled(True)
+        self.btnApplyTransform.setEnabled(True)
+        self.btnPostProcess.setEnabled(True)
+        if self.report != None:
+         self.report.setEnableUpdateUI(True)
         return
-      isRunning = getattr(observable,"isRunning",None)
-      if isRunning==None:
-        return
-      if self.process.getName()=="postupdate":
-        if not isRunning():
-          self.btnClose.setEnabled(True)
-          self.btnCheckIntegrity.setEnabled(True)
-          if not observable.isAborted():
-            self.setVisibleTaskStatus(False)
-            self.btnApplyUpdate.setEnabled(False)
-            self.btnApplyTransform.setEnabled(False)
-            
-          else:
-            self.btnApplyUpdate.setEnabled(True)
-            self.btnApplyTransform.setEnabled(True)
-      elif self.process.getName()=="postvalidator":
-        if not isRunning():
-          self.btnClose.setEnabled(True)
-          self.btnCheckIntegrity.setEnabled(True)
-          self.btnApplyUpdate.setEnabled(True)
-          self.btnApplyTransform.setEnabled(True)
-          if not observable.isAborted():
-            self.setVisibleTaskStatus(False)
-      elif self.process.getName()=="posttransform":
-        if not isRunning():
-          self.btnClose.setEnabled(True)
-          self.btnCheckIntegrity.setEnabled(True)
-          if not observable.isAborted():
-            self.setVisibleTaskStatus(False)
-            self.btnApplyUpdate.setEnabled(False)
-            self.btnApplyTransform.setEnabled(False)
-          else:
-            self.btnApplyUpdate.setEnabled(True)
-            self.btnApplyTransform.setEnabled(True)
+
+      status = self.process.getStatus()
+      self.btnClose.setEnabled(not status.isRunning())
+      self.btnCheckIntegrity.setEnabled(not status.isRunning())
+      self.btnApplyUpdate.setEnabled(not status.isRunning())
+      self.btnApplyTransform.setEnabled(not status.isRunning())
+      self.btnPostProcess.setEnabled(not status.isRunning())
+      if self.report != None:
+        self.report.setEnableUpdateUI(not status.isRunning())
+
+      self.setVisibleTaskStatus(status.isAborted())
     except:
       print "Ups!, se ha producido un error"
 
@@ -356,22 +361,11 @@ class PostValidatorPanel(FormPanel, Observer):
       expressionFilter=self.filterPicker.get()
     )
     self.process.add(self.showValidatorFinishMessage)
-    self.process.add(self.activateButtons)
-    self.report.setEnableUpdateUI(False)
+    self.process.add(self.updateComponents)
     
     th = Thread(self.process, "ARENA2_postvalidator")
     th.start()
     
-  def activateButtons(self, process):
-    if not SwingUtilities.isEventDispatchThread():
-      SwingUtilities.invokeLater(lambda :self.activateButtons(process))
-      return
-    self.btnClose.setEnabled(True)
-    self.btnApplyUpdate.setEnabled(True)
-    self.btnApplyTransform.setEnabled(True)
-    self.btnCheckIntegrity.setEnabled(True)
-    self.report.setEnableUpdateUI(True)
-
   def showValidatorFinishMessage(self, process):
     if not SwingUtilities.isEventDispatchThread():
       SwingUtilities.invokeLater(lambda :self.showValidatorFinishMessage(process))
@@ -381,7 +375,8 @@ class PostValidatorPanel(FormPanel, Observer):
         len(process)
     )
     gvsig.logger(msg)
-    self.message(msg)
+    if not process.getStatus().isAborted() :
+      self.issuesMessage(msg)
     
   def btnApplyTransform_click(self, *args):
     status = self.importManager.createStatus("ARENA2 Post transform Actualizando", self)
@@ -405,7 +400,36 @@ class PostValidatorPanel(FormPanel, Observer):
       expressionFilter=self.filterPicker.get(),
       transforms=transforms
     )
+    self.process.add(self.updateComponents)
     th = Thread(self.process, "ARENA2_posttransform")
+    th.start()
+    
+  def btnPostProcess_click(self, *args):
+    names = list()
+    checkModel = self.cltPostProcesses.getCheckedModel()
+    if checkModel.isSelectionEmpty():
+      self.message(u"Debe seleccionar algún postproceso a realizar")
+      return
+
+    for n in range(checkModel.getMinSelectionIndex(), checkModel.getMaxSelectionIndex()+1):
+      if checkModel.isSelectedIndex(n):
+        names.append(self.cltPostProcesses.getModel().getElementAt(n))
+
+    status = self.importManager.createStatus("ARENA2 Post process")
+    status.add()
+    status.setAutoremove(True)
+    self.taskStatusController.bind(status)
+    self.setVisibleTaskStatus(True)
+    self.btnClose.setEnabled(False)
+    
+    self.process = self.importManager.createPostProcessProcess(
+      self.getSelectedWorkspace(),
+      names,
+      expressionFilter=self.filterPicker.get(),
+      status=status
+    )
+    self.process.add(self.updateComponents)
+    th = Thread(self.process, "ARENA2_postprocess")
     th.start()
     
   def btnApplyUpdate_click(self, *args):
@@ -423,6 +447,7 @@ class PostValidatorPanel(FormPanel, Observer):
       self.report,
       status
     )
+    self.process.add(self.updateComponents)
     th = Thread(self.process, "ARENA2_postupdate")
     th.start()
 
@@ -437,4 +462,8 @@ def main(*args):
       return
     dialog = manager.createPostValidatorDialog()
     dialog.showWindow("ARENA2 Validador accidentes")
+
+def main0(*args):
+  pass  
+    
     

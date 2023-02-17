@@ -22,7 +22,7 @@ from org.gvsig.tools.dispose import DisposeUtils
 from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
 
 class ImportProcess(Runnable):
-  def __init__(self, importManager, files, workspace, report, status=None, transforms=None, deleteChildrensAlways = True):
+  def __init__(self, importManager, files, workspace, report, status=None, transforms=None, deleteChildrensAlways = True, postprocess = None):
     self.importManager = importManager
     if status == None:
       self.status = self.importManager.createStatus()
@@ -38,6 +38,7 @@ class ImportProcess(Runnable):
     self.__count = 0
     self.__actions = list()
     self.deleteChildrensAlways = deleteChildrensAlways
+    self.postprocess = postprocess
 
   def add(self, action):
     self.__actions.append(action)
@@ -72,8 +73,8 @@ class ImportProcess(Runnable):
       count_files = 0
       title = self.status.getTitle()
       for fname in self.files:
-        self.status.setTitle("%s (%d/%d)" % (title, count_files, len(self.files)))
         count_files+=1
+        self.status.setTitle("%s (archivo %d de %d)" % (title, count_files, len(self.files)))
         fname_tail = os.path.sep.join(fname.split(os.path.sep)[-3:])
         
         input_store = self.openStore(fname)
@@ -117,10 +118,16 @@ class ImportProcess(Runnable):
         
         DisposeUtils.dispose(input_store)
         input_store = None
-        
 
+      self.status.setTitle(title)
+      if self.postprocess != None:
+        self.status.push()
+        try:
+          self.postprocess.run()
+        finally:
+          self.status.pop()
         
-      self.status.message("Creacion completada")
+      self.status.message(u"Importación completada")
       self.status.terminate()
       
       for action in self.__actions:
@@ -138,6 +145,9 @@ class ImportProcess(Runnable):
     finally:
       pass      
 
+  def getStatus(self):
+    return self.status
+    
   def copyTable(self, sourceStore, targetStore):
     try:
       if sourceStore.getDefaultFeatureType().get("ID_ACCIDENTE")==None:
@@ -353,6 +363,9 @@ class ValidatorProcess(Runnable):
     
   def getReport(self):
     return self.report
+
+  def getStatus(self):
+    return self.status
     
   def openStore(self, fname):
     dataManager = DALLocator.getDataManager()
@@ -380,8 +393,8 @@ class ValidatorProcess(Runnable):
       count_files = 0
       title = self.status.getTitle()
       for fname in self.files:
-        self.status.setTitle("%s (%d/%d)" % (title, count_files, len(self.files)))
         count_files+=1
+        self.status.setTitle("%s (archivo %d de %d)" % (title, count_files, len(self.files)))
         fname_tail = os.path.sep.join(fname.split(os.path.sep)[-3:])
         self.input_store = self.openStore(fname)
         
@@ -436,7 +449,8 @@ class ValidatorProcess(Runnable):
         self.input_store.dispose()
         self.input_store = None
         
-        self.status.message("Comprobacion completada")
+      self.status.message("Comprobacion completada")
+      self.status.setTitle(title)
     
       self.status.terminate()
       
@@ -611,7 +625,7 @@ def genetareScript(folderData, slotsize):
   for slot in range(0,slots):
     print "./gvSIG.sh --splash=false --showgui=false --consolelogger=false --runScript=/addons/Arena2Importer/importprocess --closeAtFinish --slotsize=%d --import --slot=%d" % (slotsize,slot)   
 
-def main(*args):
+def main0(*args):
   application = ApplicationLocator.getApplicationManager()
 
   arguments = application.getArguments()
@@ -644,4 +658,6 @@ def main(*args):
   
   if closeAtFinish:
     application.close(True)
-  
+
+def main(*args):
+  pass  
