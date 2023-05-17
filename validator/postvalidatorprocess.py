@@ -23,6 +23,125 @@ from org.gvsig.expressionevaluator import ExpressionEvaluatorLocator, Expression
 
 from addons.Arena2Importer.Arena2ImportLocator import getArena2ImportManager
 
+def processFeatures(repo, expressionFilter, processFeature, status, edit=False):
+  mainTable = "ARENA2_ACCIDENTES"
+  trans = None
+  try:
+    count = 0
+    count_files = 0
+    title = status.getTitle()
+    accidentesStore = repo.getStore("ARENA2_ACCIDENTES")
+    if edit:
+      dataManager = DALLocator.getDataManager()
+      trans = dataManager.createTransaction()
+      trans.begin()
+      trans.add(accidentesStore)
+    
+    accidentesFeatureType = accidentesStore.getDefaultFeatureType()
+    if  expressionFilter != None and not expressionFilter.isEmpty():
+      fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet(expressionFilter)
+    else:
+      fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet()
+
+    count = fsetAccidentes.getSize()
+    # Regla por las tablas principales
+    childTables = ("ARENA2_VEHICULOS",
+    "ARENA2_CONDUCTORES", 
+    "ARENA2_PASAJEROS", 
+    "ARENA2_PEATONES"
+    )
+    expressionTransform = ExpresionTransform(accidentesFeatureType)
+    
+    for childTable in childTables:
+      status.message("Procesando %s..." % childTable)
+      storeChild = repo.getStore(childTable)
+
+      if  expressionFilter != None and not expressionFilter.isEmpty():
+        fset = storeChild.getFeatureSet(expressionTransform.applyTransform(expressionFilter))
+      else:
+        fset = storeChild.getFeatureSet()
+      count += fset.size()
+      DisposeUtils.disposeQuietly(fset)
+      DisposeUtils.dispose(storeChild)
+      
+    n = 0
+    status.message("Procesando accidentes...")
+    status.setRangeOfValues(0,count)
+    status.setCurValue(0)
+
+    if edit:
+      accidentesStore.edit(FeatureStore.MODE_PASS_THROUGH)
+      
+    mainTable = "ARENA2_ACCIDENTES"
+    for feature in fsetAccidentes:
+      if status.isCancellationRequested():
+        status.cancel()
+        break
+      n+=1
+      processFeature(fsetAccidentes, feature)
+      count += 1
+      status.incrementCurrentValue()
+    
+    if edit:
+      accidentesStore.finishEditing()
+
+    # Regla por las tablas hijas
+    expressionTransform = ExpresionTransform(accidentesFeatureType)
+    
+    for childTable in childTables:
+      if status.isCancellationRequested():
+        status.cancel()
+        break
+      status.message("Procesando %s..." % childTable)
+      storeChild = repo.getStore(childTable)
+      if edit:
+        trans.add(storeChild)
+      if  expressionFilter != None and not expressionFilter.isEmpty():
+        fset = storeChild.getFeatureSet(expressionTransform.applyTransform(expressionFilter))
+      else:
+        fset = storeChild.getFeatureSet()
+      
+      if fset!=None and fset.getSize()>0:
+        if edit:
+          storeChild.edit(FeatureStore.MODE_PASS_THROUGH)
+      
+        for feature in fset:
+          n+=1
+          if status.isCancellationRequested():
+            status.cancel()
+            break
+
+          processFeature(fset, feature)
+          status.incrementCurrentValue()
+        if edit:
+          storeChild.finishEditing()
+
+      DisposeUtils.disposeQuietly(fset)
+      DisposeUtils.dispose(storeChild)
+      storeChild = None
+      
+    DisposeUtils.disposeQuietly(fsetAccidentes)
+    if edit:
+      trans.commit()
+    status.message(u"Proceso completado")
+    status.terminate()
+
+  except java.lang.Throwable, ex:
+    logger("Error procesando accidentes.", LOGGER_WARN, ex)
+    DataTransaction.rollbackQuietly(trans)
+    status.message("Error procesando %s (%s)" %(mainTable,str(ex)))
+    status.abort()
+    raise ex
+  except:
+    ex = sys.exc_info()[1]
+    logger("Error procesando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
+    DataTransaction.rollbackQuietly(trans)
+    status.message("Error procesando %s (%s)" %(mainTable,str(ex)))
+    status.abort()
+  finally:
+    DisposeUtils.disposeQuietly(trans)
+
+
 class PostTransformProcess(Runnable):
   def __init__(self, importManager, workspace, report, status=None, expressionFilter=None, transforms = None):
     self.importManager = importManager
@@ -48,70 +167,20 @@ class PostTransformProcess(Runnable):
 
   def getStatus(self):
     return self.status
-    
-  def run(self):
-    trans = None
-    try:
 
-      storeAccidentes = None
-      if self.transforms == None or len(self.transforms)==0:
-        self.status.message("No hay transformaciones activas")
-        self.status.abort()
-        return
-      title = self.status.getTitle()
-      repo = self.workspace.getStoresRepository()
-      dataManager = DALLocator.getDataManager()
-      trans = dataManager.createTransaction()
-      trans.begin()
-      storeAccidentes = repo.getStore("ARENA2_ACCIDENTES")
-      trans.add(storeAccidentes)
-      if  self.expressionFilter != None and not self.expressionFilter.isEmpty():
-        fsetAccidentes = storeAccidentes.getFeatureStore().getFeatureSet(self.expressionFilter)
-      else:
-        fsetAccidentes = storeAccidentes.getFeatureStore().getFeatureSet() ### SET FILTER
+  def processFeature(self, fset, feature):
+    efeature = feature.getEditable()
+    for transform in self.transforms:
+      transform.apply(efeature)
       
-      count = fsetAccidentes.getSize()
-      n = 0
-      self.status.setTitle("Transformando accidentes")
-      self.status.message("Transformando accidentes...")
-      self.status.setRangeOfValues(0,count)
-      self.status.setCurValue(0)
-      storeAccidentes.edit(FeatureStore.MODE_PASS_THROUGH)
-      for feature in fsetAccidentes:
-        if self.status.isCancellationRequested():
-          self.status.cancel()
-          break
-        n+=1
-        efeature = feature.getEditable()
-        #apply transforms
-        for transform in self.transforms:
-          transform.apply(efeature)
-          
-        if efeature.isModified():
-          fsetAccidentes.update(efeature)
-        self.status.incrementCurrentValue()
-      trans.commit()
-      self.status.message("")
-      self.status.terminate()
-    except java.lang.Throwable, ex:
-      logger("Error transformando accidentes.", LOGGER_WARN, ex)
-      DataTransaction.rollbackQuietly(trans)
-      self.status.message("Error transformando accidentes (%s)" % str(ex))
-      self.status.abort()
-      raise ex
-    except:
-      logger("Error transformando accidentes.")
-      ex = sys.exc_info()[1]
-      logger("Error transformando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
-      DataTransaction.rollbackQuietly(trans)
-      self.status.message("Error transformando accidentes (%s)" % str(ex))
-      self.status.abort()
-      
-    finally:
-      logger("Finalizando proceso..")
-      DisposeUtils.disposeQuietly(trans)
-      self.status.setTitle("Finalizado proceso")
-      logger("..Finalizado proceso")
+    if efeature.isModified():
+      fset.update(efeature)
+
+  def run(self):
+    repo = self.workspace.getStoresRepository()
+    processFeatures(repo, self.expressionFilter, self.processFeature, self.status, True)
+    for action in self.__actions:
+      action(self)
 
   
 class PostUpdateProcess(Runnable):
@@ -223,109 +292,20 @@ class PostValidatorProcess(Runnable):
     
   def getStatus(self):
     return self.status
-    
+
+  def processFeature(self, fset, feature):
+    rules = self.rules
+    for rule in rules:
+      if rule != None:
+        #print "Feature: ", feature.get("ID_ACCIDENTE"), "Rule:", rule.getName(), "\n"
+        rule.execute(self.report, feature)
+
+   
   def run(self):
-    mainTable = "ARENA2_ACCIDENTES"
-    try:
-      self.__count = 0
-      count_files = 0
-      title = self.status.getTitle()
-      repo = self.workspace.getStoresRepository()
-      accidentesStore = repo.getStore("ARENA2_ACCIDENTES")
-      accidentesFeatureType = accidentesStore.getDefaultFeatureType()
-      if  self.expressionFilter != None and not self.expressionFilter.isEmpty():
-        fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet(self.expressionFilter)
-      else:
-        fsetAccidentes = accidentesStore.getFeatureStore().getFeatureSet()
-
-      count = fsetAccidentes.getSize()
-      # Regla por las tablas principales
-      mainTables = ("ARENA2_CONDUCTORES", 
-      "ARENA2_PASAJEROS", 
-      "ARENA2_PEATONES",
-      "ARENA2_VEHICULOS")
-      expressionTransform = ExpresionTransform(accidentesFeatureType)
-      
-      for mainTable in mainTables:
-        self.status.message("Comprobando %s..." % mainTable)
-        storeToValidate = repo.getStore(mainTable)
-        if  self.expressionFilter != None and not self.expressionFilter.isEmpty():
-          fset = storeToValidate.getFeatureSet(expressionTransform.applyTransform(self.expressionFilter))
-        else:
-          fset = storeToValidate.getFeatureSet()
-        count += fset.size()
-        DisposeUtils.disposeQuietly(fset)
-        DisposeUtils.dispose(storeToValidate)
-        
-      n = 0
-      self.status.message("Comprobando accidentes...")
-      self.status.setRangeOfValues(0,count)
-      self.status.setCurValue(0)
-
-      mainTable = "ARENA2_ACCIDENTES"
-      for feature in fsetAccidentes:
-        if self.status.isCancellationRequested():
-          self.status.cancel()
-          break
-        n+=1
-
-        rules = self.rules
-
-        # Regla para Accidentes
-        for rule in rules:
-          if rule != None:
-            #print "Feature: ", feature.get("ID_ACCIDENTE"), "Rule:", rule.getName(), "\n"
-            rule.execute(self.report, feature)
-        self.__count += 1
-        self.status.incrementCurrentValue()
-
-      # Regla por las tablas principales
-      expressionTransform = ExpresionTransform(accidentesFeatureType)
-      
-      for mainTable in mainTables:
-        if self.status.isCancellationRequested():
-          self.status.cancel()
-          break
-        self.status.message("Comprobando %s..." % mainTable)
-        storeToValidate = repo.getStore(mainTable)
-        if  self.expressionFilter != None and not self.expressionFilter.isEmpty():
-          fset = storeToValidate.getFeatureSet(expressionTransform.applyTransform(self.expressionFilter))
-        else:
-          fset = storeToValidate.getFeatureSet()
-        
-        if fset!=None and fset.getSize()>0:
-          for feature in fset:
-            n+=1
-            if self.status.isCancellationRequested():
-              self.status.cancel()
-              break
-
-            for rule in rules:
-              if rule != None:
-                rule.execute(self.report, feature)
-            self.status.incrementCurrentValue()
-        DisposeUtils.disposeQuietly(fset)
-        DisposeUtils.dispose(storeToValidate)
-        storeToValidate = None
-        
-      DisposeUtils.disposeQuietly(fsetAccidentes)
-      self.status.message(u"Comprobación completada")
-      self.status.terminate()
-      for action in self.__actions:
-        action(self)
-
-    except java.lang.Throwable, ex:
-      logger("Error validando accidentes.", LOGGER_WARN, ex)
-      self.status.message("Error validando %s (%s)" %(mainTable,str(ex)))
-      self.status.abort()
-      raise ex
-    except:
-      ex = sys.exc_info()[1]
-      logger("Error validando accidentes. " + str(ex), gvsig.LOGGER_WARN, ex)
-      self.status.message("Error validando %s (%s)" %(mainTable,str(ex)))
-      self.status.abort()
-    finally:
-      pass
+    repo = self.workspace.getStoresRepository()
+    processFeatures(repo, self.expressionFilter, self.processFeature, self.status, False)
+    for action in self.__actions:
+      action(self)
 
 
 from java.io import File
@@ -441,10 +421,16 @@ def main2(*args):
     application.close(True)
   print "Done test"
 
-def main0(*args):
+def main(*args):
   expressionEvaluatorManager = ExpressionEvaluatorLocator.getExpressionEvaluatorManager()
   expression = expressionEvaluatorManager.createExpression()
   expression.setPhrase("(FECHA_ACCIDENTE >=  DATE '2021-12-01' ) and (FECHA_ACCIDENTE <=  DATE '2021-12-02')" )
+  expressionTransform = ExpresionTransform()
+  print expressionTransform.applyTransform(expression)
+  expression.setPhrase("""((( ("ARENA2_ACCIDENTES"."TITULARIDAD_VIA" = 2) ) AND ( ("ARENA2_ACCIDENTES"."FECHA_ACCIDENTE" >= DATE '2023-01-04') )) AND ( ("ARENA2_ACCIDENTES"."FECHA_ACCIDENTE" <= DATE '2023-01-10') ))""" )
+  expressionTransform = ExpresionTransform()
+  print expressionTransform.applyTransform(expression)
+  expression.setPhrase("""((( ("TITULARIDAD_VIA" = 2) ) AND ( ("ARENA2_ACCIDENTES"."FECHA_ACCIDENTE" >= DATE '2023-01-04') )) AND ( ("ARENA2_ACCIDENTES"."FECHA_ACCIDENTE" <= DATE '2023-01-10') ))""" )
   expressionTransform = ExpresionTransform()
   print expressionTransform.applyTransform(expression)
 
@@ -453,7 +439,19 @@ class ExpresionTransform(ExpressionBuilder.Visitor):
     self.replacements = []
     self.featType = featureType
 
-  def visit(self, value):
+  def visit1(self, value):
+    if value == None:
+      return
+    if not ExpressionBuilder.isFunction(value,ExpressionBuilder.FUNCTION_GETATTR):
+      return
+    if value.parameters().get(0).name() != "ARENA2_ACCIDENTES":
+      return
+    
+    builder = ExpressionUtils.createExpressionBuilder()
+    v = builder.function("FOREING_VALUE",builder.constant("ID_ACCIDENTE."+value.parameters().get(1).value()))
+    self.replacements.append((value,v))
+
+  def visit2(self, value):
     if not isinstance(value,ExpressionBuilder.Variable) :
       return
     if self.featType != None:
@@ -466,11 +464,12 @@ class ExpresionTransform(ExpressionBuilder.Visitor):
 
   def applyTransform(self,expression):
     value = expression.getCode().toValue()
-    value.accept(self, None)
+    value.accept(lambda x:self.visit1(x), None)
+    value.accept(lambda x:self.visit2(x), None)
     for r in self.replacements:
       value.replace(r[0], r[1])
     return value.toString()
 
-def main(*args):
+def main0(*args):
   pass  
-  
+
