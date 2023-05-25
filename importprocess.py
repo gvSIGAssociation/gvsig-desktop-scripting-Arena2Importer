@@ -164,7 +164,7 @@ class ImportProcess(Runnable):
         if report != None: ### hasToProcess
           ### Cambiar
           ### si uno no se marca, que no siga
-          issue = report.hasToProcessIssue(accidentId)
+          process = report.hasToProcessIssue(accidentId)
           #if issue!=None:
           #  process = False # Si alguno de los issue no estan marcados, no se importa
         print "copyTable [%3d] %s import %s" % (count, accidentId, process)
