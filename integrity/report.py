@@ -277,10 +277,12 @@ class Report(AbstractTableModel):
     return issue
     
   def hasToProcessIssue(self, basestring):
-      issue = self.__issues.findFirst("ID_ACCIDENTE = '%s'") # Si no hay accidente con incidencia se importa
+      issue = self.__issues.findFirst("ID_ACCIDENTE = '%s'" % basestring) # Si no hay accidente con incidencia se importa
       if issue==None:
+        #trace("hasToProcessIssue(%s) TRUE" % basestring)
         return True;
       issue = self.__issues.findFirst("ID_ACCIDENTE = '%s' AND SELECTED=False" % basestring)
+      #trace("hasToProcessIssue(%s) %s" %(basestring,issue==None))
       return issue==None # Si no se encuentra desactivado en ninguno de sus reportes, hay que importarlo
 
   def putIssue(self, row, issue):
@@ -332,6 +334,7 @@ class Report(AbstractTableModel):
       editable.set("SELECTED", value)
       fset.update(editable)
     self.__issues.finishEditing()
+    self.__delayfireTableDataChanged()
       
   def setSelected(self, row, value):
     trace("setSelected(row=%s,value=%s)" % (row, value))
