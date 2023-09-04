@@ -91,7 +91,7 @@ class ImportProcess(Runnable):
           count += sourceStore.getFeatureCount()
           DisposeUtils.dispose(sourceStore)
         
-    
+        count += input_store.getFeatureCount()
         self.status.setRangeOfValues(0,count)
         self.status.setCurValue(0)
   
